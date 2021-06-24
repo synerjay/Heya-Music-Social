@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+import os.path
 
 # Initialise environment variables
 env = environ.Env()
@@ -144,6 +145,10 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser' # letting Django not that we are using a custom User Model
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'users.serializers.CustomTokenSerializer',
+}
 
 # Django All Auth config. Add all of this.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
