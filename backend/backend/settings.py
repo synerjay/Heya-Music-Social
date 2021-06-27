@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders', # new
     # Local Apps
     'users', # new
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -173,7 +174,17 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 # Rest Framework config. Add all of this.
-REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P", 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication',],}
+REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P", 
+    # Authentication Scheme
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ), 
+    #Permission Policies
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]}
 
 # Specifies localhost port 3000 where the React
 # server will be running is safe to receive requests
