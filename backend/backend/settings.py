@@ -176,11 +176,9 @@ ACCOUNT_UNIQUE_EMAIL = True
 # Rest Framework config. Add all of this.
 REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P", 
     # Authentication Scheme
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ), 
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication', #Note DO NOT PUT Session Authentication OR IT WILL ASK FOR CSRF KEY WHICH WE DO NOT WANT
+    ], 
     #Permission Policies
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
