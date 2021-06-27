@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Django REST Framework & Authentication
     'rest_framework', # new
     'rest_framework.authtoken', # new
     'rest_auth', # new
@@ -55,11 +56,11 @@ INSTALLED_APPS = [
     'corsheaders', # new
     # Local Apps
     'users', # new
-    'api',
+    'api', # new
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # this will recognize the frontend and NOT deny the access
+    'corsheaders.middleware.CorsMiddleware', # IMPORTANT !this will recognize the frontend and NOT deny the access
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,7 +96,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', #CHANGED to Postgres
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
@@ -156,7 +157,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.CustomUser' # letting Django not that we are using a custom User Model
+
+## ALL CUSTOM SETTINGS BELOW ##
+
+AUTH_USER_MODEL = 'users.CustomUser' # letting Django know that we are using a custom User Model
 
 REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'users.serializers.CustomTokenSerializer',
@@ -181,7 +185,7 @@ REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
     ], 
     #Permission Policies
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', # For permissions to protected CRUD operations when users login
     ]}
 
 # Specifies localhost port 3000 where the React
