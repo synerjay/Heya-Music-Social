@@ -23,15 +23,22 @@ def welcome(request):
     content = {"message": "Welcome to the Heya Music App!"}
     return JsonResponse(content)
 
-# Users can get all Books
+# Users can get ALL Books added by ALL users
 @api_view(["GET"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def get_books(request):
     user = request.user.id # dont need a Users model since we are only searching
-    books = Book.objects.filter(added_by=user) # get all books added by this particular user
+    # books = Book.objects.filter(added_by=user) # get all books added by this particular user
+    books = Book.objects.all()
     serializer = BookSerializer(books, many=True)
-    return JsonResponse({'books': serializer.data }, safe=False, status=status.HTTP_200_OK)
+    print(serializer.data)
+    # PROCESSING DATA IN WHICH FRONTEND CAN READ
+    data = serializer.data
+    for item in data:
+        item["author"] = Author.objects.get(id=item["author"]).name
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+    return JsonResponse({'books': data }, safe=False, status=status.HTTP_200_OK)
 
 # Users can add a book
 @api_view(["POST"])
@@ -52,6 +59,7 @@ def add_book(request):
             author=author
         )
         serializer = BookSerializer(book)
+        # PROCESS SERIALIZER
         data = serializer.data
         data["added_by"] = user.username # change to a field that humans can READ not SQL key data!
         data["author"] = payload["author"] # change to a field that humans can READ not SQL key data!
@@ -62,19 +70,23 @@ def add_book(request):
     except Exception:
         return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# Users can update a book entry by id
+# Users can update a book entry by id # USERS who created it can change the book!
 @api_view(["PUT"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def update_book(request, book_id):
     user = request.user.id
     payload = json.loads(request.body)
+    #PROCESS PAYLOAD TO SQL KEYS
+    process_data = payload
+    process_data["author"] = Author.objects.get(name=payload["author"]).id # Database can only read SQL keys so we need to change it to IDs
     try:
         book_item = Book.objects.filter(added_by=user, id=book_id)
         # returns 1 or 0
-        book_item.update(**payload)
+        book_item.update(**process_data)
         book = Book.objects.get(id=book_id)
         serializer = BookSerializer(book)
+        
         return JsonResponse({'book': serializer.data}, safe=False, status=status.HTTP_200_OK)
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
