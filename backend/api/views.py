@@ -39,9 +39,10 @@ def get_books(request):
 @permission_classes([IsAuthenticated])
 def add_book(request):
     payload = json.loads(request.body)
-    user = Users.objects.get(id=request.user.id) #the user MUST come from the Object or else it will get an ERROR!!!
-    print(user)
-    print(payload)
+    user = request.user
+    # user = Users.objects.get(id=request.user.id) #the user MUST come from the Object or else it will get an ERROR!!!
+    # print(user.username)
+    # print(payload)
     try:
         author = Author.objects.get(name=payload["author"])
         book = Book.objects.create(
@@ -51,7 +52,11 @@ def add_book(request):
             author=author
         )
         serializer = BookSerializer(book)
-        return JsonResponse({'books': serializer.data}, safe=False, status=status.HTTP_201_CREATED)
+        data = serializer.data
+        data["added_by"] = user.username # change to a field that humans can READ not SQL key data!
+        data["author"] = payload["author"] # change to a field that humans can READ not SQL key data!
+        print(data)
+        return JsonResponse({'books': data}, safe=False, status=status.HTTP_201_CREATED)
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
     except Exception:
