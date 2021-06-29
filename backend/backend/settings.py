@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # Local Apps
     'users', # new
     'api', # new
+    'posts'
 ]
 
 MIDDLEWARE = [
