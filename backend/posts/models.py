@@ -7,7 +7,7 @@ User = apps.get_model('users', 'CustomUser')
 class Post(models.Model):
     body = models.TextField()
     added_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    post_date = models.DateTimeField(auto_now_add=True) # adds the date to now 
+    date_added = models.DateTimeField(auto_now_add=True) # adds the date to now 
     likes = models.ManyToManyField(User, related_name='posts') # many likes to many posts field makes numerous relations to SQL server
 
     def total_likes(self):
