@@ -5,7 +5,7 @@ from .models import CustomUser
 class UserSerializer(ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'email', 'name', 'last_login', 'date_joined', 'is_staff')
+        fields = ('id', 'email', 'username', 'last_login', 'date_joined', 'is_staff')
 
 class CustomTokenSerializer(TokenSerializer):
     user = UserSerializer(read_only=True)

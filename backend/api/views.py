@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes #for authenti
 from rest_framework.permissions import IsAuthenticated #for authenticated routes
 from django.views.decorators.csrf import csrf_exempt #for authenticated routes
 # API dependencies
-from .serializers import BookSerializer
+from .serializers import BookSerializer, AuthorSerializer
 from .models import Book, Author
 from rest_framework import status
 import json
@@ -32,7 +32,6 @@ def get_books(request):
     # books = Book.objects.filter(added_by=user) # get all books added by this particular user
     books = Book.objects.all()
     serializer = BookSerializer(books, many=True)
-    print(serializer.data)
     # PROCESSING DATA IN WHICH FRONTEND CAN READ
     data = serializer.data
     for item in data:
@@ -59,11 +58,10 @@ def add_book(request):
             author=author
         )
         serializer = BookSerializer(book)
-        # PROCESS SERIALIZER
+        # PROCESS SERIALIZER - change to a field that humans can READ not SQL key data!
         data = serializer.data
-        data["added_by"] = user.username # change to a field that humans can READ not SQL key data!
-        data["author"] = payload["author"] # change to a field that humans can READ not SQL key data!
-        print(data)
+        data["added_by"] = user.username 
+        data["author"] = payload["author"] 
         return JsonResponse({'books': data}, safe=False, status=status.HTTP_201_CREATED)
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
@@ -75,7 +73,7 @@ def add_book(request):
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def update_book(request, book_id):
-    user = request.user.id
+    user = request.user
     payload = json.loads(request.body)
     #PROCESS PAYLOAD TO SQL KEYS
     process_data = payload
@@ -86,8 +84,11 @@ def update_book(request, book_id):
         book_item.update(**process_data)
         book = Book.objects.get(id=book_id)
         serializer = BookSerializer(book)
-        
-        return JsonResponse({'book': serializer.data}, safe=False, status=status.HTTP_200_OK)
+        #PROCESS DATA
+        data = serializer.data
+        data["added_by"] = user.username 
+        data["author"] = Author.objects.get(id=process_data["author"]).name
+        return JsonResponse({'book': data}, safe=False, status=status.HTTP_200_OK)
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
     except Exception:
@@ -102,9 +103,26 @@ def delete_book(request, book_id):
     try:
         book = Book.objects.get(added_by=user, id=book_id)
         book.delete()
-        return JsonResponse({'Success': 'Book deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'Success': 'Deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
     except Exception:
         return JsonResponse({'error': 'Something went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def author_profile(request, author_id):
+    author = Author.objects.get(id=author_id)
+    books = author.books.all() # get all book associated to that author
+    num_of_books = author.books.count()
+    serializer = BookSerializer(books, many=True)
+    #PROCESSING DATA
+    data = serializer.data
+    for item in data:
+        item["author"] = Author.objects.get(id=item["author"]).name
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+    return JsonResponse({'numOfBooks': num_of_books,'books': data }, safe=False, status=status.HTTP_200_OK)
 
