@@ -15,10 +15,8 @@ Users = apps.get_model('users', 'CustomUser')
 
 # Create your views here.
 
-# // @router  GET api/posts 
-#             POST /posts
-# // @desc    Get all posts
-              # Create a post
+# // @router  GET, POST /posts 
+# // @desc    Get all posts, Create a post
 # // @access  Private
 @api_view(["GET", "POST"])
 @csrf_exempt
@@ -46,13 +44,14 @@ def get_add_posts(request):
         except Exception:
             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# // @router  GET /posts/:id
-# // @desc    Get one post by ID
+# // @router  GET, PUT, DELETE /posts/:id
+# // @desc    Get one post by ID, Update Post, Delete Post
 # // @access  Private
-@api_view(["GET"])
+@api_view(["GET", "DELETE", "PUT"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
-def get_one_post(request, post_id):
+def get_put_delete_post(request, post_id):
+    print(request.method)
     try:
         user = request.user
         post = Post.objects.get(id=post_id)
@@ -68,6 +67,19 @@ def get_one_post(request, post_id):
 # // @router  DELETE /posts/:id
 # // @desc    Delete a post
 # // @access  Private
+# @api_view(["DELETE"])
+# @csrf_exempt
+# @permission_classes([IsAuthenticated])
+# def delete_post(request, post_id):
+#     user = request.user.id
+#     try:
+#         post = Post.objects.get(added_by=user, id=post_id)
+#         post.delete()
+#         return JsonResponse({'Success': 'Post deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+#     except ObjectDoesNotExist as e:
+#         return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+#     except Exception:
+#         return JsonResponse({'error': 'Something went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # // @router  PUT /posts/like/:id
