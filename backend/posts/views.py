@@ -10,6 +10,8 @@ from .models import Post, Comment
 from rest_framework import status
 import json #Useful for POST and PUT requests
 from django.core.exceptions import ObjectDoesNotExist
+from django.apps import apps 
+Users = apps.get_model('users', 'CustomUser')
 
 # Create your views here.
 
@@ -20,4 +22,8 @@ from django.core.exceptions import ObjectDoesNotExist
 def get_all_posts(request):
     posts = Post.objects.all() # Get all posts
     serializer = PostSerializer(posts, many=True)
-    return JsonResponse({'books': serializer.data }, safe=False, status=status.HTTP_200_OK)
+    # PROCESSING DATA IN WHICH FRONTEND CAN READ
+    data = serializer.data
+    for item in data:
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+    return JsonResponse({'books': data }, safe=False, status=status.HTTP_200_OK)
