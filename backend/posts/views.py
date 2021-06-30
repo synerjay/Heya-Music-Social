@@ -74,9 +74,6 @@ def get_put_delete_post(request, post_id):
         except Exception:
             return JsonResponse({'error': 'Something went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-
-
 # // @router  PUT /posts/like/:id
 # // @desc    Like a post
 # // @access  Private
