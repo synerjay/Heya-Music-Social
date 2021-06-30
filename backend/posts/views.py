@@ -23,7 +23,7 @@ Users = apps.get_model('users', 'CustomUser')
 @api_view(["GET", "POST"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
-def get_all_posts(request):
+def get_add_posts(request):
     if request.method == 'GET':
         posts = Post.objects.all() # Get all posts
         serializer = PostSerializer(posts, many=True)
@@ -33,8 +33,18 @@ def get_all_posts(request):
             item["added_by"] = Users.objects.get(id=item["added_by"]).username
         return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
     else:
-        pass
-        # Put POST request logic here ! DO NOT FORGET
+        payload = json.loads(request.body)
+        user = request.user
+        try:
+            post = Post.objects.create(body=payload["body"], added_by=user)
+            serializer = PostSerializer(post)
+            data = serializer.data
+            data["added_by"] = user.username 
+            return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
+        except ObjectDoesNotExist as e:
+            return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+        except Exception:
+            return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # // @router  GET /posts/:id
 # // @desc    Get one post by ID
@@ -58,6 +68,7 @@ def get_one_post(request, post_id):
 # // @router  DELETE /posts/:id
 # // @desc    Delete a post
 # // @access  Private
+
 
 # // @router  PUT /posts/like/:id
 # // @desc    Like a post
