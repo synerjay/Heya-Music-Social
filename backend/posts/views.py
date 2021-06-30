@@ -31,14 +31,29 @@ def get_all_posts(request):
         data = serializer.data
         for item in data:
             item["added_by"] = Users.objects.get(id=item["added_by"]).username
-        return JsonResponse({'books': data }, safe=False, status=status.HTTP_200_OK)
+        return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
     else:
         pass
-        # Put POST request logic here
+        # Put POST request logic here ! DO NOT FORGET
 
 # // @router  GET /posts/:id
 # // @desc    Get one post by ID
 # // @access  Private
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def get_one_post(request, post_id):
+    try:
+        user = request.user
+        post = Post.objects.get(id=post_id)
+        serializer = PostSerializer(post)
+        data = serializer.data
+        data["added_by"] = Users.objects.get(id=data["added_by"]).username
+        return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist as e:
+        return JsonResponse({'error': "Sorry, this post doesn't exist. "}, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception:
+        return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # // @router  DELETE /posts/:id
 # // @desc    Delete a post
