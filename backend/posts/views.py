@@ -88,7 +88,12 @@ def put_like(request, post_id):
     data = serializer.data
     data["added_by"] = user.username 
     print(data["likes"])
-    return JsonResponse({'likes': data["likes"] }, safe=False, status=status.HTTP_200_OK)
+    like_list = data["likes"]
+    print(type(like_list))
+    for i, item in enumerate(like_list):
+        like_list[i] = Users.objects.get(id=item).username # always put the username!!
+    print(like_list)
+    return JsonResponse({'likes': like_list }, safe=False, status=status.HTTP_200_OK)
 
 
 
