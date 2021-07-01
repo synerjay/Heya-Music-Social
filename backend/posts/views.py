@@ -83,7 +83,7 @@ def get_put_delete_post(request, post_id):
 def put_like(request, post_id):
     user = request.user
     post = get_object_or_404(Post, id=post_id)
-    if post.likes.filter(id=request.user.id).exists():
+    if post.likes.filter(id=request.user.id).exists(): # user already exists in the like list
         post.likes.remove(user)
     else:
         post.likes.add(user) # add the like to the like array in the post object
@@ -98,20 +98,39 @@ def put_like(request, post_id):
     return JsonResponse({'likes': like_list, 'total_likes': total_likes }, safe=False, status=status.HTTP_200_OK)
     # Might change above for changes in the frontend REACT later
 
-# // @router  GET and POST COMMENTS - POST /posts/comment/:post_id
+# // @router  GET and POST comments /posts/comment/:post_id
 # // @desc    Get a list of Comments and Comment on a post
 # // @access  Private
-@api_view(["GET", "PUT"])
+@api_view(["GET", "POST"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def get_post_comment(request, post_id):
-    comments = Comment.objects.filter(post=post_id)
-    serializer = CommentSerializer(comments, many=True)
+    if request.method == 'GET':
+        comments = Comment.objects.filter(post=post_id) # objects with one or more queries, it needs to be a FILTER and not a GET method
+        serializer = CommentSerializer(comments, many=True)
         # PROCESSING DATA IN WHICH FRONTEND CAN READ
-    data = serializer.data
-    for item in data:
-        item["added_by"] = Users.objects.get(id=item["added_by"]).username
-    return JsonResponse({'comments': data }, safe=False, status=status.HTTP_200_OK)
+        data = serializer.data
+        for item in data:
+            item["added_by"] = Users.objects.get(id=item["added_by"]).username
+        return JsonResponse({'comments': data }, safe=False, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        payload = json.loads(request.body)
+        user = Users.objects.get(id=request.user.id)
+        post = Post.objects.get(id=post_id)
+        try:
+            # In the Comment object, for some weird effin reason Django needs to get the specific INSTANCE of the object NOT the Key like the Post object. WEIRDO DJANGO UGH
+            Comment.objects.create(post=post, added_by=user, body=payload["body"])
+            comments = Comment.objects.filter(post=post_id)
+            serializer = CommentSerializer(comments, many=True)
+            data = serializer.data
+            for item in data:
+               item["added_by"] = Users.objects.get(id=item["added_by"]).username
+            return JsonResponse({'comment': data}, safe=False, status=status.HTTP_201_CREATED)
+        except ObjectDoesNotExist as e:
+            return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+        except Exception:
+            return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 # // @router  DELETE /posts/comment/:postid/:comment_id
 # // @desc    Comment on a post
