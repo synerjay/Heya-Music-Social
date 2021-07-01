@@ -81,8 +81,14 @@ def get_put_delete_post(request, post_id):
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def put_like(request, post_id):
+    user = request.user
     post = get_object_or_404(Post, id=post_id)
-    post.likes.add(request.user) # add the like to the like array in the post object
+    post.likes.add(user) # add the like to the like array in the post object
+    serializer = PostSerializer(post)
+    data = serializer.data
+    data["added_by"] = user.username 
+    print(data["likes"])
+    return JsonResponse({'likes': data["likes"] }, safe=False, status=status.HTTP_200_OK)
 
 
 
