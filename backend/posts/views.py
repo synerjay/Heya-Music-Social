@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 #Auth dependencies
 from rest_framework.decorators import api_view, permission_classes #for authenticated routes
@@ -44,7 +44,7 @@ def get_add_posts(request):
         except Exception:
             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# // @router  GET, PUT, DELETE /posts/:id
+# // @router  GET one post, PUT, DELETE /posts/:id
 # // @desc    Get one post by ID, Update Post, Delete Post
 # // @access  Private
 @api_view(["GET", "DELETE", "PUT"])
@@ -77,6 +77,14 @@ def get_put_delete_post(request, post_id):
 # // @router  PUT /posts/like/:id
 # // @desc    Like a post
 # // @access  Private
+@api_view(["PUT"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def put_like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.likes.add(request.user) # add the like to the like array in the post object
+
+
 
 # // @router  PUT /posts/unlike/:id
 # // @desc    Unlike a post
