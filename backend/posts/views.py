@@ -98,9 +98,20 @@ def put_like(request, post_id):
     return JsonResponse({'likes': like_list, 'total_likes': total_likes }, safe=False, status=status.HTTP_200_OK)
     # Might change above for changes in the frontend REACT later
 
-# // @router  Posting COMMENTS - POST /posts/comment/:post_id
-# // @desc    Comment on a post
+# // @router  GET and POST COMMENTS - POST /posts/comment/:post_id
+# // @desc    Get a list of Comments and Comment on a post
 # // @access  Private
+@api_view(["GET", "PUT"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def get_post_comment(request, post_id):
+    comments = Comment.objects.filter(post=post_id)
+    serializer = CommentSerializer(comments, many=True)
+        # PROCESSING DATA IN WHICH FRONTEND CAN READ
+    data = serializer.data
+    for item in data:
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+    return JsonResponse({'comments': data }, safe=False, status=status.HTTP_200_OK)
 
 # // @router  DELETE /posts/comment/:postid/:comment_id
 # // @desc    Comment on a post
