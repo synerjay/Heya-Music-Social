@@ -84,18 +84,16 @@ def put_like(request, post_id):
     user = request.user
     post = get_object_or_404(Post, id=post_id)
     post.likes.add(user) # add the like to the like array in the post object
+    total_likes = post.total_likes()
     serializer = PostSerializer(post)
     data = serializer.data
     data["added_by"] = user.username 
     print(data["likes"])
     like_list = data["likes"]
-    print(type(like_list))
     for i, item in enumerate(like_list):
         like_list[i] = Users.objects.get(id=item).username # always put the username!!
-    print(like_list)
-    return JsonResponse({'likes': like_list }, safe=False, status=status.HTTP_200_OK)
-
-
+    return JsonResponse({'likes': like_list, 'total_likes': total_likes }, safe=False, status=status.HTTP_200_OK)
+    # Might change above for changes in the frontend REACT later
 
 # // @router  PUT /posts/unlike/:id
 # // @desc    Unlike a post
