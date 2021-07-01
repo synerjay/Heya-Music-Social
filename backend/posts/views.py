@@ -75,7 +75,7 @@ def get_put_delete_post(request, post_id):
             return JsonResponse({'error': 'Something went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # // @router  PUT /posts/like/:id
-# // @desc    Like a post
+# // @desc    Like and Unlike a post
 # // @access  Private
 @api_view(["PUT"])
 @csrf_exempt
@@ -83,7 +83,10 @@ def get_put_delete_post(request, post_id):
 def put_like(request, post_id):
     user = request.user
     post = get_object_or_404(Post, id=post_id)
-    post.likes.add(user) # add the like to the like array in the post object
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(user)
+    else:
+        post.likes.add(user) # add the like to the like array in the post object
     total_likes = post.total_likes()
     serializer = PostSerializer(post)
     data = serializer.data
@@ -94,10 +97,6 @@ def put_like(request, post_id):
         like_list[i] = Users.objects.get(id=item).username # always put the username!!
     return JsonResponse({'likes': like_list, 'total_likes': total_likes }, safe=False, status=status.HTTP_200_OK)
     # Might change above for changes in the frontend REACT later
-
-# // @router  PUT /posts/unlike/:id
-# // @desc    Unlike a post
-# // @access  Private
 
 # // @router  Posting COMMENTS - POST /posts/comment/:post_id
 # // @desc    Comment on a post
