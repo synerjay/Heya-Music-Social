@@ -138,11 +138,16 @@ def get_post_comment(request, post_id):
 # // @router  DELETE /posts/comment/<int:post_id>/<int:comment_id>
 # // @desc    Delete a comment on a post
 # // @access  Private
-@api_view(["GET"])
+@api_view(["DELETE"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def delete_comment(request, post_id, comment_id):
-    comment = Comment.objects.get(id=comment_id, post=post_id)
-    serializer = CommentSerializer(comment)
-    return JsonResponse({'comment': serializer.data}, safe=False, status=status.HTTP_201_CREATED)
+    post = Post.objects.get(id=post_id)
+    comment = post.comments.get(id=comment_id)
+    comment.delete()
+    serializer = CommentSerializer(post.comments.all(), many=True)
+    data = serializer.data
+    for item in data:
+               item["added_by"] = Users.objects.get(id=item["added_by"]).username
+    return JsonResponse({'message': 'Comment deleted successfully', 'comment': data}, safe=False, status=status.HTTP_201_CREATED)
 
