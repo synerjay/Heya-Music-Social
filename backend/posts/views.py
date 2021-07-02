@@ -132,6 +132,14 @@ def get_post_comment(request, post_id):
             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
-# // @router  DELETE /posts/comment/:postid/:comment_id
-# // @desc    Comment on a post
+# // @router  DELETE /posts/comment/<int:post_id>/<int:comment_id>
+# // @desc    Delete a comment on a post
 # // @access  Private
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def delete_comment(request, post_id, comment_id):
+    comment = Comment.objects.get(id=comment_id, post=post_id)
+    serializer = CommentSerializer(comment)
+    return JsonResponse({'comment': serializer.data}, safe=False, status=status.HTTP_201_CREATED)
+
