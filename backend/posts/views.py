@@ -106,8 +106,11 @@ def put_like(request, post_id):
 @permission_classes([IsAuthenticated])
 def get_post_comment(request, post_id):
     if request.method == 'GET':
-        comments = Comment.objects.filter(post=post_id) # objects with one or more queries, it needs to be a FILTER and not a GET method
-        serializer = CommentSerializer(comments, many=True)
+        # comments = Comment.objects.filter(post=post_id) # objects with one or more queries, it needs to be a FILTER and not a GET method
+        post = Post.objects.get(id=post_id)
+        # serializer = CommentSerializer(comments, many=True)
+        # serializer = CommentSerializer(post.comments.get(id=1))
+        serializer = CommentSerializer(post.comments.all(), many=True) # you can just use post.comments.all() get to all comments from that particular post
         # PROCESSING DATA IN WHICH FRONTEND CAN READ
         data = serializer.data
         for item in data:
