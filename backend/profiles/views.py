@@ -43,9 +43,13 @@ def create_profile(request):
     payload = json.loads(request.body)
     user = Users.objects.get(id=request.user.id) # make an instance of the User when creating a profile (Ugh...)
     try:
+        profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
+        profile_item.update(**payload)
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile)
-        return JsonResponse({'post': 'Profile already exists!!!'})
+        data = serializer.data
+        data["user"] = Users.objects.get(id=user.id).username
+        return JsonResponse({'post': data}, safe=False, status=status.HTTP_200_OK)
     except Profile.DoesNotExist:
         profile = Profile.objects.create(user=user, bio=payload["bio"]) # add more fields in the future
         serializer = ProfileSerializer(profile)
