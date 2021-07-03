@@ -18,7 +18,7 @@ Users = apps.get_model('users', 'CustomUser')
 
 # // @route GET profile/
 # // @desc Get all profiles using
-# // @access Public (Not authenticated)
+# // @access Public (Not Authentication)
 @api_view(["GET"])
 @csrf_exempt
 @permission_classes([])
@@ -26,6 +26,23 @@ def get_all_profiles(request):
     profiles = Profile.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
     return JsonResponse({'books': serializer.data }, safe=False, status=status.HTTP_200_OK)
+
+# // @route GET profile/member/:user_id
+# // @desc Get profile by user ID using params
+# // @access Public (No Authentication)
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([])
+def get_one_profile(request, user_id):
+    user = Users.objects.get(id=user_id)
+    try: 
+        profile = Profile.objects.get(user=user)
+        serializer = ProfileSerializer(profile)
+        return JsonResponse({ 'profile': serializer.data}, safe=False, status=status.HTTP_200_OK)
+    except Profile.DoesNotExist:
+        return JsonResponse({'msg': 'There is no profile found yet.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception:
+            return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # // @router  GET profile/me
 # // @desc    Get current users profile
@@ -67,11 +84,6 @@ def create_profile(request):
         data = serializer.data
         data["user"] = Users.objects.get(id=user.id).username
         return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
-
-
-# // @route GET profile/user/:user_id
-# // @desc Get profile by user ID using params
-# // @access Public (no auth middleware)
 
 # // @route DELETE profile
 # // @desc Delete profile, user & posts
