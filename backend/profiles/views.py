@@ -16,6 +16,17 @@ Users = apps.get_model('users', 'CustomUser')
 
 # Create your views here.
 
+# // @route GET profile/
+# // @desc Get all profiles using
+# // @access Public (Not authenticated)
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([])
+def get_all_profiles(request):
+    profiles = Profile.objects.all()
+    serializer = ProfileSerializer(profiles, many=True)
+    return JsonResponse({'books': serializer.data }, safe=False, status=status.HTTP_200_OK)
+
 # // @router  GET profile/me
 # // @desc    Get current users profile
 # // @access  Private access with tokens
@@ -57,10 +68,6 @@ def create_profile(request):
         data["user"] = Users.objects.get(id=user.id).username
         return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
 
-
-# // @route GET profile/
-# // @desc Get all profiles using
-# // @access Public (no auth middleware)
 
 # // @route GET profile/user/:user_id
 # // @desc Get profile by user ID using params
