@@ -19,6 +19,17 @@ Users = apps.get_model('users', 'CustomUser')
 # // @router  GET api/profile/me
 # // @desc    Get current users profile
 # // @access  Private access with tokens
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def get_own_profile(request):
+    user = request.user
+    profile = Profile.objects.get(id=user.id)
+    if profile == None:
+        return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
+    else:
+        serializer = ProfileSerializer(profile)
+        return JsonResponse({'profile': serializer.data }, safe=False, status=status.HTTP_200_OK)
 
 
 # // @router  POST api/profile
