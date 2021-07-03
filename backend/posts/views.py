@@ -149,5 +149,5 @@ def delete_comment(request, post_id, comment_id):
     data = serializer.data
     for item in data:
                item["added_by"] = Users.objects.get(id=item["added_by"]).username
-    return JsonResponse({'message': 'Comment deleted successfully', 'comment': data}, safe=False, status=status.HTTP_201_CREATED)
+    return JsonResponse({'Success': 'Comment deleted successfully', 'comment': data}, safe=False, status=status.HTTP_201_CREATED)
 
