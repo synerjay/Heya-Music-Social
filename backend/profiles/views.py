@@ -16,9 +16,9 @@ Users = apps.get_model('users', 'CustomUser')
 
 # Create your views here.
 
-# // @route GET profile/
+# // @route GET profile/members
 # // @desc Get all profiles using
-# // @access Public (Not Authentication)
+# // @access Public (No Authentication)
 @api_view(["GET"])
 @csrf_exempt
 @permission_classes([])
@@ -61,30 +61,32 @@ def get_own_profile(request):
     except ObjectDoesNotExist:
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
-# // @router  POST profile/
-# // @desc    Create or update user profile
+# // @router  POST or DELETE profile/
+# // @desc    Create profile or update user profile if it already exists / Delete user account and profile
 # // @access  Private access with tokens
-@api_view(["POST"])
+@api_view(["POST", "DELETE"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
-def create_profile(request):
-    payload = json.loads(request.body)
+def create_delete_profile(request):
     user = Users.objects.get(id=request.user.id) # make an instance of the User when creating a profile (Ugh...)
-    try:
-        profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
-        profile_item.update(**payload)
-        profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile)
-        data = serializer.data
-        data["user"] = Users.objects.get(id=user.id).username
-        return JsonResponse({'post': data}, safe=False, status=status.HTTP_200_OK)
-    except Profile.DoesNotExist:
-        profile = Profile.objects.create(user=user, bio=payload["bio"]) # add more fields in the future
-        serializer = ProfileSerializer(profile)
-        data = serializer.data
-        data["user"] = Users.objects.get(id=user.id).username
-        return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
-
-# // @route DELETE profile
-# // @desc Delete profile, user & posts
-# // @access Private
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        try:
+            profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
+            profile_item.update(**payload)
+            profile = Profile.objects.get(user=user)
+            serializer = ProfileSerializer(profile)
+            data = serializer.data
+            data["user"] = Users.objects.get(id=user.id).username
+            return JsonResponse({'post': data}, safe=False, status=status.HTTP_200_OK)
+        except Profile.DoesNotExist:
+            profile = Profile.objects.create(user=user, bio=payload["bio"]) # add more fields in the future
+            serializer = ProfileSerializer(profile)
+            data = serializer.data
+            data["user"] = Users.objects.get(id=user.id).username
+            return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
+        except Exception:
+                return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    elif request.method == 'DELETE':
+        user.delete()
+        return JsonResponse({'Success': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

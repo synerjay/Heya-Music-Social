@@ -98,7 +98,7 @@ def put_like(request, post_id):
     return JsonResponse({'likes': like_list, 'total_likes': total_likes }, safe=False, status=status.HTTP_200_OK)
     # Might change above for changes in the frontend REACT later
 
-# // @router  GET and POST comments /posts/comment/:post_id
+# // @router  GET and POST comments /posts/comment/<int:post_id>
 # // @desc    Get a list of Comments and Comment on a post
 # // @access  Private
 @api_view(["GET", "POST"])
@@ -148,6 +148,6 @@ def delete_comment(request, post_id, comment_id):
     serializer = CommentSerializer(post.comments.all(), many=True)
     data = serializer.data
     for item in data:
-               item["added_by"] = Users.objects.get(id=item["added_by"]).username
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
     return JsonResponse({'Success': 'Comment deleted successfully', 'comment': data}, safe=False, status=status.HTTP_201_CREATED)
 
