@@ -5,7 +5,7 @@ from django.conf import settings # you can use this for models instead of Custom
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE) 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, related_name='profile') 
     bio = models.TextField()
 
     def __str__(self):
