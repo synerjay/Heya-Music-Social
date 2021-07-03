@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     # Local Apps
     'users', # new
     'api', # new
-    'posts'
+    'posts',
+    'profiles' #ALWAYS ADD NEW APPS in INSTALLED_APPS LIST !! DON'T FORGET !!
 ]
 
 MIDDLEWARE = [
