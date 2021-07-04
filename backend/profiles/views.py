@@ -5,8 +5,8 @@ from rest_framework.decorators import api_view, permission_classes #for authenti
 from rest_framework.permissions import IsAuthenticated #for authenticated routes
 from django.views.decorators.csrf import csrf_exempt #for authenticated routes
 # API dependencies
-from .serializers import ProfileSerializer
-from .models import Profile
+from .serializers import ProfileSerializer, GenreSerializer, ArtistsSerializer, TracksSerializer
+from .models import Profile, Genre, Artists, Tracks
 from rest_framework import status
 import json #Useful for POST and PUT requests
 from django.core.exceptions import ObjectDoesNotExist
@@ -111,6 +111,6 @@ def create_delete_profile(request):
 # // @desc Add profile favorite tracks
 # // @access Private
 
-# // @route DELETE /profile/artist/<int:track_id>
+# // @route DELETE /profile/tracks/<int:track_id>
 # // @desc Delete tracks from profile
 # // @access Private
