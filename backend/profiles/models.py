@@ -19,7 +19,7 @@ class Profile(models.Model):
   #OneToOneField will return to ONLY one instance of QuerySet like Profile-RegisteredUser
 
 class Genre(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='genre')
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='genre')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='genre') 
     genre = models.CharField(max_length=200, blank=True)
     # might add ImageField
@@ -28,18 +28,18 @@ class Genre(models.Model):
         return '%s likes %s' % (self.user, self.genre)
 
 class Artists(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='artists')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, related_name='artists') 
-    artist = models.CharField(max_length=200, null=True)
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='artists')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='artists') 
+    artist = models.CharField(max_length=200, blank=True)
     # might add ImageField
 
     def __str__(self):
         return '%s likes %s' % (self.user, self.artist)
 
 class Tracks(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='tracks')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, related_name='tracks') 
-    track = models.CharField(max_length=250, null=True)
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='tracks')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tracks') 
+    track = models.CharField(max_length=250, blank=True)
     # might add ImageField
 
     def __str__(self):
