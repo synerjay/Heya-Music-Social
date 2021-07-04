@@ -94,6 +94,21 @@ def create_delete_profile(request):
 # // @route PUT /profile/genre
 # // @desc Add profile genre
 # // @access Private
+@api_view(["PUT"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def add_genre(request):
+    payload = json.loads(request.body)
+    user = Users.objects.get(id=request.user.id)
+    try:
+        profile = Profile.objects.get(user=user)
+        Genre.objects.create(profile=profile, user=user, genre=payload["genre"])
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route DELETE /profile/genre/<int:gen_id>
 # // @desc Delete genre from profile
@@ -102,6 +117,21 @@ def create_delete_profile(request):
 # // @route PUT /profile/artist
 # // @desc Add profile favorite artists
 # // @access Private
+@api_view(["PUT"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def add_artist(request):
+    payload = json.loads(request.body)
+    user = Users.objects.get(id=request.user.id)
+    try:
+        profile = Profile.objects.get(user=user)
+        Artists.objects.create(profile=profile, user=user, artist=payload["artist"])
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route DELETE /profile/artist/<int:art_id>
 # // @desc Delete artists from profile
@@ -110,6 +140,21 @@ def create_delete_profile(request):
 # // @route PUT /profile/tracks
 # // @desc Add profile favorite tracks
 # // @access Private
+@api_view(["PUT"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def add_track(request):
+    payload = json.loads(request.body)
+    user = Users.objects.get(id=request.user.id)
+    try:
+        profile = Profile.objects.get(user=user)
+        Tracks.objects.create(profile=profile, user=user, track=payload["track"])
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route DELETE /profile/tracks/<int:track_id>
 # // @desc Delete tracks from profile
