@@ -27,7 +27,7 @@ def get_all_profiles(request):
     serializer = ProfileSerializer(profiles, many=True)
     return JsonResponse({'books': serializer.data }, safe=False, status=status.HTTP_200_OK)
 
-# // @route GET profile/member/:user_id
+# // @route GET profile/member/<int:user_id>
 # // @desc Get profile by user ID using params
 # // @access Public (No Authentication)
 @api_view(["GET"])
