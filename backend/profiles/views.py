@@ -113,6 +113,21 @@ def add_genre(request):
 # // @route DELETE /profile/genre/<int:gen_id>
 # // @desc Delete genre from profile
 # // @access Private
+@api_view(["DELETE"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def delete_genre(request, gen_id):
+    user = Users.objects.get(id=request.user.id)
+    try:
+        genre = Genre.objects.get(id=gen_id, user=user)
+        genre.delete()
+        profile = Profile.objects.get(user=user)
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no genre found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route PUT /profile/artist
 # // @desc Add profile favorite artists
@@ -136,8 +151,25 @@ def add_artist(request):
 # // @route DELETE /profile/artist/<int:art_id>
 # // @desc Delete artists from profile
 # // @access Private
+@api_view(["DELETE"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def delete_artist(request, art_id):
+    user = Users.objects.get(id=request.user.id)
+    try:
+        artist = Artists.objects.get(id=art_id, user=user)
+        artist.delete()
+        profile = Profile.objects.get(user=user)
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no artist found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
-# // @route PUT /profile/tracks
+
+
+# // @route PUT /profile/track
 # // @desc Add profile favorite tracks
 # // @access Private
 @api_view(["PUT"])
@@ -156,6 +188,22 @@ def add_track(request):
     except ObjectDoesNotExist:
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
-# // @route DELETE /profile/tracks/<int:track_id>
+# // @route DELETE /profile/track/<int:track_id>
 # // @desc Delete tracks from profile
 # // @access Private
+
+@api_view(["DELETE"])
+@csrf_exempt
+@permission_classes([IsAuthenticated])
+def delete_track(request, track_id):
+    user = Users.objects.get(id=request.user.id)
+    try:
+        track = Tracks.objects.get(id=track_id, user=user)
+        track.delete()
+        profile = Profile.objects.get(user=user)
+        serializer = ProfileSerializer(profile)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no track found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
