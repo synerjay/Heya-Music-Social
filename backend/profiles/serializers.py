@@ -4,17 +4,17 @@ from .models import Profile, Genre, Artists, Tracks
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['id', 'profile', 'user', 'genre']
+        fields = ['id', 'genre']
 
 class ArtistsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artists
-        fields = ['id', 'profile', 'user', 'artist']
+        fields = ['id', 'artist']
 
 class TracksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tracks
-        fields = ['id', 'profile', 'user', 'track']
+        fields = ['id', 'track']
 
 class ProfileSerializer(serializers.ModelSerializer):
     genre = GenreSerializer(many=True, required=False)
