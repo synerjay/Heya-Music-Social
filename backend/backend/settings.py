@@ -201,3 +201,4 @@ REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
 CORS_ALLOWED_ORIGINS = [    
 'http://localhost:3000'
 ]
+

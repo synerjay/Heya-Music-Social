@@ -61,7 +61,7 @@ def get_own_profile(request):
     except ObjectDoesNotExist:
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
-# // @router  POST or DELETE profile/
+# // @router  POST or DELETE profile/ (Indirectly also PUT method through POST method)
 # // @desc    Create profile or update user profile if it already exists / Delete user account and profile
 # // @access  Private access with tokens
 @api_view(["POST", "DELETE"])
@@ -69,27 +69,38 @@ def get_own_profile(request):
 @permission_classes([IsAuthenticated])
 def create_delete_profile(request):
     user = Users.objects.get(id=request.user.id) # make an instance of the User when creating a profile (Ugh...)
-    if request.method == 'POST':
-        payload = json.loads(request.body)
-        try:
-            profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
-            profile_item.update(**payload)
-            profile = Profile.objects.get(user=user)
-            serializer = ProfileSerializer(profile)
-            data = serializer.data
-            data["user"] = Users.objects.get(id=user.id).username
-            return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
-        except Profile.DoesNotExist:
-            profile = Profile.objects.create(user=user, bio=payload["bio"]) # add more fields in the future
-            serializer = ProfileSerializer(profile)
-            data = serializer.data
-            data["user"] = Users.objects.get(id=user.id).username
-            return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
-        except Exception:
-                return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    elif request.method == 'DELETE':
-        user.delete()
-        return JsonResponse({'Success': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    print(request.user)
+    print("This worked")
+    print(request.data) # REQUEST DATA is already an OBJECT so no need to put it on JSON.LOADS
+    #request.data also seem to parse multipart/form-data
+    # if request.method == 'POST':
+    # payload = json.loads(request.data)
+
+      #json.loads take a string as input and returns a dictionary as output.
+
+      # json.dumps take a dictionary as input and returns a string as output.
+
+
+
+    # try:
+    profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
+    profile_item.update(**request.data) # this is not working anymore
+    profile = Profile.objects.get(user=user)
+    serializer = ProfileSerializer(profile)
+    data = serializer.data
+    data["user"] = user.username
+    return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
+    #     except Profile.DoesNotExist:
+    #         profile = Profile.objects.create(user=user, bio=payload["bio"]) # add more fields in the future
+    #         serializer = ProfileSerializer(profile)
+    #         data = serializer.data
+    #         data["user"] = user.username
+    #         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
+    #     except Exception:
+    #             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # elif request.method == 'DELETE':
+    #     user.delete()
+    #     return JsonResponse({'Success': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
 # // @route PUT /profile/genre
 # // @desc Add profile genre
