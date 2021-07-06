@@ -80,15 +80,21 @@ def create_delete_profile(request):
 
       # json.dumps take a dictionary as input and returns a string as output.
         try:
-            profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
-            profile_item.update(**request.data) # this is not working anymore
+            # Profile.objects.filter(user=user).update(bio=request.data["bio"], avatar=request.data["avatar"]) #profile.update() will not work with .get() method!! Only .filter()!!
+            # profile_item.update(bio=request.data["bio"], avatar=request.data["avatar"])
+            # profile_item.update(**request.data) # this is not working anymore
+            # profile = get_object_or_404(Profile, user=request.user)
             profile = Profile.objects.get(user=user)
+            profile.bio = request.data["bio"]
+            profile.avatar = request.data["avatar"]
+            profile.save()    
+            # profile = Profile.objects.get(user=user)
             serializer = ProfileSerializer(profile)
             data = serializer.data
             data["user"] = user.username
             return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
-              profile = Profile.objects.create(user=user, bio=request.data["bio"]) # add more fields in the future
+              profile = Profile.objects.create(user=user, bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
               serializer = ProfileSerializer(profile)
               data = serializer.data
               data["user"] = user.username
