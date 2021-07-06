@@ -81,10 +81,11 @@ def create_delete_profile(request):
       # json.dumps take a dictionary as input and returns a string as output.
 
 
-
     # try:
     profile_item = Profile.objects.filter(user=user) #profile.update() will not work with .get() method!! Only .filter()!!
-    profile_item.update(**request.data) # this is not working anymore
+    bio = request.data['bio']
+    avatar = request.data['avatar']
+    profile_item.update(bio=bio, avatar=avatar) # this is not working anymore
     profile = Profile.objects.get(user=user)
     serializer = ProfileSerializer(profile)
     data = serializer.data

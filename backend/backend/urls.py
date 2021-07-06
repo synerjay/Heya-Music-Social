@@ -25,6 +25,4 @@ urlpatterns = [
     path('test/', include('api.urls')), # point to the URL test/
     path('admin/', admin.site.urls),
     path('api/v1/users/', include('users.urls')),
-]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #static files that have been uploaded to django
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

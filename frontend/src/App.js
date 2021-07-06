@@ -16,8 +16,8 @@ const App = () => {
       body: uploadData,
       headers: {
         Authorization: 'Token db1e022ecbcd40f72b8d1dbdfa19e1aa776905bb',
-        'content-type':
-          'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+        // 'content-type':
+        //   'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
       },
     })
       .then((res) => res.json())
