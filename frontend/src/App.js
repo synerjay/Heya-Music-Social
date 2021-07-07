@@ -1,11 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Landing from './components/layout/Landing';
+import Navbar from './components/layout/Navbar';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 const App = () => {
   return (
-    <div className='App'>
-      <h2> This is the future site of the Django-React app</h2>
-    </div>
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+        </Switch>
+      </Fragment>
+    </Router>
   );
 };
 
