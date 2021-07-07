@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   // Component State Hook
@@ -16,9 +17,30 @@ const Login = () => {
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
 
-  // const onSubmit = (e) => {
-  //   // Do axios fetch here
-  // };
+  const userInfo = {
+    email,
+    password,
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault(); // IMPOR-EFFIN-TANT!
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const body = JSON.stringify(userInfo);
+      const res = await axios.post(
+        'http://127.0.0.1:8000/api/v1/users/auth/login/',
+        body,
+        config
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.error(err.response.data);
+    }
+  };
 
   return (
     <Fragment>
@@ -28,7 +50,7 @@ const Login = () => {
           <p className='lead'>
             <i className='fas fa-user'></i> Sign into Your Account
           </p>
-          <form className='form' onSubmit={(e) => {}}>
+          <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
                 className='max-w-7xl'
