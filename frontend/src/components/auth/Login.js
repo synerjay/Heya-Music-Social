@@ -31,11 +31,7 @@ const Login = () => {
         },
       };
       const body = JSON.stringify(userInfo);
-      const res = await axios.post(
-        'http://127.0.0.1:8000/api/v1/users/auth/login/',
-        body,
-        config
-      );
+      const res = await axios.post('/api/v1/users/auth/login/', body, config);
       console.log(res.data);
     } catch (err) {
       console.error(err.response.data);
