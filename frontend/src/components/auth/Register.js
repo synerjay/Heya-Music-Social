@@ -1,16 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   //Component State Hook
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     password2: '',
   });
 
-  const { name, email, password, password2 } = formData;
+  const { username, email, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,10 +19,32 @@ const Register = () => {
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
 
-  // const onSubmit = (e) => {
-  //   // e.preventDefault();
-  //   // Do axios post request here
-  // };
+  const newUser = {
+    username,
+    email,
+    password1,
+    password2,
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault(); // IMPOR-EFFIN-TANT!
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const body = JSON.stringify(newUser); // need to stringify before sending to Django backend
+      const res = await axios.post(
+        '/api/v1/users/auth/register/',
+        body,
+        config
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.error(err.response.data);
+    }
+  };
 
   return (
     <Fragment>
@@ -30,13 +53,13 @@ const Register = () => {
         <div className='p-10 w-3/6'>
           <h1 className='large text-primary'>Sign Up</h1>
           <p className='lead'>Create Your Account</p>
-          <form className='form' onSubmit={(e) => {}}>
+          <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
                 type='text'
-                placeholder='Name'
-                name='name'
-                value={name}
+                placeholder='Username'
+                name='username'
+                value={username}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -50,16 +73,12 @@ const Register = () => {
                 onChange={(e) => onChange(e)}
                 required
               />
-              <small className='form-text'>
-                This site uses Gravatar so if you want a profile image, use a
-                Gravatar email
-              </small>
             </div>
             <div className='form-group'>
               <input
                 type='password'
                 placeholder='Password'
-                name='password'
+                name='password1'
                 value={password}
                 onChange={(e) => onChange(e)}
                 minLength='6'
