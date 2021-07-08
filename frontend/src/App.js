@@ -1,24 +1,30 @@
-import { useEffect, useState, Fragment } from 'react';
-import axios from 'axios';
+import { useEffect, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// Components
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './store';
+
 const App = () => {
   return (
-    <Router>
-      <Fragment>
-        <Navbar />
-        <Switch>
-          <Route exact path='/' component={Landing} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} />
-        </Switch>
-      </Fragment>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
   );
 };
 
