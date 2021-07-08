@@ -7,11 +7,11 @@ const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    password: '',
+    password1: '',
     password2: '',
   });
 
-  const { username, email, password, password2 } = formData;
+  const { username, email, password1, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -79,7 +79,7 @@ const Register = () => {
                 type='password'
                 placeholder='Password'
                 name='password1'
-                value={password}
+                value={password1}
                 onChange={(e) => onChange(e)}
                 minLength='6'
               />
