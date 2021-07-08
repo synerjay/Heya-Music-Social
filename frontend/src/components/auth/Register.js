@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ register, isAuthenticted }) => {
   //Component State Hook
   const [formData, setFormData] = useState({
     username: '',
@@ -19,30 +21,19 @@ const Register = () => {
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
 
-  const newUser = {
-    username,
-    email,
-    password1,
-    password2,
-  };
+  // const newUser = {
+  //   username,
+  //   email,
+  //   password1,
+  //   password2,
+  // };
 
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      const body = JSON.stringify(newUser); // need to stringify before sending to Django backend
-      const res = await axios.post(
-        '/api/v1/users/auth/register/',
-        body,
-        config
-      );
-      console.log(res.data);
-    } catch (err) {
-      console.error(err.response.data);
+    if (password1 !== password2) {
+      console.log('Passwords do not match!');
+    } else {
+      register({ username, email, password1, password2 });
     }
   };
 
@@ -105,4 +96,29 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { register })(Register);
+
+// const config = {
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// };
+// const body = JSON.stringify(newUser); // need to stringify before sending to Django backend
+// const res = await axios.post(
+//   '/api/v1/users/auth/register/',
+//   body,
+//   config
+// );
+// console.log(res.data);
+// } catch (err) {
+// console.error(err.response.data);
+// }
