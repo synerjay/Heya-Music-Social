@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
+import { connect } from 'react-redux';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   // Component State Hook
   const [formData, setFormData] = useState({
     email: '',
@@ -24,18 +26,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      const body = JSON.stringify(userInfo);
-      const res = await axios.post('/api/v1/users/auth/login/', body, config);
-      console.log(res.data);
-    } catch (err) {
-      console.error(err.response.data);
-    }
+    login(email, password); // action to reducer
   };
 
   return (
@@ -78,4 +69,26 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);
+
+// try {
+//   const config = {
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   };
+//   const body = JSON.stringify(userInfo);
+//   const res = await axios.post('/api/v1/users/auth/login/', body, config);
+//   console.log(res.data);
+// } catch (err) {
+//   console.error(err.response.data);
+// }

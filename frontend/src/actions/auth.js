@@ -5,6 +5,9 @@ import {
   REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
 } from './types';
 
 //Load user
@@ -59,3 +62,43 @@ export const register =
       });
     }
   };
+
+// Login User
+
+export const login = (email, password) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ email, password });
+  //We use axios to send a post request to /api/users to register.
+  //The register action takes in the response from the '/api/users' backend using the post method and store it in the res variable
+  try {
+    const res = await axios.post('/api/v1/users/auth/login/', body, config);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    setTimeout(() => {
+      dispatch(loadUser());
+    }, 1000);
+  } catch (err) {
+    // const errors = err.response.data.errors;
+
+    // if (errors) {
+    //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    // }
+
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
+
+export const logout = () => (dispatch) => {
+  // dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
+};
