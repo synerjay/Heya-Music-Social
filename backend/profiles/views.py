@@ -74,7 +74,7 @@ def create_delete_profile(request):
     print(request.data) # REQUEST DATA is already an OBJECT so no need to put it on JSON.LOADS
     #request.data also seem to parse multipart/form-data
     if request.method == 'POST':
-      # payload = json.loads(request.data)
+      # payload = json.loads(request.data) json.loads are not needed for request.data!!! Only for request.body
       #json.loads take a string as input and returns a dictionary as output.
       # json.dumps take a dictionary as input and returns a string as output.
         try:
@@ -83,11 +83,11 @@ def create_delete_profile(request):
             profile = Profile.objects.get(user=user)
             profile.bio = request.data["bio"]
             profile.avatar = request.data["avatar"]
-            # Later need to be added
-            # profile.name = request.data["name"]
-            # profile.instagram = request.data["instagram"]
-            # profile.spotify = request.data["spotify"]
-            # profile.twitter = request.data["twitter"]
+            # Later need to be added Make sure to add below fields on frontend or Django will send an error!!!
+            profile.name = request.data["name"]
+            profile.instagram = request.data["instagram"]
+            profile.spotify = request.data["spotify"]
+            profile.twitter = request.data["twitter"]
             profile.save()    
             # profile = Profile.objects.get(user=user)
             serializer = ProfileSerializer(profile, context={"request": request})
