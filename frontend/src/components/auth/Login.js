@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { connect } from 'react-redux';
@@ -28,6 +28,10 @@ const Login = ({ login, isAuthenticated }) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
     login(email, password); // action to reducer
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='dashboard' />;
+  }
 
   return (
     <Fragment>
