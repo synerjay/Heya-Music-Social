@@ -7,6 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from '../actions/types';
+import setAuthToken from '../utils/setAuthToken';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -46,6 +47,7 @@ export default function foo(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: null,
       };
     default:
       return state;
