@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Components
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
+import Alert from './components/layout/Alert';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -31,6 +32,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
+          <Alert />
           <Switch>
             <Route exact path='/' component={Landing} />
             <section className='container'>

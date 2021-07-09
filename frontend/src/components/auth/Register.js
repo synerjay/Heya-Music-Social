@@ -52,7 +52,7 @@ const Register = ({ register, isAuthenticted }) => {
                 name='username'
                 value={username}
                 onChange={(e) => onChange(e)}
-                required
+                // required
               />
             </div>
             <div className='form-group'>
@@ -62,7 +62,7 @@ const Register = ({ register, isAuthenticted }) => {
                 name='email'
                 value={email}
                 onChange={(e) => onChange(e)}
-                required
+                // required
               />
             </div>
             <div className='form-group'>
