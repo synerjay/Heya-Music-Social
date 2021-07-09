@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -162,7 +164,7 @@ img {
   margin: auto;
   overflow: hidden;
   /* padding: 0 2rem; */
-  margin-top: 6rem;
+  margin-top: 3rem;
   margin-bottom: 3rem;
 }
 

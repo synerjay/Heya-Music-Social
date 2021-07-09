@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 const Dashboard = () => {
   return (
-    <div>
+    <Fragment>
       <h2> This is the future site of the Dashboard</h2>
-    </div>
+    </Fragment>
   );
 };
 

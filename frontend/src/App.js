@@ -33,9 +33,11 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Landing} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <section className='container'>
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' component={Login} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            </section>
           </Switch>
         </Fragment>
       </Router>
