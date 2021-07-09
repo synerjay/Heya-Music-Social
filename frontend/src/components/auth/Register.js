@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ register, isAuthenticted }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   //Component State Hook
   const [formData, setFormData] = useState({
     username: '',
@@ -31,11 +32,15 @@ const Register = ({ register, isAuthenticted }) => {
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
     if (password1 !== password2) {
-      console.log('Passwords do not match!');
+      setAlert('Passwords do not match', 'danger');
     } else {
       register({ username, email, password1, password2 });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Fragment>
@@ -52,7 +57,7 @@ const Register = ({ register, isAuthenticted }) => {
                 name='username'
                 value={username}
                 onChange={(e) => onChange(e)}
-                // required
+                required
               />
             </div>
             <div className='form-group'>
@@ -62,7 +67,7 @@ const Register = ({ register, isAuthenticted }) => {
                 name='email'
                 value={email}
                 onChange={(e) => onChange(e)}
-                // required
+                required
               />
             </div>
             <div className='form-group'>
@@ -105,7 +110,7 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);
 
 // const config = {
 //   headers: {
