@@ -5,18 +5,12 @@ import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 
 const initialState = {
-  company: '',
-  website: '',
-  location: '',
-  status: '',
-  skills: '',
-  githubusername: '',
   bio: '',
-  twitter: '',
-  facebook: '',
-  linkedin: '',
-  youtube: '',
+  avatar: null,
+  name: '',
   instagram: '',
+  twitter: '',
+  spotify: '',
 };
 
 const ProfileForm = ({
@@ -25,25 +19,40 @@ const ProfileForm = ({
   getCurrentProfile,
   history,
 }) => {
-  const [bio, setBio] = useState('');
-  const [avatar, setAvatar] = useState();
-  const [name, setName] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [twitter, setTwitter] = useState('');
-  const [spotify, setSpotify] = useState('');
+  const [formData, setFormData] = useState(initialState);
+
+  useEffect(() => {
+    if (!profile) getCurrentProfile();
+    if (!loading && profile) {
+      const profileData = { ...initialState };
+      for (const key in profile) {
+        if (key in profileData) profileData[key] = profile[key];
+      }
+      return setFormData(profileData);
+    }
+  }, [profile]);
+
+  const { avatar, bio, twitter, instagram, spotify, name } = formData;
+
+  const onChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]:
+        e.target.name === 'avatar' ? e.target.files[0] : e.target.value,
+    });
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
+    const uploadData = new FormData();
+    uploadData.append('bio', formData.bio);
+    uploadData.append('avatar', formData.avatar, formData.avatar.name);
+    uploadData.append('name', formData.name);
+    uploadData.append('instagram', formData.instagram);
+    uploadData.append('twitter', formData.twitter);
+    uploadData.append('spotify', formData.spotify);
 
-    const formData = new FormData();
-    formData.append('bio', bio);
-    formData.append('avatar', avatar, avatar.name);
-    formData.append('name', name);
-    formData.append('instagram', instagram);
-    formData.append('twitter', twitter);
-    formData.append('spotify', spotify);
-
-    createProfile(formData, history, profile ? true : false);
+    createProfile(uploadData, history, profile ? true : false);
   };
 
   return (
@@ -60,7 +69,7 @@ const ProfileForm = ({
             placeholder='Name'
             name='name'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={onChange}
           />
           <small className='form-text'>Your name</small>
         </div>
@@ -69,7 +78,7 @@ const ProfileForm = ({
             placeholder='A short bio of yourself'
             name='bio'
             value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            onChange={onChange}
           />
           <small className='form-text'>Tell us a little about yourself</small>
         </div>
@@ -88,9 +97,9 @@ const ProfileForm = ({
         <div className='form-group'>
           <input
             type='file'
-            placeholder='Website'
-            name='website'
-            onChange={(e) => setAvatar(e.target.files[0])}
+            placeholder='avatar'
+            name='avatar'
+            onChange={onChange}
           />
           <small className='form-text'>Upload an avatar of your choice</small>
         </div>
@@ -100,7 +109,7 @@ const ProfileForm = ({
             placeholder='Instagram Handle'
             name='instagram'
             value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
+            onChange={onChange}
           />
           <small className='form-text'>Instagram Account</small>
         </div>
@@ -110,7 +119,7 @@ const ProfileForm = ({
             placeholder='Twitter Handle'
             name='twitter'
             value={twitter}
-            onChange={(e) => setTwitter(e.target.value)}
+            onChange={onChange}
           />
           <small className='form-text'>Twitter Account</small>
         </div>
@@ -120,7 +129,7 @@ const ProfileForm = ({
             placeholder='Spotify Handle'
             name='spotify'
             value={spotify}
-            onChange={(e) => setSpotify(e.target.value)}
+            onChange={onChange}
           />
           <small className='form-text'>Spotify Account</small>
         </div>

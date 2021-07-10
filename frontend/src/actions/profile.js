@@ -10,6 +10,13 @@ import {
   CLEAR_PROFILE,
 } from './types';
 
+const token = localStorage.getItem('token');
+const config = {
+  headers: {
+    Authorization: `Token ${token}`,
+  },
+};
+
 // Get Current User's Profile
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -17,11 +24,12 @@ export const getCurrentProfile = () => async (dispatch) => {
 
   try {
     // axios get response from Django backend /profile/me
-    const res = await axios.get('/profile/me');
+    const res = await axios.get('/profile/me', config);
 
+    console.log(res.data.profile);
     dispatch({
       type: GET_PROFILE,
-      payload: res.data.profile, // .profile to get the individual profile object
+      payload: res.data.profile,
     });
   } catch (err) {
     dispatch({
@@ -89,7 +97,7 @@ export const createProfile =
       //the same type as getCurrentProfile
       dispatch({
         type: GET_PROFILE,
-        payload: res.data,
+        payload: res.data.profile,
       });
 
       dispatch(
