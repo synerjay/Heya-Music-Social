@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes #for authenti
 from rest_framework.permissions import IsAuthenticated #for authenticated routes
 from django.views.decorators.csrf import csrf_exempt #for authenticated routes
 # API dependencies
-from .serializers import ProfileSerializer, GenreSerializer, ArtistsSerializer, TracksSerializer
+from .serializers import ProfileSerializer
 from .models import Profile, Genre, Artists, Tracks
 from rest_framework import status
 import json #Useful for POST and PUT requests
@@ -99,7 +99,7 @@ def create_delete_profile(request):
             return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
               profile = Profile.objects.create(user=user, bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
-              serializer = ProfileSerializer(profile)
+              serializer = ProfileSerializer(profile, context={"request": request})
               data = serializer.data
               data["user"] = user.username
               return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -121,7 +121,7 @@ def add_genre(request):
     try:
         profile = Profile.objects.get(user=user)
         Genre.objects.create(profile=profile, user=user, genre=payload["genre"])
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -140,7 +140,7 @@ def delete_genre(request, gen_id):
         genre = Genre.objects.get(id=gen_id, user=user)
         genre.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -159,7 +159,7 @@ def add_artist(request):
     try:
         profile = Profile.objects.get(user=user)
         Artists.objects.create(profile=profile, user=user, artist=payload["artist"])
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -178,7 +178,7 @@ def delete_artist(request, art_id):
         artist = Artists.objects.get(id=art_id, user=user)
         artist.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -199,7 +199,7 @@ def add_track(request):
     try:
         profile = Profile.objects.get(user=user)
         Tracks.objects.create(profile=profile, user=user, track=payload["track"])
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -219,7 +219,7 @@ def delete_track(request, track_id):
         track = Tracks.objects.get(id=track_id, user=user)
         track.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
