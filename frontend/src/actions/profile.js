@@ -113,3 +113,23 @@ export const createProfile =
       });
     }
   };
+
+// Delete User Account
+
+export const deleteAccount = () => async (dispatch) => {
+  if (window.confirm('Are you sure? This cannot be undone.')) {
+    try {
+      await axios.delete('/profile/');
+
+      dispatch({ type: CLEAR_PROFILE });
+      dispatch({ type: ACCOUNT_DELETED });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  }
+};
+
+// Add Genre, Artists, Tracks below

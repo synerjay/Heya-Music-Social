@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  ACCOUNT_DELETED,
 } from '../actions/types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -37,6 +38,7 @@ export default function foo(state = initialState, action) {
         loading: false,
         user: payload.user,
       };
+    case ACCOUNT_DELETED:
     case AUTH_ERROR:
     case REGISTER_FAIL:
     case LOGIN_FAIL:
