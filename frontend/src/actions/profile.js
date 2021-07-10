@@ -10,8 +10,9 @@ import {
   CLEAR_PROFILE,
 } from './types';
 
+// for some reason universal axios header in utils is not working and Django is not recognizing it!!!! >:(
 const token = localStorage.getItem('token');
-const config = {
+const getConfig = {
   headers: {
     Authorization: `Token ${token}`,
   },
@@ -24,7 +25,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 
   try {
     // axios get response from Django backend /profile/me
-    const res = await axios.get('/profile/me', config);
+    const res = await axios.get('/profile/me', getConfig);
 
     console.log(res.data.profile);
     dispatch({

@@ -28,7 +28,7 @@ const ProfileForm = ({
       for (const key in profile) {
         if (key in profileData) profileData[key] = profile[key];
       }
-      return setFormData(profileData);
+      return setFormData(profileData); // Return setFormData or else it will run in an inifinite loop
     }
   }, [profile]);
 
