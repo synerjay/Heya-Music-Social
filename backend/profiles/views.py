@@ -24,7 +24,10 @@ Users = apps.get_model('users', 'CustomUser')
 @permission_classes([])
 def get_all_profiles(request):
     profiles = Profile.objects.all()
-    serializer = ProfileSerializer(profiles, many=True)
+    print("The request is below")
+    print(request)
+    print(request.user.id)
+    serializer = ProfileSerializer(profiles, context={"request": request}, many=True)
     return JsonResponse({'profiles': serializer.data }, safe=False, status=status.HTTP_200_OK)
 
 # // @route GET profile/member/<int:user_id>
@@ -37,7 +40,7 @@ def get_one_profile(request, user_id):
     user = Users.objects.get(id=user_id)
     try: 
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         return JsonResponse({ 'profile': serializer.data}, safe=False, status=status.HTTP_200_OK)
     except Profile.DoesNotExist:
         return JsonResponse({'msg': 'There is no profile found yet.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
@@ -54,7 +57,7 @@ def get_own_profile(request):
     user = request.user
     try:
         profile = Profile.objects.get(user=user.id)
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = Users.objects.get(id=user.id).username
         return JsonResponse({'profile': data }, safe=False, status=status.HTTP_200_OK)
