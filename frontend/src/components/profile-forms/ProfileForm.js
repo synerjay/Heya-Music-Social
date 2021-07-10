@@ -43,7 +43,7 @@ const ProfileForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
     const uploadData = new FormData();
     uploadData.append('bio', formData.bio);
     uploadData.append('avatar', formData.avatar, formData.avatar.name);
