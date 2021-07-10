@@ -1,11 +1,20 @@
 import React, { Fragment, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
+const Dashboard = ({ auth: { user } }) => {
   return (
     <Fragment>
-      <h2> This is the future site of the Dashboard</h2>
+      <h1 className='text-red-500 text-2xl'> Dashboard</h1>
+      <p className='lead'>
+        <i className='fas fa-user'></i> Welcome{' '}
+        {user && user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+      </p>
     </Fragment>
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Dashboard);
