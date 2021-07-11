@@ -33,7 +33,6 @@ const Login = ({ login, isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
-    console.log(email, password);
     login(email, password); // action to reducer
   };
 

@@ -10,6 +10,7 @@ import Login from './components/auth/Login';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import ProfileForm from './components/profile-forms/ProfileForm';
+import AddGenre from './components/profile-forms/AddGenre';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -50,6 +51,7 @@ const App = () => {
                 path='/edit-profile'
                 component={ProfileForm}
               />
+              <PrivateRoute exact path='/add-genre' component={AddGenre} />
             </section>
           </Switch>
         </Fragment>

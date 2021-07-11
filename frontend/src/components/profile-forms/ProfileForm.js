@@ -53,7 +53,7 @@ const ProfileForm = ({
     if (formData.avatar) {
       uploadData.append('avatar', formData.avatar, formData.avatar.name);
     } else {
-      uploadData.append('avatar', '');
+      uploadData.append('avatar', ''); // the empty field tells Django backend to NOT change the avatar field in the DB
     }
 
     createProfile(uploadData, history, profile ? true : false);

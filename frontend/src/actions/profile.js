@@ -168,6 +168,7 @@ export const addGenre = (formData, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
+    console.log(res.data.profile);
 
     dispatch(setAlert('Favorite Genre Added', 'success'));
 
