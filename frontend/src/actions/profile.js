@@ -208,6 +208,7 @@ export const addArtist = (formData, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
+    console.log(res.data.profile);
 
     dispatch(setAlert('Favorite Artist Added', 'success'));
 
@@ -247,6 +248,7 @@ export const addTrack = (formData, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
+    console.log(res.data.profile);
 
     dispatch(setAlert('Favorite Track Added', 'success'));
 

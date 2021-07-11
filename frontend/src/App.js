@@ -17,6 +17,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
+import AddArtist from './components/profile-forms/AddArtist';
+import AddTrack from './components/profile-forms/AddTrack';
 
 const App = () => {
   useEffect(() => {
@@ -52,6 +54,8 @@ const App = () => {
                 component={ProfileForm}
               />
               <PrivateRoute exact path='/add-genre' component={AddGenre} />
+              <PrivateRoute exact path='/add-artist' component={AddArtist} />
+              <PrivateRoute exact path='/add-track' component={AddTrack} />
             </section>
           </Switch>
         </Fragment>
