@@ -8,6 +8,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_PROFILE,
 } from './types';
 import { setAlert } from './alert';
 
@@ -78,8 +79,12 @@ export const login = (email, password) => async (dispatch) => {
       'Content-Type': 'application/json',
     },
   };
+  console.log(email);
+  console.log(password);
 
   const body = JSON.stringify({ email, password });
+  console.log(body);
+  console.log(config);
   //We use axios to send a post request to /api/users to register.
   //The register action takes in the response from the '/api/users' backend using the post method and store it in the res variable
   try {
@@ -106,12 +111,13 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  // dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.post('/api/v1/users/auth/logout/');
 
     dispatch({ type: LOGOUT });
     dispatch(setAlert(res.detail, 'success'));
+    window.location.reload(); // add this one or else Django will have a hissy fit about 404 !!
   } catch (err) {
     const errors = err.response.data.errors;
 

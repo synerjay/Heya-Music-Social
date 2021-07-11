@@ -1,10 +1,17 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { connect } from 'react-redux';
 
 const Login = ({ login, isAuthenticated }) => {
+  // useEffect(() => {
+  //   if (!localStorage.justOnce) {
+  //     localStorage.setItem('justOnce', 'true');
+  //     window.location.reload();
+  //   }
+  // }, []);
+
   // Component State Hook
   const [formData, setFormData] = useState({
     email: '',
@@ -26,6 +33,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
+    console.log(email, password);
     login(email, password); // action to reducer
   };
 
