@@ -52,7 +52,7 @@ def get_one_profile(request, user_id):
 # // @access  Private access with tokens
 @api_view(["GET"])
 @csrf_exempt
-@permission_classes([])
+@permission_classes([IsAuthenticated])
 def get_own_profile(request):
     user = request.user
     try:

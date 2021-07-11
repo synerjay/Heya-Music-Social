@@ -8,12 +8,14 @@ import DashboardActions from './ DashboardActions';
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
-  auth: { user },
+  auth: { user, token },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
+    // setTimeout(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+    // }, 2000);
+  }, [token, getCurrentProfile]);
 
   return (
     <Fragment>

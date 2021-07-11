@@ -56,7 +56,7 @@ export const register =
       });
       setTimeout(() => {
         dispatch(loadUser());
-      }, 1000);
+      }, 500);
     } catch (err) {
       const errors = err.response.data.errors;
 

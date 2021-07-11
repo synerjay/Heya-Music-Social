@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-
+import setAuthToken from '../utils/setAuthToken';
 import {
   GET_PROFILE,
   GET_PROFILES,
@@ -21,11 +21,13 @@ const getConfig = {
 // Get Current User's Profile
 
 export const getCurrentProfile = () => async (dispatch) => {
-  // make a request on the backend
+  if (localStorage.token) {
+    setAuthToken(localStorage.token); // This needs to be included in GET requests or django will reject it!!!
+  }
 
   try {
     // axios get response from Django backend /profile/me
-    const res = await axios.get('/profile/me', getConfig);
+    const res = await axios.get('/profile/me'); // this endoint is HUGE problem
 
     console.log(res.data.profile);
     dispatch({
