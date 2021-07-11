@@ -46,11 +46,15 @@ const ProfileForm = ({
 
     const uploadData = new FormData();
     uploadData.append('bio', formData.bio);
-    uploadData.append('avatar', formData.avatar, formData.avatar.name);
     uploadData.append('name', formData.name);
     uploadData.append('instagram', formData.instagram);
     uploadData.append('twitter', formData.twitter);
     uploadData.append('spotify', formData.spotify);
+    if (formData.avatar) {
+      uploadData.append('avatar', formData.avatar, formData.avatar.name);
+    } else {
+      uploadData.append('avatar', '');
+    }
 
     createProfile(uploadData, history, profile ? true : false);
   };
