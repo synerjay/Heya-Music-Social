@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { Link } from 'react-router-dom';
+import DashboardActions from './ DashboardActions';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -23,8 +24,8 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
-          {/* <DashboardActions />
-          <Experience experience={profile.experience} />
+          <DashboardActions />
+          {/* <Experience experience={profile.experience} />
           <Education education={profile.education} /> */}
 
           <div className='my-2'>
