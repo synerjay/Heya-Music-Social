@@ -12,9 +12,7 @@ const Dashboard = ({
   profile: { profile, loading },
 }) => {
   useEffect(() => {
-    // setTimeout(() => {
     getCurrentProfile();
-    // }, 2000);
   }, [token, getCurrentProfile]);
 
   return (

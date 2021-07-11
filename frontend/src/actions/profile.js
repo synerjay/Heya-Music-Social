@@ -11,12 +11,12 @@ import {
 } from './types';
 
 // for some reason universal axios header in utils is not working and Django is not recognizing it!!!! >:(
-const token = localStorage.getItem('token');
-const getConfig = {
-  headers: {
-    Authorization: `Token ${token}`,
-  },
-};
+// const token = localStorage.getItem('token');
+// const getConfig = {
+//   headers: {
+//     Authorization: `Token ${token}`,
+//   },
+// };
 
 // Get Current User's Profile
 
@@ -64,6 +64,10 @@ export const getProfiles = () => async (dispatch) => {
 // Get Profile By ID
 
 export const getProfileById = (userId) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token); // This needs to be included in GET requests or django will reject it!!!
+  }
+
   try {
     const res = await axios.get(`/profile/member/${userId}`);
 
