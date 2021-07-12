@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addGenre } from '../../actions/profile';
+import SearchAlbum from '../search/SearchAlbum';
 
 const AddGenre = ({ addGenre, history }) => {
   const [formData, setFormData] = useState({
@@ -17,11 +18,12 @@ const AddGenre = ({ addGenre, history }) => {
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>What kind of music do you like?</h1>
+      <h1 className='large text-primary'>Whatis your favorite Album?</h1>
       <p className='lead'>
         <i className='fas fa-code-branch' /> Tell the world your musical taste
       </p>
       <small>* = required field</small>
+      <SearchAlbum />
       <form
         className='form'
         onSubmit={(e) => {

@@ -29,8 +29,8 @@ const Dashboard = ({
         <Fragment>
           <DashboardActions />
           <div className='flex flex-row'>
-            <Genre genre={profile.genre} />
             <Artist artists={profile.artists} />
+            <Genre genre={profile.genre} />
             <Track tracks={profile.tracks} />
           </div>
           {/* <Experience experience={profile.experience} />

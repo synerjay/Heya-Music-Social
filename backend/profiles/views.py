@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated #for authenticated routes
 from django.views.decorators.csrf import csrf_exempt #for authenticated routes
 # API dependencies
 from .serializers import ProfileSerializer
-from .models import Profile, Genre, Artists, Tracks
+from .models import Profile, Album, Artist, Track
 from rest_framework import status
 import json #Useful for POST and PUT requests
 from django.core.exceptions import ObjectDoesNotExist
@@ -112,18 +112,18 @@ def create_delete_profile(request):
         user.delete()
         return JsonResponse({'Success': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
-# // @route PUT /profile/genre
-# // @desc Add profile genre
+# // @route PUT /profile/album
+# // @desc Add profile Album
 # // @access Private
 @api_view(["PUT"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
-def add_genre(request):
+def add_album(request):
     payload = json.loads(request.body)
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Genre.objects.create(profile=profile, user=user, genre=payload["genre"])
+        Album.objects.create(profile=profile, user=user, album=payload["Album"]) # NEED TO CHANGE!!!
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -131,17 +131,17 @@ def add_genre(request):
     except ObjectDoesNotExist:
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
-# // @route DELETE /profile/genre/<int:gen_id>
-# // @desc Delete genre from profile
+# // @route DELETE /profile/Album/<int:album_id>
+# // @desc Delete Album from profile
 # // @access Private
 @api_view(["DELETE"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
-def delete_genre(request, gen_id):
+def delete_album(request, album_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        genre = Genre.objects.get(id=gen_id, user=user)
-        genre.delete()
+        album = Album.objects.get(id=album_id, user=user)
+        album.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
@@ -151,7 +151,7 @@ def delete_genre(request, gen_id):
         return JsonResponse({'msg': 'There is no genre found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route PUT /profile/artist
-# // @desc Add profile favorite artists
+# // @desc Add profile favorite Artist
 # // @access Private
 @api_view(["PUT"])
 @csrf_exempt
@@ -161,7 +161,7 @@ def add_artist(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Artists.objects.create(profile=profile, user=user, artist=payload["artist"])
+        Artist.objects.create(profile=profile, user=user, artist=payload["artist"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -170,7 +170,7 @@ def add_artist(request):
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route DELETE /profile/artist/<int:art_id>
-# // @desc Delete artists from profile
+# // @desc Delete Artist from profile
 # // @access Private
 @api_view(["DELETE"])
 @csrf_exempt
@@ -178,7 +178,7 @@ def add_artist(request):
 def delete_artist(request, art_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        artist = Artists.objects.get(id=art_id, user=user)
+        artist = Artist.objects.get(id=art_id, user=user)
         artist.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})
@@ -191,7 +191,7 @@ def delete_artist(request, art_id):
 
 
 # // @route PUT /profile/track
-# // @desc Add profile favorite tracks
+# // @desc Add profile favorite Track
 # // @access Private
 @api_view(["PUT"])
 @csrf_exempt
@@ -201,7 +201,7 @@ def add_track(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Tracks.objects.create(profile=profile, user=user, track=payload["track"])
+        Track.objects.create(profile=profile, user=user, track=payload["track"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -210,7 +210,7 @@ def add_track(request):
         return JsonResponse({'msg': 'There is no profile found.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
 
 # // @route DELETE /profile/track/<int:track_id>
-# // @desc Delete tracks from profile
+# // @desc Delete Track from profile
 # // @access Private
 
 @api_view(["DELETE"])
@@ -219,7 +219,7 @@ def add_track(request):
 def delete_track(request, track_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        track = Tracks.objects.get(id=track_id, user=user)
+        track = Track.objects.get(id=track_id, user=user)
         track.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})

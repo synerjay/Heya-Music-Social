@@ -22,30 +22,35 @@ class Profile(models.Model):
 # difference between ForeignKey and OneToOne field is that Foreign key is many-to-one relationships like Comment-Post
   #OneToOneField will return to ONLY one instance of QuerySet like Profile-RegisteredUser
 
-class Genre(models.Model):
-    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='genre')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='genre') 
-    genre = models.CharField(max_length=200, blank=True)
-    # might add ImageField
+class Album(models.Model):
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='album')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='album') 
+    title = models.CharField(max_length=200, blank=True)
+    artist = models.CharField(max_length=200, blank=True)
+    img = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
-        return '%s likes %s' % (self.user, self.genre)
+        return '%s likes %s' % (self.user, self.title)
 
-class Artists(models.Model):
+class Artist(models.Model):
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='artists')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='artists') 
-    artist = models.CharField(max_length=200, blank=True)
+    name = models.CharField(max_length=200, blank=True)
+    img = models.URLField(max_length=200, blank=True)
     # might add ImageField
 
     def __str__(self):
-        return '%s likes %s' % (self.user, self.artist)
+        return '%s likes %s' % (self.user, self.name)
 
-class Tracks(models.Model):
+class Track(models.Model):
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='tracks')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tracks') 
-    track = models.CharField(max_length=250, blank=True)
+    title = models.CharField(max_length=250, blank=True)
+    artist = models.CharField(max_length=200, blank=True)
+    img = models.URLField(max_length=200, blank=True)
+
     # might add ImageField
 
     def __str__(self):
-        return '%s likes %s' % (self.user, self.track)
+        return '%s likes %s' % (self.user, self.title)
 

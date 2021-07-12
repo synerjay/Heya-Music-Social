@@ -23,11 +23,11 @@ const Genre = ({ genre, deleteGenre }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Genre</h2>
+      <h2 className='my-2'>Your Favorite Album</h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Genre</th>
+            <th>Album</th>
             {/* <th className='hide-sm'>Degree</th>
             <th className='hide-sm'>Years</th> */}
             <th />

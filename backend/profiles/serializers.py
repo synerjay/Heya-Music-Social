@@ -1,30 +1,30 @@
 from rest_framework import serializers
-from .models import Profile, Genre, Artists, Tracks
+from .models import Profile, Album, Artist, Track
 
-class GenreSerializer(serializers.ModelSerializer):
+class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Genre
-        fields = ['id', 'genre']
+        model = Album
+        fields = ['id', 'title', 'artist', 'img']
 
-class ArtistsSerializer(serializers.ModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Artists
-        fields = ['id', 'artist']
+        model = Artist
+        fields = ['id', 'name', 'img']
 
-class TracksSerializer(serializers.ModelSerializer):
+class TrackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tracks
-        fields = ['id', 'track']
+        model = Track
+        fields = ['id', 'title', 'artist', 'img']
 
 class ProfileSerializer(serializers.ModelSerializer):
-    genre = GenreSerializer(many=True, required=False)
-    artists = ArtistsSerializer(many=True, required=False)
-    tracks = TracksSerializer(many=True, required=False)
+    albums = AlbumSerializer(many=True, required=False)
+    artists = ArtistSerializer(many=True, required=False)
+    tracks = TrackSerializer(many=True, required=False)
     avatar_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'name', 'avatar_url', 'bio', 'instagram', 'twitter', 'spotify', 'genre', 'artists', 'tracks']
+        fields = ['id', 'user', 'name', 'avatar_url', 'bio', 'instagram', 'twitter', 'spotify', 'albums', 'artists', 'tracks']
 
     def get_avatar_url(self, profile):
         request = self.context.get('request')
