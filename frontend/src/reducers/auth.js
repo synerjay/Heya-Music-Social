@@ -8,7 +8,6 @@ import {
   LOGOUT,
   ACCOUNT_DELETED,
 } from '../actions/types';
-import setAuthToken from '../utils/setAuthToken';
 
 const initialState = {
   token: localStorage.getItem('token'),

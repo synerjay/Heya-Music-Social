@@ -30,9 +30,9 @@ const ProfileForm = ({
       }
       return setFormData(profileData); // Return setFormData or else it will run in an inifinite loop
     }
-  }, [profile]);
+  }, [loading, getCurrentProfile, profile]);
 
-  const { avatar, bio, twitter, instagram, spotify, name } = formData;
+  const { bio, twitter, instagram, spotify, name } = formData;
 
   const onChange = (e) =>
     setFormData({

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
@@ -25,11 +25,6 @@ const Login = ({ login, isAuthenticated }) => {
   // The ...formData is a spreader and copies the formData
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
-
-  const userInfo = {
-    email,
-    password,
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
