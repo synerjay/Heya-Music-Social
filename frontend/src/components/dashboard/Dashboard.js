@@ -5,6 +5,7 @@ import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import DashboardActions from './ DashboardActions';
 import Genre from './Genre';
+import Artist from './Artist';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -26,7 +27,10 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <Genre genre={profile.genre} />
+          <div className='flex flex-row'>
+            <Genre genre={profile.genre} />
+            <Artist artists={profile.artists} />
+          </div>
           {/* <Experience experience={profile.experience} />
           <Education education={profile.education} /> */}
 

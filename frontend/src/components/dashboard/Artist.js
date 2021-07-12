@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteGenre } from '../../actions/profile';
+import { deleteArtist } from '../../actions/profile';
 
-const Genre = ({ genre, deleteGenre }) => {
-  const genreList = genre.map((gen) => (
-    <tr key={gen.id}>
-      <td>{gen.genre}</td>
+const Artist = ({ artists, deleteArtist }) => {
+  const artistList = artists.map((art) => (
+    <tr key={art.id}>
+      <td>{art.artist}</td>
       {/* <td className='hide-sm'>{edu.degree}</td>
       <td>
         {format(new Date(edu.from), 'yyyy/MM/dd')}-
         {edu.to ? format(new Date(edu.to), 'yyyy/MM/dd') : 'Current'}
       </td> */}
       <td>
-        <button onClick={() => deleteGenre(gen.id)} className='btn btn-danger'>
+        <button onClick={() => deleteArtist(art.id)} className='btn btn-danger'>
           {' '}
           Delete
         </button>
@@ -23,25 +23,25 @@ const Genre = ({ genre, deleteGenre }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Genre</h2>
+      <h2 className='my-2'>Your Favorite Artists</h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Genre</th>
+            <th>Artist</th>
             {/* <th className='hide-sm'>Degree</th>
             <th className='hide-sm'>Years</th> */}
             <th />
           </tr>
         </thead>
-        <tbody>{genreList}</tbody>
+        <tbody>{artistList}</tbody>
       </table>
     </div>
   );
 };
 
-Genre.propTypes = {
-  deleteGenre: PropTypes.func.isRequired,
-  genre: PropTypes.array.isRequired,
+Artist.propTypes = {
+  deleteArtist: PropTypes.func.isRequired,
+  artists: PropTypes.array.isRequired,
 };
 
-export default connect(null, { deleteGenre })(Genre);
+export default connect(null, { deleteArtist })(Artist);
