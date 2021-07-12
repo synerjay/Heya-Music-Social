@@ -268,3 +268,61 @@ export const addTrack = (formData, history) => async (dispatch) => {
     });
   }
 };
+
+// Delete Genre, Artist, Track
+
+// Delete Genre
+
+export const deleteGenre = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/profile/genre/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data.profile,
+    });
+
+    dispatch(setAlert('Genre Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const deleteArtist = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/profile/artist/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data.profile,
+    });
+
+    dispatch(setAlert('Artist Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const deleteTrack = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/profile/track/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data.profile,
+    });
+
+    dispatch(setAlert('Track Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
