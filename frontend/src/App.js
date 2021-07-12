@@ -11,6 +11,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import ProfileForm from './components/profile-forms/ProfileForm';
 import AddGenre from './components/profile-forms/AddGenre';
+import Search from './components/search/Search';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -19,6 +20,7 @@ import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
 import AddArtist from './components/profile-forms/AddArtist';
 import AddTrack from './components/profile-forms/AddTrack';
+import SearchArtists from './components/search/SearchArtists';
 
 const App = () => {
   useEffect(() => {
@@ -40,6 +42,8 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <section className='container'>
               <Alert />
+              <Route exact path='/profiles' component={Search} />
+              <Route exact path='/Posts' component={SearchArtists} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
