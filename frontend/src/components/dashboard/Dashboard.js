@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import DashboardActions from './ DashboardActions';
+import Genre from './Genre';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -25,6 +26,7 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <Genre genre={profile.genre} />
           {/* <Experience experience={profile.experience} />
           <Education education={profile.education} /> */}
 
