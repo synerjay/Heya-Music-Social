@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import DashboardActions from './ DashboardActions';
 import Genre from './Genre';
 import Artist from './Artist';
+import Track from './Track';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -30,6 +31,7 @@ const Dashboard = ({
           <div className='flex flex-row'>
             <Genre genre={profile.genre} />
             <Artist artists={profile.artists} />
+            <Track tracks={profile.tracks} />
           </div>
           {/* <Experience experience={profile.experience} />
           <Education education={profile.education} /> */}
