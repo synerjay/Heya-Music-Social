@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchResults = ({ track }) => {
+const AlbumResults = ({ track }) => {
   return (
     <div className='flex items-center'>
       <img src={track.albumUrl} className='h-16 w-16' />
@@ -13,4 +13,4 @@ const SearchResults = ({ track }) => {
   );
 };
 
-export default SearchResults;
+export default AlbumResults;

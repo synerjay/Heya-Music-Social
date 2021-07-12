@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTrack } from '../../actions/profile';
+import SearchTracks from '../search/SearchTracks';
 
 const AddTrack = ({ addTrack, history }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const AddTrack = ({ addTrack, history }) => {
         <i className='fas fa-code-branch' /> Tell the world your musical taste
       </p>
       <small>* = required field</small>
+      <SearchTracks />
       <form
         className='form'
         onSubmit={(e) => {

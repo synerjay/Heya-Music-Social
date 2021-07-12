@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
-import SearchResults from './SearchResults';
+import TrackResults from './TrackResults';
 
-const Search = () => {
+const SearchTracks = () => {
   const [token, setToken] = useState('');
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -23,7 +23,6 @@ const Search = () => {
     spotifyApi.setAccessToken(token); // just to make sure because sometimes searchTracks doesnt work
     spotifyApi.searchTracks(search, { limit: 5 }).then(
       function (data) {
-        console.log(data.body.tracks.items);
         setSearchResults(
           data.body.tracks.items.map((track) => {
             const smallestAlbumImage = track.album.images.reduce(
@@ -36,8 +35,8 @@ const Search = () => {
 
             return {
               artist: track.artists[0].name,
-              // title: track.name,
-              // uri: track.uri,
+              title: track.name,
+              uri: track.uri,
               albumUrl: smallestAlbumImage.url,
               album: track.album.name,
             };
@@ -60,14 +59,14 @@ const Search = () => {
     //     console.log('Something went wrong!', err);
     //   }
     // );
-    spotifyApi.searchArtists('doja cat').then(
-      function (data) {
-        console.log('Search artist', data.body);
-      },
-      function (err) {
-        console.error(err);
-      }
-    );
+    // spotifyApi.searchArtists('doja cat').then(
+    //   function (data) {
+    //     console.log('Search artist', data.body);
+    //   },
+    //   function (err) {
+    //     console.error(err);
+    //   }
+    // );
   }, [search, token]);
 
   // useEffect for POST request to Spotify AUTH token, which expires every 3600
@@ -92,16 +91,22 @@ const Search = () => {
 
   return (
     <div className='flex justify-center items-center'>
-      <form value={search} onChange={(e) => setSearch(e.target.value)}>
+      <form
+        className='form'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      >
         <div className='flex flex-col '>
-          <input
-            type='text'
-            className='h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none'
-            placeholder='Search anything...'
-          />
+          <div className='form-group'>
+            <input
+              type='text'
+              className='w-full focus:shadow focus:outline-none'
+              placeholder='Add your favorite Tracks'
+            />
+          </div>
           <div className='overflow-scroll'>
             {searchResults.map((track) => (
-              <SearchResults track={track} key={track.uri} />
+              <TrackResults track={track} key={track.uri} />
             ))}
           </div>
         </div>
@@ -110,4 +115,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchTracks;

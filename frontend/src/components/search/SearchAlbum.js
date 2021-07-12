@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
-import ArtistResults from './ArtistResults';
-const SearchArtists = () => {
+import AlbumResults from './AlbumResults';
+
+const SearchAlbum = () => {
   const [token, setToken] = useState('');
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -20,21 +21,25 @@ const SearchArtists = () => {
   useEffect(() => {
     if (!search) return setSearchResults([]);
     spotifyApi.setAccessToken(token); // just to make sure because sometimes searchTracks doesnt work
-    spotifyApi.searchArtists(search, { limit: 5 }).then(
+    spotifyApi.searchTracks(search, { limit: 5 }).then(
       function (data) {
-        console.log(data.body.artists.items);
+        console.log(data.body.tracks.items);
         setSearchResults(
-          data.body.artists.items.map((artist) => {
-            const smallestImage = artist.images.reduce((smallest, image) => {
-              if (image.height < smallest.height) return image;
-              return smallest;
-            }, artist.images[0]);
-            console.log(smallestImage);
+          data.body.tracks.items.map((track) => {
+            const smallestAlbumImage = track.album.images.reduce(
+              (smallest, image) => {
+                if (image.height < smallest.height) return image;
+                return smallest;
+              },
+              track.album.images[0]
+            );
+
             return {
-              name: artist.name,
-              // title: artist.name,
-              uri: artist.uri,
-              imageUrl: smallestImage === undefined ? null : smallestImage.url,
+              artist: track.artists[0].name,
+              // title: track.name,
+              // uri: track.uri,
+              albumUrl: smallestAlbumImage.url,
+              album: track.album.name,
             };
           })
         );
@@ -43,6 +48,18 @@ const SearchArtists = () => {
         console.error(err);
       }
     );
+
+    // spotifyApi.searchTracks('track:Alright artist:Kendrick Lamar').then(
+    //   function (data) {
+    //     console.log(
+    //       'Search tracks by "Alright" in the track name and "Kendrick Lamar" in the artist name',
+    //       data.body
+    //     );
+    //   },
+    //   function (err) {
+    //     console.log('Something went wrong!', err);
+    //   }
+    // );
   }, [search, token]);
 
   // useEffect for POST request to Spotify AUTH token, which expires every 3600
@@ -67,22 +84,16 @@ const SearchArtists = () => {
 
   return (
     <div className='flex justify-center items-center'>
-      <form
-        className='form'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      >
+      <form value={search} onChange={(e) => setSearch(e.target.value)}>
         <div className='flex flex-col '>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='w-full focus:shadow focus:outline-none'
-              placeholder='Add your favorite artist'
-            />
-          </div>
+          <input
+            type='text'
+            className='h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none'
+            placeholder='Search any album'
+          />
           <div className='overflow-scroll'>
-            {searchResults.map((artist) => (
-              <ArtistResults artist={artist} key={artist.uri} />
+            {searchResults.map((track) => (
+              <AlbumResults track={track} key={track.uri} />
             ))}
           </div>
         </div>
@@ -91,4 +102,4 @@ const SearchArtists = () => {
   );
 };
 
-export default SearchArtists;
+export default SearchAlbum;

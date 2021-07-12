@@ -11,7 +11,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import ProfileForm from './components/profile-forms/ProfileForm';
 import AddGenre from './components/profile-forms/AddGenre';
-import Search from './components/search/Search';
+import SearchAlbum from './components/search/SearchAlbum';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -42,7 +42,7 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <section className='container'>
               <Alert />
-              <Route exact path='/profiles' component={Search} />
+              <Route exact path='/profiles' component={SearchAlbum} />
               <Route exact path='/Posts' component={SearchArtists} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />

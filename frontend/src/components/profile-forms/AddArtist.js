@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArtist } from '../../actions/profile';
+import SearchArtists from '../search/SearchArtists';
 
 const AddArtist = ({ addArtist, history }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const AddArtist = ({ addArtist, history }) => {
         <i className='fas fa-code-branch' /> Tell the world your musical taste
       </p>
       <small>* = required field</small>
+      <SearchArtists />
       <form
         className='form'
         onSubmit={(e) => {
