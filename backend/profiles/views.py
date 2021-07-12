@@ -123,7 +123,7 @@ def add_album(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Album.objects.create(profile=profile, user=user, album=payload["Album"]) # NEED TO CHANGE!!!
+        Album.objects.create(profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -161,7 +161,7 @@ def add_artist(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Artist.objects.create(profile=profile, user=user, artist=payload["artist"])
+        Artist.objects.create(profile=profile, user=user, name=payload["name"], img=payload["img"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -201,7 +201,7 @@ def add_track(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Track.objects.create(profile=profile, user=user, track=payload["track"])
+        Track.objects.create(profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
