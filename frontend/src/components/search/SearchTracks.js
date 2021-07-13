@@ -105,7 +105,7 @@ const SearchTracks = () => {
               placeholder='Add your favorite Tracks'
             />
           </div>
-          <div className='overflow-scroll'>
+          <div className='overflow-scroll flex flex-col'>
             {searchResults.map((track) => (
               <AddTrack track={track} key={track.uri} />
             ))}

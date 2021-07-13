@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ const AddTrack = ({ track, addTrack }) => {
 
   useEffect(() => {
     setFormData({
-      title: track.album,
+      title: track.title,
       artist: track.artist,
       img: track.albumUrl,
     });

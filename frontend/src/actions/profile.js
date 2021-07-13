@@ -231,7 +231,7 @@ export const addArtist = (formData, history) => async (dispatch) => {
 
 // Add Favorite Track
 
-export const addTrack = (formData, history) => async (dispatch) => {
+export const addTrack = (formData) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -253,7 +253,7 @@ export const addTrack = (formData, history) => async (dispatch) => {
     dispatch(setAlert('Favorite Track Added', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);

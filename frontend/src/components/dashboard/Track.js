@@ -6,7 +6,12 @@ import { deleteTrack } from '../../actions/profile';
 const Track = ({ tracks, deleteTrack }) => {
   const trackList = tracks.map((track) => (
     <tr key={track.id}>
-      <td>{track.track}</td>
+      <td>
+        <img src={track.img} />
+      </td>
+      <td>
+        {track.title} <p className='text-xs'> {track.artist} </p>
+      </td>
       {/* <td className='hide-sm'>{edu.degree}</td>
       <td>
         {format(new Date(edu.from), 'yyyy/MM/dd')}-

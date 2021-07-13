@@ -21,6 +21,7 @@ import { loadUser } from './actions/auth';
 import AddArtist from './components/profile-forms/AddArtist';
 import AddTrack from './components/profile-forms/AddTrack';
 import SearchArtists from './components/search/SearchArtists';
+import SearchTracks from './components/search/SearchTracks';
 
 const App = () => {
   useEffect(() => {
@@ -63,7 +64,7 @@ const App = () => {
                 path='/add-artist'
                 component={SearchArtists}
               />
-              <PrivateRoute exact path='/add-track' component={AddTrack} />
+              <PrivateRoute exact path='/add-track' component={SearchTracks} />
             </section>
           </Switch>
         </Fragment>
