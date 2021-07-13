@@ -23,8 +23,8 @@ class Profile(models.Model):
   #OneToOneField will return to ONLY one instance of QuerySet like Profile-RegisteredUser
 
 class Album(models.Model):
-    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='album')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='album') 
+    profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='albums')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='albums') 
     title = models.CharField(max_length=200, blank=True)
     artist = models.CharField(max_length=200, blank=True)
     img = models.URLField(max_length=200, blank=True)

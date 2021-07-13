@@ -1,11 +1,6 @@
 from rest_framework import serializers
 from .models import Profile, Album, Artist, Track
 
-class AlbumSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Album
-        fields = ['id', 'title', 'artist', 'img']
-
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
@@ -16,8 +11,14 @@ class TrackSerializer(serializers.ModelSerializer):
         model = Track
         fields = ['id', 'title', 'artist', 'img']
 
+class AlbumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Album
+        fields = ['id', 'title', 'artist', 'img']
+
 class ProfileSerializer(serializers.ModelSerializer):
-    albums = AlbumSerializer(many=True, required=False)
+    # albums = AlbumSerializer(many=True, required=False)
+    albums= AlbumSerializer(many=True, required=False)
     artists = ArtistSerializer(many=True, required=False)
     tracks = TrackSerializer(many=True, required=False)
     avatar_url = serializers.SerializerMethodField()
