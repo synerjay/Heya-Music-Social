@@ -17,8 +17,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'artist', 'img']
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # albums = AlbumSerializer(many=True, required=False)
-    albums= AlbumSerializer(many=True, required=False)
+    albums = AlbumSerializer(many=True, required=False) # DONT FORGET THE RELATED NAME IN THE MODELS.PY !! IMPORTANT !!
     artists = ArtistSerializer(many=True, required=False)
     tracks = TrackSerializer(many=True, required=False)
     avatar_url = serializers.SerializerMethodField()

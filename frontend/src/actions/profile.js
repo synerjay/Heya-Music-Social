@@ -147,11 +147,11 @@ export const deleteAccount = () => async (dispatch) => {
   }
 };
 
-// Add Genre, Artists, Tracks below
+// Add Album, Artists, Tracks below
 
-//Add Genre
+//Add an Album
 
-export const addGenre = (formData, history) => async (dispatch) => {
+export const addAlbum = (formData, history) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ export const addGenre = (formData, history) => async (dispatch) => {
 
   try {
     // make a PUT request instead of request because in the backend, we made experience node a PUT request
-    const res = await axios.put('/profile/genre', formData, config);
+    const res = await axios.put('/profile/album', formData, config);
 
     // Since the response to the post action to node is a profile data, the dispatch type is just GET_PROFILE
     //the same type as getCurrentProfile
@@ -170,7 +170,7 @@ export const addGenre = (formData, history) => async (dispatch) => {
     });
     console.log(res.data.profile);
 
-    dispatch(setAlert('Favorite Genre Added', 'success'));
+    dispatch(setAlert('Favorite Album Added', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
     history.push('/dashboard');
@@ -273,16 +273,16 @@ export const addTrack = (formData, history) => async (dispatch) => {
 
 // Delete Genre
 
-export const deleteGenre = (id) => async (dispatch) => {
+export const deleteAlbum = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/profile/genre/${id}`);
+    const res = await axios.delete(`/profile/album/${id}`);
 
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
 
-    dispatch(setAlert('Genre Removed', 'success'));
+    dispatch(setAlert('Album Removed', 'success'));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

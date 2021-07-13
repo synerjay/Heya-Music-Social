@@ -2,16 +2,17 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addGenre } from '../../actions/profile';
+import { addAlbum } from '../../actions/profile';
 import SearchAlbum from '../search/SearchAlbum';
 
-const AddGenre = ({ addGenre, history }) => {
+const AddAlbum = ({ addAlbum, history }) => {
   const [formData, setFormData] = useState({
-    genre: '',
-    // image: '',
+    title: '',
+    artist: '',
+    img: '',
   });
 
-  const { genre } = formData;
+  const { title, artist, img } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,15 +29,15 @@ const AddGenre = ({ addGenre, history }) => {
         className='form'
         onSubmit={(e) => {
           e.preventDefault();
-          addGenre(formData, history);
+          addAlbum(formData, history);
         }}
       >
         <div className='form-group'>
           <input
             type='text'
-            placeholder='Your Favorite Genre'
-            name='genre'
-            value={genre}
+            placeholder='Title of Your Favorite Album'
+            name='title'
+            value={title}
             onChange={onChange}
             required
           />
@@ -50,8 +51,8 @@ const AddGenre = ({ addGenre, history }) => {
   );
 };
 
-AddGenre.propTypes = {
-  addGenre: PropTypes.func.isRequired,
+AddAlbum.propTypes = {
+  addAlbum: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addGenre })(AddGenre);
+export default connect(null, { addAlbum })(AddAlbum);

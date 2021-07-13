@@ -10,7 +10,7 @@ import Login from './components/auth/Login';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import ProfileForm from './components/profile-forms/ProfileForm';
-import AddGenre from './components/profile-forms/AddGenre';
+import AddAlbum from './components/profile-forms/AddAlbum';
 import SearchAlbum from './components/search/SearchAlbum';
 
 // Redux
@@ -57,7 +57,7 @@ const App = () => {
                 path='/edit-profile'
                 component={ProfileForm}
               />
-              <PrivateRoute exact path='/add-album' component={AddGenre} />
+              <PrivateRoute exact path='/add-album' component={AddAlbum} />
               <PrivateRoute exact path='/add-artist' component={AddArtist} />
               <PrivateRoute exact path='/add-track' component={AddTrack} />
             </section>

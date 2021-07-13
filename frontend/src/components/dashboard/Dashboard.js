@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import DashboardActions from './ DashboardActions';
-import Genre from './Genre';
+import Album from './Album';
 import Artist from './Artist';
 import Track from './Track';
 
@@ -30,7 +30,7 @@ const Dashboard = ({
           <DashboardActions />
           <div className='flex flex-row'>
             <Artist artists={profile.artists} />
-            <Genre genre={profile.genre} />
+            <Album albums={profile.albums} />
             <Track tracks={profile.tracks} />
           </div>
           {/* <Experience experience={profile.experience} />
