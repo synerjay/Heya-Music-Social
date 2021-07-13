@@ -6,6 +6,9 @@ import { deleteAlbum } from '../../actions/profile';
 const Album = ({ albums, deleteAlbum }) => {
   const albumList = albums.map((album) => (
     <tr key={album.id}>
+      <td>
+        <img src={album.img} />
+      </td>
       <td>{album.title}</td>
       {/* <td className='hide-sm'>{edu.degree}</td>
       <td>
@@ -34,9 +37,10 @@ const Album = ({ albums, deleteAlbum }) => {
             {/* <th className='hide-sm'>Degree</th>
             <th className='hide-sm'>Years</th> */}
             <th />
+            <th />
           </tr>
         </thead>
-        <tbody>{AlbumList}</tbody>
+        <tbody>{albumList}</tbody>
       </table>
     </div>
   );

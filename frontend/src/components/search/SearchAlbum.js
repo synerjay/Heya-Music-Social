@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AlbumResults from './AlbumResults';
+import AddAlbum from '../profile-forms/AddAlbum';
 
 const SearchAlbum = () => {
   const [token, setToken] = useState('');
@@ -91,9 +92,9 @@ const SearchAlbum = () => {
             className='h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none'
             placeholder='Search any album'
           />
-          <div className='overflow-scroll'>
+          <div className='overflow-scroll flex flex-col'>
             {searchResults.map((track) => (
-              <AlbumResults track={track} key={track.uri} />
+              <AddAlbum track={track} key={track.uri} />
             ))}
           </div>
         </div>
@@ -103,3 +104,7 @@ const SearchAlbum = () => {
 };
 
 export default SearchAlbum;
+
+{
+  /* <AlbumResults track={track} key={track.uri} /> */
+}

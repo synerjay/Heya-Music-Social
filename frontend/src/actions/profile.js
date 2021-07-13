@@ -151,7 +151,7 @@ export const deleteAccount = () => async (dispatch) => {
 
 //Add an Album
 
-export const addAlbum = (formData, history) => async (dispatch) => {
+export const addAlbum = (formData) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ export const addAlbum = (formData, history) => async (dispatch) => {
     dispatch(setAlert('Favorite Album Added', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
@@ -213,7 +213,7 @@ export const addArtist = (formData, history) => async (dispatch) => {
     dispatch(setAlert('Favorite Artist Added', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
