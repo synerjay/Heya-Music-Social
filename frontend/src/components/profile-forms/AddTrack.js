@@ -5,19 +5,52 @@ import { connect } from 'react-redux';
 import { addTrack } from '../../actions/profile';
 import SearchTracks from '../search/SearchTracks';
 
-const AddTrack = ({ addTrack, history }) => {
+const AddTrack = ({ track, addTrack }) => {
   const [formData, setFormData] = useState({
-    track: '',
-    // image: '',
+    title: '',
+    artist: '',
+    img: '',
   });
 
-  const { track } = formData;
+  // const { track } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  useEffect(() => {
+    setFormData({
+      title: track.album,
+      artist: track.artist,
+      img: track.albumUrl,
+    });
+  }, [track]);
+
   return (
-    <Fragment>
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        addTrack(formData);
+      }}
+    >
+      <div className='flex items-center'>
+        <img src={track.albumUrl} className='h-16 w-16' />
+        <div className='ml-3'>
+          <div>{track.title}</div>
+          <div className='font-bold'>{track.artist}</div>
+        </div>
+      </div>
+    </button>
+  );
+};
+
+AddTrack.propTypes = {
+  addTrack: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addTrack })(AddTrack);
+
+{
+  /* <Fragment>
       <h1 className='large text-primary'>What tracks do you like?</h1>
       <p className='lead'>
         <i className='fas fa-code-branch' /> Tell the world your musical taste
@@ -46,12 +79,5 @@ const AddTrack = ({ addTrack, history }) => {
           Go Back
         </Link>
       </form>
-    </Fragment>
-  );
-};
-
-AddTrack.propTypes = {
-  addTrack: PropTypes.func.isRequired,
-};
-
-export default connect(null, { addTrack })(AddTrack);
+    </Fragment> */
+}

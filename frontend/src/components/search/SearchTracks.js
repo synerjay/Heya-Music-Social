@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import TrackResults from './TrackResults';
+import AddTrack from '../profile-forms/AddTrack';
 
 const SearchTracks = () => {
   const [token, setToken] = useState('');
@@ -106,7 +107,7 @@ const SearchTracks = () => {
           </div>
           <div className='overflow-scroll'>
             {searchResults.map((track) => (
-              <TrackResults track={track} key={track.uri} />
+              <AddTrack track={track} key={track.uri} />
             ))}
           </div>
         </div>
