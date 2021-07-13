@@ -9,7 +9,9 @@ const Album = ({ albums, deleteAlbum }) => {
       <td>
         <img src={album.img} />
       </td>
-      <td>{album.title}</td>
+      <td>
+        {album.title} <p className='text-xs'> {album.artist} </p>
+      </td>
       {/* <td className='hide-sm'>{edu.degree}</td>
       <td>
         {format(new Date(edu.from), 'yyyy/MM/dd')}-
@@ -29,11 +31,11 @@ const Album = ({ albums, deleteAlbum }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Album</h2>
+      <h2 className='my-2'>Your Favorite Albums</h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Album</th>
+            <th>Albums</th>
             {/* <th className='hide-sm'>Degree</th>
             <th className='hide-sm'>Years</th> */}
             <th />

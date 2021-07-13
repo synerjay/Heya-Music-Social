@@ -28,9 +28,9 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <div className='flex flex-row'>
-            <Artist artists={profile.artists} />
+          <div className='flex flex-row gap-x-10'>
             <Album albums={profile.albums} />
+            <Artist artists={profile.artists} />
             <Track tracks={profile.tracks} />
           </div>
           {/* <Experience experience={profile.experience} />
