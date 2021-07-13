@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import ArtistResults from './ArtistResults';
+import AddArtist from '../profile-forms/AddArtist';
+
 const SearchArtists = () => {
   const [token, setToken] = useState('');
   const [search, setSearch] = useState('');
@@ -80,9 +82,9 @@ const SearchArtists = () => {
               placeholder='Add your favorite artist'
             />
           </div>
-          <div className='overflow-scroll'>
+          <div className='overflow-scroll flex flex-col'>
             {searchResults.map((artist) => (
-              <ArtistResults artist={artist} key={artist.uri} />
+              <AddArtist artist={artist} key={artist.uri} />
             ))}
           </div>
         </div>
@@ -92,3 +94,7 @@ const SearchArtists = () => {
 };
 
 export default SearchArtists;
+
+{
+  /* <ArtistResults artist={artist} key={artist.uri} /> */
+}

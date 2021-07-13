@@ -58,7 +58,11 @@ const App = () => {
                 component={ProfileForm}
               />
               <PrivateRoute exact path='/add-album' component={SearchAlbum} />
-              <PrivateRoute exact path='/add-artist' component={AddArtist} />
+              <PrivateRoute
+                exact
+                path='/add-artist'
+                component={SearchArtists}
+              />
               <PrivateRoute exact path='/add-track' component={AddTrack} />
             </section>
           </Switch>

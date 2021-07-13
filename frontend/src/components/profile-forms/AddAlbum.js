@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addAlbum } from '../../actions/profile';
 
-const AddAlbum = ({ track, addAlbum, history }) => {
+const AddAlbum = ({ track, addAlbum }) => {
   const [formData, setFormData] = useState({
     title: '',
     artist: '',
     img: '',
   });
 
-  const { title, artist, img } = formData;
+  // const { title, artist, img } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,14 +22,12 @@ const AddAlbum = ({ track, addAlbum, history }) => {
       artist: track.artist,
       img: track.albumUrl,
     });
-    console.log(formData);
   }, [track]);
 
   return (
     <button
       onClick={(e) => {
         e.preventDefault();
-        console.log(formData);
         addAlbum(formData);
       }}
     >

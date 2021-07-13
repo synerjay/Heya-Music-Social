@@ -6,7 +6,10 @@ import { deleteArtist } from '../../actions/profile';
 const Artist = ({ artists, deleteArtist }) => {
   const artistList = artists.map((art) => (
     <tr key={art.id}>
-      <td>{art.artist}</td>
+      <td>
+        <img className='h-16  w-16 ' src={art.img} />
+      </td>
+      <td>{art.name}</td>
       {/* <td className='hide-sm'>{edu.degree}</td>
       <td>
         {format(new Date(edu.from), 'yyyy/MM/dd')}-
@@ -30,6 +33,7 @@ const Artist = ({ artists, deleteArtist }) => {
             <th>Artist</th>
             {/* <th className='hide-sm'>Degree</th>
             <th className='hide-sm'>Years</th> */}
+            <th />
             <th />
           </tr>
         </thead>
