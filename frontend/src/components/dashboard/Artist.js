@@ -7,14 +7,9 @@ const Artist = ({ artists, deleteArtist }) => {
   const artistList = artists.map((art) => (
     <tr key={art.id}>
       <td>
-        <img className='h-16  w-16 ' src={art.img} />
+        <img className='h-10 w-10' src={art.img} />
       </td>
       <td>{art.name}</td>
-      {/* <td className='hide-sm'>{edu.degree}</td>
-      <td>
-        {format(new Date(edu.from), 'yyyy/MM/dd')}-
-        {edu.to ? format(new Date(edu.to), 'yyyy/MM/dd') : 'Current'}
-      </td> */}
       <td>
         <button onClick={() => deleteArtist(art.id)} className='btn btn-danger'>
           {' '}
@@ -31,8 +26,6 @@ const Artist = ({ artists, deleteArtist }) => {
         <thead>
           <tr>
             <th>Artist</th>
-            {/* <th className='hide-sm'>Degree</th>
-            <th className='hide-sm'>Years</th> */}
             <th />
             <th />
           </tr>

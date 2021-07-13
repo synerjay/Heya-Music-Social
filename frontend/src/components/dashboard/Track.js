@@ -12,11 +12,6 @@ const Track = ({ tracks, deleteTrack }) => {
       <td>
         {track.title} <p className='text-xs'> {track.artist} </p>
       </td>
-      {/* <td className='hide-sm'>{edu.degree}</td>
-      <td>
-        {format(new Date(edu.from), 'yyyy/MM/dd')}-
-        {edu.to ? format(new Date(edu.to), 'yyyy/MM/dd') : 'Current'}
-      </td> */}
       <td>
         <button
           onClick={() => deleteTrack(track.id)}
@@ -36,8 +31,6 @@ const Track = ({ tracks, deleteTrack }) => {
         <thead>
           <tr>
             <th>Track</th>
-            {/* <th className='hide-sm'>Degree</th>
-          <th className='hide-sm'>Years</th> */}
             <th />
           </tr>
         </thead>

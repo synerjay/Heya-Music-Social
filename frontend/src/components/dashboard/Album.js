@@ -12,11 +12,6 @@ const Album = ({ albums, deleteAlbum }) => {
       <td>
         {album.title} <p className='text-xs'> {album.artist} </p>
       </td>
-      {/* <td className='hide-sm'>{edu.degree}</td>
-      <td>
-        {format(new Date(edu.from), 'yyyy/MM/dd')}-
-        {edu.to ? format(new Date(edu.to), 'yyyy/MM/dd') : 'Current'}
-      </td> */}
       <td>
         <button
           onClick={() => deleteAlbum(album.id)}
@@ -36,8 +31,6 @@ const Album = ({ albums, deleteAlbum }) => {
         <thead>
           <tr>
             <th>Albums</th>
-            {/* <th className='hide-sm'>Degree</th>
-            <th className='hide-sm'>Years</th> */}
             <th />
             <th />
           </tr>

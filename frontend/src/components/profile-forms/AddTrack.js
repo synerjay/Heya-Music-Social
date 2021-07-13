@@ -12,8 +12,6 @@ const AddTrack = ({ track, addTrack }) => {
     img: '',
   });
 
-  // const { track } = formData;
-
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
