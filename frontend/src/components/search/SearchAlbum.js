@@ -104,7 +104,3 @@ const SearchAlbum = () => {
 };
 
 export default SearchAlbum;
-
-{
-  /* <AlbumResults track={track} key={track.uri} /> */
-}

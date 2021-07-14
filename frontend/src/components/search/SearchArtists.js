@@ -94,7 +94,3 @@ const SearchArtists = () => {
 };
 
 export default SearchArtists;
-
-{
-  /* <ArtistResults artist={artist} key={artist.uri} /> */
-}
