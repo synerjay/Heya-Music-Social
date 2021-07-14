@@ -9,9 +9,6 @@ const AddArtist = ({ artist, addArtist }) => {
     img: '',
   });
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
   useEffect(() => {
     setFormData({
       name: artist.name,

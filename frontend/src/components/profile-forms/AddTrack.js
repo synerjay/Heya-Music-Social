@@ -10,9 +10,6 @@ const AddTrack = ({ track, addTrack }) => {
     img: '',
   });
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
   useEffect(() => {
     setFormData({
       title: track.title,
