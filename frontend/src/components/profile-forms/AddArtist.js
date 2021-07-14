@@ -1,9 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArtist } from '../../actions/profile';
-import SearchArtists from '../search/SearchArtists';
 
 const AddArtist = ({ artist, addArtist }) => {
   const [formData, setFormData] = useState({

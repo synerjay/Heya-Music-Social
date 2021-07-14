@@ -350,19 +350,3 @@ export const getAccessToken = () => (dispatch) => {
     });
   }
 };
-
-// axios('https://accounts.spotify.com/api/token', {
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded',
-//     Authorization:
-//       'Basic ' + btoa(REACT_APP_CLIENT_ID + ':' + REACT_APP_CLIENT_SECRET),
-//   },
-//   data: 'grant_type=client_credentials',
-//   method: 'POST',
-// }).then((tokenResponse) => {
-//   // Once we get a Spotify token we can get the Genres list using the token
-//   console.log('Successfully Recieve Spotify Token');
-//   console.log(tokenResponse.data);
-//   spotifyApi.setAccessToken(tokenResponse.data.access_token); // Getting accessToken to spotifyApi is very important!!!
-//   setToken(tokenResponse.data.access_token);
-// });

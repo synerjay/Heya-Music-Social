@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addAlbum } from '../../actions/profile';
@@ -10,9 +9,6 @@ const AddAlbum = ({ track, addAlbum }) => {
     artist: '',
     img: '',
   });
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   useEffect(() => {
     setFormData({
