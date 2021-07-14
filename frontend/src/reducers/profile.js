@@ -4,11 +4,14 @@ import {
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
+  GET_TOKEN,
+  NO_TOKEN,
 } from '../actions/types';
 
 const initialState = {
   profile: null,
   profiles: [],
+  accessToken: null,
   loading: true,
   error: {},
 };
@@ -42,6 +45,18 @@ export default function foo(state = initialState, action) {
         ...state,
         profile: null,
         loading: false,
+      };
+    case GET_TOKEN:
+      console.log('TOKEN');
+      return {
+        ...state,
+        accessToken: payload,
+        loading: false,
+      };
+    case NO_TOKEN:
+      return {
+        ...state,
+        accessToken: null,
       };
     default:
       return state;

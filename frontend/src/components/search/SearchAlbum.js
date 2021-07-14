@@ -2,25 +2,34 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddAlbum from '../profile-forms/AddAlbum';
+import { connect } from 'react-redux';
+import { getAccessToken } from '../../actions/profile';
 
-const SearchAlbum = () => {
-  const [token, setToken] = useState('');
+const SearchAlbum = ({ accessToken, getAccessToken }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
-  // This compoennt is for testing the search Artists Tracks function
-  const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env;
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
+  //Get Spotify Key at start up
   useEffect(() => {
-    console.log(search);
-  }, [search]);
+    getAccessToken();
+  }, []);
+
+  // Get another Spotify Key after every one hour expiration time
+  useEffect(() => {
+    console.log('is this getting fired?');
+    const interval = setInterval(() => {
+      getAccessToken();
+    }, 1000 * 60 * 60);
+
+    return () => clearInterval(interval); // unmount & cleanup
+  }, [accessToken]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
-    spotifyApi.setAccessToken(token); // just to make sure because sometimes searchTracks doesnt work
+    spotifyApi.setAccessToken(accessToken); // get token from redux state
     spotifyApi.searchTracks(search, { limit: 5 }).then(
       function (data) {
         console.log(data.body.tracks.items);
@@ -48,39 +57,18 @@ const SearchAlbum = () => {
         console.error(err);
       }
     );
-
-    // spotifyApi.searchTracks('track:Alright artist:Kendrick Lamar').then(
-    //   function (data) {
-    //     console.log(
-    //       'Search tracks by "Alright" in the track name and "Kendrick Lamar" in the artist name',
-    //       data.body
-    //     );
-    //   },
-    //   function (err) {
-    //     console.log('Something went wrong!', err);
-    //   }
-    // );
-  }, [search, token]);
+  }, [search, accessToken]);
 
   // useEffect for POST request to Spotify AUTH token, which expires every 3600
   // Needs to be in its reducer
+
   useEffect(() => {
-    axios('https://accounts.spotify.com/api/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:
-          'Basic ' + btoa(REACT_APP_CLIENT_ID + ':' + REACT_APP_CLIENT_SECRET),
-      },
-      data: 'grant_type=client_credentials',
-      method: 'POST',
-    }).then((tokenResponse) => {
-      // Once we get a Spotify token we can get the Genres list using the token
-      console.log('Successfully Recieve Spotify Token');
-      console.log(tokenResponse.data);
-      spotifyApi.setAccessToken(tokenResponse.data.access_token); // Getting accessToken to spotifyApi is very important!!!
-      setToken(tokenResponse.data.access_token);
-    });
-  }, []);
+    console.log(searchResults);
+  }, [searchResults]);
+
+  useEffect(() => {
+    console.log(accessToken);
+  }, [accessToken]);
 
   return (
     <div className='flex justify-center items-center'>
@@ -102,4 +90,8 @@ const SearchAlbum = () => {
   );
 };
 
-export default SearchAlbum;
+const mapStateToProps = (state) => ({
+  accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
+});
+
+export default connect(mapStateToProps, { getAccessToken })(SearchAlbum);
