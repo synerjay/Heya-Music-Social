@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
-import TrackResults from './TrackResults';
 import AddTrack from '../profile-forms/AddTrack';
 
 const SearchTracks = () => {

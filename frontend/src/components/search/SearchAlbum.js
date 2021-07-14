@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
-import AlbumResults from './AlbumResults';
 import AddAlbum from '../profile-forms/AddAlbum';
 
 const SearchAlbum = () => {
