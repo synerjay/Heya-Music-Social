@@ -55,18 +55,24 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
         console.error(err);
       }
     );
+
+    spotifyApi
+      .getRecommendations({
+        // min_energy: 0.4,
+        seed_artists: ['4kYSro6naA4h99UJvo89HB', '4kYSro6naA4h99UJvo89HB'], // seeds mean spotify unique id
+        seed_genres: ['hiphop', 'rap', 'urban'],
+        min_popularity: 50,
+      })
+      .then(
+        function (data) {
+          let recommendations = data.body;
+          console.log(recommendations);
+        },
+        function (err) {
+          console.log('Something went wrong!', err);
+        }
+      );
   }, [search, accessToken]);
-
-  // useEffect for POST request to Spotify AUTH token, which expires every 3600
-  // Needs to be in its reducer
-
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
-
-  useEffect(() => {
-    console.log(accessToken);
-  }, [accessToken]);
 
   return (
     <div className='flex justify-center items-center'>
