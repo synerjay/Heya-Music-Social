@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddAlbum from '../profile-forms/AddAlbum';
 import { connect } from 'react-redux';
@@ -19,7 +18,6 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
-    console.log('is this getting fired?');
     const interval = setInterval(() => {
       getAccessToken();
     }, 1000 * 60 * 60);

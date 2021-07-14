@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddArtist from '../profile-forms/AddArtist';
+import { connect } from 'react-redux';
+import { getAccessToken } from '../../actions/profile';
 
-const SearchArtists = () => {
-  const [token, setToken] = useState('');
+const SearchArtists = ({ accessToken, getAccessToken }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  // This compoennt is for testing the search Artists Tracks function
-  const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env;
-
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
+
+  //Get Spotify Key at start up
+  useEffect(() => {
+    getAccessToken();
+  }, []);
+
+  // Get another Spotify Key after every one hour expiration time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getAccessToken();
+    }, 1000 * 60 * 60);
+
+    return () => clearInterval(interval); // unmount & cleanup
+  }, [accessToken]);
 
   useEffect(() => {
     console.log(search);
@@ -20,7 +31,7 @@ const SearchArtists = () => {
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
-    spotifyApi.setAccessToken(token); // just to make sure because sometimes searchTracks doesnt work
+    spotifyApi.setAccessToken(accessToken);
     spotifyApi.searchArtists(search, { limit: 5 }).then(
       function (data) {
         console.log(data.body.artists.items);
@@ -44,27 +55,7 @@ const SearchArtists = () => {
         console.error(err);
       }
     );
-  }, [search, token]);
-
-  // useEffect for POST request to Spotify AUTH token, which expires every 3600
-  // Needs to be in its reducer
-  useEffect(() => {
-    axios('https://accounts.spotify.com/api/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:
-          'Basic ' + btoa(REACT_APP_CLIENT_ID + ':' + REACT_APP_CLIENT_SECRET),
-      },
-      data: 'grant_type=client_credentials',
-      method: 'POST',
-    }).then((tokenResponse) => {
-      // Once we get a Spotify token we can get the Genres list using the token
-      console.log('Successfully Recieve Spotify Token');
-      console.log(tokenResponse.data);
-      spotifyApi.setAccessToken(tokenResponse.data.access_token); // Getting accessToken to spotifyApi is very important!!!
-      setToken(tokenResponse.data.access_token);
-    });
-  }, []);
+  }, [search, accessToken]);
 
   return (
     <div className='flex justify-center items-center'>
@@ -92,4 +83,8 @@ const SearchArtists = () => {
   );
 };
 
-export default SearchArtists;
+const mapStateToProps = (state) => ({
+  accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
+});
+
+export default connect(mapStateToProps, { getAccessToken })(SearchArtists);

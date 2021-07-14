@@ -14,14 +14,6 @@ import {
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env;
 
-// for some reason universal axios header in utils is not working and Django is not recognizing it!!!! >:(
-// const token = localStorage.getItem('token');
-// const getConfig = {
-//   headers: {
-//     Authorization: `Token ${token}`,
-//   },
-// };
-
 // Get Current User's Profile
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -331,17 +323,9 @@ export const deleteTrack = (id) => async (dispatch) => {
   }
 };
 
-export const getAccessToken = () => (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization:
-        'Basic ' + btoa(REACT_APP_CLIENT_ID + ':' + REACT_APP_CLIENT_SECRET),
-    },
-    data: 'grant_type=client_credentials',
-    method: 'POST',
-  };
+// Get Spotify Access Token (Non-Async-Await Promise-based Axios Post request)
 
+export const getAccessToken = () => (dispatch) => {
   try {
     axios('https://accounts.spotify.com/api/token', {
       headers: {
@@ -359,8 +343,6 @@ export const getAccessToken = () => (dispatch) => {
       });
       console.log('Successfully Recieve Spotify Token');
       console.log(tokenResponse.data);
-      // spotifyApi.setAccessToken(tokenResponse.data.access_token); // Getting accessToken to spotifyApi is very important!!!
-      // setToken(tokenResponse.data.access_token);
     });
   } catch (err) {
     dispatch({
