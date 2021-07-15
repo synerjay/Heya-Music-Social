@@ -25,19 +25,19 @@ def get_add_posts(request):
     if request.method == 'GET':
         posts = Post.objects.all() # Get all posts
         serializer = PostSerializer(posts, many=True)
-        # PROCESSING DATA IN WHICH FRONTEND CAN READ
+        # PROCESSING DATA IN WHICH FRONTEND CAN READ # try to make the post seralizer output the avatar url s
         data = serializer.data
         for item in data:
-            item["added_by"] = Users.objects.get(id=item["added_by"]).username
+            item["user"] = Users.objects.get(id=item["user"]).username
         return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
     else:
         payload = json.loads(request.body)
         user = request.user
         try:
-            post = Post.objects.create(body=payload["body"], added_by=user)
+            post = Post.objects.create(body=payload["body"], user=user)
             serializer = PostSerializer(post)
             data = serializer.data
-            data["added_by"] = user.username 
+            data["user"] = user.username 
             return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
         except ObjectDoesNotExist as e:
             return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
@@ -57,7 +57,7 @@ def get_put_delete_post(request, post_id):
             post = Post.objects.get(id=post_id)
             serializer = PostSerializer(post)
             data = serializer.data
-            data["added_by"] = Users.objects.get(id=data["added_by"]).username
+            data["user"] = Users.objects.get(id=data["user"]).username
             return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
         except ObjectDoesNotExist as e:
             return JsonResponse({'error': "Sorry, this post doesn't exist. "}, safe=False, status=status.HTTP_404_NOT_FOUND)
@@ -66,7 +66,7 @@ def get_put_delete_post(request, post_id):
     elif request.method == 'DELETE':
         try:
             user = request.user.id
-            post = Post.objects.get(added_by=user, id=post_id)
+            post = Post.objects.get(user=user, id=post_id)
             post.delete()
             return JsonResponse({'Success': 'Post deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         except ObjectDoesNotExist as e:
@@ -90,7 +90,7 @@ def put_like(request, post_id):
     total_likes = post.total_likes()
     serializer = PostSerializer(post)
     data = serializer.data
-    data["added_by"] = user.username 
+    data["user"] = user.username 
     print(data["likes"])
     like_list = data["likes"]
     for i, item in enumerate(like_list):
@@ -114,7 +114,7 @@ def get_post_comment(request, post_id):
         # PROCESSING DATA IN WHICH FRONTEND CAN READ
         data = serializer.data
         for item in data:
-            item["added_by"] = Users.objects.get(id=item["added_by"]).username
+            item["user"] = Users.objects.get(id=item["user"]).username
         return JsonResponse({'comments': data }, safe=False, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         payload = json.loads(request.body)
@@ -122,12 +122,12 @@ def get_post_comment(request, post_id):
         post = Post.objects.get(id=post_id)
         try:
             # In the Comment object, for some weird effin reason Django needs to get the specific INSTANCE of the object NOT the Key like the Post object. WEIRDO DJANGO UGH
-            Comment.objects.create(post=post, added_by=user, body=payload["body"])
+            Comment.objects.create(post=post, user=user, body=payload["body"])
             comments = Comment.objects.filter(post=post_id)
             serializer = CommentSerializer(comments, many=True)
             data = serializer.data
             for item in data:
-               item["added_by"] = Users.objects.get(id=item["added_by"]).username
+               item["user"] = Users.objects.get(id=item["user"]).username
             return JsonResponse({'comment': data}, safe=False, status=status.HTTP_201_CREATED)
         except ObjectDoesNotExist as e:
             return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
@@ -148,6 +148,6 @@ def delete_comment(request, post_id, comment_id):
     serializer = CommentSerializer(post.comments.all(), many=True)
     data = serializer.data
     for item in data:
-        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+        item["user"] = Users.objects.get(id=item["user"]).username
     return JsonResponse({'Success': 'Comment deleted successfully', 'comment': data}, safe=False, status=status.HTTP_201_CREATED)
 
