@@ -2,12 +2,13 @@ from django.db import models
 # from django.apps import apps 
 # User = apps.get_model('users', 'CustomUser')
 from django.conf import settings # you can use this for models instead of CustomUser
-
+from profiles.models import Profile
 # Create your models here.
 
 class Post(models.Model):
     body = models.TextField()
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None, related_name='posts')
     date_added = models.DateTimeField(auto_now_add=True) # adds the date to now 
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts', blank=True) # many likes to many posts field makes numerous relations to SQL server
 
@@ -19,7 +20,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None, related_name='comments')
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
