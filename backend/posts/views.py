@@ -12,6 +12,8 @@ import json #Useful for POST and PUT requests
 from django.core.exceptions import ObjectDoesNotExist
 from django.apps import apps 
 Users = apps.get_model('users', 'CustomUser')
+Profile = apps.get_model('profiles', 'Profile')
+
 
 # Create your views here.
 
@@ -34,8 +36,9 @@ def get_add_posts(request):
         payload = json.loads(request.body)
         user = request.user
         try:
-            post = Post.objects.create(body=payload["body"], user=user)
-            serializer = PostSerializer(post)
+            profile = Profile.objects.get(user=user.id)
+            post = Post.objects.create(body=payload["body"], user=user, profile=profile)
+            serializer = PostSerializer(post, context={"request": request})
             data = serializer.data
             data["user"] = user.username 
             return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
