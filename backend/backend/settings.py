@@ -58,7 +58,11 @@ INSTALLED_APPS = [
     # Local Apps
     'users', # new
     'api', # new
+<<<<<<< HEAD
     'updates',
+=======
+    # 'posts',
+>>>>>>> b84c44d0ffb92de2b080bc92faafe729c08ad853
     'profiles' #ALWAYS ADD NEW APPS in INSTALLED_APPS LIST !! DON'T FORGET !!
 ]
 
