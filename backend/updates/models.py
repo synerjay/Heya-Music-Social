@@ -16,6 +16,7 @@ class Update(models.Model):
 
     def __str__(self):
         return self.body[:50] + '...' + str(self.added_by)
+    # pass
 
 class Message(models.Model):
     update = models.ForeignKey(Update, on_delete=models.CASCADE, related_name='messages')
@@ -26,3 +27,4 @@ class Message(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.body[:50], self.added_by)
+    # pass
