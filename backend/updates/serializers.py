@@ -3,9 +3,17 @@ from .models import Update, Message
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Message
-        fields = ['id', 'added_by', 'body']
+        fields = ['id', 'added_by', 'avatar_url', 'body']
+    
+    def get_avatar_url(self, message):
+        request = self.context.get('request')
+        print(request)
+        avatar_url = message.profile.avatar.url
+        return request.build_absolute_uri(avatar_url)
 
 
 class UpdateSerializer(serializers.ModelSerializer):
