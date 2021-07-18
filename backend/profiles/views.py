@@ -101,7 +101,7 @@ def create_delete_profile(request):
             data["user"] = user.username
             return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
-              profile = Profile.objects.create(user=user, bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
+              profile = Profile.objects.create(user=user, name = request.data["name"], instagram = request.data["instagram"], spotify = request.data["spotify"], twitter = request.data["twitter"], bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
               serializer = ProfileSerializer(profile, context={"request": request})
               data = serializer.data
               data["user"] = user.username

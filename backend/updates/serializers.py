@@ -10,10 +10,17 @@ class MessageSerializer(serializers.ModelSerializer):
 
 class UpdateSerializer(serializers.ModelSerializer):
     messages = MessageSerializer(many=True, required=False)
+    avatar_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Update
-        fields = ['id', 'added_by', 'body', 'likes', 'messages']
+        fields = ['id', 'added_by', 'avatar_url', 'body', 'likes', 'messages']
+    
+    def get_avatar_url(self, update):
+        request = self.context.get('request')
+        print(request)
+        avatar_url = update.profile.avatar.url
+        return request.build_absolute_uri(avatar_url)
 
 
 # class Message(models.Model):
