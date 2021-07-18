@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getPosts } from '../../actions/post';
 import PostItem from './PostItem';
-// import PostForm from './PostForm';
+import PostForm from './PostForm';
 
 const Posts = ({ post: { posts, loading }, getPosts }) => {
   useEffect(() => {
@@ -17,9 +17,9 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
     <Fragment>
       <h1 className='large text-primary'>Posts</h1>
       <p className='lead'>
-        <i className='fas fa-user'></i> Welcome to the community
+        <i className='fas fa-user'></i> See what others are jammin' to
       </p>
-      {/* <PostForm /> */}
+      <PostForm />
       <div className='posts'>
         {posts.map((post) => (
           <PostItem key={post.id} post={post} showActions={true} />
