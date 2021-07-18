@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import setAuthToken from '../utils/setAuthToken';
 import {
   ADD_COMMENT,
   ADD_POST,
@@ -15,6 +16,10 @@ import {
 // Get Many Posts method
 
 export const getPosts = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token); // This needs to be included in GET requests or django will reject it!!!
+  }
+
   dispatch({ type: CLEAR_POST });
 
   try {

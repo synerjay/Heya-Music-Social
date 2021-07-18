@@ -12,6 +12,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import ProfileForm from './components/profile-forms/ProfileForm';
 import AddAlbum from './components/profile-forms/AddAlbum';
 import SearchAlbum from './components/search/SearchAlbum';
+import Posts from './components/posts/Posts';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -44,7 +45,6 @@ const App = () => {
             <section className='container'>
               <Alert />
               <Route exact path='/profiles' component={SearchAlbum} />
-              <Route exact path='/Posts' component={SearchArtists} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
@@ -65,6 +65,7 @@ const App = () => {
                 component={SearchArtists}
               />
               <PrivateRoute exact path='/add-track' component={SearchTracks} />
+              <PrivateRoute exact path='/posts' component={Posts} />
             </section>
           </Switch>
         </Fragment>

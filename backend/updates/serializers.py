@@ -7,7 +7,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = ['id', 'added_by', 'avatar_url', 'body']
+        fields = ['id', 'added_by', 'avatar_url', 'body', 'date_added']
     
     def get_avatar_url(self, message):
         request = self.context.get('request')
@@ -22,7 +22,7 @@ class UpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Update
-        fields = ['id', 'added_by', 'avatar_url', 'body', 'likes', 'messages']
+        fields = ['id', 'added_by', 'avatar_url', 'body', 'likes', 'messages', 'date_added']
     
     def get_avatar_url(self, update):
         request = self.context.get('request')
