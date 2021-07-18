@@ -70,15 +70,15 @@ def get_put_delete_update(request, update_id):
                     data["likes"][i] = Users.objects.get(id=like).username
             for message in data["messages"]:
                     message["added_by"] = Users.objects.get(id=message["added_by"]).username
-            return JsonResponse({'posts': data }, safe=False, status=status.HTTP_200_OK)
+            return JsonResponse({'post': data }, safe=False, status=status.HTTP_200_OK)
         except ObjectDoesNotExist as e:
             return JsonResponse({'error': "Sorry, this post doesn't exist. "}, safe=False, status=status.HTTP_404_NOT_FOUND)
         except Exception:
             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     elif request.method == 'DELETE':
         try:
-            user = request.user.id
-            update = Update.objects.get(user=user, id=update_id)
+            user = request.user
+            update = Update.objects.get(added_by=user, id=update_id)
             update.delete()
             return JsonResponse({'Success': 'Post deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         except ObjectDoesNotExist as e:
