@@ -14,6 +14,7 @@ import AddAlbum from './components/profile-forms/AddAlbum';
 import SearchAlbum from './components/search/SearchAlbum';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+import Profiles from './components/Profiles/Profiles';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -45,9 +46,9 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <section className='container'>
               <Alert />
-              <Route exact path='/profiles' component={SearchAlbum} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/profiles' component={Profiles} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute
                 exact

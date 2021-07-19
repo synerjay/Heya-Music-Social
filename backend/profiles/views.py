@@ -28,7 +28,10 @@ def get_all_profiles(request):
     print(request)
     print(request.user.id)
     serializer = ProfileSerializer(profiles, context={"request": request}, many=True)
-    return JsonResponse({'profiles': serializer.data }, safe=False, status=status.HTTP_200_OK)
+    data = serializer.data
+    for item in data:
+        item["user"] = Users.objects.get(id=item["user"]).username
+    return JsonResponse({'profiles': data }, safe=False, status=status.HTTP_200_OK)
 
 # // @route GET profile/member/<str:username>
 # // @desc Get profile by user ID using params
