@@ -13,6 +13,7 @@ import ProfileForm from './components/profile-forms/ProfileForm';
 import AddAlbum from './components/profile-forms/AddAlbum';
 import SearchAlbum from './components/search/SearchAlbum';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -66,6 +67,7 @@ const App = () => {
               />
               <PrivateRoute exact path='/add-track' component={SearchTracks} />
               <PrivateRoute exact path='/posts' component={Posts} />
+              <PrivateRoute exact path='/posts/:id' component={Post} />
             </section>
           </Switch>
         </Fragment>
