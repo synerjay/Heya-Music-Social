@@ -30,20 +30,22 @@ def get_all_profiles(request):
     serializer = ProfileSerializer(profiles, context={"request": request}, many=True)
     return JsonResponse({'profiles': serializer.data }, safe=False, status=status.HTTP_200_OK)
 
-# // @route GET profile/member/<int:user_id>
+# // @route GET profile/member/<str:username>
 # // @desc Get profile by user ID using params
 # // @access Public (No Authentication)
 @api_view(["GET"])
 @csrf_exempt
 @permission_classes([])
-def get_one_profile(request, user_id):
-    user = Users.objects.get(id=user_id)
+def get_one_profile(request, username):
     try: 
+        user = Users.objects.get(username=username)
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})
-        return JsonResponse({ 'profile': serializer.data}, safe=False, status=status.HTTP_200_OK)
-    except Profile.DoesNotExist:
-        return JsonResponse({'msg': 'There is no profile found yet.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
+        data = serializer.data
+        data["user"] = user.username
+        return JsonResponse({ 'profile': data}, safe=False, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return JsonResponse({'msg': 'There is no profile found yet or no such user exists.' }, safe=False, status=status.HTTP_404_NOT_FOUND)
     except Exception:
             return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
