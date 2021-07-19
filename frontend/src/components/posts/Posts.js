@@ -21,9 +21,13 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
       </p>
       <PostForm />
       <div className='posts'>
-        {posts.map((post) => (
-          <PostItem key={post.id} post={post} showActions={true} />
-        ))}
+        {posts
+          .sort(function (a, b) {
+            return new Date(b.date_added) - new Date(a.date_added); // sort post from recent to old
+          })
+          .map((post) => (
+            <PostItem key={post.id} post={post} showActions={true} />
+          ))}
       </div>
     </Fragment>
   );
