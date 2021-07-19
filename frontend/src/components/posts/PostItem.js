@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
-// import { format } from 'date-fns';
+import { format } from 'date-fns';
 
 const PostItem = ({
   addLike,
@@ -24,8 +24,7 @@ const PostItem = ({
       <div>
         <p className='my-1'>{body}</p>
         <p className='post-date'>
-          Blah
-          {/* Posted on {format(new Date(date_added), 'MMMM do Y')} */}
+          Posted on {format(new Date(date_added), 'MMMM do Y')}
         </p>
 
         {showActions && (

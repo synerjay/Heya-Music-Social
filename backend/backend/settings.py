@@ -179,8 +179,8 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 # Rest Framework config. Add all of this.
-REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P", 
-    # Authentication Scheme
+REST_FRAMEWORK = {'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S", 
+    # Authentication Scheme "%m/%d/%Y %I:%M%P",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication', #Note DO NOT PUT Session Authentication OR IT WILL ASK FOR CSRF KEY WHICH WE DO NOT WANT
     ], 
