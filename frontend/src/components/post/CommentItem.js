@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import formatDate from '../../utils/formatDate';
-import { format } from 'date-fns';
 import { deleteComment } from '../../actions/post';
+import { formatDistanceToNow } from 'date-fns';
+import moment from 'moment';
 
 const CommentItem = ({
   postId,
@@ -23,7 +23,13 @@ const CommentItem = ({
       <div>
         <p className='my-1'>{body}</p>
         <p className='post-date'>
-          Posted on {format(new Date(date_added), 'MMMM do Y')}
+          Posted{' '}
+          {formatDistanceToNow(
+            new Date(moment.utc(date_added).local().format()),
+            {
+              addSuffix: true,
+            }
+          )}
         </p>
 
         {!auth.loading && added_by === auth.user.username && (
