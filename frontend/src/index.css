@@ -502,8 +502,8 @@ button {
   grid-template-areas:
     'top top'
     'about about'
-    'exp edu'
-    'github github';
+    'album artist'
+    'track track';
   grid-gap: 1rem;
 }
 

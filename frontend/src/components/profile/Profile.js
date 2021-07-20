@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import { Link } from 'react-router-dom';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
+import ProfileTrack from './ProfileTrack';
+import ProfileArtist from './ProfileArtist';
+import ProfileAlbum from './ProfileAlbum';
 
 const Profile = ({
   getProfileById,
@@ -37,19 +42,19 @@ const Profile = ({
             {/* This div grid is needed to organize the profile components into a grid*/}
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
-            <div class='profile-exp bg-white p-2'>
+            <div class='profile-album bg-white p-2'>
               <h2 class='text-primary'>Favorite Albums</h2>
               {profile.albums.length > 0 ? (
                 <Fragment>
                   {profile.albums.map((album) => (
-                    <ProfileAlbums key={album._id} album={album} />
+                    <ProfileAlbum key={album.id} album={album} />
                   ))}
                 </Fragment>
               ) : (
                 <h4> No favorite albums yet</h4>
               )}
             </div>
-            <div class='profile-edu bg-white p-2'>
+            <div class='profile-artist bg-white p-2'>
               <h2 class='text-primary'>Favorite Artists</h2>
               {profile.artists.length > 0 ? (
                 <Fragment>
@@ -61,7 +66,7 @@ const Profile = ({
                 <h4> No favorite artists yet</h4>
               )}
             </div>
-            <div class='profile-edu bg-white p-2'>
+            <div class='profile-track bg-white p-2'>
               <h2 class='text-primary'>Favorite Tracks</h2>
               {profile.tracks.length > 0 ? (
                 <Fragment>

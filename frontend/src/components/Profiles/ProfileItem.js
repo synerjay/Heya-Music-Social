@@ -17,12 +17,12 @@ const ProfileItem = ({
         </Link>
       </div>
       <ul>
-        {tracks &&
+        {/* {tracks &&
           tracks.slice(0, 4).map((track, index) => (
             <li key={index} className='text-primary'>
               <i className='fas fa-check' /> {track}
             </li>
-          ))}
+          ))} */}
       </ul>
     </div>
   );
