@@ -59,8 +59,9 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
     spotifyApi
       .getRecommendations({
         // min_energy: 0.4,
-        seed_artists: ['4kYSro6naA4h99UJvo89HB', '4kYSro6naA4h99UJvo89HB'], // seeds mean spotify unique id
-        seed_genres: ['hiphop', 'rap', 'urban'],
+        seed_artists: ['3fMbdgg4jU18AjLCKBhRSm', '4kOfxxnW1ukZdsNbCKY9br'], // seeds mean spotify unique id
+        // seed_genres: ['rock and roll', 'rock', 'metal', 'rap'],
+        // seed_tracks: ["46eu3SBuFCXWsPT39Yg3tJ",]
         min_popularity: 50,
       })
       .then(
@@ -99,3 +100,23 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getAccessToken })(SearchAlbum);
+
+// Sample API response in an array
+
+// album: {album_type: "ALBUM", artists: Array(1), available_markets: Array(178), external_urls: {…}, href: "https://api.spotify.com/v1/albums/31TRqoVBTQi0lzlPLtvINn", …}
+// artists: [{…}]
+// available_markets: (178) ["AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CH", "CI", "CL", "CM", "CO", "CR", "CV", "CW", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FJ", "FM", "FR", "GA", "GB", "GD", "GE", "GH", "GM", "GN", "GQ", "GR", "GT", "GW", "GY", "HK", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "MA", "MC", "MD", …]
+// disc_number: 1
+// duration_ms: 227600
+// explicit: false
+// external_ids: {isrc: "USSM18600632"}
+// external_urls: {spotify: "https://open.spotify.com/track/2A6yzRGMgSQCUapR2ptm6A"}
+// href: "https://api.spotify.com/v1/tracks/2A6yzRGMgSQCUapR2ptm6A"
+// id: "2A6yzRGMgSQCUapR2ptm6A"
+// is_local: false
+// name: "True Colors"
+// popularity: 69
+// preview_url: "https://p.scdn.co/mp3-preview/6e3190bfdf07d4c267b00aa512dacfd7d10345ca?cid=e159b7e3b96f40f1b63182f7023ed113"
+// track_number: 4
+// type: "track"
+// uri: "spotify:track:2A6yzRGMgSQCUapR2ptm6A"
