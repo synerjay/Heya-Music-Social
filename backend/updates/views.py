@@ -42,7 +42,7 @@ def get_add_updates(request):
         member = Users.objects.get(id=request.user.id)
         try:
               profile = Profile.objects.get(user=request.user.id)
-              update = Update.objects.create(body=payload["body"], added_by=member, profile=profile)
+              update = Update.objects.create(track_title = payload["title"], track_artist = payload["artist"], track_img = payload["img"], body=payload["body"], added_by=member, profile=profile)
               serializer = UpdateSerializer(update, context={"request": request})
               data = serializer.data
               data["added_by"] = member.username 
