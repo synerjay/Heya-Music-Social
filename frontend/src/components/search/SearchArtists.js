@@ -74,7 +74,7 @@ const SearchArtists = ({ accessToken, getAccessToken }) => {
           </div>
           <div className='overflow-scroll flex flex-col'>
             {searchResults.map((artist) => (
-              <AddArtist artist={artist} key={artist.uri} />
+              <AddArtist artist={artist} key={artist.id} />
             ))}
           </div>
         </div>

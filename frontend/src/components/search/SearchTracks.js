@@ -78,7 +78,7 @@ const SearchTracks = ({ accessToken, getAccessToken }) => {
           </div>
           <div className='overflow-scroll flex flex-col'>
             {searchResults.map((track) => (
-              <AddTrack track={track} key={track.uri} />
+              <AddTrack track={track} key={track.id} />
             ))}
           </div>
         </div>

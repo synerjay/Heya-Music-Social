@@ -87,7 +87,7 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
           />
           <div className='overflow-scroll flex flex-col'>
             {searchResults.map((track) => (
-              <AddAlbum track={track} key={track.uri} />
+              <AddAlbum track={track} key={track.albumId} />
             ))}
           </div>
         </div>
