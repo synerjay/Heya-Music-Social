@@ -5,7 +5,7 @@ import { deleteAlbum } from '../../actions/profile';
 
 const Album = ({ albums, deleteAlbum }) => {
   const albumList = albums.map((album) => (
-    <tr key={album.id}>
+    <tr key={album.spot_id}>
       <td>
         <img src={album.img} />
       </td>
@@ -14,7 +14,7 @@ const Album = ({ albums, deleteAlbum }) => {
       </td>
       <td>
         <button
-          onClick={() => deleteAlbum(album.id)}
+          onClick={() => deleteAlbum(album.spot_id)}
           className='btn btn-danger'
         >
           {' '}

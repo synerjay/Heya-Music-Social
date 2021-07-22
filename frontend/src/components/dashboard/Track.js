@@ -5,7 +5,7 @@ import { deleteTrack } from '../../actions/profile';
 
 const Track = ({ tracks, deleteTrack }) => {
   const trackList = tracks.map((track) => (
-    <tr key={track.id}>
+    <tr key={track.spot_id}>
       <td>
         <img src={track.img} />
       </td>
@@ -14,7 +14,7 @@ const Track = ({ tracks, deleteTrack }) => {
       </td>
       <td>
         <button
-          onClick={() => deleteTrack(track.id)}
+          onClick={() => deleteTrack(track.spot_id)}
           className='btn btn-danger'
         >
           {' '}

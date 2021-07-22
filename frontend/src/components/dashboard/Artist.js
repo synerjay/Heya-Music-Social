@@ -5,13 +5,16 @@ import { deleteArtist } from '../../actions/profile';
 
 const Artist = ({ artists, deleteArtist }) => {
   const artistList = artists.map((art) => (
-    <tr key={art.id}>
+    <tr key={art.spot_id}>
       <td>
         <img className='h-10 w-10' src={art.img} />
       </td>
       <td>{art.name}</td>
       <td>
-        <button onClick={() => deleteArtist(art.id)} className='btn btn-danger'>
+        <button
+          onClick={() => deleteArtist(art.spot_id)}
+          className='btn btn-danger'
+        >
           {' '}
           Delete
         </button>

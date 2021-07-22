@@ -11,7 +11,18 @@ const PostItem = ({
   removeLike,
   deletePost,
   auth,
-  post: { id, body, added_by, avatar_url, likes, messages, date_added },
+  post: {
+    id,
+    body,
+    track_title,
+    track_artist,
+    track_img,
+    added_by,
+    avatar_url,
+    likes,
+    messages,
+    date_added,
+  },
   showActions,
 }) => {
   return (
@@ -23,6 +34,14 @@ const PostItem = ({
         </Link>
       </div>
       <div>
+        <h4>{added_by} is currently listening to</h4>
+        <div className='flex items-center'>
+          <img src={track_img} className='h-16 w-16' />
+          <div className='ml-3'>
+            <div>{track_title}</div>
+            <div className='font-bold'>{track_artist}</div>
+          </div>
+        </div>
         <p className='my-1'>{body}</p>
         <p className='post-date'>
           Posted{' '}
