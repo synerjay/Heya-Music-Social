@@ -92,6 +92,7 @@ def create_delete_profile(request):
             profile.bio = request.data["bio"]
             # Later need to be added Make sure to add below fields on frontend or Django will send an error!!!
             profile.name = request.data["name"]
+            profile.genre = request.data["genre"]
             profile.instagram = request.data["instagram"]
             profile.spotify = request.data["spotify"]
             profile.twitter = request.data["twitter"]
@@ -106,7 +107,7 @@ def create_delete_profile(request):
             data["user"] = user.username
             return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
-              profile = Profile.objects.create(user=user, name = request.data["name"], instagram = request.data["instagram"], spotify = request.data["spotify"], twitter = request.data["twitter"], bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
+              profile = Profile.objects.create(user=user, name = request.data["name"], genre = request.data["genre"], instagram = request.data["instagram"], spotify = request.data["spotify"], twitter = request.data["twitter"], bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
               serializer = ProfileSerializer(profile, context={"request": request})
               data = serializer.data
               data["user"] = user.username
@@ -128,7 +129,7 @@ def add_album(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Album.objects.create(profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
+        Album.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -145,7 +146,7 @@ def add_album(request):
 def delete_album(request, album_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        album = Album.objects.get(id=album_id, user=user)
+        album = Album.objects.get(spot_id=album_id, user=user)
         album.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})
@@ -166,7 +167,7 @@ def add_artist(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Artist.objects.create(profile=profile, user=user, name=payload["name"], img=payload["img"])
+        Artist.objects.create(spot_id = payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -183,7 +184,7 @@ def add_artist(request):
 def delete_artist(request, art_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        artist = Artist.objects.get(id=art_id, user=user)
+        artist = Artist.objects.get(spot_id=art_id, user=user)
         artist.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})
@@ -206,7 +207,7 @@ def add_track(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Track.objects.create(profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
+        Track.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -224,7 +225,7 @@ def add_track(request):
 def delete_track(request, track_id):
     user = Users.objects.get(id=request.user.id)
     try:
-        track = Track.objects.get(id=track_id, user=user)
+        track = Track.objects.get(spot_id=track_id, user=user)
         track.delete()
         profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, context={"request": request})

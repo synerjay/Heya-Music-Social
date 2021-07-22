@@ -7,9 +7,9 @@ urlpatterns = [
   path('members', views.get_all_profiles),
   path('member/<str:username>', views.get_one_profile),
   path('album', views.add_album),
-  path('album/<int:album_id>', views.delete_album),
+  path('album/<slug:album_id>', views.delete_album),
   path('artist', views.add_artist),
-  path('artist/<int:art_id>', views.delete_artist),
+  path('artist/<slug:art_id>', views.delete_artist),
   path('track', views.add_track),
-  path('track/<int:track_id>', views.delete_track),
+  path('track/<slug:track_id>', views.delete_track),
 ]
