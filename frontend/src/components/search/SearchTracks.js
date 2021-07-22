@@ -74,7 +74,7 @@ const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
             <input
               type='text'
               className='w-full focus:shadow focus:outline-none'
-              placeholder='Add your favorite Tracks'
+              placeholder='Search Any Tracks'
             />
           </div>
           <div className='overflow-scroll flex flex-col'>

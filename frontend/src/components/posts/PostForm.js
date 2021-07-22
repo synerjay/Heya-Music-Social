@@ -27,7 +27,7 @@ const PostForm = ({ addPost }) => {
     <Fragment>
       <div className='post-form'>
         <div className='bg-primary p'>
-          <h3>Say Something...</h3>
+          <h3>Tell the world what you're listening to...</h3>
         </div>
         <form
           className='form my-1'
