@@ -13,11 +13,11 @@ const PostForm = ({ addPost }) => {
   //const onChange = (e) => setText({ ...text, [e.target.name]: e.target.value });
 
   // 3. make data passed to the reduce
-  const onSubmit = (e) => {
-    e.preventDefault(); //prevents refresh of the page once submitted
-    addPost({ body }); // action to the reducer with text data deconstructed
-    setBody(''); // <-- set the text state back to initial state once submitted for the next text input
-  };
+  // const onSubmit = (e) => {
+  //   e.preventDefault(); //prevents refresh of the page once submitted
+  //   addPost({ body }); // action to the reducer with text data deconstructed
+  //   setBody(''); // <-- set the text state back to initial state once submitted for the next text input
+  // };
 
   useEffect(() => {
     console.log({ ...playingTrack, body });
