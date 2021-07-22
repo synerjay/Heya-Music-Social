@@ -45,7 +45,7 @@ const SearchArtists = ({ accessToken, getAccessToken }) => {
             return {
               name: artist.name,
               // title: artist.name,
-              uri: artist.uri,
+              id: artist.id,
               imageUrl: smallestImage === undefined ? null : smallestImage.url,
             };
           })

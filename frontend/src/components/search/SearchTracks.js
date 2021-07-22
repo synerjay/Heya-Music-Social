@@ -34,6 +34,7 @@ const SearchTracks = ({ accessToken, getAccessToken }) => {
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.searchTracks(search, { limit: 5 }).then(
       function (data) {
+        console.log(data.body.tracks.items);
         setSearchResults(
           data.body.tracks.items.map((track) => {
             const smallestAlbumImage = track.album.images.reduce(
@@ -47,7 +48,7 @@ const SearchTracks = ({ accessToken, getAccessToken }) => {
             return {
               artist: track.artists[0].name,
               title: track.name,
-              uri: track.uri,
+              id: track.id,
               albumUrl: smallestAlbumImage.url,
               album: track.album.name,
             };

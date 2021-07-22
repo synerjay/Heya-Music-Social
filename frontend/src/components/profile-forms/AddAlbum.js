@@ -5,6 +5,7 @@ import { addAlbum } from '../../actions/profile';
 
 const AddAlbum = ({ track, addAlbum }) => {
   const [formData, setFormData] = useState({
+    id: '',
     title: '',
     artist: '',
     img: '',
@@ -12,6 +13,7 @@ const AddAlbum = ({ track, addAlbum }) => {
 
   useEffect(() => {
     setFormData({
+      id: track.albumId,
       title: track.album,
       artist: track.artist,
       img: track.albumUrl,

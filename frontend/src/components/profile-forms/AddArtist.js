@@ -5,12 +5,14 @@ import { addArtist } from '../../actions/profile';
 
 const AddArtist = ({ artist, addArtist }) => {
   const [formData, setFormData] = useState({
+    id: '',
     name: '',
     img: '',
   });
 
   useEffect(() => {
     setFormData({
+      id: artist.id,
       name: artist.name,
       img: artist.imageUrl,
     });
