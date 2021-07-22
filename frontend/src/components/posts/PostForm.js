@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
+import SearchTracks from '../search/SearchTracks';
 
 const PostForm = ({ addPost }) => {
   // 1. Make a component state,
   const [body, setBody] = useState('');
+  const [playingTrack, setPlayingTrack] = useState();
 
   //2. Make input field response to state change - HTML tags need to be changed with value={NameOfField} and onChange={onChange}
   //const onChange = (e) => setText({ ...text, [e.target.name]: e.target.value });
@@ -17,6 +19,10 @@ const PostForm = ({ addPost }) => {
     setBody(''); // <-- set the text state back to initial state once submitted for the next text input
   };
 
+  useEffect(() => {
+    console.log({ ...playingTrack, body });
+  }, [playingTrack]);
+
   return (
     <Fragment>
       <div className='post-form'>
@@ -27,10 +33,12 @@ const PostForm = ({ addPost }) => {
           className='form my-1'
           onSubmit={(e) => {
             e.preventDefault();
-            addPost({ body });
+            addPost({ ...playingTrack, body });
             setBody('');
+            setPlayingTrack();
           }}
         >
+          <SearchTracks setPlayingTrack={setPlayingTrack} />
           <textarea
             name='body'
             cols='30'

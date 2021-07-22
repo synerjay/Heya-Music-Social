@@ -3,8 +3,9 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import AddTrack from '../profile-forms/AddTrack';
 import { connect } from 'react-redux';
 import { getAccessToken } from '../../actions/profile';
+import TracksListening from '../posts/TracksListening';
 
-const SearchTracks = ({ accessToken, getAccessToken }) => {
+const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -77,9 +78,17 @@ const SearchTracks = ({ accessToken, getAccessToken }) => {
             />
           </div>
           <div className='overflow-scroll flex flex-col'>
-            {searchResults.map((track) => (
-              <AddTrack track={track} key={track.id} />
-            ))}
+            {setPlayingTrack
+              ? searchResults.map((track) => (
+                  <TracksListening
+                    track={track}
+                    key={track.id}
+                    setPlayingTrack={setPlayingTrack}
+                  />
+                ))
+              : searchResults.map((track) => (
+                  <AddTrack track={track} key={track.id} />
+                ))}
           </div>
         </div>
       </form>
