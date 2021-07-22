@@ -5,6 +5,9 @@ from profiles.models import Profile
 # Create your models here.
 
 class Update(models.Model):
+    track_title = models.CharField(max_length=250, blank=True)
+    track_artist = models.CharField(max_length=200, blank=True)
+    track_img = models.URLField(max_length=200, blank=True)
     body = models.TextField()
     added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None, related_name='updates')

@@ -4,17 +4,17 @@ from .models import Profile, Album, Artist, Track
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ['id', 'name', 'img']
+        fields = ['spot_id', 'name', 'img']
 
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ['id', 'title', 'artist', 'img']
+        fields = ['spot_id', 'title', 'artist', 'img']
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ['id', 'title', 'artist', 'img']
+        fields = ['spot_id', 'title', 'artist', 'img']
 
 class ProfileSerializer(serializers.ModelSerializer):
     albums = AlbumSerializer(many=True, required=False) # DONT FORGET THE RELATED NAME IN THE MODELS.PY !! IMPORTANT !!
@@ -24,7 +24,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'name', 'avatar_url', 'bio', 'instagram', 'twitter', 'spotify', 'albums', 'artists', 'tracks']
+        fields = ['id', 'user', 'name', 'avatar_url', 'bio', 'genre', 'instagram', 'twitter', 'spotify', 'albums', 'artists', 'tracks']
 
     def get_avatar_url(self, profile):
         request = self.context.get('request')

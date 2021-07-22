@@ -12,6 +12,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=150, blank=True, null=True)
     avatar = models.ImageField(blank=True, null=True, upload_to=upload_path)
     bio = models.TextField(null=True)
+    genre = models.CharField(max_length=350, blank=True)
     instagram = models.CharField(max_length=100, blank=True, null=True)
     twitter = models.CharField(max_length=100, blank=True, null=True)
     spotify = models.CharField(max_length=100, blank=True, null=True)
@@ -24,6 +25,7 @@ class Profile(models.Model):
 #   #OneToOneField will return to ONLY one instance of QuerySet like Profile-RegisteredUser
 
 class Album(models.Model):
+    spot_id = models.CharField(max_length=250, primary_key=True, default=None)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='albums')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='albums') 
     title = models.CharField(max_length=200, blank=True)
@@ -35,6 +37,7 @@ class Album(models.Model):
     # pass
 
 class Artist(models.Model):
+    spot_id = models.CharField(max_length=250, primary_key=True, default=None)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='artists')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='artists') 
     name = models.CharField(max_length=200, blank=True)
@@ -46,6 +49,7 @@ class Artist(models.Model):
     # pass
 
 class Track(models.Model):
+    spot_id = models.CharField(max_length=250, primary_key=True, default=None)
     profile = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE, related_name='tracks')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='tracks') 
     title = models.CharField(max_length=250, blank=True)
