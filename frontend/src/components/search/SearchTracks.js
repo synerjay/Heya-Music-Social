@@ -101,7 +101,13 @@ const SearchTracks = ({
                 ))
               : searchResults
                   .filter((x) => !tracks.map((y) => y.spot_id).includes(x.id))
-                  .map((track) => <AddTrack track={track} key={track.id} />)}
+                  .map((track) => (
+                    <AddTrack
+                      track={track}
+                      key={track.id}
+                      setSearchResults={setSearchResults}
+                    />
+                  ))}
           </div>
         </div>
       </form>

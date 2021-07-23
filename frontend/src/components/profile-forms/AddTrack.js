@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTrack } from '../../actions/profile';
 
-const AddTrack = ({ track, addTrack }) => {
+const AddTrack = ({ track, addTrack, setSearchResults }) => {
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -25,6 +25,7 @@ const AddTrack = ({ track, addTrack }) => {
       onClick={(e) => {
         e.preventDefault();
         addTrack(formData);
+        setSearchResults([]);
       }}
     >
       <div className='flex items-center'>
