@@ -170,7 +170,10 @@ def add_artist(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Artist.objects.create(spot_id = payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
+        if profile.artists.filter(spot_id=payload["id"]).exists(): # album already exists in the album list
+             return JsonResponse({'error': 'Artist already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            Artist.objects.create(spot_id = payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -210,7 +213,10 @@ def add_track(request):
     user = Users.objects.get(id=request.user.id)
     try:
         profile = Profile.objects.get(user=user)
-        Track.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
+        if profile.tracks.filter(spot_id=payload["id"]).exists(): # album already exists in the album list
+             return JsonResponse({'error': 'Track already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+             Track.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
