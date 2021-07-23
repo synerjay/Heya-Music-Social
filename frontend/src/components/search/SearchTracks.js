@@ -84,6 +84,7 @@ const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
                     track={track}
                     key={track.id}
                     setPlayingTrack={setPlayingTrack}
+                    setSearchResults={setSearchResults}
                   />
                 ))
               : searchResults.map((track) => (

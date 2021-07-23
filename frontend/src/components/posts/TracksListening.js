@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TracksListening = ({ track, setPlayingTrack }) => {
+const TracksListening = ({ track, setPlayingTrack, setSearchResults }) => {
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -22,6 +22,7 @@ const TracksListening = ({ track, setPlayingTrack }) => {
       onClick={(e) => {
         e.preventDefault();
         setPlayingTrack(formData);
+        setSearchResults([]);
       }}
     >
       <div className='flex items-center'>

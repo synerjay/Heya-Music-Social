@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArtist } from '../../actions/profile';
 
-const AddArtist = ({ artist, addArtist }) => {
+const AddArtist = ({ artist, addArtist, setSearchResults }) => {
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -23,6 +23,7 @@ const AddArtist = ({ artist, addArtist }) => {
       onClick={(e) => {
         e.preventDefault();
         addArtist(formData);
+        setSearchResults([]);
       }}
     >
       <div className='flex items-center'>
