@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddAlbum from '../profile-forms/AddAlbum';
 import { connect } from 'react-redux';
-import { getAccessToken } from '../../actions/profile';
+import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 
-const SearchAlbum = ({ accessToken, getAccessToken }) => {
+const SearchAlbum = ({
+  accessToken,
+  profile: { profile, loading },
+  getAccessToken,
+  getCurrentProfile,
+}) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -14,7 +20,12 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
   //Get Spotify Key at start up
   useEffect(() => {
     getAccessToken();
-  }, []);
+    if (!profile) getCurrentProfile();
+    if (profile) {
+      setAlbums(profile['albums']);
+      console.log(albums);
+    }
+  }, [profile]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -86,9 +97,11 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
             placeholder='Search any album'
           />
           <div className='overflow-scroll flex flex-col'>
-            {searchResults.map((track) => (
-              <AddAlbum track={track} key={track.albumId} />
-            ))}
+            {searchResults
+              .filter((x) => !albums.map((y) => y.spot_id).includes(x.albumId))
+              .map((track) => (
+                <AddAlbum track={track} key={track.albumId} />
+              ))}
           </div>
         </div>
       </form>
@@ -98,9 +111,12 @@ const SearchAlbum = ({ accessToken, getAccessToken }) => {
 
 const mapStateToProps = (state) => ({
   accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken })(SearchAlbum);
+export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
+  SearchAlbum
+);
 
 // Sample API response in an array
 
