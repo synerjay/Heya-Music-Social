@@ -13,6 +13,7 @@ const SearchArtists = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [artists, setArtists] = useState([]);
+  const [seedArtists, setSeedArtists] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -23,9 +24,15 @@ const SearchArtists = ({
     if (!profile) getCurrentProfile();
     if (profile) {
       setArtists(profile['artists']);
-      console.log(artists);
     }
   }, [profile]);
+
+  useEffect(() => {
+    console.log(artists);
+    setSeedArtists(
+      artists.map((y) => y.spot_id).sort(() => 0.5 - Math.random())
+    );
+  }, [artists]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -45,14 +52,14 @@ const SearchArtists = ({
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.searchArtists(search, { limit: 5 }).then(
       function (data) {
-        console.log(data.body.artists.items);
+        // console.log(data.body.artists.items);
         setSearchResults(
           data.body.artists.items.map((artist) => {
             const smallestImage = artist.images.reduce((smallest, image) => {
               if (image.height < smallest.height) return image;
               return smallest;
             }, artist.images[0]);
-            console.log(smallestImage);
+            // console.log(smallestImage);
             return {
               name: artist.name,
               // title: artist.name,
@@ -66,6 +73,33 @@ const SearchArtists = ({
         console.error(err);
       }
     );
+
+    console.log(seedArtists);
+    spotifyApi
+      .getRecommendations({
+        // min_energy: 0.4,
+        seed_artists: [...seedArtists.slice(0, 5)],
+        // [
+        //   '3TVXtAsR1Inumwj472S9r4',
+        //   '7tYKF4w9nC0nq9CsPZTHyP',
+        //   '3fMbdgg4jU18AjLCKBhRSm',
+        //   '5gcr3GdxkY87uv0K66hjn2',
+        //   '7hJcb9fa4alzcOq3EaNPoG',
+        //   // '7hJcb9fa4alzcOq3EaNPoG', It seems like this API endpoint only works when there are only 5 seeds or less
+        // ], // seeds mean spotify unique id
+        // seed_genres: ['rock and roll', 'rock', 'metal', 'rap'],
+        // seed_tracks: ["46eu3SBuFCXWsPT39Yg3tJ",]
+        min_popularity: 50,
+      })
+      .then(
+        function (data) {
+          let recommendations = data.body;
+          console.log(recommendations);
+        },
+        function (err) {
+          console.log('Something went wrong!', err);
+        }
+      );
   }, [search, accessToken]);
 
   return (

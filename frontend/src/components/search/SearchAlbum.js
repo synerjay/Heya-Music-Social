@@ -23,9 +23,14 @@ const SearchAlbum = ({
     if (!profile) getCurrentProfile();
     if (profile) {
       setAlbums(profile['albums']);
-      console.log(albums);
     }
+    // use this for album seed for track recommendation web api
   }, [profile]);
+
+  useEffect(() => {
+    console.log(albums);
+    console.log(albums.map((y) => y.spot_id));
+  }, [albums]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
