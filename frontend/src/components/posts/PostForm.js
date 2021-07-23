@@ -39,15 +39,26 @@ const PostForm = ({ addPost }) => {
           }}
         >
           <SearchTracks setPlayingTrack={setPlayingTrack} />
-          <textarea
-            name='body'
-            cols='30'
-            rows='5'
-            placeholder='Create a post'
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-          />
+          {playingTrack && (
+            <div className='flex flex-col items-center'>
+              <p>You're currently listening to</p>
+              <img src={playingTrack.img} className='h-16 w-16' />
+              <div className='ml-3'>
+                <div>{playingTrack.title}</div>
+                <div className='font-bold'>{playingTrack.artist}</div>
+              </div>
+              <textarea
+                name='body'
+                cols='30'
+                rows='5'
+                placeholder='Say something about this song'
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                required
+              />
+            </div>
+          )}
+
           <input type='submit' className='btn btn-dark my-1' value='Submit' />
         </form>
       </div>
