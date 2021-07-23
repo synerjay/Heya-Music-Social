@@ -11,6 +11,7 @@ const initialState = {
   instagram: '',
   twitter: '',
   spotify: '',
+  genre: '',
 };
 
 const ProfileForm = ({
@@ -32,7 +33,7 @@ const ProfileForm = ({
     }
   }, [loading, getCurrentProfile, profile]);
 
-  const { bio, twitter, instagram, spotify, name } = formData;
+  const { bio, twitter, instagram, spotify, name, genre } = formData;
 
   const onChange = (e) =>
     setFormData({
@@ -48,6 +49,7 @@ const ProfileForm = ({
     uploadData.append('bio', formData.bio);
     uploadData.append('name', formData.name);
     uploadData.append('instagram', formData.instagram);
+    uploadData.append('genre', formData.genre);
     uploadData.append('twitter', formData.twitter);
     uploadData.append('spotify', formData.spotify);
     if (formData.avatar) {
@@ -86,18 +88,19 @@ const ProfileForm = ({
           />
           <small className='form-text'>Tell us a little about yourself</small>
         </div>
-        {/* <div className='form-group'>
+        <div className='form-group'>
           <input
             type='text'
-            placeholder='Bio'
-            name='bio'
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            placeholder='* Favorite Genre'
+            name='genre'
+            value={genre}
+            onChange={onChange}
           />
           <small className='form-text'>
-            Tell us a little about yourself
+            List your favorite musical genre. Please use comma separated values
+            (eg. Pop, Rap, Dance, Hip-hop)
           </small>
-        </div> */}
+        </div>
         <div className='form-group'>
           <input
             type='file'

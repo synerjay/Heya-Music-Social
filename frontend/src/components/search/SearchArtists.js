@@ -78,7 +78,10 @@ const SearchArtists = ({
     spotifyApi
       .getRecommendations({
         // min_energy: 0.4,
-        seed_artists: [...seedArtists.slice(0, 5)],
+        seed_artists:
+          seedArtists.length < 5
+            ? [...seedArtists]
+            : [...seedArtists.slice(0, 5)],
         // [
         //   '3TVXtAsR1Inumwj472S9r4',
         //   '7tYKF4w9nC0nq9CsPZTHyP',
