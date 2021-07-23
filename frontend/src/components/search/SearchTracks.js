@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddTrack from '../profile-forms/AddTrack';
 import { connect } from 'react-redux';
-import { getAccessToken } from '../../actions/profile';
+import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 import TracksListening from '../posts/TracksListening';
 
-const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
+const SearchTracks = ({
+  accessToken,
+  profile: { profile },
+  getAccessToken,
+  getCurrentProfile,
+  setPlayingTrack,
+}) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [tracks, setTracks] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -15,7 +22,12 @@ const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
   //Get Spotify Key at start up
   useEffect(() => {
     getAccessToken();
-  }, []);
+    if (!profile) getCurrentProfile();
+    if (profile) {
+      setTracks(profile['tracks']);
+      console.log(tracks);
+    }
+  }, [profile]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -87,9 +99,9 @@ const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
                     setSearchResults={setSearchResults}
                   />
                 ))
-              : searchResults.map((track) => (
-                  <AddTrack track={track} key={track.id} />
-                ))}
+              : searchResults
+                  .filter((x) => !tracks.map((y) => y.spot_id).includes(x.id))
+                  .map((track) => <AddTrack track={track} key={track.id} />)}
           </div>
         </div>
       </form>
@@ -99,6 +111,9 @@ const SearchTracks = ({ accessToken, getAccessToken, setPlayingTrack }) => {
 
 const mapStateToProps = (state) => ({
   accessToken: state.profile.accessToken,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken })(SearchTracks);
+export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
+  SearchTracks
+);

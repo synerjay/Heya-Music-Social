@@ -6,7 +6,7 @@ import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 
 const SearchAlbum = ({
   accessToken,
-  profile: { profile, loading },
+  profile: { profile },
   getAccessToken,
   getCurrentProfile,
 }) => {
@@ -100,7 +100,11 @@ const SearchAlbum = ({
             {searchResults
               .filter((x) => !albums.map((y) => y.spot_id).includes(x.albumId))
               .map((track) => (
-                <AddAlbum track={track} key={track.albumId} />
+                <AddAlbum
+                  track={track}
+                  key={track.albumId}
+                  setSearchResults={setSearchResults}
+                />
               ))}
           </div>
         </div>

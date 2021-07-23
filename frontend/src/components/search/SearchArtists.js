@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import AddArtist from '../profile-forms/AddArtist';
 import { connect } from 'react-redux';
-import { getAccessToken } from '../../actions/profile';
+import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 
-const SearchArtists = ({ accessToken, getAccessToken }) => {
+const SearchArtists = ({
+  accessToken,
+  profile: { profile },
+  getAccessToken,
+  getCurrentProfile,
+}) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [artists, setArtists] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -14,7 +20,12 @@ const SearchArtists = ({ accessToken, getAccessToken }) => {
   //Get Spotify Key at start up
   useEffect(() => {
     getAccessToken();
-  }, []);
+    if (!profile) getCurrentProfile();
+    if (profile) {
+      setArtists(profile['artists']);
+      console.log(artists);
+    }
+  }, [profile]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -73,13 +84,15 @@ const SearchArtists = ({ accessToken, getAccessToken }) => {
             />
           </div>
           <div className='overflow-scroll flex flex-col'>
-            {searchResults.map((artist) => (
-              <AddArtist
-                setSearchResults={setSearchResults}
-                artist={artist}
-                key={artist.id}
-              />
-            ))}
+            {searchResults
+              .filter((x) => !artists.map((y) => y.spot_id).includes(x.id))
+              .map((artist) => (
+                <AddArtist
+                  setSearchResults={setSearchResults}
+                  artist={artist}
+                  key={artist.id}
+                />
+              ))}
           </div>
         </div>
       </form>
@@ -89,6 +102,9 @@ const SearchArtists = ({ accessToken, getAccessToken }) => {
 
 const mapStateToProps = (state) => ({
   accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken })(SearchArtists);
+export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
+  SearchArtists
+);
