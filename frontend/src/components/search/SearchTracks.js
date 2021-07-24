@@ -32,7 +32,7 @@ const SearchTracks = ({
 
   useEffect(() => {
     console.log(tracks);
-    setSeedTracks(tracks.map((y) => y.spot_id));
+    setSeedTracks(tracks.map((y) => y.spot_id).sort(() => 0.5 - Math.random()));
   }, [tracks]);
 
   // Get another Spotify Key after every one hour expiration time
