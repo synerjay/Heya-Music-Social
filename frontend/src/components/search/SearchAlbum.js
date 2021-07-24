@@ -13,6 +13,7 @@ const SearchAlbum = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [seedGenre, setSeedGenre] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -23,14 +24,16 @@ const SearchAlbum = ({
     if (!profile) getCurrentProfile();
     if (profile) {
       setAlbums(profile['albums']);
+      setSeedGenre(
+        profile['genre'].split(', ').sort(() => 0.5 - Math.random())
+      );
     }
     // use this for album seed for track recommendation web api
   }, [profile]);
 
   useEffect(() => {
-    console.log(albums);
-    console.log(albums.map((y) => y.spot_id));
-  }, [albums]);
+    console.log(seedGenre);
+  }, [seedGenre]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -76,8 +79,9 @@ const SearchAlbum = ({
     spotifyApi
       .getRecommendations({
         // min_energy: 0.4,
-        seed_artists: ['3fMbdgg4jU18AjLCKBhRSm', '4kOfxxnW1ukZdsNbCKY9br'], // seeds mean spotify unique id
-        // seed_genres: ['rock and roll', 'rock', 'metal', 'rap'],
+        // seed_artists: ['3fMbdgg4jU18AjLCKBhRSm', '4kOfxxnW1ukZdsNbCKY9br'], // seeds mean spotify unique id
+        seed_genres:
+          seedGenre > 5 ? [...seedGenre] : [...seedGenre.slice(0, 5)],
         // seed_tracks: ["46eu3SBuFCXWsPT39Yg3tJ",]
         min_popularity: 50,
       })
