@@ -62,8 +62,6 @@ const SearchAlbum = ({
 
             return {
               artist: track.artists[0].name,
-              // title: track.name,
-              // uri: track.uri,
               albumId: track.album.id,
               albumUrl: smallestAlbumImage.url,
               album: track.album.name,
