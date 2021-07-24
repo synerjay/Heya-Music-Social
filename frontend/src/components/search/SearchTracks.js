@@ -15,6 +15,7 @@ const SearchTracks = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [tracks, setTracks] = useState([]);
+  const [seedTracks, setSeedTracks] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -28,6 +29,11 @@ const SearchTracks = ({
       console.log(tracks);
     }
   }, [profile]);
+
+  useEffect(() => {
+    console.log(tracks);
+    setSeedTracks(tracks.map((y) => y.spot_id));
+  }, [tracks]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -72,6 +78,29 @@ const SearchTracks = ({
         console.error(err);
       }
     );
+
+    console.log(seedTracks);
+    spotifyApi
+      .getRecommendations({
+        // min_energy: 0.4,
+        // seed_artists:
+        //   seedArtists.length < 5
+        //     ? [...seedArtists]
+        //     : [...seedArtists.slice(0, 5)],
+        // seed_genres: ['rock and roll', 'rock', 'metal', 'rap'],
+        seed_tracks:
+          seedTracks.length < 5 ? [seedTracks] : [...seedTracks.slice(0, 5)], // limit to only 5 tracks
+        min_popularity: 50,
+      })
+      .then(
+        function (data) {
+          let recommendations = data.body;
+          console.log(recommendations);
+        },
+        function (err) {
+          console.log('Something went wrong!', err);
+        }
+      );
   }, [search, accessToken]);
 
   return (
