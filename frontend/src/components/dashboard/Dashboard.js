@@ -8,6 +8,7 @@ import Album from './Album';
 import Artist from './Artist';
 import Track from './Track';
 import ArtistRec from '../recommendations/ArtistRec';
+import GenreRec from '../recommendations/GenreRec';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -30,6 +31,7 @@ const Dashboard = ({
         <Fragment>
           <DashboardActions />
           <ArtistRec />
+          <GenreRec />
           <div className='flex flex-row gap-x-10'>
             <Album albums={profile.albums} />
             <Artist artists={profile.artists} />

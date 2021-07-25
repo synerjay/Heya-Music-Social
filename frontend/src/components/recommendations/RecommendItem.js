@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ArtistRecItem = ({ track }) => {
+const RecommendItem = ({ track }) => {
   return (
     <div className='flex flex-col h-56 w-56 '>
       <img src={track.img} className='h-36 w-36 ' />
@@ -12,4 +12,4 @@ const ArtistRecItem = ({ track }) => {
   );
 };
 
-export default ArtistRecItem;
+export default RecommendItem;
