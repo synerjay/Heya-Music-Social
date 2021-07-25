@@ -7,6 +7,7 @@ import DashboardActions from './ DashboardActions';
 import Album from './Album';
 import Artist from './Artist';
 import Track from './Track';
+import ArtistRec from '../recommendations/ArtistRec';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -28,12 +29,12 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <ArtistRec />
           <div className='flex flex-row gap-x-10'>
             <Album albums={profile.albums} />
             <Artist artists={profile.artists} />
             <Track tracks={profile.tracks} />
           </div>
-
           <div className='my-2'>
             <button className='btn btn-danger' onClick={() => deleteAccount()}>
               <i className='fas fa-user-minus' /> Delete My Account
