@@ -35,8 +35,8 @@ const PostItem = ({
       </div>
       <div>
         <h4>{added_by} is currently listening to</h4>
-        <div className='flex items-center'>
-          <img src={track_img} className='h-16 w-16' />
+        <div className='flex flex-col items-center'>
+          <img src={track_img} className='h-44 w-56' />
           <div className='ml-3'>
             <div>{track_title}</div>
             <div className='font-bold'>{track_artist}</div>
