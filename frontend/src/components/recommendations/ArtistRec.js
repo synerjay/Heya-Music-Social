@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
+import ArtistRecItem from './ArtistRecItem';
 import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 
@@ -11,6 +12,7 @@ const ArtistRec = ({
 }) => {
   const [artists, setArtists] = useState([]);
   const [seedArtists, setSeedArtists] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -40,6 +42,10 @@ const ArtistRec = ({
   }, [accessToken]);
 
   useEffect(() => {
+    console.log(recommendations);
+  }, [recommendations]);
+
+  useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
     console.log(seedArtists);
     spotifyApi
@@ -55,6 +61,25 @@ const ArtistRec = ({
         function (data) {
           let recommendations = data.body;
           console.log(recommendations.tracks);
+          setRecommendations(
+            recommendations.tracks.slice(0, 10).map((track) => {
+              const smallestAlbumImage = track.album.images.reduce(
+                (smallest, image) => {
+                  if (image.height > smallest.height) return image;
+                  return smallest;
+                },
+                track.album.images[0]
+              );
+
+              return {
+                artist: track.artists[0].name,
+                title: track.name,
+                spot_id: track.id,
+                img: smallestAlbumImage.url,
+                album: track.album.name,
+              };
+            })
+          );
         },
         function (err) {
           console.log('Something went wrong!', err);
@@ -64,7 +89,12 @@ const ArtistRec = ({
 
   return (
     <div>
-      <h2> This is the future page of Track Recommendation by Artists</h2>
+      <h2> Track Recommendation by your favorite Artists </h2>
+      <div className='overflow-scroll flex flex-row gap-x-2'>
+        {recommendations.map((track) => (
+          <ArtistRecItem track={track} key={track.id} />
+        ))}
+      </div>
     </div>
   );
 };

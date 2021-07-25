@@ -54,7 +54,7 @@ const SearchAlbum = ({
           data.body.tracks.items.map((track) => {
             const smallestAlbumImage = track.album.images.reduce(
               (smallest, image) => {
-                if (image.height < smallest.height) return image;
+                if (image.height > smallest.height) return image;
                 return smallest;
               },
               track.album.images[0]
@@ -105,7 +105,7 @@ const SearchAlbum = ({
           />
           <div className='overflow-scroll flex flex-col'>
             {searchResults
-              .filter((x) => !albums.map((y) => y.spot_id).includes(x.albumId))
+              .filter((x) => !albums.map((y) => y.spot_id).includes(x.albumId)) // filter out existing albums in the profile DB
               .map((track) => (
                 <AddAlbum
                   track={track}

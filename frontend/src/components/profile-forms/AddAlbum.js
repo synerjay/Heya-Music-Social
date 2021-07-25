@@ -29,7 +29,7 @@ const AddAlbum = ({ track, addAlbum, setSearchResults }) => {
       }}
     >
       <div className='flex items-center'>
-        <img src={track.albumUrl} className='h-16 w-16' />
+        <img src={track.albumUrl} className='h-32 w-32' />
         <div className='ml-3'>
           <div>{track.album}</div>
           <div className='font-bold'>{track.artist}</div>
