@@ -62,7 +62,7 @@ const ArtistRec = ({
           let recommendations = data.body;
           console.log(recommendations.tracks);
           setRecommendations(
-            recommendations.tracks.slice(0, 10).map((track) => {
+            recommendations.tracks.slice(0, 6).map((track) => {
               const smallestAlbumImage = track.album.images.reduce(
                 (smallest, image) => {
                   if (image.height > smallest.height) return image;
