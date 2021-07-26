@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addAlbum } from '../../actions/profile';
 
-const AddAlbum = ({ track, addAlbum, setSearchResults }) => {
+const AddAlbum = ({ track, addAlbum, setSearchResults, setSearch }) => {
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -26,9 +26,10 @@ const AddAlbum = ({ track, addAlbum, setSearchResults }) => {
         e.preventDefault();
         addAlbum(formData);
         setSearchResults([]);
+        setSearch('');
       }}
     >
-      <div className='flex items-center'>
+      <div className='flex items-center w-72'>
         <img src={track.albumUrl} className='h-32 w-32' />
         <div className='ml-3'>
           <div>{track.album}</div>

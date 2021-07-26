@@ -37,6 +37,10 @@ const SearchAlbum = ({
   }, [accessToken]);
 
   useEffect(() => {
+    console.log(searchResults);
+  }, [searchResults]);
+
+  useEffect(() => {
     if (!search) return setSearchResults([]);
     spotifyApi.setAccessToken(accessToken); // get token from redux state
     spotifyApi.searchTracks(search, { limit: 5 }).then(
@@ -73,7 +77,7 @@ const SearchAlbum = ({
         <div className='flex flex-col '>
           <input
             type='text'
-            className='h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none'
+            className='bg-white h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
             placeholder='Search any album'
           />
           <div className='overflow-scroll flex flex-col'>
@@ -84,6 +88,7 @@ const SearchAlbum = ({
                   track={track}
                   key={track.albumId}
                   setSearchResults={setSearchResults}
+                  setSearch={setSearch}
                 />
               ))}
           </div>
