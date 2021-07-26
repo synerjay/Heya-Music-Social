@@ -99,7 +99,11 @@ const SearchAlbum = ({
         </div>
       </form>
       {/* Selected album components put here */}
-      <div className='flex flex-col'>
+      <div className='flex w-full flex-col ml-7'>
+        <p className='mb-5 text-center'>
+          {' '}
+          Click on the plus button to add to your list:{' '}
+        </p>
         {selectedAlbum.map((track) => (
           <SelectedAlbums key={track.id} track={track} added={true} />
         ))}
