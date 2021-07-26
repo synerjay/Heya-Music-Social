@@ -86,13 +86,6 @@ const Dashboard = ({
                       >
                         Close
                       </button>
-                      {/* <button
-                        className='bg-green-700 text-white h-1.5 active:bg-green-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-                        type='button'
-                        onClick={() => setShowModal(false)}
-                      >
-                        Save Changes
-                      </button> */}
                     </div>
                   </div>
                 </div>

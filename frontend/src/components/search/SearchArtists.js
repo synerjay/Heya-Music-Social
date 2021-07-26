@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import AddArtist from '../profile-forms/AddArtist';
 import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
+import SelectedArtists from './SelectedArtists';
 
 const SearchArtists = ({
   accessToken,
@@ -13,6 +14,7 @@ const SearchArtists = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [artists, setArtists] = useState([]);
+  const [selectedArtist, setSelectedArtist] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -54,9 +56,8 @@ const SearchArtists = ({
             // console.log(biggestImage);
             return {
               name: artist.name,
-              // title: artist.name,
               id: artist.id,
-              imageUrl: biggestImage === undefined ? null : biggestImage.url,
+              img: biggestImage === undefined ? null : biggestImage.url,
             };
           })
         );
@@ -68,26 +69,22 @@ const SearchArtists = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex justify-center items-center'>
-      <form
-        className='form'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      >
-        <div className='flex flex-col '>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='w-full focus:shadow focus:outline-none'
-              placeholder='Add your favorite artist'
-            />
-          </div>
+    <div className='flex justify-around'>
+      <form value={search} onChange={(e) => setSearch(e.target.value)}>
+        <div className='flex flex-col gap-y-2'>
+          <input
+            type='text'
+            className='bg-white h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
+            placeholder='Search any artist'
+          />
           <div className='overflow-scroll flex flex-col'>
             {searchResults
               .filter((x) => !artists.map((y) => y.spot_id).includes(x.id))
               .map((artist) => (
                 <AddArtist
                   setSearchResults={setSearchResults}
+                  setSelectedArtist={setSelectedArtist}
+                  selectedArtist={selectedArtist}
                   artist={artist}
                   key={artist.id}
                 />
@@ -95,6 +92,15 @@ const SearchArtists = ({
           </div>
         </div>
       </form>
+      <div className='flex w-full flex-col ml-7'>
+        <p className='mb-5 text-center'>
+          {' '}
+          Click on the plus button to add to your list:{' '}
+        </p>
+        {selectedArtist.map((artist) => (
+          <SelectedArtists key={artist.id} artist={artist} added={true} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArtist } from '../../actions/profile';
+import SelectedArtists from '../search/SelectedArtists';
 
-const AddArtist = ({ artist, addArtist, setSearchResults }) => {
+const AddArtist = ({
+  artist,
+  addArtist,
+  setSearchResults,
+  setSelectedArtist,
+  selectedArtist,
+}) => {
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -14,7 +21,7 @@ const AddArtist = ({ artist, addArtist, setSearchResults }) => {
     setFormData({
       id: artist.id,
       name: artist.name,
-      img: artist.imageUrl,
+      img: artist.img,
     });
   }, [artist]);
 
@@ -23,15 +30,11 @@ const AddArtist = ({ artist, addArtist, setSearchResults }) => {
       onClick={(e) => {
         e.preventDefault();
         addArtist(formData);
+        setSelectedArtist([...selectedArtist, formData]);
         setSearchResults([]);
       }}
     >
-      <div className='flex items-center'>
-        <img src={artist.imageUrl} className='h-16 w-16' />
-        <div className='ml-3'>
-          <div className='font-bold'>{artist.name}</div>
-        </div>
-      </div>
+      <SelectedArtists artist={artist} />
     </button>
   );
 };
