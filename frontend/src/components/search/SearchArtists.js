@@ -50,7 +50,7 @@ const SearchArtists = ({
         setSearchResults(
           data.body.artists.items.map((artist) => {
             const biggestImage = artist.images.reduce((biggest, image) => {
-              if (image.height < biggest.height) return image;
+              if (image.height > biggest.height) return image;
               return biggest;
             }, artist.images[0]);
             // console.log(biggestImage);
