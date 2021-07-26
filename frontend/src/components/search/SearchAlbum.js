@@ -13,6 +13,7 @@ const SearchAlbum = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [selectedAlbum, setSelectedAlbum] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -37,8 +38,8 @@ const SearchAlbum = ({
   }, [accessToken]);
 
   useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
+    console.log(selectedAlbum);
+  }, [selectedAlbum]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -72,7 +73,7 @@ const SearchAlbum = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex'>
       <form value={search} onChange={(e) => setSearch(e.target.value)}>
         <div className='flex flex-col '>
           <input
@@ -89,11 +90,14 @@ const SearchAlbum = ({
                   key={track.albumId}
                   setSearchResults={setSearchResults}
                   setSearch={setSearch}
+                  selectedAlbum={selectedAlbum}
+                  setSelectedAlbum={setSelectedAlbum}
                 />
               ))}
           </div>
         </div>
       </form>
+      {/* Selected album components put here */}
     </div>
   );
 };

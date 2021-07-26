@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addAlbum } from '../../actions/profile';
 
-const AddAlbum = ({ track, addAlbum, setSearchResults, setSearch }) => {
+const AddAlbum = ({
+  track,
+  addAlbum,
+  setSearchResults,
+  setSearch,
+  selectedAlbum,
+  setSelectedAlbum,
+}) => {
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -25,6 +32,7 @@ const AddAlbum = ({ track, addAlbum, setSearchResults, setSearch }) => {
       onClick={(e) => {
         e.preventDefault();
         addAlbum(formData);
+        setSelectedAlbum([...selectedAlbum, formData]);
         setSearchResults([]);
         setSearch('');
       }}
