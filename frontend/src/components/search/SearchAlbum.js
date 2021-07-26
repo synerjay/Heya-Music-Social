@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import AddAlbum from '../profile-forms/AddAlbum';
 import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
+import SelectedAlbums from './SelectedAlbums';
 
 const SearchAlbum = ({
   accessToken,
@@ -38,8 +39,8 @@ const SearchAlbum = ({
   }, [accessToken]);
 
   useEffect(() => {
-    console.log(selectedAlbum);
-  }, [selectedAlbum]);
+    console.log(albums);
+  }, [albums]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -59,9 +60,9 @@ const SearchAlbum = ({
 
             return {
               artist: track.artists[0].name,
-              albumId: track.album.id,
-              albumUrl: biggestAlbumImage.url,
-              album: track.album.name,
+              id: track.album.id,
+              img: biggestAlbumImage.url,
+              title: track.album.name,
             };
           })
         );
@@ -73,9 +74,9 @@ const SearchAlbum = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex'>
+    <div className='flex justify-around'>
       <form value={search} onChange={(e) => setSearch(e.target.value)}>
-        <div className='flex flex-col '>
+        <div className='flex flex-col gap-y-2'>
           <input
             type='text'
             className='bg-white h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
@@ -83,11 +84,11 @@ const SearchAlbum = ({
           />
           <div className='overflow-scroll flex flex-col'>
             {searchResults
-              .filter((x) => !albums.map((y) => y.spot_id).includes(x.albumId)) // filter out existing albums in the profile DB
+              .filter((x) => !albums.map((y) => y.spot_id).includes(x.id)) // filter out existing albums in the profile DB
               .map((track) => (
                 <AddAlbum
                   track={track}
-                  key={track.albumId}
+                  key={track.id}
                   setSearchResults={setSearchResults}
                   setSearch={setSearch}
                   selectedAlbum={selectedAlbum}
@@ -98,6 +99,11 @@ const SearchAlbum = ({
         </div>
       </form>
       {/* Selected album components put here */}
+      <div className='flex flex-col'>
+        {selectedAlbum.map((track) => (
+          <SelectedAlbums key={track.id} track={track} added={true} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addAlbum } from '../../actions/profile';
+import SelectedAlbums from '../search/SelectedAlbums';
 
 const AddAlbum = ({
   track,
@@ -20,10 +21,10 @@ const AddAlbum = ({
 
   useEffect(() => {
     setFormData({
-      id: track.albumId,
-      title: track.album,
+      id: track.id,
+      title: track.title,
       artist: track.artist,
-      img: track.albumUrl,
+      img: track.img,
     });
   }, [track]);
 
@@ -37,13 +38,7 @@ const AddAlbum = ({
         setSearch('');
       }}
     >
-      <div className='flex items-center w-72'>
-        <img src={track.albumUrl} className='h-32 w-32' />
-        <div className='ml-3'>
-          <div>{track.album}</div>
-          <div className='font-bold'>{track.artist}</div>
-        </div>
-      </div>
+      <SelectedAlbums track={track} />
     </button>
   );
 };
