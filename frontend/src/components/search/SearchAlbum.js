@@ -44,10 +44,10 @@ const SearchAlbum = ({
         console.log(data.body.tracks.items);
         setSearchResults(
           data.body.tracks.items.map((track) => {
-            const smallestAlbumImage = track.album.images.reduce(
-              (smallest, image) => {
-                if (image.height > smallest.height) return image;
-                return smallest;
+            const biggestAlbumImage = track.album.images.reduce(
+              (biggest, image) => {
+                if (image.height > biggest.height) return image;
+                return biggest;
               },
               track.album.images[0]
             );
@@ -55,7 +55,7 @@ const SearchAlbum = ({
             return {
               artist: track.artists[0].name,
               albumId: track.album.id,
-              albumUrl: smallestAlbumImage.url,
+              albumUrl: biggestAlbumImage.url,
               album: track.album.name,
             };
           })

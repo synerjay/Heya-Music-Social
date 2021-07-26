@@ -15,7 +15,6 @@ const SearchTracks = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [tracks, setTracks] = useState([]);
-  const [seedTracks, setSeedTracks] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -30,11 +29,6 @@ const SearchTracks = ({
     }
   }, [profile]);
 
-  useEffect(() => {
-    console.log(tracks);
-    setSeedTracks(tracks.map((y) => y.spot_id).sort(() => 0.5 - Math.random()));
-  }, [tracks]);
-
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,21 +39,16 @@ const SearchTracks = ({
   }, [accessToken]);
 
   useEffect(() => {
-    console.log(search);
-  }, [search]);
-
-  useEffect(() => {
     if (!search) return setSearchResults([]);
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.searchTracks(search, { limit: 5 }).then(
       function (data) {
-        console.log(data.body.tracks.items);
         setSearchResults(
           data.body.tracks.items.map((track) => {
-            const smallestAlbumImage = track.album.images.reduce(
-              (smallest, image) => {
-                if (image.height > smallest.height) return image;
-                return smallest;
+            const biggestAlbumImage = track.album.images.reduce(
+              (biggest, image) => {
+                if (image.height > biggest.height) return image;
+                return biggest;
               },
               track.album.images[0]
             );
@@ -68,7 +57,7 @@ const SearchTracks = ({
               artist: track.artists[0].name,
               title: track.name,
               id: track.id,
-              albumUrl: smallestAlbumImage.url,
+              albumUrl: biggestAlbumImage.url,
               album: track.album.name,
             };
           })
@@ -78,29 +67,6 @@ const SearchTracks = ({
         console.error(err);
       }
     );
-
-    console.log(seedTracks);
-    spotifyApi
-      .getRecommendations({
-        // min_energy: 0.4,
-        // seed_artists:
-        //   seedArtists.length < 5
-        //     ? [...seedArtists]
-        //     : [...seedArtists.slice(0, 5)],
-        // seed_genres: ['rock and roll', 'rock', 'metal', 'rap'],
-        seed_tracks:
-          seedTracks.length < 5 ? [seedTracks] : [...seedTracks.slice(0, 5)], // limit to only 5 tracks
-        min_popularity: 50,
-      })
-      .then(
-        function (data) {
-          let recommendations = data.body;
-          console.log(recommendations);
-        },
-        function (err) {
-          console.log('Something went wrong!', err);
-        }
-      );
   }, [search, accessToken]);
 
   return (
