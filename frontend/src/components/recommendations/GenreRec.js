@@ -17,34 +17,15 @@ const GenreRec = ({
   const spotifyApi = new SpotifyWebApi();
 
   useEffect(() => {
-    // getAccessToken();
-    if (!profile) getCurrentProfile();
-    if (profile) {
-      setSeedGenre(
-        profile['genre'].split(', ').sort(() => 0.5 - Math.random())
-      );
-    }
-    // use this for album seed for track recommendation web api
-  }, [profile]);
-
-  // Get another Spotify Key after every one hour expiration time
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getAccessToken();
-  //   }, 1000 * 60 * 60);
-
-  //   return () => clearInterval(interval); // unmount & cleanup
-  // }, [accessToken]);
+    setSeedGenre(profile['genre'].split(', ').sort(() => 0.5 - Math.random()));
+  }, []);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken); // get token from redux state
     spotifyApi
       .getRecommendations({
-        // min_energy: 0.4,
-        // seed_artists: ['3fMbdgg4jU18AjLCKBhRSm', '4kOfxxnW1ukZdsNbCKY9br'], // seeds mean spotify unique id
         seed_genres:
           seedGenre > 5 ? [...seedGenre] : [...seedGenre.slice(0, 5)],
-        // seed_tracks: ["46eu3SBuFCXWsPT39Yg3tJ",]
         min_popularity: 50,
       })
       .then(
@@ -75,7 +56,7 @@ const GenreRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [seedGenre, accessToken]);
 
   return (
     <div>

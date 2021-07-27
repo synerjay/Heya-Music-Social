@@ -17,6 +17,7 @@ import TrackRec from '../recommendations/TrackRec';
 import SearchAlbum from '../search/SearchAlbum';
 
 const Dashboard = ({
+  accessToken,
   getCurrentProfile,
   getAccessToken,
   deleteAccount,
@@ -26,7 +27,16 @@ const Dashboard = ({
   useEffect(() => {
     getAccessToken();
     getCurrentProfile();
-  }, [token, getCurrentProfile]);
+  }, []);
+
+  // Get another Spotify Key after every one hour expiration time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getAccessToken();
+    }, 1000 * 60 * 60); // one hour
+
+    return () => clearInterval(interval); // unmount & cleanup
+  }, [accessToken]);
 
   const [showAlbumModal, setShowAlbumModal] = useState(false);
 
@@ -139,6 +149,7 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
+  accessToken: state.profile.accessToken,
 });
 
 export default connect(mapStateToProps, {

@@ -11,7 +11,6 @@ const ArtistRec = ({
   getCurrentProfile,
 }) => {
   const [artists, setArtists] = useState([]);
-  const [seedArtists, setSeedArtists] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
 
   // Make new instance of Spotify API
@@ -19,42 +18,19 @@ const ArtistRec = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
-    // getAccessToken();
-    if (!profile) getCurrentProfile();
-    if (profile) {
-      setArtists(profile['artists']);
-    }
-  }, [profile]);
-
-  useEffect(() => {
-    console.log(artists);
-    setSeedArtists(
-      artists.map((y) => y.spot_id).sort(() => 0.5 - Math.random())
+    setArtists(
+      profile['artists'].map((y) => y.spot_id).sort(() => 0.5 - Math.random())
     );
-  }, [artists]);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getAccessToken();
-  //   }, 1000 * 60 * 60);
-
-  //   return () => clearInterval(interval); // unmount & cleanup
-  // }, [accessToken]);
-
-  useEffect(() => {
-    console.log(recommendations);
-  }, [recommendations]);
+  }, []);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
-    console.log(seedArtists);
+    console.log(artists);
     spotifyApi
       .getRecommendations({
         // min_energy: 0.4,
         seed_artists:
-          seedArtists.length < 5
-            ? [...seedArtists]
-            : [...seedArtists.slice(0, 5)],
+          artists.length < 5 ? [...artists] : [...artists.slice(0, 5)],
         min_popularity: 50,
       })
       .then(
@@ -85,7 +61,7 @@ const ArtistRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [artists, accessToken]);
 
   return (
     <div>

@@ -4,47 +4,24 @@ import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 import RecommendItem from './RecommendItem';
 
-const TrackRec = ({
-  accessToken,
-  profile: { profile },
-  // getAccessToken,
-  getCurrentProfile,
-}) => {
+const TrackRec = ({ accessToken, profile: { profile } }) => {
   const [tracks, setTracks] = useState([]);
-  const [seedTracks, setSeedTracks] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const spotifyApi = new SpotifyWebApi();
 
   //Get Spotify Key at start up
   useEffect(() => {
-    // getAccessToken();
-    if (!profile) getCurrentProfile();
-    if (profile) {
-      setTracks(profile['tracks']);
-    }
-  }, [profile]);
-
-  useEffect(() => {
-    console.log(tracks);
-    setSeedTracks(tracks.map((y) => y.spot_id).sort(() => 0.5 - Math.random()));
-  }, [tracks]);
-
-  // // Get another Spotify Key after every one hour expiration time
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // getAccessToken();
-  //   }, 1000 * 60 * 60); // one hour
-
-  //   return () => clearInterval(interval); // unmount & cleanup
-  // }, [accessToken]);
+    setTracks(
+      profile['tracks'].map((y) => y.spot_id).sort(() => 0.5 - Math.random())
+    );
+  }, []);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
-    console.log(seedTracks);
+    console.log(tracks);
     spotifyApi
       .getRecommendations({
-        seed_tracks:
-          seedTracks.length < 5 ? [seedTracks] : [...seedTracks.slice(0, 5)], // limit to only 5 tracks
+        seed_tracks: tracks.length < 5 ? [tracks] : [...tracks.slice(0, 5)], // limit to only 5 tracks
         min_popularity: 50,
       })
       .then(
@@ -74,7 +51,7 @@ const TrackRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [tracks, accessToken]);
 
   return (
     <div>
@@ -93,7 +70,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, {
-  // getAccessToken,
-  getCurrentProfile,
-})(TrackRec);
+export default connect(mapStateToProps, { getCurrentProfile })(TrackRec);
