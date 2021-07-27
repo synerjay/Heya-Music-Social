@@ -16,6 +16,7 @@ import GenreRec from '../recommendations/GenreRec';
 import TrackRec from '../recommendations/TrackRec';
 import SearchAlbum from '../search/SearchAlbum';
 import CustomModal from '../layout/CustomModal';
+import SearchArtists from '../search/SearchArtists';
 
 const Dashboard = ({
   accessToken,
@@ -40,6 +41,7 @@ const Dashboard = ({
   }, [accessToken]);
 
   const [showAlbumModal, setShowAlbumModal] = useState(false);
+  const [showArtistModal, setShowArtistModal] = useState(false);
 
   return (
     <Fragment>
@@ -50,15 +52,6 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
-          {/* Testing Modal purposes */}
-          {/* <button
-            className='bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-            type='button'
-            onClick={() => setShowModal(true)}
-          >
-            Open regular modal
-          </button> */}
-
           {showAlbumModal ? (
             <CustomModal
               title='Add your favorite albums'
@@ -67,9 +60,20 @@ const Dashboard = ({
             />
           ) : null}
 
+          {showArtistModal ? (
+            <CustomModal
+              title='Add your favorite artists'
+              component={SearchArtists}
+              setShowModal={setShowArtistModal}
+            />
+          ) : null}
+
           {/*  Testing Modal Purposes */}
 
-          <DashboardActions setShowAlbumModal={setShowAlbumModal} />
+          <DashboardActions
+            setShowAlbumModal={setShowAlbumModal}
+            setShowArtistModal={setShowArtistModal}
+          />
           <ArtistRec />
           <GenreRec />
           <TrackRec />
