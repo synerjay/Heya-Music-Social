@@ -8,7 +8,7 @@ import SelectedAlbums from './SelectedAlbums';
 const SearchAlbum = ({
   accessToken,
   profile: { profile },
-  getAccessToken,
+  // getAccessToken,
   getCurrentProfile,
 }) => {
   const [search, setSearch] = useState('');
@@ -21,7 +21,7 @@ const SearchAlbum = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
-    getAccessToken();
+    // getAccessToken();
     if (!profile) getCurrentProfile();
     if (profile) {
       setAlbums(profile['albums']);
@@ -30,17 +30,17 @@ const SearchAlbum = ({
   }, [profile]);
 
   // Get another Spotify Key after every one hour expiration time
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getAccessToken();
-    }, 1000 * 60 * 60);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getAccessToken();
+  //   }, 1000 * 60 * 60);
 
-    return () => clearInterval(interval); // unmount & cleanup
-  }, [accessToken]);
+  //   return () => clearInterval(interval); // unmount & cleanup
+  // }, [accessToken]);
 
-  useEffect(() => {
-    console.log(albums);
-  }, [albums]);
+  // useEffect(() => {
+  //   console.log(albums);
+  // }, [albums]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -117,9 +117,10 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
-  SearchAlbum
-);
+export default connect(mapStateToProps, {
+  // getAccessToken,
+  getCurrentProfile,
+})(SearchAlbum);
 
 // Sample API response in an array
 

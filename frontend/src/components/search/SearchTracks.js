@@ -8,7 +8,7 @@ import TracksListening from '../posts/TracksListening';
 const SearchTracks = ({
   accessToken,
   profile: { profile },
-  getAccessToken,
+  // getAccessToken,
   getCurrentProfile,
   setPlayingTrack,
 }) => {
@@ -21,7 +21,7 @@ const SearchTracks = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
-    getAccessToken();
+    // getAccessToken();
     if (!profile) getCurrentProfile();
     if (profile) {
       setTracks(profile['tracks']);
@@ -30,13 +30,13 @@ const SearchTracks = ({
   }, [profile]);
 
   // Get another Spotify Key after every one hour expiration time
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getAccessToken();
-    }, 1000 * 60 * 60); // one hour
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getAccessToken();
+  //   }, 1000 * 60 * 60); // one hour
 
-    return () => clearInterval(interval); // unmount & cleanup
-  }, [accessToken]);
+  //   return () => clearInterval(interval); // unmount & cleanup
+  // }, [accessToken]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -115,6 +115,7 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
-  SearchTracks
-);
+export default connect(mapStateToProps, {
+  // getAccessToken,
+  getCurrentProfile,
+})(SearchTracks);

@@ -7,7 +7,7 @@ import RecommendItem from './RecommendItem';
 const TrackRec = ({
   accessToken,
   profile: { profile },
-  getAccessToken,
+  // getAccessToken,
   getCurrentProfile,
 }) => {
   const [tracks, setTracks] = useState([]);
@@ -17,7 +17,7 @@ const TrackRec = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
-    getAccessToken();
+    // getAccessToken();
     if (!profile) getCurrentProfile();
     if (profile) {
       setTracks(profile['tracks']);
@@ -29,14 +29,14 @@ const TrackRec = ({
     setSeedTracks(tracks.map((y) => y.spot_id).sort(() => 0.5 - Math.random()));
   }, [tracks]);
 
-  // Get another Spotify Key after every one hour expiration time
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getAccessToken();
-    }, 1000 * 60 * 60); // one hour
+  // // Get another Spotify Key after every one hour expiration time
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     // getAccessToken();
+  //   }, 1000 * 60 * 60); // one hour
 
-    return () => clearInterval(interval); // unmount & cleanup
-  }, [accessToken]);
+  //   return () => clearInterval(interval); // unmount & cleanup
+  // }, [accessToken]);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
@@ -93,6 +93,7 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getAccessToken, getCurrentProfile })(
-  TrackRec
-);
+export default connect(mapStateToProps, {
+  // getAccessToken,
+  getCurrentProfile,
+})(TrackRec);

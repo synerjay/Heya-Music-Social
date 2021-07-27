@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import {
+  getAccessToken,
+  getCurrentProfile,
+  deleteAccount,
+} from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import DashboardActions from './ DashboardActions';
 import Album from './Album';
@@ -14,11 +18,13 @@ import SearchAlbum from '../search/SearchAlbum';
 
 const Dashboard = ({
   getCurrentProfile,
+  getAccessToken,
   deleteAccount,
   auth: { user, token },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
+    getAccessToken();
     getCurrentProfile();
   }, [token, getCurrentProfile]);
 
@@ -135,6 +141,8 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getAccessToken,
+  getCurrentProfile,
+  deleteAccount,
+})(Dashboard);
