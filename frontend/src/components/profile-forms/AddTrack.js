@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { addTrack } from '../../actions/profile';
 import SelectedTracks from '../search/SelectedTracks';
 
-const AddTrack = ({ track, addTrack, setSearchResults }) => {
+const AddTrack = ({
+  track,
+  addTrack,
+  setSearchResults,
+  setSelectedTrack,
+  selectedTrack,
+}) => {
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -17,7 +23,7 @@ const AddTrack = ({ track, addTrack, setSearchResults }) => {
       id: track.id,
       title: track.title,
       artist: track.artist,
-      img: track.albumUrl,
+      img: track.img,
     });
   }, [track]);
 
@@ -27,6 +33,7 @@ const AddTrack = ({ track, addTrack, setSearchResults }) => {
         e.preventDefault();
         addTrack(formData);
         setSearchResults([]);
+        setSelectedTrack([...selectedTrack, formData]);
       }}
     >
       <SelectedTracks track={track} />

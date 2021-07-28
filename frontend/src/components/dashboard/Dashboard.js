@@ -17,6 +17,7 @@ import TrackRec from '../recommendations/TrackRec';
 import SearchAlbum from '../search/SearchAlbum';
 import CustomModal from '../layout/CustomModal';
 import SearchArtists from '../search/SearchArtists';
+import SearchTracks from '../search/SearchTracks';
 
 const Dashboard = ({
   accessToken,
@@ -42,6 +43,7 @@ const Dashboard = ({
 
   const [showAlbumModal, setShowAlbumModal] = useState(false);
   const [showArtistModal, setShowArtistModal] = useState(false);
+  const [showTrackModal, setShowTrackModal] = useState(false);
 
   return (
     <Fragment>
@@ -68,11 +70,20 @@ const Dashboard = ({
             />
           ) : null}
 
+          {showTrackModal ? (
+            <CustomModal
+              title='Add your favorite artists'
+              component={SearchTracks}
+              setShowModal={setShowTrackModal}
+            />
+          ) : null}
+
           {/*  Testing Modal Purposes */}
 
           <DashboardActions
             setShowAlbumModal={setShowAlbumModal}
             setShowArtistModal={setShowArtistModal}
+            setShowTrackModal={setShowTrackModal}
           />
           <ArtistRec />
           <GenreRec />

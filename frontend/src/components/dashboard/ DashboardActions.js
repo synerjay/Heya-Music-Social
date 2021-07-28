@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const DashboardActions = ({ setShowAlbumModal, setShowArtistModal }) => {
+const DashboardActions = ({
+  setShowAlbumModal,
+  setShowArtistModal,
+  setShowTrackModal,
+}) => {
   return (
     <div className='dash-buttons'>
       <Link to='/edit-profile' className='btn btn-light'>
@@ -22,14 +26,13 @@ const DashboardActions = ({ setShowAlbumModal, setShowArtistModal }) => {
       >
         Add Favorite Album
       </button>
-      {/* <button
+      <button
         type='button'
         className='btn btn-light'
-        onClick={() => setShowAlbumModal(true)}
+        onClick={() => setShowTrackModal(true)}
       >
-        <i className='fas fa-graduation-cap text-primary'></i> Add Favorite
-        Tracks
-        </button> */}
+        Add Favorite Tracks
+      </button>
     </div>
   );
 };

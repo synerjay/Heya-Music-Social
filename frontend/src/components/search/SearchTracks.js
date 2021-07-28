@@ -59,7 +59,7 @@ const SearchTracks = ({
               artist: track.artists[0].name,
               title: track.name,
               id: track.id,
-              albumUrl: biggestAlbumImage.url,
+              img: biggestAlbumImage.url,
               album: track.album.name,
             };
           })
@@ -72,12 +72,8 @@ const SearchTracks = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex justify-center items-center'>
-      <form
-        className='form'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      >
+    <div className='flex justify-around'>
+      <form value={search} onChange={(e) => setSearch(e.target.value)}>
         <div className='flex flex-col gap-y-2'>
           <input
             type='text'
@@ -101,6 +97,8 @@ const SearchTracks = ({
                       track={track}
                       key={track.id}
                       setSearchResults={setSearchResults}
+                      setSelectedTrack={setSelectedTrack}
+                      selectedTrack={selectedTrack}
                     />
                   ))}
           </div>
