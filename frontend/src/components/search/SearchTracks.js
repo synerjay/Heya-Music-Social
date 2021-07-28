@@ -4,6 +4,7 @@ import AddTrack from '../profile-forms/AddTrack';
 import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 import TracksListening from '../posts/TracksListening';
+import SelectedTracks from './SelectedTracks';
 
 const SearchTracks = ({
   accessToken,
@@ -15,6 +16,7 @@ const SearchTracks = ({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [tracks, setTracks] = useState([]);
+  const [selectedTrack, setSelectedTrack] = useState([]);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -76,14 +78,12 @@ const SearchTracks = ({
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       >
-        <div className='flex flex-col '>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='w-full focus:shadow focus:outline-none'
-              placeholder='Search Any Tracks'
-            />
-          </div>
+        <div className='flex flex-col gap-y-2'>
+          <input
+            type='text'
+            className='bg-white h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
+            placeholder='Search Any Tracks'
+          />
           <div className='overflow-scroll flex flex-col'>
             {setPlayingTrack
               ? searchResults.map((track) => (
@@ -106,6 +106,15 @@ const SearchTracks = ({
           </div>
         </div>
       </form>
+      <div className='flex w-full flex-col ml-7'>
+        <p className='mb-5 text-center'>
+          {' '}
+          Click on the plus button to add to your list:{' '}
+        </p>
+        {selectedTrack.map((track) => (
+          <SelectedTracks key={track.id} track={track} added={true} />
+        ))}
+      </div>
     </div>
   );
 };

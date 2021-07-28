@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTrack } from '../../actions/profile';
+import SelectedTracks from '../search/SelectedTracks';
 
 const AddTrack = ({ track, addTrack, setSearchResults }) => {
   const [formData, setFormData] = useState({
@@ -28,13 +29,7 @@ const AddTrack = ({ track, addTrack, setSearchResults }) => {
         setSearchResults([]);
       }}
     >
-      <div className='flex items-center'>
-        <img src={track.albumUrl} className='h-16 w-16' />
-        <div className='ml-3'>
-          <div>{track.title}</div>
-          <div className='font-bold'>{track.artist}</div>
-        </div>
-      </div>
+      <SelectedTracks track={track} />
     </button>
   );
 };
