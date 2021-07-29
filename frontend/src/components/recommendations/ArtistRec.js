@@ -70,7 +70,9 @@ const ArtistRec = ({
       <h2> Track Recommendation by your favorite Artists </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
-        autoPlay={true}
+        autoPlay
+        autoFocus={true}
+        interval={2000}
         showIndicators={false}
         centerMode={true}
         showThumbs={false}
