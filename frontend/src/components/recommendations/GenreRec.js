@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { connect } from 'react-redux';
-import { getAccessToken, getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile } from '../../actions/profile';
 import RecommendItem from './RecommendItem';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 
 const GenreRec = ({
   accessToken,
@@ -33,7 +35,7 @@ const GenreRec = ({
           let recommendations = data.body;
           console.log(recommendations.tracks);
           setRecommendations(
-            recommendations.tracks.slice(0, 6).map((track) => {
+            recommendations.tracks.slice(0, 20).map((track) => {
               const smallestAlbumImage = track.album.images.reduce(
                 (smallest, image) => {
                   if (image.height > smallest.height) return image;
@@ -61,11 +63,24 @@ const GenreRec = ({
   return (
     <div>
       <h2> Track Recommendation by the musical genre you like </h2>
-      <div className='overflow-scroll flex flex-row gap-x-2'>
+      {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
+      <Carousel
+        autoPlay
+        autoFocus={true}
+        interval={2000}
+        showIndicators={false}
+        centerMode={true}
+        showThumbs={false}
+        showStatus={false}
+        dynamicHeight={false}
+        centerSlidePercentage={23}
+        infiniteLoop={true}
+      >
         {recommendations.map((track) => (
           <RecommendItem track={track} key={track.id} />
         ))}
-      </div>
+      </Carousel>
+      {/* </div> */}
     </div>
   );
 };

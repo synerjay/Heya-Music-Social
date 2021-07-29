@@ -3,7 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import RecommendItem from './RecommendItem';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; //
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
 const ArtistRec = ({
@@ -70,7 +70,8 @@ const ArtistRec = ({
       <h2> Track Recommendation by your favorite Artists </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
-        autoPlay
+        autoPlay={true}
+        stopOnHover={false}
         autoFocus={true}
         interval={2000}
         showIndicators={false}
@@ -80,6 +81,7 @@ const ArtistRec = ({
         dynamicHeight={false}
         centerSlidePercentage={23}
         infiniteLoop={true}
+        width='100%'
       >
         {recommendations.map((track) => (
           <RecommendItem track={track} key={track.id} />
