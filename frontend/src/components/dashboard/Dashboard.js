@@ -72,7 +72,7 @@ const Dashboard = ({
 
           {showTrackModal ? (
             <CustomModal
-              title='Add your favorite artists'
+              title='Add your favorite tracks'
               component={SearchTracks}
               setShowModal={setShowTrackModal}
             />
