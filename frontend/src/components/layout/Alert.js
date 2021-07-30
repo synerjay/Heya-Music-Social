@@ -7,7 +7,7 @@ const Alert = ({ alerts }) =>
   alerts.length > 0 &&
   alerts.map((alert) => (
     <div
-      class='z-50 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+      class='z-50 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded absolute top-0'
       role='alert'
     >
       <strong class='font-bold'>Holy smokes!</strong>
