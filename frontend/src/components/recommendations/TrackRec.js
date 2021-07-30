@@ -63,7 +63,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
       </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
-        autoPlay
+        autoPlay={false}
         autoFocus={true}
         interval={2000}
         showIndicators={true}

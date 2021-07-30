@@ -73,7 +73,7 @@ const ArtistRec = ({
       </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
-        autoPlay={true}
+        autoPlay={false}
         stopOnHover={true}
         autoFocus={true}
         interval={2000}
