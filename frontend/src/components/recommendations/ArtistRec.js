@@ -67,19 +67,22 @@ const ArtistRec = ({
 
   return (
     <div>
-      <h2> Track Recommendation by your favorite Artists </h2>
+      <h2 className='text-center my-5'>
+        {' '}
+        Track Recommendation by your favorite Artists{' '}
+      </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
         autoPlay={true}
-        stopOnHover={false}
+        stopOnHover={true}
         autoFocus={true}
         interval={2000}
-        showIndicators={false}
+        showIndicators={true}
         centerMode={true}
         showThumbs={false}
         showStatus={false}
         dynamicHeight={false}
-        centerSlidePercentage={23}
+        centerSlidePercentage={27}
         infiniteLoop={true}
         width='100%'
       >
