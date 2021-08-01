@@ -18,6 +18,7 @@ import SearchAlbum from '../search/SearchAlbum';
 import CustomModal from '../layout/CustomModal';
 import SearchArtists from '../search/SearchArtists';
 import SearchTracks from '../search/SearchTracks';
+import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
   accessToken,
@@ -45,7 +46,9 @@ const Dashboard = ({
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
 
-  return (
+  return loading && profile === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <h1 className='text-red-500 text-2xl'> Dashboard</h1>
       <p className='lead'>
