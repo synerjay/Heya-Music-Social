@@ -196,7 +196,7 @@ export const addAlbum = (formData) => async (dispatch) => {
     });
     console.log(res.data.profile);
 
-    dispatch(setAlert('Favorite Album Added', 'success'));
+    dispatch(setAlert('Album Added to Favorites', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
     // history.push('/dashboard');
@@ -242,7 +242,7 @@ export const addArtist = (formData, history) => async (dispatch) => {
     });
     console.log(res.data.profile);
 
-    dispatch(setAlert('Favorite Artist Added', 'success'));
+    dispatch(setAlert('Artist Added to Favorites', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
     // history.push('/dashboard');
@@ -288,7 +288,7 @@ export const addTrack = (formData) => async (dispatch) => {
     });
     console.log(res.data.profile);
 
-    dispatch(setAlert('Favorite Track Added', 'success'));
+    dispatch(setAlert('Track Added to Favorites', 'success'));
 
     // if its not an edit (aka first time created) go back to dashboard
     // history.push('/dashboard');
@@ -326,7 +326,7 @@ export const deleteAlbum = (id) => async (dispatch) => {
       payload: res.data.profile,
     });
 
-    dispatch(setAlert('Album Removed', 'success'));
+    dispatch(setAlert('Album Removed From Favorites', 'success'));
   } catch (err) {
     dispatch(
       setAlert(
@@ -350,7 +350,7 @@ export const deleteArtist = (id) => async (dispatch) => {
       payload: res.data.profile,
     });
 
-    dispatch(setAlert('Artist Removed', 'success'));
+    dispatch(setAlert('Artist Removed From Favorites', 'success'));
   } catch (err) {
     dispatch(
       setAlert(
@@ -374,7 +374,7 @@ export const deleteTrack = (id) => async (dispatch) => {
       payload: res.data.profile,
     });
 
-    dispatch(setAlert('Track Removed', 'success'));
+    dispatch(setAlert('Track Removed From Favorites', 'success'));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
