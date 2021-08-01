@@ -94,7 +94,7 @@ const Dashboard = ({
           <ArtistRec />
           <GenreRec />
           <TrackRec />
-          <div className='flex flex-row gap-x-10'>
+          <div className='flex flex-row justify-center gap-x-10 my-10'>
             <Album albums={profile.albums} />
             <Artist artists={profile.artists} />
             <Track tracks={profile.tracks} />

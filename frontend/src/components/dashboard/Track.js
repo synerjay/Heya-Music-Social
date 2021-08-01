@@ -7,7 +7,7 @@ const Track = ({ tracks, deleteTrack }) => {
   const trackList = tracks.map((track) => (
     <tr key={track.spot_id}>
       <td>
-        <img src={track.img} />
+        <img className='h-16 w-16' src={track.img} />
       </td>
       <td>
         {track.title} <p className='text-xs'> {track.artist} </p>
@@ -36,12 +36,29 @@ const Track = ({ tracks, deleteTrack }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Tracks</h2>
+      <h2 className='bg-gray-600 p-5 text-center rounded-lg flex justify-center '>
+        Your Favorite Tracks
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 ml-2'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3'
+          />
+        </svg>
+      </h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Track</th>
-            <th />
+            <th className='w-24 ' />
+            <th className='w-32' />
+            <th className='w-5' />
           </tr>
         </thead>
         <tbody>{trackList}</tbody>

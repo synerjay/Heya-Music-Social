@@ -10,7 +10,7 @@ const Artist = ({ artists, deleteArtist }) => {
         {art.img === '' ? (
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            className='h-10 w-10'
+            className='h-16 w-16'
             viewBox='0 0 20 20'
             fill='currentColor'
           >
@@ -21,7 +21,7 @@ const Artist = ({ artists, deleteArtist }) => {
             />
           </svg>
         ) : (
-          <img className='h-10 w-10' src={art.img} />
+          <img className='h-16 w-16' src={art.img} />
         )}
       </td>
       <td>{art.name}</td>
@@ -49,13 +49,29 @@ const Artist = ({ artists, deleteArtist }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Artists</h2>
+      <h2 className='bg-gray-600 p-5 text-center rounded-lg flex justify-center'>
+        Your Favorite Artists
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 ml-2'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+          />
+        </svg>
+      </h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Artist</th>
-            <th />
-            <th />
+            <th className='w-24 ' />
+            <th className='w-32' />
+            <th className='w-5' />
           </tr>
         </thead>
         <tbody>{artistList}</tbody>

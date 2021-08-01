@@ -36,13 +36,29 @@ const Album = ({ albums, deleteAlbum }) => {
 
   return (
     <div>
-      <h2 className='my-2'>Your Favorite Albums</h2>
+      <h2 className='bg-gray-600 p-5 text-center rounded-lg flex justify-center'>
+        Your Favorite Albums{' '}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6  w-6 ml-2'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+          />
+        </svg>
+      </h2>
       <table className='table'>
         <thead>
           <tr>
-            <th>Albums</th>
-            <th />
-            <th />
+            <th className='w-24 ' />
+            <th className='w-32' />
+            <th className='w-5' />
           </tr>
         </thead>
         <tbody>{albumList}</tbody>
