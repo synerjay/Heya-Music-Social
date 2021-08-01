@@ -31,6 +31,12 @@ export const getCurrentProfile = () => async (dispatch) => {
       payload: res.data.profile,
     });
   } catch (err) {
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -50,6 +56,12 @@ export const getProfiles = () => async (dispatch) => {
       payload: res.data.profiles, // .profiles to get the specific array of profiles
     });
   } catch (err) {
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -72,6 +84,12 @@ export const getProfileById = (userId) => async (dispatch) => {
       payload: res.data.profile,
     });
   } catch (err) {
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -113,6 +131,12 @@ export const createProfile =
       }
     } catch (err) {
       const errors = err.response.data.errors;
+      dispatch(
+        setAlert(
+          'Oops! Something went wrong. Please try refreshing the page.',
+          'danger'
+        )
+      );
 
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -135,6 +159,12 @@ export const deleteAccount = () => async (dispatch) => {
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
     } catch (err) {
+      dispatch(
+        setAlert(
+          'Oops! Something went wrong. Please try refreshing the page.',
+          'danger'
+        )
+      );
       dispatch({
         type: PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
@@ -173,6 +203,12 @@ export const addAlbum = (formData) => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -213,6 +249,12 @@ export const addArtist = (formData, history) => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -253,6 +295,12 @@ export const addTrack = (formData) => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(err.response);
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
 
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -280,6 +328,12 @@ export const deleteAlbum = (id) => async (dispatch) => {
 
     dispatch(setAlert('Album Removed', 'success'));
   } catch (err) {
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -298,6 +352,12 @@ export const deleteArtist = (id) => async (dispatch) => {
 
     dispatch(setAlert('Artist Removed', 'success'));
   } catch (err) {
+    dispatch(
+      setAlert(
+        'Oops! Something went wrong. Please try refreshing the page.',
+        'danger'
+      )
+    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

@@ -58,9 +58,17 @@ export const register =
       setTimeout(() => {
         dispatch(loadUser());
       }, 500);
+      dispatch(
+        setAlert('Account successfully registered. Welcome!', 'success')
+      );
     } catch (err) {
       const errors = err.response.data.errors;
-
+      dispatch(
+        setAlert(
+          'Oops! Something went terribly wrong. Please try reloading the page.',
+          'danger'
+        )
+      );
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
       }
@@ -93,11 +101,24 @@ export const login = (email, password) => async (dispatch) => {
     setTimeout(() => {
       dispatch(loadUser());
     }, 1000);
+    dispatch(setAlert('Successfully logged in. Welcome back!', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
-
+    dispatch(
+      setAlert(
+        "Oops! The username or password doesn't seem to match. Please try again.",
+        'danger'
+      )
+    );
     if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach((error) =>
+        dispatch(
+          setAlert(
+            "Oops! The username or password doesn't seem to match. Please try again.",
+            'danger'
+          )
+        )
+      );
     }
 
     dispatch({
@@ -112,7 +133,9 @@ export const logout = () => async (dispatch) => {
     const res = await axios.post('/api/v1/users/auth/logout/');
 
     dispatch({ type: LOGOUT });
-    dispatch(setAlert(res.detail, 'success'));
+    dispatch(
+      setAlert('Successfully logged out. See ya again soon!', 'success')
+    );
     window.location.reload(); // add this one or else Django will have a hissy fit about 404 !!
   } catch (err) {
     const errors = err.response.data.errors;
