@@ -43,9 +43,6 @@ const Dashboard = ({
     return () => clearInterval(interval); // unmount & cleanup
   }, [accessToken]);
 
-  const loadingTrue = true;
-  const profileNull = null;
-
   const [showAlbumModal, setShowAlbumModal] = useState(false);
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);

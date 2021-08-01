@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import ReactLoading from 'react-loading';
 
 const ArtistRec = ({
   accessToken,
@@ -65,7 +66,11 @@ const ArtistRec = ({
       );
   }, [artists, accessToken]);
 
-  return (
+  return profile === null ? (
+    <div>
+      <ReactLoading type='bars' color='#fff' width={100} />
+    </div>
+  ) : (
     <div>
       <h2 className='text-center my-5'>
         {' '}
