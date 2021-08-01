@@ -57,7 +57,7 @@ const SearchArtists = ({
             return {
               name: artist.name,
               id: artist.id,
-              img: biggestImage === undefined ? null : biggestImage.url,
+              img: biggestImage === undefined ? '' : biggestImage.url,
             };
           })
         );

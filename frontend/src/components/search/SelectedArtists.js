@@ -3,7 +3,22 @@ import React from 'react';
 const SelectedArtists = ({ artist, added }) => {
   return (
     <div className='flex items-center'>
-      <img src={artist.img} className='h-32 w-32' />
+      {artist.img === '' ? (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-32 w-32'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+        >
+          <path
+            fillRule='evenodd'
+            d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
+            clipRule='evenodd'
+          />
+        </svg>
+      ) : (
+        <img src={artist.img} className='h-32 w-32' />
+      )}
       <div className='ml-3'>
         <div className='font-bold'>{artist.name}</div>
       </div>
