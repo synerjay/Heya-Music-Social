@@ -1,7 +1,10 @@
 import React from 'react';
+import Spinner from '../layout/Spinner';
 
 const RecommendItem = ({ track }) => {
-  return (
+  return track === null ? (
+    <Spinner />
+  ) : (
     <div className='flex flex-col h-72 w-60 items-center '>
       <img src={track.img} className='h-48 w-48' />
       <div className='items-center'>

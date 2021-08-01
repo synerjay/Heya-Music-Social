@@ -19,6 +19,7 @@ import CustomModal from '../layout/CustomModal';
 import SearchArtists from '../search/SearchArtists';
 import SearchTracks from '../search/SearchTracks';
 import Spinner from '../layout/Spinner';
+import ReactLoading from 'react-loading';
 
 const Dashboard = ({
   accessToken,
@@ -42,12 +43,17 @@ const Dashboard = ({
     return () => clearInterval(interval); // unmount & cleanup
   }, [accessToken]);
 
+  const loadingTrue = true;
+  const profileNull = null;
+
   const [showAlbumModal, setShowAlbumModal] = useState(false);
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
 
   return loading && profile === null ? (
-    <Spinner />
+    <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
+      <ReactLoading type='bars' color='#fff' width={300} />
+    </div>
   ) : (
     <Fragment>
       <h1 className='text-red-500 text-2xl'> Dashboard</h1>
