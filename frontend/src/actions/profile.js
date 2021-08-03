@@ -31,12 +31,6 @@ export const getCurrentProfile = () => async (dispatch) => {
       payload: res.data.profile,
     });
   } catch (err) {
-    dispatch(
-      setAlert(
-        'Oops! Something went wrong. Please try refreshing the page.',
-        'danger'
-      )
-    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -56,12 +50,6 @@ export const getProfiles = () => async (dispatch) => {
       payload: res.data.profiles, // .profiles to get the specific array of profiles
     });
   } catch (err) {
-    dispatch(
-      setAlert(
-        'Oops! Something went wrong. Please try refreshing the page.',
-        'danger'
-      )
-    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -84,12 +72,6 @@ export const getProfileById = (userId) => async (dispatch) => {
       payload: res.data.profile,
     });
   } catch (err) {
-    dispatch(
-      setAlert(
-        'Oops! Something went wrong. Please try refreshing the page.',
-        'danger'
-      )
-    );
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
