@@ -21,6 +21,7 @@ import SearchTracks from '../search/SearchTracks';
 import Spinner from '../layout/Spinner';
 import ReactLoading from 'react-loading';
 import TestingForm from '../profile-forms/TestingForm';
+import ProfileForm from '../profile-forms/ProfileForm';
 
 const Dashboard = ({
   accessToken,
@@ -108,14 +109,14 @@ const Dashboard = ({
         </Fragment>
       ) : (
         <Fragment>
-          <h2> First things first</h2>
-          <p>
+          <h2 className='text-4xl'> First things first</h2>
+          <p className='text-sm my-1'>
             To best recommend you new music, please let us know who you are.
           </p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
+          {/* <Link to='/create-profile' className='btn btn-primary my-1'>
             Create Profile
-          </Link>
-          {/* <TestingForm /> */}
+          </Link> */}
+          <ProfileForm />
         </Fragment>
       )}
     </Fragment>

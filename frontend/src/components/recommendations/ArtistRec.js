@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import ReactLoading from 'react-loading';
 
 const ArtistRec = ({
   accessToken,

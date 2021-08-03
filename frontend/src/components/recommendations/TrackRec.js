@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { connect } from 'react-redux';
-import { getAccessToken, getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile } from '../../actions/profile';
 import RecommendItem from './RecommendItem';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -61,24 +61,26 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
         {' '}
         Recommendations by your favorite tracks
       </h2>
-      {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
-      <Carousel
-        autoPlay={false}
-        autoFocus={true}
-        interval={2000}
-        showIndicators={true}
-        centerMode={true}
-        showThumbs={false}
-        showStatus={false}
-        dynamicHeight={false}
-        centerSlidePercentage={27}
-        infiniteLoop={true}
-      >
-        {recommendations.map((track) => (
-          <RecommendItem track={track} key={track.id} />
-        ))}
-      </Carousel>
-      {/* </div> */}
+      {recommendations.length === 0 ? (
+        <div className='text-center'> Try adding your favorite tracks </div>
+      ) : (
+        <Carousel
+          autoPlay={false}
+          autoFocus={true}
+          interval={2000}
+          showIndicators={true}
+          centerMode={true}
+          showThumbs={false}
+          showStatus={false}
+          dynamicHeight={false}
+          centerSlidePercentage={27}
+          infiniteLoop={true}
+        >
+          {recommendations.map((track) => (
+            <RecommendItem track={track} key={track.id} />
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 };
