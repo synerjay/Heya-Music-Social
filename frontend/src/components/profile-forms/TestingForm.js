@@ -53,7 +53,7 @@ const TestingForm = () => {
                     Please fill out this field.
                   </p>
                 </div>
-                <div className='mb-3 space-y-2 w-full text-xs'>
+                {/* <div className='mb-3 space-y-2 w-full text-xs'>
                   <label className='font-semibold text-gray-600 py-2'>
                     Your favorite Musical Genre <abbr title='required'>*</abbr>
                   </label>
@@ -68,11 +68,12 @@ const TestingForm = () => {
                   <p className='text-red text-xs hidden'>
                     Please fill out this field.
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className='mb-3 space-y-2 w-full text-xs'>
                 <label className=' font-semibold text-gray-600 py-2'>
-                  Company Website
+                  Your favorite musical genre. Please separate each item by a
+                  comma and space. <abbr title='required'>*</abbr>
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
                   <div className='flex'>
@@ -85,22 +86,22 @@ const TestingForm = () => {
                         stroke='currentColor'
                       >
                         <path
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
-                          stroke-width='2'
-                          d='M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                        ></path>
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3'
+                        />
                       </svg>
                     </span>
                   </div>
                   <input
                     type='text'
                     className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
-                    placeholder='https://'
+                    placeholder='Pop, hiphop, classical, etc.'
                   />
                 </div>
               </div>
-              <div className='md:flex md:flex-row md:space-x-4 w-full text-xs'>
+              {/* <div className='md:flex md:flex-row md:space-x-4 w-full text-xs'>
                 <div className='w-full flex flex-col mb-3'>
                   <label className='font-semibold text-gray-600 py-2'>
                     Company Address
@@ -132,22 +133,105 @@ const TestingForm = () => {
                     Please fill out this field.
                   </p>
                 </div>
-              </div>
+              </div> */}
               <div className='flex-auto w-full mb-1 text-xs space-y-2'>
                 <label className='font-semibold text-gray-600 py-2'>
-                  Description
+                  Bio <abbr title='required'>*</abbr>
                 </label>
                 <textarea
                   required=''
-                  name='message'
+                  name='bio'
                   id=''
                   className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
-                  placeholder='Enter your comapny info'
+                  placeholder='A short bio of yourself'
                   spellcheck='false'
                 ></textarea>
-                <p className='text-xs text-gray-400 text-left my-3'>
-                  You inserted 0 characters
-                </p>
+              </div>
+              <div className='mb-3 space-y-2 w-full text-xs'>
+                <label className=' font-semibold text-gray-600 my-5'>
+                  Instagram
+                </label>
+                <div className='flex flex-wrap items-stretch w-full mb-6 relative'>
+                  <div className='flex'>
+                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <input
+                    type='text'
+                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    placeholder='https://'
+                  />
+                </div>
+                <label className=' font-semibold text-gray-600 py-2'>
+                  Twitter
+                </label>
+                <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
+                  <div className='flex'>
+                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <input
+                    type='text'
+                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    placeholder='https://'
+                  />
+                </div>
+                <label className=' font-semibold text-gray-600 py-2'>
+                  Facebook
+                </label>
+                <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
+                  <div className='flex'>
+                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <input
+                    type='text'
+                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    placeholder='https://'
+                  />
+                </div>
               </div>
               <p className='text-xs text-red-500 text-right my-3'>
                 Required fields are marked with an asterisk{' '}
