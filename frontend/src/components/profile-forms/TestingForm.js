@@ -2,7 +2,7 @@ import React from 'react';
 
 const TestingForm = () => {
   return (
-    <div className='max-w-xl w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10'>
+    <div className='max-w-xl w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10'>
       <div className='grid  gap-8 grid-cols-1'>
         <div className='flex flex-col '>
           <div className='flex flex-col sm:flex-row items-center'>
@@ -29,7 +29,7 @@ const TestingForm = () => {
                     />
                   </div>
                   <label className='cursor-pointer '>
-                    <span className='focus:outline-none text-white text-sm py-4 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg'>
+                    <span className='focus:outline-none text-white text-sm py-4 px-4 rounded-full bg-green-500 hover:bg-green-500 hover:shadow-lg'>
                       Browse
                     </span>
                     <input type='file' className='hidden' />
@@ -37,13 +37,13 @@ const TestingForm = () => {
                 </div>
               </div>
               <div className='md:flex flex-row md:space-x-4 w-full text-xs'>
-                <div className='mb-3 space-y-2 w-full text-xs'>
-                  <label className='font-semibold text-gray-600 py-2'>
+                <div className='mb-3 space-y-2 w-full text-sm'>
+                  <label className='font-semibold text-gray-400 py-2'>
                     Name <abbr title='required'>*</abbr>
                   </label>
                   <input
                     placeholder='Name'
-                    className='appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4'
+                    className='appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4'
                     required='required'
                     type='text'
                     name='integration[shop_name]'
@@ -70,17 +70,20 @@ const TestingForm = () => {
                   </p>
                 </div> */}
               </div>
-              <div className='mb-3 space-y-2 w-full text-xs'>
-                <label className=' font-semibold text-gray-600 py-2'>
-                  Your favorite musical genre. Please separate each item by a
-                  comma and space. <abbr title='required'>*</abbr>
+              <div className='mb-3 space-y-2 w-full text-sm'>
+                <label className=' font-semibold text-gray-400 py-2'>
+                  Your favorite musical genre. <abbr title='required'>*</abbr>
+                  <p className='text-xs'>
+                    {' '}
+                    Please separate each item by a comma and a space.{' '}
+                  </p>
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
                   <div className='flex'>
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6'
+                        className='h-6 w-6 text-gray-700'
                         fill='none'
                         viewBox='0 0 24 24'
                         stroke='currentColor'
@@ -96,7 +99,7 @@ const TestingForm = () => {
                   </div>
                   <input
                     type='text'
-                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='Pop, hiphop, classical, etc.'
                   />
                 </div>
@@ -134,21 +137,21 @@ const TestingForm = () => {
                   </p>
                 </div>
               </div> */}
-              <div className='flex-auto w-full mb-1 text-xs space-y-2'>
-                <label className='font-semibold text-gray-600 py-2'>
+              <div className='flex-auto w-full mb-1 text-sm space-y-2'>
+                <label className='font-semibold text-gray-400 py-2'>
                   Bio <abbr title='required'>*</abbr>
                 </label>
                 <textarea
                   required=''
                   name='bio'
                   id=''
-                  className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
+                  className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-white text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
                   placeholder='A short bio of yourself'
                   spellcheck='false'
                 ></textarea>
               </div>
               <div className='mb-3 space-y-2 w-full text-xs'>
-                <label className=' font-semibold text-gray-600 my-5'>
+                <label className=' font-semibold text-gray-400 my-5'>
                   Instagram
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-6 relative'>
@@ -156,7 +159,7 @@ const TestingForm = () => {
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6'
+                        className='h-6 w-6 text-gray-700'
                         fill='none'
                         viewBox='0 0 24 24'
                         stroke='currentColor'
@@ -172,11 +175,11 @@ const TestingForm = () => {
                   </div>
                   <input
                     type='text'
-                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                   />
                 </div>
-                <label className=' font-semibold text-gray-600 py-2'>
+                <label className=' font-semibold text-gray-400 py-2'>
                   Twitter
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
@@ -184,7 +187,7 @@ const TestingForm = () => {
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6'
+                        className='h-6 w-6 text-gray-700'
                         fill='none'
                         viewBox='0 0 24 24'
                         stroke='currentColor'
@@ -200,11 +203,11 @@ const TestingForm = () => {
                   </div>
                   <input
                     type='text'
-                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                   />
                 </div>
-                <label className=' font-semibold text-gray-600 py-2'>
+                <label className=' font-semibold text-gray-400 py-2'>
                   Facebook
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
@@ -212,7 +215,7 @@ const TestingForm = () => {
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6'
+                        className='h-6 w-6 text-gray-700'
                         fill='none'
                         viewBox='0 0 24 24'
                         stroke='currentColor'
@@ -228,7 +231,7 @@ const TestingForm = () => {
                   </div>
                   <input
                     type='text'
-                    className='flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                   />
                 </div>
