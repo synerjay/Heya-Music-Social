@@ -48,6 +48,7 @@ const Dashboard = ({
   const [showAlbumModal, setShowAlbumModal] = useState(false);
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   return loading && profile === null ? (
     <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
@@ -62,6 +63,12 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
+          {showProfileModal ? (
+            <CustomModal
+              component={ProfileForm}
+              setShowModal={setShowProfileModal}
+            />
+          ) : null}
           {showAlbumModal ? (
             <CustomModal
               title='Add your favorite albums'
@@ -92,6 +99,7 @@ const Dashboard = ({
             setShowAlbumModal={setShowAlbumModal}
             setShowArtistModal={setShowArtistModal}
             setShowTrackModal={setShowTrackModal}
+            setShowProfileModal={setShowProfileModal}
           />
           <GenreRec />
           <ArtistRec />

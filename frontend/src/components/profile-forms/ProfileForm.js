@@ -62,7 +62,7 @@ const ProfileForm = ({
   };
 
   return (
-    <div className='max-w-2xl w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10'>
+    <div className='max-w-5xl w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10'>
       <div className='grid  gap-8 grid-cols-1'>
         <div className='flex flex-col '>
           <div className='flex flex-col sm:flex-row items-center'>
