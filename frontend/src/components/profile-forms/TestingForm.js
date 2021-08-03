@@ -39,10 +39,10 @@ const TestingForm = () => {
               <div className='md:flex flex-row md:space-x-4 w-full text-xs'>
                 <div className='mb-3 space-y-2 w-full text-xs'>
                   <label className='font-semibold text-gray-600 py-2'>
-                    Company Name <abbr title='required'>*</abbr>
+                    Name <abbr title='required'>*</abbr>
                   </label>
                   <input
-                    placeholder='Company Name'
+                    placeholder='Name'
                     className='appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4'
                     required='required'
                     type='text'
@@ -55,10 +55,10 @@ const TestingForm = () => {
                 </div>
                 <div className='mb-3 space-y-2 w-full text-xs'>
                   <label className='font-semibold text-gray-600 py-2'>
-                    Company Mail <abbr title='required'>*</abbr>
+                    Your favorite Musical Genre <abbr title='required'>*</abbr>
                   </label>
                   <input
-                    placeholder='Email ID'
+                    placeholder='Pop music, hip hop, etc.'
                     className='appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4'
                     required='required'
                     type='text'
