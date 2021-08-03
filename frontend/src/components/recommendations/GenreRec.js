@@ -58,13 +58,13 @@ const GenreRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [seedGenre, accessToken]);
+  }, [accessToken]);
 
   return (
     <div>
-      <h2 className='text-center my-5'>
+      <h2 className='text-center text-2xl my-5'>
         {' '}
-        Track Recommendation by the musical genre you like{' '}
+        Recommendations by the musical genre you like{' '}
       </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel

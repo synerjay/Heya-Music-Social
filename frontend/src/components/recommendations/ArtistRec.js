@@ -66,36 +66,34 @@ const ArtistRec = ({
       );
   }, [artists, accessToken]);
 
-  return profile === null ? (
+  return (
     <div>
-      <ReactLoading type='bars' color='#fff' width={100} />
-    </div>
-  ) : (
-    <div>
-      <h2 className='text-center my-5'>
+      <h2 className='text-center text-2xl my-5'>
         {' '}
-        Track Recommendation by your favorite Artists{' '}
+        Recommendations by your favorite Artists{' '}
       </h2>
-      {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
-      <Carousel
-        autoPlay={false}
-        stopOnHover={true}
-        autoFocus={true}
-        interval={2000}
-        showIndicators={true}
-        centerMode={true}
-        showThumbs={false}
-        showStatus={false}
-        dynamicHeight={false}
-        centerSlidePercentage={27}
-        infiniteLoop={true}
-        width='100%'
-      >
-        {recommendations.map((track) => (
-          <RecommendItem track={track} key={track.id} />
-        ))}
-      </Carousel>
-      {/* </div> */}
+      {recommendations.length === 0 ? (
+        <div className='text-center'> Try adding your favorite artist </div>
+      ) : (
+        <Carousel
+          autoPlay={false}
+          stopOnHover={true}
+          autoFocus={true}
+          interval={2000}
+          showIndicators={true}
+          centerMode={true}
+          showThumbs={false}
+          showStatus={false}
+          dynamicHeight={false}
+          centerSlidePercentage={27}
+          infiniteLoop={true}
+          width='100%'
+        >
+          {recommendations.map((track) => (
+            <RecommendItem track={track} key={track.id} />
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 };

@@ -92,8 +92,8 @@ const Dashboard = ({
             setShowArtistModal={setShowArtistModal}
             setShowTrackModal={setShowTrackModal}
           />
-          <ArtistRec />
           <GenreRec />
+          <ArtistRec />
           <TrackRec />
           <div className='flex flex-row justify-center gap-x-10 my-10'>
             <Album albums={profile.albums} />

@@ -57,9 +57,9 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
 
   return (
     <div>
-      <h2 className='text-center my-5'>
+      <h2 className='text-center text-2xl my-5'>
         {' '}
-        Track Recommendation by your favorite tracks
+        Recommendations by your favorite tracks
       </h2>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
       <Carousel
