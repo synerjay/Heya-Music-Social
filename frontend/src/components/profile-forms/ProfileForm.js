@@ -67,11 +67,11 @@ const ProfileForm = ({
         <div className='flex flex-col '>
           <div className='flex flex-col sm:flex-row items-center'>
             {profile === null ? (
-              <h2 className='font-semibold text-lg mr-auto'>
+              <h2 className='font-semibold text-4xl mr-auto'>
                 Create Your Profile
               </h2>
             ) : (
-              <h2 className='font-semibold text-lg mr-auto'>
+              <h2 className='font-semibold text-4xl mr-auto'>
                 Edit Your Profile
               </h2>
             )}
