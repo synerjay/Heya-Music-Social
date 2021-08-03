@@ -109,11 +109,13 @@ const Dashboard = ({
       ) : (
         <Fragment>
           <h2> First things first</h2>
-          <p>To best recommend you music, please let us know your profile</p>
-          {/* <Link to='/create-profile' className='btn btn-primary my-1'>
+          <p>
+            To best recommend you new music, please let us know who you are.
+          </p>
+          <Link to='/create-profile' className='btn btn-primary my-1'>
             Create Profile
-          </Link> */}
-          <TestingForm />
+          </Link>
+          {/* <TestingForm /> */}
         </Fragment>
       )}
     </Fragment>
