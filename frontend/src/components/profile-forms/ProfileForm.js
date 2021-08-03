@@ -63,7 +63,11 @@ const ProfileForm = ({
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Edit Your Profile</h1>
+      {profile === null ? (
+        <h1 className='large text-primary'>Create Your Profile</h1>
+      ) : (
+        <h1 className='large text-primary'>Edit Your Profile</h1>
+      )}
       <p className='lead'>
         <i className='fas fa-user' /> Add some changes to your profile
       </p>
