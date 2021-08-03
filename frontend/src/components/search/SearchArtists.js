@@ -92,10 +92,14 @@ const SearchArtists = ({
           </div>
         </div>
       </form>
-      <div className='flex w-full flex-col ml-7'>
-        <p className='mb-5 text-center'>
+      <div className='flex w-full flex-col ml-7 text-center'>
+        <h2 className='text-2xl text-center font-bold'>
           {' '}
-          Click on the plus button to add to your list:{' '}
+          Add your favorite artists:{' '}
+        </h2>
+        <p className='text-sm'>
+          {' '}
+          Search any artist and click on the plus button to add{' '}
         </p>
         {selectedArtist.map((artist) => (
           <SelectedArtists key={artist.id} artist={artist} added={true} />

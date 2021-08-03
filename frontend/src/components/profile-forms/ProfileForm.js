@@ -62,7 +62,7 @@ const ProfileForm = ({
   };
 
   return (
-    <div className='max-w-5xl w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10'>
+    <div className='max-w-5xl w-full space-y-8 p-5 pt-0 bg-gray-800 rounded-xl shadow-lg z-10'>
       <div className='grid  gap-8 grid-cols-1'>
         <div className='flex flex-col '>
           <div className='flex flex-col sm:flex-row items-center'>
@@ -292,10 +292,10 @@ const ProfileForm = ({
                 <abbr title='Required field'>*</abbr>
               </p>
               <div className='mt-5 text-right md:space-x-3 md:block flex flex-col-reverse'>
-                <button className='mb-2 md:mb-0 bg-white md:px-5 md:py-2 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100'>
+                {/* <button className='mb-2 md:mb-0 bg-white md:px-5 md:py-2 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100'>
                   {' '}
                   Cancel{' '}
-                </button>
+                </button> */}
                 <button
                   type='submit'
                   className='mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'

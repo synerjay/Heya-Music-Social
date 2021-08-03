@@ -2,8 +2,8 @@ import React from 'react';
 
 const SelectedTracks = ({ track, added }) => {
   return (
-    <div className='flex items-center'>
-      <img src={track.img} className='h-16 w-16' />
+    <div className='flex items-center w-72'>
+      <img src={track.img} className='h-32 w-32' />
       <div className='ml-3'>
         <div>{track.title}</div>
         <div className='font-bold'>{track.artist}</div>
