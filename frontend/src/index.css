@@ -377,6 +377,18 @@ img {
   color: #888;
 }
 
+input[type='text'],
+input[type='search'],
+input[type='password'],
+input[type='email'],
+input[type='file'],
+input[type='number'],
+input[type='tel'],
+textarea,
+select {
+  background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+}
+
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
