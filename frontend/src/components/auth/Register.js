@@ -52,6 +52,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
+                className='bg-gray-800'
                 type='text'
                 placeholder='Username'
                 name='username'
@@ -62,6 +63,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </div>
             <div className='form-group'>
               <input
+                className='bg-gray-800'
                 type='email'
                 placeholder='Email Address'
                 name='email'
@@ -72,6 +74,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </div>
             <div className='form-group'>
               <input
+                className='bg-gray-800'
                 type='password'
                 placeholder='Password'
                 name='password1'
@@ -82,6 +85,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </div>
             <div className='form-group'>
               <input
+                className='bg-gray-800'
                 type='password'
                 placeholder='Confirm Password'
                 name='password2'

@@ -106,11 +106,12 @@ export const createProfile =
       dispatch(
         setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success')
       );
-
+      console.log(edit);
       // if its not an edit (aka first time created) go back to dashboard
-      if (!edit) {
-        history.push('/dashboard');
-      }
+      // if (!edit) {
+      //   history.push('/dashboard'); <-- // This is causing problems at first profile creation!
+      //   console.log('EDIT!!!!!!');
+      // }
     } catch (err) {
       const errors = err.response.data.errors;
       dispatch(
