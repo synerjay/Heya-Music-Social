@@ -43,13 +43,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <div class='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5'>
+    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5'>
       <div
-        class='bg-gray-800 text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden'
+        className='bg-gray-800 text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
       >
-        <div class='md:flex w-full'>
-          <div class='hidden md:block w-1/2 bg-gray-800 py-10 px-10'>
+        <div className='md:flex w-full'>
+          <div className='hidden md:block w-1/2 bg-gray-800 py-10 px-10'>
             <svg
               id='a0c20882-2d18-455a-ade1-f7c359a0c63a'
               data-name='Layer 1'
@@ -1052,26 +1052,26 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               />
             </svg>
           </div>
-          <div class='w-full md:w-1/2 py-10 px-5 md:px-10'>
-            <div class='text-center mb-5'>
-              <h1 class='font-bold text-3xl text-white'>SIGN UP</h1>
+          <div className='w-full md:w-1/2 py-10 px-5 md:px-10'>
+            <div className='text-center mb-5'>
+              <h1 className='font-bold text-3xl text-white'>SIGN UP</h1>
               <p>Enter the information below to create your own account</p>
             </div>
             <div>
               {/* dfsdfd */}
               <form onSubmit={(e) => onSubmit(e)}>
-                <div class='flex -mx-3'>
-                  <div class='w-full px-3 mb-5'>
-                    <label for='' class='text-xs font-semibold px-1'>
+                <div className='flex -mx-3'>
+                  <div className='w-full px-3 mb-5'>
+                    <label for='' className='text-xs font-semibold px-1'>
                       Username
                     </label>
-                    <div class='flex'>
-                      <div class='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
-                        <i class='mdi mdi-account-outline text-gray-400 text-lg'></i>
+                    <div className='flex'>
+                      <div className='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
+                        <i className='mdi mdi-account-outline text-gray-400 text-lg'></i>
                       </div>
                       <input
                         type='text'
-                        class='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                        className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                         placeholder='JohnSmith7'
                         name='username'
                         value={username}
@@ -1081,18 +1081,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     </div>
                   </div>
                 </div>
-                <div class='flex -mx-3'>
-                  <div class='w-full px-3 mb-5'>
-                    <label for='' class='text-xs font-semibold px-1'>
+                <div className='flex -mx-3'>
+                  <div className='w-full px-3 mb-5'>
+                    <label for='' className='text-xs font-semibold px-1'>
                       Email
                     </label>
-                    <div class='flex'>
-                      <div class='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
-                        <i class='mdi mdi-email-outline text-gray-400 text-lg'></i>
+                    <div className='flex'>
+                      <div className='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
+                        <i className='mdi mdi-email-outline text-gray-400 text-lg'></i>
                       </div>
                       <input
                         type='email'
-                        class='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                        className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                         placeholder='johnsmith@example.com'
                         name='email'
                         value={email}
@@ -1102,18 +1102,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     </div>
                   </div>
                 </div>
-                <div class='flex -mx-3'>
-                  <div class='w-1/2 px-3 mb-12'>
-                    <label for='' class='text-xs font-semibold px-1'>
+                <div className='flex -mx-3'>
+                  <div className='w-1/2 px-3 mb-12'>
+                    <label for='' className='text-xs font-semibold px-1'>
                       Password
                     </label>
-                    <div class='flex'>
-                      <div class='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
-                        <i class='mdi mdi-lock-outline text-gray-400 text-lg'></i>
+                    <div className='flex'>
+                      <div className='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
+                        <i className='mdi mdi-lock-outline text-gray-400 text-lg'></i>
                       </div>
                       <input
                         type='password'
-                        class='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                        className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                         placeholder='************'
                         name='password1'
                         value={password1}
@@ -1122,17 +1122,17 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       />
                     </div>
                   </div>
-                  <div class='w-1/2 px-3 mb-12'>
-                    <label for='' class='text-xs font-semibold px-1'>
+                  <div className='w-1/2 px-3 mb-12'>
+                    <label for='' className='text-xs font-semibold px-1'>
                       Confirm Password
                     </label>
-                    <div class='flex'>
-                      <div class='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
-                        <i class='mdi mdi-lock-outline text-gray-400 text-lg'></i>
+                    <div className='flex'>
+                      <div className='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
+                        <i className='mdi mdi-lock-outline text-gray-400 text-lg'></i>
                       </div>
                       <input
                         type='password'
-                        class='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                        className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                         placeholder='************'
                         name='password2'
                         value={password2}
@@ -1142,8 +1142,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     </div>
                   </div>
                 </div>
-                <div class='flex -mx-3'>
-                  <div class='w-full px-3 mb-5'>
+                <div className='flex -mx-3'>
+                  <div className='w-full px-3 mb-5'>
                     <input
                       type='submit'
                       className='block w-full max-w-xs mx-auto bg-green-600 hover:bg-green-700 focus:bg-green-600 text-white rounded-lg p-1 font-semibold'
@@ -1153,6 +1153,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 </div>
                 {/*  */}
               </form>
+              <p className='text-sm text-center flex justify-center gap-x-1'>
+                Already have an account?{' '}
+                <Link to='/login'>
+                  {' '}
+                  <p className='text-green-600'>Log In</p>
+                </Link>
+              </p>
             </div>
           </div>
         </div>
