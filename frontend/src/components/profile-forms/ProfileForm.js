@@ -62,7 +62,7 @@ const ProfileForm = ({
   };
 
   return (
-    <div className='max-w-5xl w-full space-y-8 p-5 pt-0 bg-gray-800 rounded-xl shadow-lg z-10'>
+    <div className='max-w-2xl w-full space-y-8 p-10 pt-10 bg-gray-800 rounded-xl shadow-lg z-10'>
       <div className='grid  gap-8 grid-cols-1'>
         <div className='flex flex-col '>
           <div className='flex flex-col sm:flex-row items-center'>
@@ -81,7 +81,7 @@ const ProfileForm = ({
             <form onSubmit={onSubmit}>
               <div className='md:flex flex-row items-center md:space-x-8 w-full text-xs'>
                 <div className='md:space-y-0 mb-3'>
-                  <label className='text-xs font-semibold text-gray-400 py-2'>
+                  <label className='text-xs font-semibold px-1'>
                     Upload your own avatar
                     <abbr className='hidden' title='required'>
                       *
@@ -125,11 +125,11 @@ const ProfileForm = ({
                   </div>
                 </div>
                 <div className='mb-3 space-y-2 w-full text-sm'>
-                  <label className='font-semibold text-gray-400 py-2'>
+                  <label className='text-xs font-semibold px-1'>
                     Name <abbr title='required'>*</abbr>
                   </label>
                   <input
-                    className='appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4'
+                    className='w-full -ml-2 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                     required='required'
                     type='text'
                     placeholder='Name'
@@ -143,15 +143,14 @@ const ProfileForm = ({
                 </div>
               </div>
               <div className='mb-3 space-y-2 w-full text-sm'>
-                <label className=' font-semibold text-gray-400 py-2'>
-                  Your favorite musical genre. <abbr title='required'>*</abbr>
-                  <p className='text-xs'>
-                    {' '}
-                    Please separate each item by a comma and a space.{' '}
-                  </p>
+                <label className='text-xs font-semibold px-1'>
+                  Your favorite musical genre. <abbr title='required'>* </abbr>
+                  {/* <p className='text-xs'>
+                    {' '} */}
+                  Please separate each item by a comma and a space. {/* </p> */}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  <div className='flex'>
+                  {/* <div className='flex'>
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -168,10 +167,10 @@ const ProfileForm = ({
                         />
                       </svg>
                     </span>
-                  </div>
+                  </div> */}
                   <input
                     type='text'
-                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='w-full p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
                     placeholder='Pop, hiphop, classical, etc.'
                     name='genre'
                     value={genre}
@@ -180,12 +179,13 @@ const ProfileForm = ({
                 </div>
               </div>
               <div className='flex-auto w-full mb-1 text-sm space-y-2'>
-                <label className='font-semibold text-gray-400 py-2'>
+                <label className='text-xs font-semibold px-1'>
                   Bio <abbr title='required'>*</abbr>
                 </label>
                 <textarea
                   required='required'
-                  className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-white text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
+                  className='w-full p-1 mb-3 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                  // className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-white text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
                   placeholder='A short bio of yourself'
                   name='bio'
                   value={bio}
@@ -193,11 +193,11 @@ const ProfileForm = ({
                 ></textarea>
               </div>
               <div className='mb-3 space-y-2 w-full text-xs'>
-                <label className=' font-semibold text-gray-400 my-5'>
-                  Instagram
+                <label className='text-xs font-semibold px-1'>
+                  Instagram (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-6 relative'>
-                  <div className='flex'>
+                  {/* <div className='flex'>
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -214,21 +214,22 @@ const ProfileForm = ({
                         />
                       </svg>
                     </span>
-                  </div>
+                  </div> */}
                   <input
                     type='text'
-                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='w-full mb-3 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='instagram'
                     value={instagram}
                     onChange={onChange}
                   />
                 </div>
-                <label className=' font-semibold text-gray-400 py-2'>
-                  Twitter
+                <label className='text-xs font-semibold px-1'>
+                  Twitter (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  <div className='flex'>
+                  {/* <div className='flex'>
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -245,21 +246,22 @@ const ProfileForm = ({
                         />
                       </svg>
                     </span>
-                  </div>
+                  </div> */}
                   <input
                     type='text'
-                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='w-full p-1 mb-3 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='twitter'
                     value={twitter}
                     onChange={onChange}
                   />
                 </div>
-                <label className=' font-semibold text-gray-400 py-2'>
-                  Facebook
+                <label className='text-xs font-semibold px-1'>
+                  Facebook (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  <div className='flex'>
+                  {/* <div className='flex'>
                     <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -276,10 +278,11 @@ const ProfileForm = ({
                         />
                       </svg>
                     </span>
-                  </div>
+                  </div> */}
                   <input
                     type='text'
-                    className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
+                    className='w-full p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
+                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='spotify'
                     value={spotify}
