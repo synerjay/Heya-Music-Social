@@ -331,7 +331,7 @@ const Login = ({ login, isAuthenticated }) => {
                     </label>
                     <div className='flex'>
                       <div className='w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center'>
-                        <i className='mdi mdi-email-outline text-gray-400 text-lg'></i>
+                        {/* <i className='mdi mdi-email-outline text-gray-400 text-lg'></i> */}
                       </div>
                       <input
                         type='email'
