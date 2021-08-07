@@ -60,7 +60,10 @@ const Dashboard = ({
       <aside className='w-96  h-full bg-gray shadow-md hidden sm:block'>
         <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
           <div className='text-sm'>
-            <div className='bg-gray-900 text-white p-5 rounded cursor-pointer'>
+            <div
+              onClick={() => setShowProfileModal(true)}
+              className='bg-gray-900 text-white p-5 rounded cursor-pointer text-center'
+            >
               <h1 className='text-green-500 text-xl'> Dashboard</h1>
               <p className='text-lg'>
                 <i className='fas fa-user'></i> Welcome{' '}
@@ -68,6 +71,9 @@ const Dashboard = ({
                   user.username.charAt(0).toUpperCase() +
                     user.username.slice(1)}
               </p>
+              <div class='w-full mt-2 cursor-pointer flex justify-center'>
+                <img class='w-16 h-16 rounded-full' src={profile.avatar_url} />
+              </div>
             </div>
             <div
               onClick={() => setShowProfileModal(true)}
