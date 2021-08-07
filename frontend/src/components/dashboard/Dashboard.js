@@ -55,7 +55,6 @@ const Dashboard = ({
       <ReactLoading type='bars' color='#fff' width={300} />
     </div>
   ) : (
-    // <Fragment>
     <main className='flex w-full h-screen'>
       <aside className='w-96  h-full bg-gray shadow-md hidden sm:block'>
         <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
@@ -72,7 +71,12 @@ const Dashboard = ({
                     user.username.slice(1)}
               </p>
               <div class='w-full mt-2 cursor-pointer flex justify-center'>
-                <img class='w-16 h-16 rounded-full' src={profile.avatar_url} />
+                {profile && (
+                  <img
+                    class='w-16 h-16 rounded-full'
+                    src={profile.avatar_url}
+                  />
+                )}
               </div>
             </div>
             <div
@@ -196,16 +200,11 @@ const Dashboard = ({
             <p className='text-sm my-1'>
               To best recommend you new music, please let us know who you are.
             </p>
-            {/* <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link> */}
             <ProfileForm />
           </Fragment>
         )}
-        {/* </div> */}
       </section>
     </main>
-    // </Fragment>
   );
 };
 
