@@ -6,40 +6,71 @@ import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
-    <ul>
-      <li>
-        <Link to='/profiles'>Members</Link>
-      </li>
-      <li>
-        <Link to='/posts'>Posts</Link>
-      </li>
-      <li>
-        <Link to='/dashboard'>
-          <i className='fas fa-user'></i>{' '}
-          <span className='hide-sm'>Dashboard</span>
-        </Link>
-      </li>
-      <li>
-        <a onClick={logout} href='#!'>
-          <i className='fas fa-sign-out-alt'></i>{' '}
-          <span className='hide-sm'>Logout</span>
-        </a>
-      </li>
-    </ul>
+    <div class='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
+      <Link
+        to='/dashboard'
+        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+      >
+        Dashboard
+      </Link>
+      <Link
+        to='/posts'
+        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+      >
+        Music Feed
+      </Link>
+      <Link
+        to='/profiles'
+        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+      >
+        Members
+      </Link>
+
+      <a
+        onClick={logout}
+        href='#!'
+        class='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
+      >
+        <button className='rounded inline-flex items-center'>
+          <svg
+            className='w-3 h-3 mr-2'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 20 20'
+            fill='currentColor'
+          >
+            <path
+              fillRule='evenodd'
+              d='M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z'
+              clipRule='evenodd'
+            />
+          </svg>
+          <span className='font-semibold'>Logout</span>
+        </button>
+      </a>
+    </div>
   );
 
   const guestLinks = (
-    <ul className='font-bold'>
-      <li>
-        <Link to='/profiles'>Members</Link>
-      </li>
-      <li>
-        <Link to='/register'>Sign Up</Link>
-      </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-    </ul>
+    <div class='md:flex text-white text-sm font-bold hidden sm:block ml-2 gap-x-3 '>
+      <Link
+        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+        to='/profiles'
+      >
+        Members
+      </Link>
+      <Link
+        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+        to='/login'
+      >
+        Login
+      </Link>
+      <Link
+        class='bg-green-600 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-200'
+        to='/register'
+      >
+        Sign Up
+      </Link>
+    </div>
   );
 
   return (
@@ -55,48 +86,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         /> */}
       </div>
       <nav class='w-1/2 flex items-center justify-end'>
-        <div class='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
-          <Link
-            to='/dashboard'
-            class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
-          >
-            Dashboard
-          </Link>
-          <Link
-            to='/posts'
-            class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
-          >
-            Music Feed
-          </Link>
-          <Link
-            to='/profiles'
-            class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
-          >
-            Members
-          </Link>
-
-          <a
-            onClick={logout}
-            href='#!'
-            class='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
-          >
-            <button className='rounded inline-flex items-center'>
-              <svg
-                className='w-3 h-3 mr-2'
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z'
-                  clipRule='evenodd'
-                />
-              </svg>
-              <span className='font-semibold'>Logout</span>
-            </button>
-          </a>
-        </div>
+        {!loading && (
+          <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+        )}
       </nav>
     </header>
   );
