@@ -74,7 +74,7 @@ const SearchArtists = ({
         <div className='flex flex-col gap-y-2'>
           <input
             type='text'
-            className='bg-white h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
+            className='border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600 h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
             placeholder='Search any artist'
           />
           <div className='overflow-scroll flex flex-col'>
