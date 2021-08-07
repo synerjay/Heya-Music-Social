@@ -56,40 +56,52 @@ const Dashboard = ({
     </div>
   ) : (
     // <Fragment>
-    <main class='flex w-full h-screen'>
-      <aside class='w-96  h-full bg-gray shadow-md hidden sm:block'>
-        <div class='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
-          <div class='text-sm'>
-            <div class='bg-gray-900 text-white p-5 rounded cursor-pointer'>
-              Teams in space
+    <main className='flex w-full h-screen'>
+      <aside className='w-96  h-full bg-gray shadow-md hidden sm:block'>
+        <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
+          <div className='text-sm'>
+            <div className='bg-gray-900 text-white p-5 rounded cursor-pointer'>
+              Dashboard
             </div>
-            <div class='bg-gray-900 text-white p-2 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
-              Backlog
+            <div
+              onClick={() => setShowProfileModal(true)}
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+            >
+              Edit Profile
             </div>
-            <div class='bg-gray-700 text-blue-300 p-2 rounded mt-2 cursor-pointer'>
-              Board
+            <div
+              onClick={() => setShowArtistModal(true)}
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+            >
+              Add Favorite Artists
             </div>
-            <div class='bg-gray-900 flex justify-between items-center text-white p-2 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
+            {/* <div className='bg-gray-900 flex justify-between items-center text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
               <span>Reports</span>
-              <span class='w-4 h-4 bg-blue-600 rounded-full text-white text-center font-normal text-xs'>
+              <span className='w-4 h-4 bg-blue-600 rounded-full text-white text-center font-normal text-xs'>
                 5
               </span>
+            </div> */}
+            <div
+              onClick={() => setShowAlbumModal(true)}
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+            >
+              Add Favorite Albums
             </div>
-            <div class='bg-gray-900 text-white p-2 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
-              Releases
+            <div
+              onClick={() => setShowTrackModal(true)}
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+            >
+              Add Favorite Tracks
             </div>
-            <div class='bg-gray-900 text-white p-2 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
-              Components
-            </div>
-            <div class='bg-gray-900 text-white p-2 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
-              Repository
+            <div className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
+              Settings
             </div>
           </div>
 
-          <div class='flex p-3 text-white bg-red-500 rounded cursor-pointer text-center text-sm'>
-            <button class='rounded inline-flex items-center'>
+          <div className='flex p-1 text-white bg-red-500 rounded cursor-pointer text-center text-sm'>
+            <button className='rounded inline-flex items-center'>
               <svg
-                class='w-4 h-4 mr-2'
+                className='w-4 h-4 mr-2'
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 20 20'
                 fill='currentColor'
@@ -100,14 +112,14 @@ const Dashboard = ({
                   clipRule='evenodd'
                 />
               </svg>
-              <span class='font-semibold'>Logout</span>
+              <span className='font-semibold'>Logout</span>
             </button>
           </div>
         </div>
       </aside>
 
-      <section class='w-4/5 p-4 h-auto'>
-        {/* <div class='w-full h-64 border-dashed border-4 p-4 text-md'> */}
+      <section className='w-4/5 p-4 h-auto'>
+        {/* <div className='w-full h-64 border-dashed border-4 p-4 text-md'> */}
         {/*  */}
         <h1 className='text-red-500 text-2xl'> Dashboard</h1>
         <p className='lead'>
