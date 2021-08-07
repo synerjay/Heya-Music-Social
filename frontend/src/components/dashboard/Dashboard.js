@@ -61,21 +61,27 @@ const Dashboard = ({
         <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
           <div className='text-sm'>
             <div className='bg-gray-900 text-white p-5 rounded cursor-pointer'>
-              Dashboard
+              <h1 className='text-green-500 text-xl'> Dashboard</h1>
+              <p className='text-lg'>
+                <i className='fas fa-user'></i> Welcome{' '}
+                {user &&
+                  user.username.charAt(0).toUpperCase() +
+                    user.username.slice(1)}
+              </p>
             </div>
             <div
               onClick={() => setShowProfileModal(true)}
-              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
             >
               Edit Profile
             </div>
             <div
               onClick={() => setShowArtistModal(true)}
-              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
             >
               Add Favorite Artists
             </div>
-            {/* <div className='bg-gray-900 flex justify-between items-center text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
+            {/* <div className='bg-gray-900 flex justify-between items-center text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'>
               <span>Reports</span>
               <span className='w-4 h-4 bg-blue-600 rounded-full text-white text-center font-normal text-xs'>
                 5
@@ -83,17 +89,17 @@ const Dashboard = ({
             </div> */}
             <div
               onClick={() => setShowAlbumModal(true)}
-              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
             >
               Add Favorite Albums
             </div>
             <div
               onClick={() => setShowTrackModal(true)}
-              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'
+              className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
             >
               Add Favorite Tracks
             </div>
-            <div className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-blue-300'>
+            <div className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'>
               Settings
             </div>
           </div>
@@ -118,15 +124,9 @@ const Dashboard = ({
         </div>
       </aside>
 
-      <section className='w-4/5 p-4 h-auto'>
+      <section className='w-full md:w-4/5 p-4 h-auto'>
         {/* <div className='w-full h-64 border-dashed border-4 p-4 text-md'> */}
         {/*  */}
-        <h1 className='text-red-500 text-2xl'> Dashboard</h1>
-        <p className='lead'>
-          <i className='fas fa-user'></i> Welcome{' '}
-          {user &&
-            user.username.charAt(0).toUpperCase() + user.username.slice(1)}
-        </p>
         {profile !== null ? (
           <Fragment>
             {showProfileModal ? (
