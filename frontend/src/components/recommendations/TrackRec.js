@@ -13,8 +13,12 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
 
   //Get Spotify Key at start up
   useEffect(() => {
+    const regex = new RegExp(profile.user);
+
     setTracks(
-      profile['tracks'].map((y) => y.spot_id).sort(() => 0.5 - Math.random())
+      profile['tracks']
+        .map((y) => y.spot_id.replace(regex, ''))
+        .sort(() => 0.5 - Math.random())
     );
   }, []);
 

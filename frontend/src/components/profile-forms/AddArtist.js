@@ -31,7 +31,7 @@ const AddArtist = ({
         e.preventDefault();
         addArtist(formData);
         setSelectedArtist([...selectedArtist, formData]);
-        setSearchResults([]);
+        // setSearchResults([]);
       }}
     >
       <SelectedArtists artist={artist} />

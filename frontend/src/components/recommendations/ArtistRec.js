@@ -20,8 +20,12 @@ const ArtistRec = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
+    const regex = new RegExp(profile.user);
+
     setArtists(
-      profile['artists'].map((y) => y.spot_id).sort(() => 0.5 - Math.random())
+      profile['artists']
+        .map((y) => y.spot_id.replace(regex, ''))
+        .sort(() => 0.5 - Math.random())
     );
   }, []);
 

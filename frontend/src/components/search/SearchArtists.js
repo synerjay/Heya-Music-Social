@@ -16,6 +16,8 @@ const SearchArtists = ({
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState([]);
 
+  const regex = new RegExp(profile.user);
+
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
@@ -79,7 +81,12 @@ const SearchArtists = ({
           />
           <div className='overflow-scroll flex flex-col'>
             {searchResults
-              .filter((x) => !artists.map((y) => y.spot_id).includes(x.id))
+              .filter(
+                (x) =>
+                  !artists
+                    .map((y) => y.spot_id.replace(regex, ''))
+                    .includes(x.id)
+              )
               .map((artist) => (
                 <AddArtist
                   setSearchResults={setSearchResults}

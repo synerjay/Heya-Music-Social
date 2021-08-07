@@ -17,6 +17,7 @@ const SearchTracks = ({
   const [searchResults, setSearchResults] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState([]);
+  const regex = new RegExp(profile.user);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -91,7 +92,12 @@ const SearchTracks = ({
                   />
                 ))
               : searchResults
-                  .filter((x) => !tracks.map((y) => y.spot_id).includes(x.id))
+                  .filter(
+                    (x) =>
+                      !tracks
+                        .map((y) => y.spot_id.replace(regex, ''))
+                        .includes(x.id)
+                  )
                   .map((track) => (
                     <AddTrack
                       track={track}

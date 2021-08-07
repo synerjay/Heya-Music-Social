@@ -132,7 +132,7 @@ def add_album(request):
         if profile.albums.filter(spot_id=payload["id"]).exists(): # album already exists in the album list
              return JsonResponse({'error': 'Album already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            Album.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
+            Album.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -173,7 +173,7 @@ def add_artist(request):
         if profile.artists.filter(spot_id=payload["id"]).exists(): # album already exists in the album list
              return JsonResponse({'error': 'Artist already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            Artist.objects.create(spot_id = payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
+            Artist.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username
@@ -216,7 +216,7 @@ def add_track(request):
         if profile.tracks.filter(spot_id=payload["id"]).exists(): # album already exists in the album list
              return JsonResponse({'error': 'Track already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-             Track.objects.create(spot_id = payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
+             Track.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
         serializer = ProfileSerializer(profile, context={"request": request})
         data = serializer.data
         data["user"] = user.username

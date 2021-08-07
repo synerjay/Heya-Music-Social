@@ -15,7 +15,7 @@ const SearchAlbum = ({
   const [searchResults, setSearchResults] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState([]);
-
+  const regex = new RegExp(profile.user);
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
@@ -84,7 +84,12 @@ const SearchAlbum = ({
           />
           <div className='overflow-scroll flex flex-col'>
             {searchResults
-              .filter((x) => !albums.map((y) => y.spot_id).includes(x.id)) // filter out existing albums in the profile DB
+              .filter(
+                (x) =>
+                  !albums
+                    .map((y) => y.spot_id.replace(regex, ''))
+                    .includes(x.id)
+              ) // filter out existing albums in the profile DB
               .map((track) => (
                 <AddAlbum
                   track={track}
