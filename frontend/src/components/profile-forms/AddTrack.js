@@ -32,7 +32,7 @@ const AddTrack = ({
       onClick={(e) => {
         e.preventDefault();
         addTrack(formData);
-        setSearchResults([]);
+        // setSearchResults([]);
         setSelectedTrack([...selectedTrack, formData]);
       }}
     >

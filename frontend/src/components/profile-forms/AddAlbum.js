@@ -34,8 +34,8 @@ const AddAlbum = ({
         e.preventDefault();
         addAlbum(formData);
         setSelectedAlbum([...selectedAlbum, formData]);
-        setSearchResults([]);
-        setSearch('');
+        // setSearchResults([]);
+        // setSearch('');
       }}
     >
       <SelectedAlbums track={track} />
