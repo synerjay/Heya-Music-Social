@@ -15,11 +15,8 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>Posts</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> See what others are jammin' to
-      </p>
-      <PostForm />
+      <p className='text-2xl text-center'>See what others are jammin' to</p>
+      {/* <PostForm /> */}
       <div className='posts'>
         {posts
           .sort(function (a, b) {

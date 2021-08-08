@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 import { formatDistanceToNow } from 'date-fns';
 import moment from 'moment';
+import Track from '../dashboard/Track';
 
 const PostItem = ({
   addLike,
@@ -26,7 +27,50 @@ const PostItem = ({
   showActions,
 }) => {
   return (
-    <div className='post bg-white p-1 my-1'>
+    <Fragment>
+      <div class='py-1 md:my-16 sm:max-w-xl sm:mx-auto'>
+        <div class='bg-gray-800 shadow-lg h-56  border-black max-h-80	 border sm:rounded-3xl p-8 flex space-x-8'>
+          <div class='flex flex-col w-1/2 space-y-4'>
+            <div class='flex justify-around items-start'>
+              <img class='rounded-xl h-16 w-16' src={avatar_url} />
+              <div className='ml-4'>
+                <h2 class='text-xl font-bold'>{added_by}</h2>
+                <p className='text-xs'> is currently listening to: </p>
+              </div>
+            </div>
+            <div class='flex flex-col text-a'>
+              <h2 className='text-xl font-bold '>{track_title}</h2>
+              <p>{track_artist}</p>
+            </div>
+            <p class=' text-gray-400 max-h-40 overflow-y-hidden'>{body}</p>
+          </div>
+          <div class='h-48 overflow-visible w-1/2'>
+            <img class='rounded-3xl shadow-lg' src={track_img} alt='' />
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+  PostItem
+);
+
+{
+  /* <div className='post bg-white p-1 my-1'>
       <div>
         <Link to={`/profile/${added_by}`}>
           <img className='round-img' src={avatar_url} alt='User avatar' />
@@ -84,22 +128,5 @@ const PostItem = ({
           </Fragment>
         )}
       </div>
-    </div>
-  );
-};
-
-PostItem.propTypes = {
-  post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
-  PostItem
-);
+    </div> */
+}
