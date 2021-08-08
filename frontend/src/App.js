@@ -50,7 +50,12 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/profile/:id' component={Profile} />
-              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute
+                exact
+                path='/dashboard'
+                name='Dashboard'
+                component={Dashboard}
+              />
               <PrivateRoute exact path='/profiles' component={Profiles} />
               <PrivateRoute
                 exact
@@ -69,7 +74,12 @@ const App = () => {
                 component={SearchArtists}
               />
               <PrivateRoute exact path='/add-track' component={SearchTracks} />
-              <PrivateRoute exact path='/posts' component={Posts} />
+              <PrivateRoute
+                exact
+                path='/posts'
+                name='Music Feed'
+                component={Posts}
+              />
               <PrivateRoute exact path='/posts/:id' component={Post} />
             </section>
           </Switch>

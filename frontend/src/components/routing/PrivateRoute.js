@@ -9,6 +9,7 @@ import SearchTracks from '../search/SearchTracks';
 import ProfileForm from '../profile-forms/ProfileForm';
 
 const PrivateRoute = ({
+  name,
   component: Component,
   auth: { isAuthenticated, loading, user },
   profile: { profile },
@@ -70,7 +71,7 @@ const PrivateRoute = ({
                     onClick={() => setShowProfileModal(true)}
                     className='bg-gray-900 text-white p-5 rounded cursor-pointer text-center'
                   >
-                    <h1 className='text-green-500 text-xl'> Dashboard</h1>
+                    <h1 className='text-green-500 text-xl'>{name}</h1>
                     <p className='text-lg'>
                       <i className='fas fa-user'></i> Welcome{' '}
                       {user &&
