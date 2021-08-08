@@ -58,7 +58,7 @@ const GenreRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken, seedGenre]);
+  }, [accessToken]);
 
   return (
     <div>

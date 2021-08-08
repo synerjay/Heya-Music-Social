@@ -67,7 +67,7 @@ const ArtistRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [artists, accessToken]);
+  }, [accessToken]);
 
   return (
     <div>

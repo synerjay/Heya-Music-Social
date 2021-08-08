@@ -57,7 +57,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
           console.log('Something went wrong!', err);
         }
       );
-  }, [tracks, accessToken]);
+  }, [accessToken]);
 
   return (
     <div>

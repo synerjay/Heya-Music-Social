@@ -26,9 +26,11 @@ const SearchTracks = ({
   useEffect(() => {
     // getAccessToken();
     if (!profile) getCurrentProfile();
+  }, []);
+
+  useEffect(() => {
     if (profile) {
       setTracks(profile['tracks']);
-      console.log(tracks);
     }
   }, [profile]);
 
