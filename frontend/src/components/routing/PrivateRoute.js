@@ -64,7 +64,7 @@ const PrivateRoute = ({
                 setShowModal={setShowTrackModal}
               />
             ) : null}
-            <aside className='w-96  h-full bg-gray shadow-md hidden sm:block'>
+            <aside className='w-64  h-full bg-gray shadow-md hidden sm:block'>
               <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
                 <div className='text-sm'>
                   <div
