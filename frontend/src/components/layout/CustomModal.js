@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomModal = ({ component: Component, setShowModal, localProfile }) => {
+const CustomModal = ({ component: Component, setShowModal }) => {
   return (
     <>
       <div className='h-full w-full justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
@@ -8,7 +8,7 @@ const CustomModal = ({ component: Component, setShowModal, localProfile }) => {
           {/*content*/}
           <div className=' h-full border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-800 outline-none focus:outline-none'>
             <div className='h-full w-full relative p-6 flex-auto overflow-scroll'>
-              <Component localProfile={localProfile} />
+              <Component />
             </div>
             {/*footer*/}
             <div className=' h-px bg-opacity-0 bg-transparent flex items-center justify-end p-6 rounded-b'>

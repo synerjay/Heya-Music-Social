@@ -10,14 +10,13 @@ const SearchArtists = ({
   profile: { profile },
   // getAccessToken,
   getCurrentProfile,
-  localProfile,
 }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState([]);
 
-  const regex = new RegExp(profile != null ? profile.user : localProfile.user);
+  const regex = new RegExp(profile.user);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();

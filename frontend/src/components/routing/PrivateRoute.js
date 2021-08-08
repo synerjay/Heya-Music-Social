@@ -19,11 +19,11 @@ const PrivateRoute = ({
   const [showTrackModal, setShowTrackModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-  const [localProfile, setLocalProfile] = useState(null);
+  // const [localProfile, setLocalProfile] = useState(null);
 
-  useEffect(() => {
-    setLocalProfile(profile);
-  }, []);
+  // useEffect(() => {
+  //   setLocalProfile(profile);
+  // }, []);
 
   return (
     <Route
@@ -49,7 +49,7 @@ const PrivateRoute = ({
 
             {showArtistModal ? (
               <CustomModal
-                localProfile={localProfile}
+                // localProfile={localProfile}
                 title='Add your favorite artists'
                 component={SearchArtists}
                 setShowModal={setShowArtistModal}
@@ -78,10 +78,10 @@ const PrivateRoute = ({
                           user.username.slice(1)}
                     </p>
                     <div class='w-full mt-2 cursor-pointer flex justify-center'>
-                      {localProfile && (
+                      {profile && (
                         <img
                           class='w-16 h-16 rounded-full'
-                          src={localProfile.avatar_url}
+                          src={profile.avatar_url}
                         />
                       )}
                     </div>
