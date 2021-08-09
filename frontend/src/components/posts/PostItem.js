@@ -114,8 +114,11 @@ const PostItem = ({
             <div class='text-xs mx-1 mt-2 mb-4'>
               <p className='font-semibold'>
                 {likes.length} {likes.length === 1 ? <>like</> : <>likes</>} ·{' '}
-                {messages.length}{' '}
-                {messages.length === 1 ? <>Comment</> : <>Comments</>}
+                <Link to={`/posts/${id}`}>
+                  {' '}
+                  {messages.length}{' '}
+                  {messages.length === 1 ? <>Comment</> : <>Comments</>}{' '}
+                </Link>
               </p>
               <p className='text-gray-500'>
                 Posted{' '}

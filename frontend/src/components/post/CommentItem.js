@@ -36,9 +36,9 @@ const CommentItem = ({
             </svg>
           )}
         </div>
-        <div className='flex h-auto flex-col gap-x-10 ml-2 w-full overflow-y-scroll'>
+        <div className='flex h-auto flex-col ml-2 w-full overflow-y-scroll'>
           <h2 class='text-md font-bold'>{added_by}</h2>
-          <p class=' text-gray-200 text-xs'>{body}</p>
+          <p class=' text-gray-200 text-sm mb-4'>{body}</p>
           <p className='text-gray-500 text-xs'>
             Posted{' '}
             {formatDistanceToNow(
