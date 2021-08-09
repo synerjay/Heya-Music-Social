@@ -13,10 +13,7 @@ const Track = ({ tracks, deleteTrack }) => {
         {track.title} <p className='text-xs'> {track.artist} </p>
       </td>
       <td>
-        <button
-          onClick={() => deleteTrack(track.spot_id)}
-          // className='btn btn-danger'
-        >
+        <button onClick={() => deleteTrack(track.spot_id)}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='text-red-700 h-5 w-5'

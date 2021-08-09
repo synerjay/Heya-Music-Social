@@ -22,12 +22,6 @@ const PrivateRoute = ({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showPostForm, setShowPostForm] = useState(false);
 
-  // const [localProfile, setLocalProfile] = useState(null);
-
-  // useEffect(() => {
-  //   setLocalProfile(profile);
-  // }, []);
-
   return (
     <Route
       {...rest}
@@ -198,30 +192,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
-
-// const PrivateRoute = ({
-//   component: Component,
-//   auth: { isAuthenticated, loading },
-//   ...rest
-// }) => (
-//   <Route
-//     {...rest}
-//     render={(props) =>
-//       !isAuthenticated && !loading ? (
-//         <Redirect to='/login' />
-//       ) : (
-//         <Component {...props} />
-//       )
-//     }
-//   />
-// );
-
-// PrivateRoute.propTypes = {
-//   auth: PropTypes.object.isRequired,
-// };
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-// });
-
-// export default connect(mapStateToProps)(PrivateRoute);
