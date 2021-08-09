@@ -24,8 +24,8 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
             Back to Posts
           </Link>
           <PostItem post={post} showActions={false} />
-          <CommentForm postId={post.id} />
-          <div className='comments'>
+          <div className='flex flex-col justify-center items-center gap-y-3 w-full md:-mt-6'>
+            <h2 className='text-lg text-center'>Comments:</h2>
             {post.messages.map((message) => (
               <CommentItem
                 key={message.id}
@@ -34,6 +34,7 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
               />
             ))}
           </div>
+          <CommentForm postId={post.id} />
         </Fragment>
       )}
     </Fragment>
