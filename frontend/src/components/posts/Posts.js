@@ -15,7 +15,7 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <p className='text-2xl text-center'>See what others are jammin' to</p>
+      <p className='text-2xl text-center'>See what others are listening to</p>
       {/* <PostForm /> */}
       <div className='posts'>
         {posts
