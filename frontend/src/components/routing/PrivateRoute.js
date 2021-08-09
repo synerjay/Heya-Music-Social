@@ -7,6 +7,7 @@ import CustomModal from '../layout/CustomModal';
 import SearchArtists from '../search/SearchArtists';
 import SearchTracks from '../search/SearchTracks';
 import ProfileForm from '../profile-forms/ProfileForm';
+import PostForm from '../posts/PostForm';
 
 const PrivateRoute = ({
   name,
@@ -19,6 +20,7 @@ const PrivateRoute = ({
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showPostForm, setShowPostForm] = useState(false);
 
   // const [localProfile, setLocalProfile] = useState(null);
 
@@ -40,6 +42,15 @@ const PrivateRoute = ({
                 setShowModal={setShowProfileModal}
               />
             ) : null}
+
+            {showPostForm ? (
+              <CustomModal
+                title='Add your favorite albums'
+                component={PostForm}
+                setShowModal={setShowPostForm}
+              />
+            ) : null}
+
             {showAlbumModal ? (
               <CustomModal
                 title='Add your favorite albums'
@@ -81,17 +92,33 @@ const PrivateRoute = ({
                     <div class='w-full mt-2 cursor-pointer flex justify-center'>
                       {profile && (
                         <img
-                          class='w-16 h-16 rounded-full'
+                          class='w-16 h-16 rounded-full mb-2'
                           src={profile.avatar_url}
                         />
                       )}
                     </div>
+                    <p>Edit Profile</p>
                   </div>
                   <div
-                    onClick={() => setShowProfileModal(true)}
-                    className='bg-gray-900 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
+                    onClick={() => setShowPostForm(true)}
+                    className='flex flex-row items-center bg-green-600 text-white p-1 rounded mt-2 cursor-pointer hover:bg-gray-700 hover:text-green-400'
                   >
-                    Edit Profile
+                    {' '}
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-4 w-4 mr-2'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+                      />
+                    </svg>
+                    Update Music Status
                   </div>
                   <div
                     onClick={() => setShowArtistModal(true)}

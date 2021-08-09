@@ -13,7 +13,7 @@ const TracksListening = ({ track, setPlayingTrack, setSearchResults }) => {
       id: track.id,
       title: track.title,
       artist: track.artist,
-      img: track.albumUrl,
+      img: track.img,
     });
   }, [track]);
 
@@ -25,8 +25,8 @@ const TracksListening = ({ track, setPlayingTrack, setSearchResults }) => {
         setSearchResults([]);
       }}
     >
-      <div className='flex items-center'>
-        <img src={track.albumUrl} className='h-16 w-16' />
+      <div className='flex items-center w-72'>
+        <img src={track.img} className='h-24 w-24' />
         <div className='ml-3'>
           <div>{track.title}</div>
           <div className='font-bold'>{track.artist}</div>

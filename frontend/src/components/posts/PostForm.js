@@ -25,12 +25,12 @@ const PostForm = ({ addPost }) => {
 
   return (
     <Fragment>
-      <div className='post-form'>
-        <div className='bg-primary p'>
-          <h3>Tell the world what you're listening to...</h3>
-        </div>
+      <div className='flex flex-col text-center p-8'>
+        <h3 className='text-4xl mb-5'>
+          What are you currently listening to ?{' '}
+        </h3>
+        <p className='mb-5 '>Search any track below </p>
         <form
-          className='form my-1'
           onSubmit={(e) => {
             e.preventDefault();
             addPost({ ...playingTrack, body });
@@ -40,26 +40,31 @@ const PostForm = ({ addPost }) => {
         >
           <SearchTracks setPlayingTrack={setPlayingTrack} />
           {playingTrack && (
-            <div className='flex flex-col items-center'>
-              <p>You're currently listening to</p>
-              <img src={playingTrack.img} className='h-16 w-16' />
-              <div className='ml-3'>
-                <div>{playingTrack.title}</div>
-                <div className='font-bold'>{playingTrack.artist}</div>
+            <>
+              <div className='flex flex-col items-center'>
+                <p>You're currently listening to</p>
+                <img src={playingTrack.img} className='h-16 w-16' />
+                <div className='ml-3'>
+                  <div>{playingTrack.title}</div>
+                  <div className='font-bold'>{playingTrack.artist}</div>
+                </div>
+                <textarea
+                  name='body'
+                  cols='30'
+                  rows='5'
+                  placeholder='Say something about this song'
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  required
+                />
               </div>
-              <textarea
-                name='body'
-                cols='30'
-                rows='5'
-                placeholder='Say something about this song'
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                required
+              <input
+                type='submit'
+                className='btn btn-dark my-1'
+                value='Submit'
               />
-            </div>
+            </>
           )}
-
-          <input type='submit' className='btn btn-dark my-1' value='Submit' />
         </form>
       </div>
     </Fragment>

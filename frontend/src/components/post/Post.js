@@ -25,7 +25,7 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
         <Fragment>
           <Link
             to='/posts'
-            className='flex items-center w-48 justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
+            className='flex items-center w-40 justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
           >
             {' '}
             <svg
@@ -40,7 +40,7 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
                 clipRule='evenodd'
               />
             </svg>
-            Back to Posts
+            Back to Feed
           </Link>
           <PostItem post={post} showActions={false} />
           <div className='flex flex-col justify-center items-center gap-y-3 w-full'>

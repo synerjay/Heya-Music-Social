@@ -112,19 +112,21 @@ const SearchTracks = ({
           </div>
         </div>
       </form>
-      <div className='flex w-full flex-col ml-7 text-center'>
-        <h2 className='text-2xl text-center font-bold'>
-          {' '}
-          Add your favorite tracks:{' '}
-        </h2>
-        <p className='text-sm'>
-          {' '}
-          Search any track and click on the plus button to add{' '}
-        </p>
-        {selectedTrack.map((track) => (
-          <SelectedTracks key={track.id} track={track} added={true} />
-        ))}
-      </div>
+      {setPlayingTrack ? null : (
+        <div className='flex w-full flex-col ml-7 text-center'>
+          <h2 className='text-2xl text-center font-bold'>
+            {' '}
+            Add your favorite tracks:{' '}
+          </h2>
+          <p className='text-sm'>
+            {' '}
+            Search any track and click on the plus button to add{' '}
+          </p>
+          {selectedTrack.map((track) => (
+            <SelectedTracks key={track.id} track={track} added={true} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
