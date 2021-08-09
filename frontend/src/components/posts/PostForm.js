@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 import SearchTracks from '../search/SearchTracks';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, setShowModal, history }) => {
   // 1. Make a component state,
   const [body, setBody] = useState('');
-  const [playingTrack, setPlayingTrack] = useState();
+  const [playingTrack, setPlayingTrack] = useState(null);
 
   //2. Make input field response to state change - HTML tags need to be changed with value={NameOfField} and onChange={onChange}
   //const onChange = (e) => setText({ ...text, [e.target.name]: e.target.value });
@@ -33,15 +33,16 @@ const PostForm = ({ addPost }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addPost({ ...playingTrack, body });
+            addPost({ ...playingTrack, body }, history);
             setBody('');
-            setPlayingTrack();
+            setPlayingTrack(null);
+            setShowModal(false);
           }}
         >
           <SearchTracks setPlayingTrack={setPlayingTrack} />
           {playingTrack && (
             <>
-              <div className='flex flex-col items-center'>
+              <div className='flex flex-col items-center w-full'>
                 <p>You're currently listening to</p>
                 <img src={playingTrack.img} className='h-16 w-16' />
                 <div className='ml-3'>

@@ -48,6 +48,7 @@ const PrivateRoute = ({
                 title='Add your favorite albums'
                 component={PostForm}
                 setShowModal={setShowPostForm}
+                history={props.history}
               />
             ) : null}
 

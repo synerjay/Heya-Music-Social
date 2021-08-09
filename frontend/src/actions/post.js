@@ -96,7 +96,7 @@ export const deletePost = (id) => async (dispatch) => {
 
 // Add Post - whenever there is an action that needs to put in the payload, data should be passed in the func argument
 
-export const addPost = (formData) => async (dispatch) => {
+export const addPost = (formData, history) => async (dispatch) => {
   try {
     const res = await axios.post('/updates/', formData);
     // in a post request to the backend, the data is inputed in the second argument of the axios.post method
@@ -107,6 +107,7 @@ export const addPost = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert('Post Created', 'success'));
+    history.push('/posts');
   } catch (err) {
     dispatch({
       type: POST_ERROR,
