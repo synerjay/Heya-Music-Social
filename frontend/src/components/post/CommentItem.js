@@ -16,7 +16,7 @@ const CommentItem = ({
   return (
     <Fragment>
       <div class='flex flex-row overflow-hidden bg-gray-800 shadow-lg h-auto w-96 max-w-2xl  border-black border sm:rounded-3xl p-1'>
-        <div className='flex flex-col content-between justify-between items-center'>
+        <div className='flex w-24 flex-col content-between justify-between items-center'>
           <img class='rounded-xl h-16 w-16' src={avatar_url} />
           {!auth.loading && added_by === auth.user.username && (
             <svg

@@ -24,7 +24,7 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
             Back to Posts
           </Link>
           <PostItem post={post} showActions={false} />
-          <div className='flex flex-col justify-center items-center gap-y-3 w-full md:-mt-6'>
+          <div className='flex flex-col justify-center items-center gap-y-3 w-full'>
             <h2 className='text-lg text-center'>Comments:</h2>
             {post.messages.map((message) => (
               <CommentItem
