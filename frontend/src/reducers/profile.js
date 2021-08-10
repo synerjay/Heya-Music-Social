@@ -1,6 +1,8 @@
 import {
   GET_PROFILE,
+  GET_MEMBERPROFILE,
   PROFILE_ERROR,
+  CLEAR_MEMBERPROFILE,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
@@ -11,6 +13,7 @@ import {
 const initialState = {
   profile: null,
   profiles: [],
+  memberProfile: null,
   accessToken: null,
   loading: true,
   error: {},
@@ -25,6 +28,12 @@ export default function foo(state = initialState, action) {
       return {
         ...state,
         profile: payload,
+        loading: false,
+      };
+    case GET_MEMBERPROFILE:
+      return {
+        ...state,
+        memberProfile: payload,
         loading: false,
       };
     case GET_PROFILES:
@@ -44,6 +53,12 @@ export default function foo(state = initialState, action) {
       return {
         ...state,
         profile: null,
+        loading: false,
+      };
+    case CLEAR_MEMBERPROFILE:
+      return {
+        ...state,
+        memberProfile: null,
         loading: false,
       };
     case GET_TOKEN:

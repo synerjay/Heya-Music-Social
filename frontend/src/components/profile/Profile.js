@@ -12,7 +12,7 @@ import ProfileAlbum from './ProfileAlbum';
 
 const Profile = ({
   getProfileById,
-  profile: { profile, loading },
+  profile: { memberProfile, loading },
   auth,
   match,
 }) => {
@@ -22,7 +22,7 @@ const Profile = ({
 
   return (
     <Fragment>
-      {profile === null || loading ? (
+      {memberProfile === null || loading ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -32,7 +32,7 @@ const Profile = ({
           </Link>
           {auth.isAuthenticated &&
             auth.loading === false &&
-            auth.user.username === profile.user && (
+            auth.user.username === memberProfile.user && (
               <Link to='/edit-profile' className='btn btn-dark'>
                 Edit Profile
               </Link>
@@ -40,13 +40,13 @@ const Profile = ({
           <div class='profile-grid my-1'>
             {' '}
             {/* This div grid is needed to organize the profile components into a grid*/}
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
+            <ProfileTop profile={memberProfile} />
+            <ProfileAbout profile={memberProfile} />
             <div class='profile-album bg-white p-2'>
               <h2 class='text-primary'>Favorite Albums</h2>
-              {profile.albums.length > 0 ? (
+              {memberProfile.albums.length > 0 ? (
                 <Fragment>
-                  {profile.albums.map((album) => (
+                  {memberProfile.albums.map((album) => (
                     <ProfileAlbum key={album.id} album={album} />
                   ))}
                 </Fragment>
@@ -56,9 +56,9 @@ const Profile = ({
             </div>
             <div class='profile-artist bg-white p-2'>
               <h2 class='text-primary'>Favorite Artists</h2>
-              {profile.artists.length > 0 ? (
+              {memberProfile.artists.length > 0 ? (
                 <Fragment>
-                  {profile.artists.map((artist) => (
+                  {memberProfile.artists.map((artist) => (
                     <ProfileArtist key={artist.id} artist={artist} />
                   ))}
                 </Fragment>
@@ -68,9 +68,9 @@ const Profile = ({
             </div>
             <div class='profile-track bg-white p-2'>
               <h2 class='text-primary'>Favorite Tracks</h2>
-              {profile.tracks.length > 0 ? (
+              {memberProfile.tracks.length > 0 ? (
                 <Fragment>
-                  {profile.tracks.map((track) => (
+                  {memberProfile.tracks.map((track) => (
                     <ProfileTrack key={track.id} track={track} />
                   ))}
                 </Fragment>

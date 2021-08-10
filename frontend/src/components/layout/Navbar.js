@@ -19,12 +19,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       >
         Music Feed
       </Link>
-      {/* <Link
+      <Link
         to='/profiles'
         class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
       >
         Members
-      </Link> */}
+      </Link>
 
       <a
         onClick={logout}

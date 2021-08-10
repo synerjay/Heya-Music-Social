@@ -3,6 +3,8 @@ import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 import {
   GET_PROFILE,
+  GET_MEMBERPROFILE,
+  CLEAR_MEMBERPROFILE,
   GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
@@ -40,7 +42,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 
 // Get all Profiles
 export const getProfiles = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE }); // we need clear profile here so that the previous user's profile doesnt get remained in the browser
+  dispatch({ type: CLEAR_MEMBERPROFILE }); // we need clear profile here so that the previous user's profile doesnt get remained in the browser
 
   try {
     const res = await axios.get('/profile/members');
@@ -68,7 +70,7 @@ export const getProfileById = (userId) => async (dispatch) => {
     const res = await axios.get(`/profile/member/${userId}`);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_MEMBERPROFILE,
       payload: res.data.profile,
     });
   } catch (err) {
