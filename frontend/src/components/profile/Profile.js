@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -9,6 +9,7 @@ import ProfileAbout from './ProfileAbout';
 import ProfileTrack from './ProfileTrack';
 import ProfileArtist from './ProfileArtist';
 import ProfileAlbum from './ProfileAlbum';
+import StatusUpdates from './StatusUpdates';
 
 const Profile = ({
   getProfileById,
@@ -19,6 +20,17 @@ const Profile = ({
   useEffect(() => {
     getProfileById(match.params.id); // in react, we get the params by accessing the match object from the props
   }, [getProfileById, match.params.id]);
+
+  const [updates, setUpdates] = useState(null);
+
+  useEffect(() => {
+    if (!memberProfile) return;
+    setUpdates(memberProfile.updates);
+  }, [memberProfile]);
+
+  useEffect(() => {
+    console.log(updates);
+  }, [updates]);
 
   return (
     <Fragment>
@@ -94,11 +106,38 @@ const Profile = ({
               </div>
 
               <div class='w-full'>
-                <h3 class='font-bold text-gray-600 text-left px-4'>
-                  Recent activites
+                <h3 class='font-bold text-gray-200 text-left px-4'>
+                  Recent Music Feed
                 </h3>
                 <div class='mt-5 w-full'>
-                  <a
+                  {memberProfile.updates.map((update) => {
+                    return <StatusUpdates key={update.id} post={update} />;
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      )}
+    </Fragment>
+  );
+};
+
+Profile.propTypes = {
+  getProfileById: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { getProfileById })(Profile);
+
+{
+  /* <a
                     href='#'
                     class='w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 block hover:bg-gray-100 transition duration-150'
                   >
@@ -161,29 +200,8 @@ const Profile = ({
                     />
                     Added new rank
                     <span class='text-gray-400 text-sm'>5 days ago</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Fragment>
-      )}
-    </Fragment>
-  );
-};
-
-Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  profile: state.profile,
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, { getProfileById })(Profile);
+                  </a> */
+}
 
 {
   /* <Fragment>
