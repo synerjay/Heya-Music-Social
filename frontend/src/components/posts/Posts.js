@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import { getPosts } from '../../actions/post';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
+import ReactLoading from 'react-loading';
 
 const Posts = ({ post: { posts, loading }, getPosts }) => {
   useEffect(() => {
@@ -12,7 +13,9 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
   }, [getPosts]);
 
   return loading ? (
-    <Spinner />
+    <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
+      <ReactLoading type='bars' color='#fff' width={300} />
+    </div>
   ) : (
     <Fragment>
       <p className='text-2xl text-center'>See what others are listening to</p>

@@ -47,15 +47,20 @@ const PostItem = ({
                 {/* Start of Target 1 */}
                 {!post ? (
                   <>
-                    <p className='text-lg'> You're currently listening to:</p>
-                    <p className='text-xl font-bold'>
+                    <p className='text-sm md:text-lg'>
+                      {' '}
+                      You're currently listening to:
+                    </p>
+                    <p className='text-sm md:text-xl font-bold'>
                       {playingTrack.title} - {playingTrack.artist}
                     </p>{' '}
                   </>
                 ) : (
                   <>
                     {' '}
-                    <h2 class='text-md font-bold'>{post.added_by}</h2>
+                    <Link to={`/profile/${post.added_by}`}>
+                      <h2 class='text-md font-bold'>{post.added_by}</h2>
+                    </Link>
                     <p className='text-xs'> is currently listening to:</p>
                     <p className='text-sm font-bold'>
                       {post.track_title} - {post.track_artist}
