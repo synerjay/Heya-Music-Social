@@ -36,7 +36,7 @@ const PostItem = ({
 
   return (
     <Fragment>
-      <div class='py-1 md:my-7 sm:max-w-xl sm:mx-auto'>
+      <div class='py-1 md:my-5 sm:max-w-xl sm:mx-auto'>
         <div class='bg-gray-800 shadow-lg h-56  border-black max-h-80	 border sm:rounded-3xl p-1 flex space-x-8'>
           <div class='flex flex-col mx-2 w-1/2 space-y-3'>
             <div class='flex space-x-6 items-start'>
