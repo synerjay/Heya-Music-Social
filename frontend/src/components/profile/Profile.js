@@ -81,28 +81,28 @@ const Profile = ({
               <div class='flex justify-evenly my-0'>
                 <a
                   href={memberProfile.instagram}
-                  class='bg font-bold text-sm text-blue-800 w-full py-1 text-center hover:bg-blue-800 hover:text-white hover:shadow-lg'
+                  class='font-bold text-sm text-yellow-600 w-full text-center py-1 hover:bg-yellow-600 hover:text-white hover:shadow-lg'
                 >
                   Instagram
                 </a>
                 <a
                   href={memberProfile.twitter}
-                  class='bg font-bold text-sm text-blue-400 w-full text-center py-1 hover:bg-blue-400 hover:text-white hover:shadow-lg'
+                  class='font-bold text-sm text-blue-400 w-full text-center py-1 hover:bg-blue-400 hover:text-white hover:shadow-lg'
                 >
                   Twitter
                 </a>
                 <a
                   href={memberProfile.spotify}
-                  class='bg font-bold text-sm text-yellow-600 w-full text-center py-1 hover:bg-yellow-600 hover:text-white hover:shadow-lg'
+                  class='font-bold text-sm text-blue-800 w-full py-1 text-center hover:bg-blue-800 hover:text-white hover:shadow-lg'
                 >
                   Facebook
                 </a>
-                <a
+                {/* <a
                   href=''
-                  class='bg font-bold text-sm text-gray-600 w-full text-center py-1 hover:bg-gray-600 hover:text-white hover:shadow-lg'
+                  class='font-bold text-sm text-gray-600 w-full text-center py-1 hover:bg-gray-600 hover:text-white hover:shadow-lg'
                 >
                   Email
-                </a>
+                </a> */}
               </div>
 
               <div class='w-full'>
@@ -110,9 +110,13 @@ const Profile = ({
                   Recent Music Feed
                 </h3>
                 <div class='mt-5 w-full'>
-                  {memberProfile.updates.map((update) => {
-                    return <StatusUpdates key={update.id} post={update} />;
-                  })}
+                  {memberProfile.updates
+                    .sort((a, b) => {
+                      return new Date(b.date_added) - new Date(a.date_added);
+                    })
+                    .map((update) => {
+                      return <StatusUpdates key={update.id} post={update} />;
+                    })}
                 </div>
               </div>
             </div>
