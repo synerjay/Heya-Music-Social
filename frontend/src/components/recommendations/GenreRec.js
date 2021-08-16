@@ -87,7 +87,7 @@ const GenreRec = ({
             />
           </svg>
           No recommendations found. Try adding your favorite genre first in your
-          profile.{' '}
+          profile or refreshing the page.{' '}
         </div>
       ) : (
         <Carousel

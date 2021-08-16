@@ -3,7 +3,7 @@ import React from 'react';
 const SelectedAlbums = ({ track, added }) => {
   return (
     <div className='flex justify-around items-center w-full '>
-      <img src={track.img} className='h-32 w-32' />
+      <img src={track.img} className='h-32 w-32 rounded-xl' />
       <div className='ml-3'>
         <div>{track.title}</div>
         <div className='font-bold'>{track.artist}</div>

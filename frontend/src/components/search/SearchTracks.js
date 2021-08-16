@@ -18,20 +18,22 @@ const SearchTracks = ({
   const [searchResults, setSearchResults] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState([]);
-  const regex = new RegExp(profile.user);
+  const [regex, setRegex] = useState(null);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
   //Get Spotify Key at start up
-  useEffect(() => {
-    // getAccessToken();
-    if (!profile) getCurrentProfile();
-  }, []);
+  // useEffect(() => {
+  //   // getAccessToken();
+  //   if (!profile) getCurrentProfile();
+  // }, []);
 
   useEffect(() => {
+    if (!profile) getCurrentProfile();
     if (profile) {
       setTracks(profile['tracks']);
+      setRegex(new RegExp(profile.user));
     }
   }, [profile]);
 

@@ -16,7 +16,8 @@ const SearchAlbum = ({
   const [searchResults, setSearchResults] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState([]);
-  const regex = new RegExp(profile.user);
+  const [regex, setRegex] = useState(null);
+
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
@@ -26,9 +27,14 @@ const SearchAlbum = ({
     if (!profile) getCurrentProfile();
     if (profile) {
       setAlbums(profile['albums']);
+      setRegex(new RegExp(profile.user));
     }
     // use this for album seed for track recommendation web api
   }, [profile]);
+
+  useEffect(() => {
+    console.log(regex);
+  }, [regex]);
 
   // Get another Spotify Key after every one hour expiration time
   // useEffect(() => {

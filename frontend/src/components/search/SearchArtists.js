@@ -16,8 +16,7 @@ const SearchArtists = ({
   const [searchResults, setSearchResults] = useState([]);
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState([]);
-
-  const regex = new RegExp(profile.user);
+  const [regex, setRegex] = useState(null);
 
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
@@ -28,6 +27,7 @@ const SearchArtists = ({
     if (!profile) getCurrentProfile();
     if (profile) {
       setArtists(profile['artists']);
+      setRegex(new RegExp(profile.user));
     }
   }, [profile]);
 
