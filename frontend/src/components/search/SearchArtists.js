@@ -4,6 +4,7 @@ import AddArtist from '../profile-forms/AddArtist';
 import { connect } from 'react-redux';
 import { getAccessToken, getCurrentProfile } from '../../actions/profile';
 import SelectedArtists from './SelectedArtists';
+import Artist from '../dashboard/Artist';
 
 const SearchArtists = ({
   accessToken,
@@ -71,12 +72,20 @@ const SearchArtists = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex justify-around'>
+    <div className='flex flex-col md:flex-row justify-around'>
       <form value={search} onChange={(e) => setSearch(e.target.value)}>
-        <div className='flex flex-col gap-y-2'>
+        <div className='flex items-center w-full flex-col gap-y-4'>
+          <h2 className='text-3xl text-green-600 text-center font-bold'>
+            {' '}
+            Add your favorite artists:{' '}
+          </h2>
+          <p className='text-xs'>
+            {' '}
+            Search any artist and click on the plus button to add{' '}
+          </p>
           <input
             type='text'
-            className='border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600 h-10 w-72 px-5 pr-10 rounded-full text-sm focus:outline-none'
+            className='border-2 w-full bg-gray-900 border-gray-200 outline-none focus:border-green-600 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none'
             placeholder='Search any artist'
           />
           <div className='overflow-scroll flex flex-col'>
@@ -99,8 +108,9 @@ const SearchArtists = ({
           </div>
         </div>
       </form>
-      <div className='flex w-full flex-col ml-7 text-center'>
-        <h2 className='text-2xl text-center font-bold'>
+      <div className='flex w-full md:w-4/6  flex-col ml-0 md:ml-7 text-center'>
+        <Artist artists={profile.artists} />
+        {/* <h2 className='text-2xl text-center font-bold'>
           {' '}
           Add your favorite artists:{' '}
         </h2>
@@ -110,7 +120,7 @@ const SearchArtists = ({
         </p>
         {selectedArtist.map((artist) => (
           <SelectedArtists key={artist.id} artist={artist} added={true} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

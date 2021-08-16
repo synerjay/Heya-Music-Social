@@ -27,6 +27,7 @@ const AddArtist = ({
 
   return (
     <button
+      className='w-full '
       onClick={(e) => {
         e.preventDefault();
         addArtist(formData);

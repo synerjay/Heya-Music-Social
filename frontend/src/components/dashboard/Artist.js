@@ -77,7 +77,7 @@ const Artist = ({ artists, deleteArtist }) => {
                   </div> */}
         </div>
       </td>
-      <td class='text-center p-1 text-xl md:text-2xl font-bold'>{art.name}</td>
+      <td class='text-center p-1 text-md md:text-2xl font-bold'>{art.name}</td>
       <td class='p-1 font-bold'></td>
       {/* <td class='p-1'>
         <span class='bg-green-400 text-gray-50 rounded-md px-2'>available</span>
@@ -110,11 +110,11 @@ const Artist = ({ artists, deleteArtist }) => {
         <table class='table w-full text-gray-400 border-separate space-y-6 text-sm'>
           <thead class='bg-gray-800 text-gray-500'>
             <tr>
-              <th class='p-1'>Your Favorite Artists</th>
-              <th class='p-1 text-center'>Artist's Name</th>
-              <th class='p-1 text-left'></th>
+              <th class='p-1 w-1/2'>Your Favorite Artists</th>
+              <th class='p-1 text-center w-1/4'>Artist's Name</th>
+              <th class='p-1 text-left w-0'></th>
               {/* <th class='p-1 text-left'>Status</th> */}
-              <th class='p-1 text-left'>Action</th>
+              <th class='p-1 text-left w-1/12 '>Action</th>
             </tr>
           </thead>
           <tbody>{artistList}</tbody>
