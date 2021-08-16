@@ -73,7 +73,11 @@ const SearchArtists = ({
 
   return (
     <div className='flex flex-col md:flex-row justify-around'>
-      <form value={search} onChange={(e) => setSearch(e.target.value)}>
+      <form
+        className='w-full md:w-1/2'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      >
         <div className='flex items-center w-full flex-col gap-y-4'>
           <h2 className='text-3xl text-green-600 text-center font-bold'>
             {' '}

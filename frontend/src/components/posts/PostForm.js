@@ -27,7 +27,7 @@ const PostForm = ({ addPost, setShowModal, history }) => {
   return (
     <Fragment>
       <div className='flex flex-col items-center -mt-5 text-center p-4 w-full'>
-        <h3 className='text-2xl mb-2'>
+        <h3 className='text-green-600 font-bold text-3xl mb-2'>
           What are you currently listening to ?{' '}
         </h3>
         <p className='mb-2 '>Let the world know </p>

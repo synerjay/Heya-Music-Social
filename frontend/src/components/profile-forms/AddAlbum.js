@@ -30,6 +30,7 @@ const AddAlbum = ({
 
   return (
     <button
+      className='bg-gray-800 p-1 my-0.5 rounded-2xl w-96'
       onClick={(e) => {
         e.preventDefault();
         addAlbum(formData);

@@ -2,7 +2,7 @@ import React from 'react';
 
 const SelectedArtists = ({ artist, added }) => {
   return (
-    <div className='flex max-w-lg my-1 items-center'>
+    <div className='flex justify-around items-center w-full'>
       {artist.img === '' ? (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -17,12 +17,12 @@ const SelectedArtists = ({ artist, added }) => {
           />
         </svg>
       ) : (
-        <img src={artist.img} className='rounded-full h-32 w-32' />
+        <img src={artist.img} className='rounded-full h-28 w-28' />
       )}
       <div className='ml-3'>
-        <div className='font-bold w-40  '>{artist.name}</div>
+        <div className='font-bold w-1/4'>{artist.name}</div>
       </div>
-      <div>
+      <div className='w-1/6 '>
         {added ? (
           <svg
             xmlns='http://www.w3.org/2000/svg'

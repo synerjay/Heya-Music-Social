@@ -19,14 +19,15 @@ const TracksListening = ({ track, setPlayingTrack, setSearchResults }) => {
 
   return (
     <button
+      className='bg-gray-800 p-1 my-0.5 rounded-2xl w-96'
       onClick={(e) => {
         e.preventDefault();
         setPlayingTrack(formData);
         setSearchResults([]);
       }}
     >
-      <div className='flex items-center w-72'>
-        <img src={track.img} className='h-24 w-24' />
+      <div className='flex justify-around items-center w-full '>
+        <img src={track.img} className='h-32 w-32 rounded-xl' />
         <div className='ml-3'>
           <div>{track.title}</div>
           <div className='font-bold'>{track.artist}</div>

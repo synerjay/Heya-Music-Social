@@ -2,13 +2,13 @@ import React from 'react';
 
 const SelectedTracks = ({ track, added }) => {
   return (
-    <div className='flex items-center w-72'>
-      <img src={track.img} className='h-32 w-32' />
+    <div className='flex justify-around items-center w-full '>
+      <img src={track.img} className='h-32 w-32 rounded-xl' />
       <div className='ml-3'>
         <div>{track.title}</div>
         <div className='font-bold'>{track.artist}</div>
       </div>
-      <div>
+      <div className='w-1/6'>
         {added ? (
           <svg
             xmlns='http://www.w3.org/2000/svg'
