@@ -435,15 +435,37 @@ button {
   color: #0077b5;
 }
 
-.table th,
+/* .table th,
 .table td {
   padding: 1rem;
   text-align: left;
-}
+} */
 
 /* .table th {
   background: var(--light-color);
 } */
+
+.table {
+  border-spacing: 0 15px;
+}
+
+i {
+  font-size: 1rem !important;
+}
+
+.table tr {
+  border-radius: 20px;
+}
+
+tr td:nth-child(n + 4),
+tr th:nth-child(n + 4) {
+  border-radius: 0 0.625rem 0.625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+  border-radius: 0.625rem 0 0 0.625rem;
+}
 
 /* Navbar */
 .navbar {
@@ -647,7 +669,9 @@ button {
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
-    margin-top: 8rem;
+    margin-top: 3rem;
+    width: 100%;
+    height: auto;
   }
 
   .hide-sm {

@@ -70,13 +70,32 @@ const ArtistRec = ({
   }, [accessToken]);
 
   return (
-    <div>
-      <h2 className='text-center text-2xl my-5'>
-        {' '}
-        Recommendations by your favorite Artists{' '}
-      </h2>
+    <div className='mt-5 flex flex-col space-y-4'>
+      <div className='flex w-full justify-center items-center'>
+        <h2 className='bg-gray-800 text-sm md:text-lg text-gray-400 font-semibold p-1 w-10/12   text-center rounded-lg'>
+          {' '}
+          Recommendations by your favorite artists{' '}
+        </h2>
+      </div>
       {recommendations.length === 0 ? (
-        <div className='text-center'> Try adding your favorite artist </div>
+        <div className='flex justify-center items-center text-center text-sm md:text-lg my-7'>
+          {' '}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-3 w-3 md:h-6 md:w-6 mr-2 '
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+            />
+          </svg>
+          No recommendations found. Try adding your favorite artists first.{' '}
+        </div>
       ) : (
         <Carousel
           autoPlay={false}

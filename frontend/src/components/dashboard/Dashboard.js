@@ -94,11 +94,14 @@ const Dashboard = ({
           <GenreRec />
           <ArtistRec />
           <TrackRec />
-          <div className='flex flex-row justify-center gap-x-10 my-10'>
+          <Track tracks={profile.tracks} />
+          <Album albums={profile.albums} />
+          <Artist artists={profile.artists} />
+          {/* <div className='flex flex-col justify-center gap-x-2 md:gap-x-10 my-10'>
             <Album albums={profile.albums} />
             <Artist artists={profile.artists} />
             <Track tracks={profile.tracks} />
-          </div>
+          </div> */}
           <div className='my-2'>
             <button className='btn btn-danger' onClick={() => deleteAccount()}>
               <i className='fas fa-user-minus' /> Delete My Account

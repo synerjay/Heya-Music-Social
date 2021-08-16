@@ -61,29 +61,52 @@ const GenreRec = ({
   }, [accessToken]);
 
   return (
-    <div>
-      <h2 className='text-center text-2xl my-5'>
-        {' '}
-        Recommendations by the musical genre you like{' '}
-      </h2>
+    <div className='flex flex-col space-y-4'>
+      <div className='flex w-full justify-center items-center'>
+        <h2 className='bg-gray-800 text-sm md:text-lg text-gray-400 font-semibold p-1 w-10/12   text-center rounded-lg'>
+          {' '}
+          Recommendations by the musical genre you like{' '}
+        </h2>
+      </div>
       {/* <div className='overflow-scroll flex flex-row gap-x-2'> */}
-      <Carousel
-        autoPlay={false}
-        autoFocus={true}
-        interval={2000}
-        showIndicators={true}
-        centerMode={true}
-        showThumbs={false}
-        showStatus={false}
-        dynamicHeight={false}
-        centerSlidePercentage={27}
-        infiniteLoop={true}
-      >
-        {recommendations.map((track) => (
-          <RecommendItem track={track} key={track.id} />
-        ))}
-      </Carousel>
-      {/* </div> */}
+      {recommendations.length === 0 ? (
+        <div className='flex justify-center items-center text-center text-sm md:text-lg my-7'>
+          {' '}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-3 w-3 md:h-6 md:w-6 mr-2'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+            />
+          </svg>
+          No recommendations found. Try adding your favorite genre first in your
+          profile.{' '}
+        </div>
+      ) : (
+        <Carousel
+          autoPlay={false}
+          autoFocus={true}
+          interval={2000}
+          showIndicators={true}
+          centerMode={true}
+          showThumbs={false}
+          showStatus={false}
+          dynamicHeight={false}
+          centerSlidePercentage={27}
+          infiniteLoop={true}
+        >
+          {recommendations.map((track) => (
+            <RecommendItem track={track} key={track.id} />
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 };

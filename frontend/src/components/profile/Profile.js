@@ -10,6 +10,7 @@ import ProfileTrack from './ProfileTrack';
 import ProfileArtist from './ProfileArtist';
 import ProfileAlbum from './ProfileAlbum';
 import StatusUpdates from './StatusUpdates';
+import ReactLoading from 'react-loading';
 
 const Profile = ({
   getProfileById,
@@ -35,7 +36,9 @@ const Profile = ({
   return (
     <Fragment>
       {memberProfile === null || loading ? (
-        <Spinner />
+        <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
+          <ReactLoading type='bars' color='#fff' width={300} />
+        </div>
       ) : (
         <Fragment>
           <Link to='/profiles' className='btn btn-light'>
