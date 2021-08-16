@@ -679,6 +679,11 @@ tr th:nth-child(1) {
     height: auto;
   }
 
+  .CustomModal {
+    height: 90%;
+    width: 90%;
+  }
+
   .hide-sm {
     display: none;
   }

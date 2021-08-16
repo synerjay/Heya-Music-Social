@@ -75,7 +75,7 @@ const SearchAlbum = ({
   }, [search, accessToken]);
 
   return (
-    <div className='flex justify-around'>
+    <div className='flex flex-col md:flex-row justify-around'>
       <form value={search} onChange={(e) => setSearch(e.target.value)}>
         <div className='flex items-center w-full flex-col gap-y-4'>
           <h2 className='text-3xl text-green-600 text-center font-bold'>
@@ -113,7 +113,7 @@ const SearchAlbum = ({
         </div>
       </form>
       {/* Selected album components put here */}
-      <div className='flex w-4/6  flex-col ml-7 text-center'>
+      <div className='flex w-full md:w-4/6  flex-col ml-0 md:ml-7 text-center'>
         <Album albums={profile.albums} />
         {/* <h2 className='text-2xl text-center font-bold'>
           {' '}
