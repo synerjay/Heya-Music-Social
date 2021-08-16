@@ -281,7 +281,7 @@ img {
   position: fixed;
   left: -2px;
   bottom: 5px;
-  z-index: 50;
+  z-index: 55;
   padding: 15px;
   width: 100%;
   margin-left: 10px;

@@ -63,7 +63,7 @@ const GenreRec = ({
   return (
     <div className='flex flex-col space-y-4'>
       <div className='flex w-full justify-center items-center'>
-        <h2 className='bg-gray-800 text-sm md:text-lg text-gray-400 font-semibold p-1 w-10/12   text-center rounded-lg'>
+        <h2 className='bg-gray-800 text-sm md:text-lg text-green-500 font-semibold p-1 w-10/12   text-center rounded-lg'>
           {' '}
           Recommendations by the musical genre you like{' '}
         </h2>
