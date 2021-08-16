@@ -68,11 +68,11 @@ const Album = ({ albums, deleteAlbum }) => {
         <table class='table w-full text-gray-400 border-separate space-y-6 text-sm'>
           <thead class='bg-gray-800 text-gray-500'>
             <tr>
-              <th class='p-1'>Your Favorite Albums</th>
+              <th class='p-1 w-1/4'>Your Favorite Albums</th>
               <th class='p-1 text-center w-1/4'>Title</th>
               <th class='p-1 text-center w-1/4'>Artists' Name</th>
               {/* <th class='p-1 text-left'>Status</th> */}
-              <th class='p-1 text-left'>Action</th>
+              <th class='p-1 text-left w-1/12 '>Action</th>
             </tr>
           </thead>
           <tbody>{albumList}</tbody>

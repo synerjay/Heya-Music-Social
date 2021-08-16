@@ -445,6 +445,11 @@ button {
   background: var(--light-color);
 } */
 
+.CustomModal {
+  height: 95%;
+  width: 90%;
+}
+
 .table {
   border-spacing: 0 15px;
 }
