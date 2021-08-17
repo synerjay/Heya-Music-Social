@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import { Transition } from '@headlessui/react';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [menu, setMenu] = useState(false);
@@ -137,7 +138,17 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           )}
         </nav>
       </header>
-      {menu ? (
+      {/* {menu ? ( */}
+
+      <Transition
+        show={menu}
+        enter='transition ease-in-out duration-200 transform'
+        enterFrom='-translate-x-full'
+        enterTo='translate-x-0'
+        leave='transition ease-in-out duration-300 transform'
+        leaveFrom='translate-x-0'
+        leaveTo='-translate-x-full'
+      >
         <div class='navbar-menu relative z-50'>
           <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
           <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
@@ -242,7 +253,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </div>
           </nav>
         </div>
-      ) : null}
+      </Transition>
+      {/* ) : null} */}
     </>
   );
 };

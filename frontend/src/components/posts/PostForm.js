@@ -30,7 +30,7 @@ const PostForm = ({ addPost, setShowModal, history }) => {
         <h3 className='text-green-600 font-bold text-3xl mb-2'>
           What are you currently listening to ?{' '}
         </h3>
-        <p className='mb-2 '>Let the world know </p>
+        <p className='mb-2 '>Let your friends know </p>
         <form
           className='flex flex-col items-center w-full'
           onSubmit={(e) => {
