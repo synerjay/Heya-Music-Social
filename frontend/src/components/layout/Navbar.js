@@ -138,68 +138,68 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <div>
               <ul>
                 <li class='mb-1'>
-                  <a
+                  <Link
+                    to='/dashboard'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
                   >
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li class='mb-1'>
-                  <a
+                  <Link
+                    to='/posts'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
                   >
                     Music Feed
-                  </a>
+                  </Link>
                 </li>
                 <li class='mb-1'>
-                  <a
+                  <Link
+                    to='/profiles'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
                   >
                     Members
-                  </a>
+                  </Link>
                 </li>
                 <li class='mb-1'>
-                  <a
+                  <Link
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
+                    to='/add-artist'
                   >
                     Add Artist
-                  </a>
+                  </Link>
                 </li>
                 <li class='mb-1'>
-                  <a
+                  <Link
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
+                    to='/add-album'
                   >
                     Add Albums
-                  </a>
+                  </Link>
                 </li>
                 <li class='mb-1'>
-                  <a
+                  <Link
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    href='#'
+                    to='/add-track'
                   >
                     Add Tracks
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div class='mt-auto'>
               <div class='pt-6'>
                 <a
-                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-900 hover:bg-gray-900 rounded-xl'
+                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
                   href='#'
                 >
                   Settings
                 </a>
                 <a
-                  class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl'
+                  class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
                   href='#'
                 >
-                  Sign Up
+                  Log out
                 </a>
               </div>
               <p class='my-4 text-xs text-center text-gray-400'>
