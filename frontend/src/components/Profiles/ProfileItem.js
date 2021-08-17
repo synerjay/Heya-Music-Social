@@ -6,17 +6,17 @@ const ProfileItem = ({
   profile: { id, user, name, genre, avatar_url, bio, tracks, artists },
 }) => {
   return (
-    <div class='max-w-3xl w-2/3  mx-auto z-10'>
+    <div class='max-w-3xl w-full md:w-2/3  mx-auto z-10'>
       <div class='flex flex-col'>
         <div class='bg-gray-800 border border-black shadow-lg  rounded-3xl p-4 m-4'>
-          <div class='flex-none sm:flex'>
-            <div class=' relative h-32 w-32   sm:mb-0 mb-3'>
+          <div class='flex'>
+            <div class=' relative h-32 w-40 md:w-32 mr-2 md:mr-1   sm:mb-0 mb-3'>
               <img
                 src={avatar_url}
                 alt='aji'
                 class=' w-32 h-32 object-cover rounded-2xl'
               />
-              <a
+              {/* <a
                 href='#'
                 class='absolute -right-2 bottom-2   -ml-3  text-white p-1 text-xs bg-green-400 hover:bg-green-500 font-medium tracking-wider rounded-full transition ease-in duration-300'
               >
@@ -28,14 +28,14 @@ const ProfileItem = ({
                 >
                   <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
                 </svg>
-              </a>
+              </a> */}
             </div>
             <div class='flex-auto sm:ml-5 justify-evenly'>
               <div class='flex items-center justify-between sm:mt-2'>
                 <div class='flex items-center'>
                   <div class='flex flex-col'>
                     <div class='w-full flex-none text-lg text-gray-200 font-bold leading-none'>
-                      {user}
+                      <Link to={`/profile/${user}`}>{user}</Link>
                     </div>
                     <div class='flex-auto text-gray-400 my-1'>
                       <span class='mr-3 '>{name}</span>
