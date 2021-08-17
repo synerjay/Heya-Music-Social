@@ -85,12 +85,12 @@ const Dashboard = ({
             />
           ) : null}
 
-          <DashboardActions
+          {/* <DashboardActions
             setShowAlbumModal={setShowAlbumModal}
             setShowArtistModal={setShowArtistModal}
             setShowTrackModal={setShowTrackModal}
             setShowProfileModal={setShowProfileModal}
-          />
+          /> */}
           <GenreRec />
           <ArtistRec />
           <TrackRec />

@@ -1,53 +1,61 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-  const authLinks = (
-    <div class='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
-      <Link
-        to='/dashboard'
-        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
-      >
-        Dashboard
-      </Link>
-      <Link
-        to='/posts'
-        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
-      >
-        Music Feed
-      </Link>
-      <Link
-        to='/profiles'
-        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
-      >
-        Members
-      </Link>
+  const [menu, setMenu] = useState(false);
 
-      <a
-        onClick={logout}
-        href='#!'
-        class='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
-      >
-        <button className='rounded inline-flex items-center'>
-          <svg
-            className='w-3 h-3 mr-2'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 20 20'
-            fill='currentColor'
-          >
-            <path
-              fillRule='evenodd'
-              d='M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z'
-              clipRule='evenodd'
-            />
-          </svg>
-          <span className='font-semibold'>Logout</span>
-        </button>
-      </a>
-    </div>
+  const handleMenu = () => {
+    setMenu(!menu);
+  };
+
+  const authLinks = (
+    <Fragment>
+      <div class='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
+        <Link
+          to='/dashboard'
+          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+        >
+          Dashboard
+        </Link>
+        <Link
+          to='/posts'
+          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+        >
+          Music Feed
+        </Link>
+        <Link
+          to='/profiles'
+          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+        >
+          Members
+        </Link>
+
+        <a
+          onClick={logout}
+          href='#!'
+          class='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
+        >
+          <button className='rounded inline-flex items-center'>
+            <svg
+              className='w-3 h-3 mr-2'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+            >
+              <path
+                fillRule='evenodd'
+                d='M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z'
+                clipRule='evenodd'
+              />
+            </svg>
+            <span className='font-semibold'>Logout</span>
+          </button>
+        </a>
+      </div>
+    </Fragment>
   );
 
   const guestLinks = (
@@ -74,23 +82,126 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <header class='navbar w-full md:h-16 bg-gray-800 p-1 flex justify-between items-center'>
-      <div class='cursor-pointer'>
+    <>
+      <header class='navbar w-full md:h-16 bg-gray-800 p-1 flex flex-row justify-between'>
+        {/* <div class='w-5 cursor-pointer'> */}
         <h1 className='text-xl font-bold'>
-          //<Link to='/'>heya music social</Link>
-          //{' '}
+          <Link to='/'>heya music social</Link>
         </h1>
-        {/* <img
-          class='rounded-full'
-          src='data:image/jpeg;base64,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'
-        /> */}
-      </div>
-      <nav class='w-1/2 flex items-center justify-end'>
-        {!loading && (
-          <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-        )}
-      </nav>
-    </header>
+        {/* </div> */}
+        {/* <div class='w-4 h-4 md:hidden'> */}
+        <button
+          onClick={() => setMenu(!menu)}
+          class='navbar-burger md:hidden flex items-center text-gray-200 mr-2'
+        >
+          <svg
+            class='block h-4 w-4 fill-current'
+            viewBox='0 0 20 20'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <title>Mobile menu</title>
+            <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
+          </svg>
+        </button>
+        {/* </div> */}
+        <nav class='w-1/2 md:flex hidden items-center justify-end'>
+          {!loading && (
+            <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+          )}
+        </nav>
+      </header>
+      {menu ? (
+        <div class='navbar-menu relative z-50'>
+          <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
+          <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
+            <div class='flex items-center mb-8'>
+              <a class='mr-auto text-3xl font-bold leading-none' href='#'>
+                heya music social
+              </a>
+              <button onClick={() => setMenu(!menu)} class='navbar-close'>
+                <svg
+                  class='h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M6 18L18 6M6 6l12 12'
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <ul>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    href='#'
+                  >
+                    Home Mobile
+                  </a>
+                </li>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    href='#'
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    href='#'
+                  >
+                    Services
+                  </a>
+                </li>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    href='#'
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    href='#'
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class='mt-auto'>
+              <div class='pt-6'>
+                <a
+                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl'
+                  href='#'
+                >
+                  Sign in
+                </a>
+                <a
+                  class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl'
+                  href='#'
+                >
+                  Sign Up
+                </a>
+              </div>
+              <p class='my-4 text-xs text-center text-gray-400'>
+                <span>Copyright © 2021</span>
+              </p>
+            </div>
+          </nav>
+        </div>
+      ) : null}
+    </>
   );
 };
 
@@ -105,72 +216,232 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, { logout })(Navbar);
 
+//  VERY IMPORTANT! DO NOT DELETE BELOW!!
+
+// BACK UP BELOW
+
 {
-  /* <div className='flex p-1 text-white bg-red-500 rounded cursor-pointer text-center text-sm'>
-            <button className='rounded inline-flex items-center'>
-              <svg
-                className='w-4 h-4 mr-2'
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z'
-                  clipRule='evenodd'
-                />
-              </svg>
-              <span className='font-semibold'>Logout</span>
-            </button>
-          </div> */
+  /* <>
+<nav class='relative px-4 py-4 flex justify-between items-center bg-white'>
+  <a class='text-3xl font-bold leading-none' href='#'>
+    <svg class='h-10' alt='logo' viewBox='0 0 10240 10240'>
+      <path
+        xmlns='http://www.w3.org/2000/svg'
+        d='M8284 9162 c-2 -207 -55 -427 -161 -667 -147 -333 -404 -644 -733 -886 -81 -59 -247 -169 -256 -169 -3 0 -18 -9 -34 -20 -26 -19 -344 -180 -354 -180 -3 0 -29 -11 -58 -24 -227 -101 -642 -225 -973 -290 -125 -25 -397 -70 -480 -80 -22 -3 -76 -9 -120 -15 -100 -13 -142 -17 -357 -36 -29 -2 -98 -7 -153 -10 -267 -15 -436 -28 -525 -40 -14 -2 -45 -7 -70 -10 -59 -8 -99 -14 -130 -20 -14 -3 -41 -7 -60 -11 -19 -3 -39 -7 -45 -8 -5 -2 -28 -6 -50 -10 -234 -45 -617 -165 -822 -257 -23 -10 -45 -19 -48 -19 -7 0 -284 -138 -340 -170 -631 -355 -1107 -842 -1402 -1432 -159 -320 -251 -633 -308 -1056 -26 -190 -27 -635 -1 -832 3 -19 7 -59 10 -89 4 -30 11 -84 17 -120 6 -36 12 -77 14 -91 7 -43 33 -174 39 -190 3 -8 7 -28 9 -45 6 -35 52 -221 72 -285 7 -25 23 -79 35 -120 29 -99 118 -283 189 -389 67 -103 203 -244 286 -298 75 -49 178 -103 196 -103 16 0 27 16 77 110 124 231 304 529 485 800 82 124 153 227 157 230 3 3 28 36 54 74 116 167 384 497 546 671 148 160 448 450 560 542 14 12 54 45 90 75 88 73 219 172 313 238 42 29 77 57 77 62 0 5 -13 34 -29 66 -69 137 -149 405 -181 602 -7 41 -14 82 -15 90 -1 8 -6 46 -10 83 -3 37 -8 77 -10 88 -2 11 -7 65 -11 122 -3 56 -8 104 -9 107 -2 3 0 12 5 19 6 10 10 8 15 -10 10 -34 167 -346 228 -454 118 -210 319 -515 340 -515 4 0 40 18 80 40 230 128 521 255 787 343 118 40 336 102 395 113 28 5 53 11 105 23 25 5 59 12 75 15 17 3 41 8 55 11 34 7 274 43 335 50 152 18 372 29 565 29 194 0 481 -11 489 -19 2 -3 -3 -6 -12 -6 -9 -1 -20 -2 -24 -3 -33 -8 -73 -16 -98 -21 -61 -10 -264 -56 -390 -90 -649 -170 -1243 -437 -1770 -794 -60 -41 -121 -82 -134 -93 l-24 -18 124 -59 c109 -52 282 -116 404 -149 92 -26 192 -51 220 -55 17 -3 64 -12 105 -21 71 -14 151 -28 230 -41 19 -3 46 -7 60 -10 14 -2 45 -7 70 -10 25 -4 56 -8 70 -10 14 -2 53 -7 88 -10 35 -4 71 -8 81 -10 10 -2 51 -6 92 -9 101 -9 141 -14 147 -21 3 -3 -15 -5 -39 -6 -24 0 -52 -2 -62 -4 -21 -4 -139 -12 -307 -22 -242 -14 -700 -7 -880 13 -41 4 -187 27 -250 39 -125 23 -274 68 -373 111 -43 19 -81 34 -86 34 -4 0 -16 -8 -27 -17 -10 -10 -37 -33 -59 -52 -166 -141 -422 -395 -592 -586 -228 -257 -536 -672 -688 -925 -21 -36 -43 -66 -47 -68 -4 -2 -8 -7 -8 -11 0 -5 -24 -48 -54 -97 -156 -261 -493 -915 -480 -935 2 -3 47 -21 101 -38 54 -18 107 -36 118 -41 58 -25 458 -138 640 -181 118 -27 126 -29 155 -35 14 -2 45 -9 70 -14 66 -15 137 -28 300 -55 37 -7 248 -33 305 -39 28 -3 84 -9 125 -13 163 -16 792 -8 913 12 12 2 58 9 102 15 248 35 423 76 665 157 58 19 134 46 170 60 86 33 344 156 348 166 2 4 8 7 13 7 14 0 205 116 303 184 180 126 287 216 466 396 282 281 511 593 775 1055 43 75 178 347 225 455 100 227 236 602 286 790 59 220 95 364 120 485 6 28 45 245 50 275 2 14 7 41 10 60 3 19 8 49 10 65 2 17 6 46 9 65 15 100 35 262 40 335 3 39 8 89 10 112 22 225 33 803 21 1043 -3 41 -7 129 -11 195 -3 66 -8 136 -10 155 -2 19 -6 76 -10 125 -3 50 -8 101 -10 115 -2 14 -6 57 -10 95 -7 72 -12 113 -20 175 -2 19 -7 55 -10 80 -6 46 -43 295 -51 340 -2 14 -9 54 -15 90 -5 36 -16 97 -24 135 -8 39 -17 84 -20 100 -12 68 -18 97 -50 248 -19 87 -47 204 -61 260 -14 56 -27 109 -29 117 -30 147 -232 810 -253 832 -4 4 -7 -23 -8 -60z'
+      ></path>
+    </svg>
+  </a>
+  {/* MENU BUTTON 
+  <div class='md:hidden'>
+    <button
+      onClick={() => setMenu(!menu)}
+      class='navbar-burger flex items-center text-blue-600 p-3'
+    >
+      <svg
+        class='block h-4 w-4 fill-current'
+        viewBox='0 0 20 20'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <title>Mobile menu</title>
+        <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
+      </svg>
+    </button>
+  </div>
+  {/* MENU BUTTON END HERE 
+  <ul class='hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6'>
+    <li>
+      <a class='text-sm text-gray-400 hover:text-gray-500' href='#'>
+        Home Change
+      </a>
+    </li>
+    <li class='text-gray-300'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        stroke='currentColor'
+        class='w-4 h-4 current-fill'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z'
+        />
+      </svg>
+    </li>
+    <li>
+      <a class='text-sm text-blue-600 font-bold' href='#'>
+        About Us
+      </a>
+    </li>
+    <li class='text-gray-300'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        stroke='currentColor'
+        class='w-4 h-4 current-fill'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z'
+        />
+      </svg>
+    </li>
+    <li>
+      <a class='text-sm text-gray-400 hover:text-gray-500' href='#'>
+        Services
+      </a>
+    </li>
+    <li class='text-gray-300'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        stroke='currentColor'
+        class='w-4 h-4 current-fill'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z'
+        />
+      </svg>
+    </li>
+    <li>
+      <a class='text-sm text-gray-400 hover:text-gray-500' href='#'>
+        Pricing
+      </a>
+    </li>
+    <li class='text-gray-300'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        stroke='currentColor'
+        class='w-4 h-4 current-fill'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z'
+        />
+      </svg>
+    </li>
+    <li>
+      <a class='text-sm text-gray-400 hover:text-gray-500' href='#'>
+        Contact
+      </a>
+    </li>
+  </ul>
+  <a
+    class='hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200'
+    href='#'
+  >
+    Sign In
+  </a>
+  <a
+    class='hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200'
+    href='#'
+  >
+    Sign up
+  </a>
+</nav>
+{menu ? (
+  <div class='navbar-menu relative z-50'>
+    <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
+    <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
+      <div class='flex items-center mb-8'>
+        <a class='mr-auto text-3xl font-bold leading-none' href='#'>
+          heya music
+        </a>
+        <button onClick={() => setMenu(!menu)} class='navbar-close'>
+          <svg
+            class='h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M6 18L18 6M6 6l12 12'
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div>
+        <ul>
+          <li class='mb-1'>
+            <a
+              class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+              href='#'
+            >
+              Home Mobile
+            </a>
+          </li>
+          <li class='mb-1'>
+            <a
+              class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+              href='#'
+            >
+              About Us
+            </a>
+          </li>
+          <li class='mb-1'>
+            <a
+              class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+              href='#'
+            >
+              Services
+            </a>
+          </li>
+          <li class='mb-1'>
+            <a
+              class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+              href='#'
+            >
+              Pricing
+            </a>
+          </li>
+          <li class='mb-1'>
+            <a
+              class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+              href='#'
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class='mt-auto'>
+        <div class='pt-6'>
+          <a
+            class='block p-1 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl'
+            href='#'
+          >
+            Sign in
+          </a>
+          <a
+            class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl'
+            href='#'
+          >
+            Sign Up
+          </a>
+        </div>
+        <p class='my-4 text-xs text-center text-gray-400'>
+          <span>Copyright © 2021</span>
+        </p>
+      </div>
+    </nav>
+  </div>
+) : null}
+</> */
 }
-
-// const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-//   const authLinks = (
-//     <ul>
-//       <li>
-//         <Link to='/profiles'>Members</Link>
-//       </li>
-//       <li>
-//         <Link to='/posts'>Posts</Link>
-//       </li>
-//       <li>
-//         <Link to='/dashboard'>
-//           <i className='fas fa-user'></i>{' '}
-//           <span className='hide-sm'>Dashboard</span>
-//         </Link>
-//       </li>
-//       <li>
-//         <a onClick={logout} href='#!'>
-//           <i className='fas fa-sign-out-alt'></i>{' '}
-//           <span className='hide-sm'>Logout</span>
-//         </a>
-//       </li>
-//     </ul>
-//   );
-
-//   const guestLinks = (
-//     <ul className='font-bold'>
-//       <li>
-//         <Link to='/profiles'>Members</Link>
-//       </li>
-//       <li>
-//         <Link to='/register'>Sign Up</Link>
-//       </li>
-//       <li>
-//         <Link to='/login'>Login</Link>
-//       </li>
-//     </ul>
-//   );
-
-//   return (
-//     <nav className='navbar bg-dark'>
-//       <h1 className='text-xl font-bold'>
-//         <Link to='/'>heya music social</Link>
-//       </h1>
-//       {!loading && (
-//         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-//       )}
-//     </nav>
-//   );
-// };
