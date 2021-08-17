@@ -139,42 +139,50 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               <ul>
                 <li class='mb-1'>
                   <a
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     href='#'
                   >
-                    Home Mobile
+                    Dashboard
                   </a>
                 </li>
                 <li class='mb-1'>
                   <a
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     href='#'
                   >
-                    About Us
+                    Music Feed
                   </a>
                 </li>
                 <li class='mb-1'>
                   <a
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     href='#'
                   >
-                    Services
+                    Members
                   </a>
                 </li>
                 <li class='mb-1'>
                   <a
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     href='#'
                   >
-                    Pricing
+                    Add Artist
                   </a>
                 </li>
                 <li class='mb-1'>
                   <a
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded'
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     href='#'
                   >
-                    Contact
+                    Add Albums
+                  </a>
+                </li>
+                <li class='mb-1'>
+                  <a
+                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                    href='#'
+                  >
+                    Add Tracks
                   </a>
                 </li>
               </ul>
@@ -182,10 +190,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <div class='mt-auto'>
               <div class='pt-6'>
                 <a
-                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl'
+                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-900 hover:bg-gray-900 rounded-xl'
                   href='#'
                 >
-                  Sign in
+                  Settings
                 </a>
                 <a
                   class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl'
