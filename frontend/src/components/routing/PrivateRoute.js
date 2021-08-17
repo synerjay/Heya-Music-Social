@@ -172,7 +172,7 @@ const PrivateRoute = ({
               </div>
             </aside>
 
-            <section className='w-full md:w-4/5 p-4 h-auto'>
+            <section className='w-full md:w-4/5 p-4 mt-7 md:mt-0 h-auto'>
               <Component {...props} />
             </section>
           </main>

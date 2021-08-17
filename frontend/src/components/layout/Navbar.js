@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,6 +10,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const handleMenu = () => {
     setMenu(!menu);
   };
+
+  useEffect(() => {
+    setMenu(false);
+  }, []);
 
   const authLinks = (
     <Fragment>
@@ -55,6 +59,41 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </button>
         </a>
       </div>
+      <div className='flex justify-around space-x-0 w-1/2 md:hidden'>
+        <Link
+          to='/post-form'
+          className='flex flex-row items-center bg-green-600 text-white p-1 rounded mt-0 cursor-pointer hover:bg-gray-700 hover:text-green-400'
+        >
+          {' '}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-4 w-4'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+            />
+          </svg>
+        </Link>
+        <button
+          onClick={() => setMenu(!menu)}
+          class='navbar-burger flex items-center text-gray-200 mr-2'
+        >
+          <svg
+            class='block h-4 w-4 fill-current'
+            viewBox='0 0 20 20'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <title>Mobile menu</title>
+            <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
+          </svg>
+        </button>
+      </div>
     </Fragment>
   );
 
@@ -83,28 +122,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <>
-      <header class='navbar w-full md:h-16 bg-gray-800 p-1 flex flex-row justify-between'>
+      <header class='navbar w-full h-16 md:h-16 bg-gray-800 p-1 flex flex-row justify-between items-center'>
         {/* <div class='w-5 cursor-pointer'> */}
         <h1 className='text-xl font-bold'>
           <Link to='/'>heya music social</Link>
         </h1>
         {/* </div> */}
         {/* <div class='w-4 h-4 md:hidden'> */}
-        <button
-          onClick={() => setMenu(!menu)}
-          class='navbar-burger md:hidden flex items-center text-gray-200 mr-2'
-        >
-          <svg
-            class='block h-4 w-4 fill-current'
-            viewBox='0 0 20 20'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <title>Mobile menu</title>
-            <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
-          </svg>
-        </button>
+
         {/* </div> */}
-        <nav class='w-1/2 md:flex hidden items-center justify-end'>
+        <nav class='w-1/2 flex items-center justify-end'>
           {!loading && (
             <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
           )}
@@ -114,7 +141,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <div class='navbar-menu relative z-50'>
           <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
           <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
-            <div class='flex items-center mb-8'>
+            <div class='flex justify-center items-center mb-8'>
               <a class='mr-auto text-3xl font-bold leading-none' href='#'>
                 heya music social
               </a>
@@ -139,6 +166,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               <ul>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     to='/dashboard'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                   >
@@ -147,6 +175,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </li>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     to='/posts'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                   >
@@ -155,6 +184,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </li>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     to='/profiles'
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                   >
@@ -163,6 +193,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </li>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     to='/add-artist'
                   >
@@ -171,6 +202,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </li>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     to='/add-album'
                   >
@@ -179,6 +211,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </li>
                 <li class='mb-1'>
                   <Link
+                    onClick={() => setMenu(false)}
                     class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                     to='/add-track'
                   >
@@ -196,8 +229,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                   Settings
                 </a>
                 <a
+                  onClick={logout}
+                  href='#!'
                   class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
-                  href='#'
                 >
                   Log out
                 </a>

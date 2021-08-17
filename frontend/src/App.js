@@ -26,6 +26,7 @@ import AddArtist from './components/profile-forms/AddArtist';
 import AddTrack from './components/profile-forms/AddTrack';
 import SearchArtists from './components/search/SearchArtists';
 import SearchTracks from './components/search/SearchTracks';
+import PostForm from './components/posts/PostForm';
 
 const App = () => {
   useEffect(() => {
@@ -68,6 +69,7 @@ const App = () => {
                 component={ProfileForm}
               />
               <PrivateRoute exact path='/add-album' component={SearchAlbum} />
+              <PrivateRoute exact path='/post-form' component={PostForm} />
               <PrivateRoute
                 exact
                 path='/add-artist'
