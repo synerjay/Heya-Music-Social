@@ -8,7 +8,6 @@ import { XIcon } from '@heroicons/react/outline';
 
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     setMenu(false);
