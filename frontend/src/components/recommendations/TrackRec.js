@@ -92,7 +92,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
           autoPlay={false}
           autoFocus={true}
           interval={2000}
-          showIndicators={true}
+          showIndicators={false}
           centerMode={true}
           showThumbs={false}
           showStatus={false}

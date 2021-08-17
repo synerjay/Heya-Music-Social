@@ -98,7 +98,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   const guestLinks = (
-    <div class='md:flex text-white text-sm font-bold hidden sm:block ml-2 gap-x-3 '>
+    <div class='flex text-white text-sm font-bold ml-2 gap-x-3 md:gap-x-5 '>
       {/* <Link
         class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
         to='/profiles'

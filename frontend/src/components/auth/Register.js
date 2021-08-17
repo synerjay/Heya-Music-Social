@@ -43,7 +43,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center -mt-5 px-5 py-5'>
+    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center mt-10 md:-mt-5 px-5 py-5'>
       <div
         className='bg-gray-800 text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
