@@ -9,9 +9,9 @@ import { XIcon } from '@heroicons/react/outline';
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setMenu(false);
-  }, []);
+  // useEffect(() => {
+  //   setMenu(false);
+  // }, []);
 
   const handleLogout = () => {
     setOpen(false);
