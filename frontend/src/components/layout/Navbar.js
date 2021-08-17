@@ -3,14 +3,21 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
-import { Transition } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
+  const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     setMenu(false);
   }, []);
+
+  const handleLogout = () => {
+    setOpen(false);
+    logout();
+  };
 
   const authLinks = (
     <Fragment>
@@ -79,7 +86,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </svg>
         </Link>
         <button
-          onClick={() => setMenu(!menu)}
+          onClick={() => setOpen(!open)}
           class='navbar-burger flex items-center text-gray-200 mr-2'
         >
           <svg
@@ -131,123 +138,156 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           )}
         </nav>
       </header>
-
-      {/* {menu ? ( */}
-      <Transition
-        show={menu}
-        enter='transition ease-in-out duration-200 transform'
-        enterFrom='-translate-x-full'
-        enterTo='translate-x-0'
-        leave='transition ease-in-out duration-300 transform'
-        leaveFrom='translate-x-0'
-        leaveTo='-translate-x-full'
-      >
-        <div class='navbar-menu relative z-50'>
-          <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
-          <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
-            <div class='flex justify-center items-center mb-8'>
-              <a class='mr-auto text-3xl font-bold leading-none' href='#'>
-                heya music social
-              </a>
-              <button onClick={() => setMenu(!menu)} class='navbar-close'>
-                <svg
-                  class='h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M6 18L18 6M6 6l12 12'
-                  ></path>
-                </svg>
-              </button>
+      {/* Put new Mobile menu below here */}
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog
+          as='div'
+          className='fixed inset-0 overflow-hidden'
+          onClose={setOpen}
+        >
+          <div className='absolute inset-0 overflow-hidden'>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-in-out duration-500'
+              enterFrom='opacity-0'
+              enterTo='opacity-100'
+              leave='ease-in-out duration-500'
+              leaveFrom='opacity-100'
+              leaveTo='opacity-0'
+            >
+              <Dialog.Overlay className='absolute inset-0 bg-gray-900 bg-opacity-75 transition-opacity' />
+            </Transition.Child>
+            <div className='fixed inset-y-0 mt-16 right-0 pl-10 max-w-full flex'>
+              <Transition.Child
+                as={Fragment}
+                enter='transform transition ease-in-out duration-500 sm:duration-700'
+                enterFrom='translate-x-full'
+                enterTo='translate-x-0'
+                leave='transform transition ease-in-out duration-500 sm:duration-700'
+                leaveFrom='translate-x-0'
+                leaveTo='translate-x-full'
+              >
+                <div className='relative w-screen max-w-md'>
+                  <Transition.Child
+                    as={Fragment}
+                    enter='ease-in-out duration-500'
+                    enterFrom='opacity-0'
+                    enterTo='opacity-100'
+                    leave='ease-in-out duration-500'
+                    leaveFrom='opacity-100'
+                    leaveTo='opacity-0'
+                  >
+                    <div className='absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4'>
+                      <button
+                        type='button'
+                        className='rounded-md text-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-300'
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className='sr-only'>Close panel</span>
+                        <XIcon className='h-6 w-6' aria-hidden='true' />
+                      </button>
+                    </div>
+                  </Transition.Child>
+                  <div className='h-full flex flex-col py-6 bg-gray-800 shadow-xl overflow-y-scroll'>
+                    <div className='px-4 sm:px-6'>
+                      <Dialog.Title className='text-2xl font-bold text-green-500'>
+                        Welcome,{' '}
+                        {user &&
+                          user.username.charAt(0).toUpperCase() +
+                            user.username.slice(1)}
+                      </Dialog.Title>
+                    </div>
+                    <div className='mt-6 relative flex-1 px-4 sm:px-6'>
+                      {/* Replace with your content */}
+                      <div className='flex flex-col justify-between h-full'>
+                        <div>
+                          <ul>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                to='/dashboard'
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                to='/posts'
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                              >
+                                Music Feed
+                              </Link>
+                            </li>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                to='/profiles'
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                              >
+                                Members
+                              </Link>
+                            </li>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                to='/add-artist'
+                              >
+                                Add Artist
+                              </Link>
+                            </li>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                to='/add-album'
+                              >
+                                Add Albums
+                              </Link>
+                            </li>
+                            <li class='mb-1'>
+                              <Link
+                                onClick={() => setOpen(false)}
+                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                to='/add-track'
+                              >
+                                Add Tracks
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class='mt-auto'>
+                          <div class='pt-6'>
+                            <a
+                              class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
+                              href='#'
+                            >
+                              Settings
+                            </a>
+                            <a
+                              onClick={() => handleLogout()}
+                              href='#!'
+                              class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
+                            >
+                              Log out
+                            </a>
+                          </div>
+                          <p class='my-4 text-xs text-center text-gray-400'>
+                            <span>Copyright © 2021</span>
+                          </p>
+                        </div>
+                      </div>
+                      {/* /End replace */}
+                    </div>
+                  </div>
+                </div>
+              </Transition.Child>
             </div>
-            <div>
-              <ul>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    to='/dashboard'
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    to='/posts'
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                  >
-                    Music Feed
-                  </Link>
-                </li>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    to='/profiles'
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                  >
-                    Members
-                  </Link>
-                </li>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    to='/add-artist'
-                  >
-                    Add Artist
-                  </Link>
-                </li>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    to='/add-album'
-                  >
-                    Add Albums
-                  </Link>
-                </li>
-                <li class='mb-1'>
-                  <Link
-                    onClick={() => setMenu(false)}
-                    class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-                    to='/add-track'
-                  >
-                    Add Tracks
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div class='mt-auto'>
-              <div class='pt-6'>
-                <a
-                  class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
-                  href='#'
-                >
-                  Settings
-                </a>
-                <a
-                  onClick={logout}
-                  href='#!'
-                  class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
-                >
-                  Log out
-                </a>
-              </div>
-              <p class='my-4 text-xs text-center text-gray-400'>
-                <span>Copyright © 2021</span>
-              </p>
-            </div>
-          </nav>
-        </div>
-      </Transition>
-      {/* ) : null} */}
+          </div>
+        </Dialog>
+      </Transition.Root>
     </>
   );
 };
@@ -262,3 +302,124 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);
+
+{
+  /* {menu ? ( */
+}
+// <Transition
+//   show={menu}
+//   enter='transition ease-in-out duration-200 transform'
+//   enterFrom='-translate-x-full'
+//   enterTo='translate-x-0'
+//   leave='transition ease-in-out duration-300 transform'
+//   leaveFrom='translate-x-0'
+//   leaveTo='-translate-x-full'
+// >
+//   <div class='navbar-menu relative z-50'>
+//     <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
+//     <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
+//       <div class='flex justify-center items-center mb-8'>
+//         <a class='mr-auto text-3xl font-bold leading-none' href='#'>
+//           heya music social
+//         </a>
+//         <button onClick={() => setMenu(!menu)} class='navbar-close'>
+//           <svg
+//             class='h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500'
+//             xmlns='http://www.w3.org/2000/svg'
+//             fill='none'
+//             viewBox='0 0 24 24'
+//             stroke='currentColor'
+//           >
+//             <path
+//               stroke-linecap='round'
+//               stroke-linejoin='round'
+//               stroke-width='2'
+//               d='M6 18L18 6M6 6l12 12'
+//             ></path>
+//           </svg>
+//         </button>
+//       </div>
+//       <div>
+//         <ul>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               to='/dashboard'
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//             >
+//               Dashboard
+//             </Link>
+//           </li>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               to='/posts'
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//             >
+//               Music Feed
+//             </Link>
+//           </li>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               to='/profiles'
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//             >
+//               Members
+//             </Link>
+//           </li>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//               to='/add-artist'
+//             >
+//               Add Artist
+//             </Link>
+//           </li>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//               to='/add-album'
+//             >
+//               Add Albums
+//             </Link>
+//           </li>
+//           <li class='mb-1'>
+//             <Link
+//               onClick={() => setMenu(false)}
+//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+//               to='/add-track'
+//             >
+//               Add Tracks
+//             </Link>
+//           </li>
+//         </ul>
+//       </div>
+//       <div class='mt-auto'>
+//         <div class='pt-6'>
+//           <a
+//             class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
+//             href='#'
+//           >
+//             Settings
+//           </a>
+//           <a
+//             onClick={logout}
+//             href='#!'
+//             class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
+//           >
+//             Log out
+//           </a>
+//         </div>
+//         <p class='my-4 text-xs text-center text-gray-400'>
+//           <span>Copyright © 2021</span>
+//         </p>
+//       </div>
+//     </nav>
+//   </div>
+// </Transition>
+{
+  /* ) : null} */
+}

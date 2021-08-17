@@ -38,7 +38,9 @@ const PostForm = ({ addPost, setShowModal, history }) => {
             addPost({ ...playingTrack, body }, history);
             setBody('');
             setPlayingTrack(null);
-            setShowModal(false);
+            if (setShowModal) {
+              setShowModal(false);
+            }
           }}
         >
           <SearchTracks setPlayingTrack={setPlayingTrack} />
