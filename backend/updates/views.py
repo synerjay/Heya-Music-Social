@@ -15,42 +15,49 @@ Users = apps.get_model('users', 'CustomUser')
 Profile = apps.get_model('profiles', 'Profile')
 
 
+# // @route /updates/posts
+# // @desc Get all posts using
+# // @access Public (No Authentication)
+@api_view(["GET"])
+@csrf_exempt
+@permission_classes([])
+def get_updates(request):
+    updates = Update.objects.all() # Get all posts
+    serializer = UpdateSerializer(updates, many=True, context={"request": request})
+    # PROCESSING DATA IN WHICH FRONTEND CAN READ # try to make the post seralizer output the avatar url s
+    data = serializer.data
+    for item in data:
+        item["added_by"] = Users.objects.get(id=item["added_by"]).username
+        if len(item["likes"]) != 0:
+            for i, like in enumerate(item["likes"]):
+                item["likes"][i] = Users.objects.get(id=like).username
+        if len(item["messages"]) != 0:
+            for message in item["messages"]:
+                message["added_by"] = Users.objects.get(id=message["added_by"]).username
+    return JsonResponse({ 'posts': data }, safe=False, status=status.HTTP_200_OK)
+
+
 # Create your views here.
 # // @router  GET, POST /updates
 # // @desc    Get all posts, Create a post
 # // @access  Private
-@api_view(["GET", "POST"])
+@api_view(["POST"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def get_add_updates(request):
-    if request.method == 'GET':
-        updates = Update.objects.all() # Get all posts
-        serializer = UpdateSerializer(updates, many=True, context={"request": request})
-        # PROCESSING DATA IN WHICH FRONTEND CAN READ # try to make the post seralizer output the avatar url s
-        data = serializer.data
-        for item in data:
-            item["added_by"] = Users.objects.get(id=item["added_by"]).username
-            if len(item["likes"]) != 0:
-                for i, like in enumerate(item["likes"]):
-                    item["likes"][i] = Users.objects.get(id=like).username
-            if len(item["messages"]) != 0:
-                for message in item["messages"]:
-                    message["added_by"] = Users.objects.get(id=message["added_by"]).username
-        return JsonResponse({ 'posts': data }, safe=False, status=status.HTTP_200_OK)
-    else:
-        payload = json.loads(request.body)
-        member = Users.objects.get(id=request.user.id)
-        try:
-              profile = Profile.objects.get(user=request.user.id)
-              update = Update.objects.create(track_title = payload["title"], track_artist = payload["artist"], track_img = payload["img"], body=payload["body"], added_by=member, profile=profile)
-              serializer = UpdateSerializer(update, context={"request": request})
-              data = serializer.data
-              data["added_by"] = member.username 
-              return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
-        except ObjectDoesNotExist as e:
-            return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
-        except Exception:
-            return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    payload = json.loads(request.body)
+    member = Users.objects.get(id=request.user.id)
+    try:
+            profile = Profile.objects.get(user=request.user.id)
+            update = Update.objects.create(track_title = payload["title"], track_artist = payload["artist"], track_img = payload["img"], body=payload["body"], added_by=member, profile=profile)
+            serializer = UpdateSerializer(update, context={"request": request})
+            data = serializer.data
+            data["added_by"] = member.username 
+            return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
+    except ObjectDoesNotExist as e:
+        return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception:
+        return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # // @router  GET one post, PUT, DELETE /updates/:id
 # // @desc    Get one post by ID, Update Post, Delete Post

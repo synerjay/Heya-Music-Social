@@ -16,14 +16,14 @@ import {
 // Get Many Posts method
 
 export const getPosts = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token); // This needs to be included in GET requests or django will reject it!!!
-  }
+  // if (localStorage.token) {
+  //   setAuthToken(localStorage.token); // This needs to be included in GET requests or django will reject it!!!
+  // }
 
   dispatch({ type: CLEAR_POST });
 
   try {
-    const res = await axios.get('/updates/');
+    const res = await axios.get('/updates/posts');
 
     dispatch({
       type: GET_POSTS,

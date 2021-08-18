@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getPosts } from '../../actions/post';
+import PostItem from '../posts/PostItem';
 
-const Landing = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
-  }
+const Landing = ({ isAuthenticated, post: { posts, loading }, getPosts }) => {
+  useEffect(() => {
+    if (isAuthenticated) {
+      return <Redirect to='/dashboard' />;
+    }
+    getPosts();
+  }, []);
 
   return (
     <section className='flex mt-40 md:mt-0 w-full h-screen  '>
@@ -45,13 +50,20 @@ const Landing = ({ isAuthenticated }) => {
           </div>
         </div>
 
-        <div class='max-w-lg pr-24 md:flex justify-center items-center  hidden'>
-          {/* <img
-            class='rounded-lg'
-            src='https://images.unsplash.com/photo-1483058712412-4245e9b90334'
-            alt=''
-          /> */}
-          <svg
+        <div class='w-11/12 mt-20 overflow-y-hidden pr-16 md:flex md:flex-col gap-y-10 hidden'>
+          <h1 className='text-center text-xl -mb-10 font-bold text-green-500'>
+            Latest Feed
+          </h1>
+          {posts
+            .sort(function (a, b) {
+              return new Date(b.date_added) - new Date(a.date_added); // sort post from recent to old
+            })
+            .slice(0, 3)
+            .map((post) => (
+              <PostItem key={post.id} post={post} showActions={false} />
+            ))}
+
+          {/* <svg
             id='a5531c2a-42c0-48e3-8177-211774c58b20'
             data-name='Layer 1'
             xmlns='http://www.w3.org/2000/svg'
@@ -204,7 +216,7 @@ const Landing = ({ isAuthenticated }) => {
               transform='translate(-182.80077 -151.35854)'
               fill='#cbcbcb'
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
     </section>
@@ -213,13 +225,15 @@ const Landing = ({ isAuthenticated }) => {
 
 Landing.propTypes = {
   isAuthenticated: PropTypes.bool,
+  post: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  post: state.post,
 });
 
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps, { getPosts })(Landing);
 
 {
   /* <section className='landing'>

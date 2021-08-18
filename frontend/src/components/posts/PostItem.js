@@ -26,6 +26,7 @@ const PostItem = ({
   };
 
   useEffect(() => {
+    if (!showActions) return;
     if (!post) return;
     if (post.likes.includes(auth.user.username)) {
       setLiked(true);
@@ -36,8 +37,13 @@ const PostItem = ({
 
   return (
     <Fragment>
-      <div class='py-1 md:my-10 sm:max-w-xl sm:mx-auto'>
-        <div class='bg-gray-800 shadow-lg h-56  border-black max-h-80	 border rounded-3xl p-1 flex space-x-0 md:space-x-8'>
+      <div class='py-1 md:my-2 sm:max-w-xl sm:mx-auto'>
+        <div
+          class={
+            'bg-gray-800 shadow-lg border-black max-h-80	 border rounded-3xl p-1 flex space-x-0 md:space-x-8 ' +
+            (showActions ? 'h-56' : 'h-48 ')
+          }
+        >
           <div class='flex flex-col overflow-y-scroll mx-0 md:mx-2 w-10/12 md:w-1/2 space-y-3'>
             <div class='flex space-x-6 items-start'>
               {!post ? null : (
