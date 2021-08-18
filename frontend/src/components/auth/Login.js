@@ -36,9 +36,9 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center -mt-7 md:-mt-16 px-5 py-5'>
+    <div className='overflow-hidden w-screen h-screen bg-gray-900 flex items-center justify-center -mt-7 md:-mt-16 px-5 py-5'>
       <div
-        className='bg-gray-800 text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden'
+        className='bg-gray-800 text-gray-200 rounded-3xl mx-auto my-auto shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
       >
         <div className='md:flex w-full'>

@@ -84,7 +84,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
               d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
             />
           </svg>
-          No recommendations found. Try adding your favorite tracks first or
+          No recommendations found yet. Try adding your favorite tracks first or
           refreshing the page.{' '}
         </div>
       ) : (
