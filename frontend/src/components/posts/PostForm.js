@@ -900,7 +900,7 @@ const PostForm = ({ addPost, setShowModal, history }) => {
               />
               <input
                 type='submit'
-                className='mb-2 mt-3 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
+                className='mb-2 mt-20 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
                 value='Update Status'
               />
             </>

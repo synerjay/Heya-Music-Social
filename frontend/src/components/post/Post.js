@@ -43,7 +43,7 @@ const Post = ({ post: { post, loading }, getPost, match }) => {
             Back to Feed
           </Link>
           <PostItem post={post} showActions={false} />
-          <div className='flex flex-col justify-center items-center gap-y-3 w-full'>
+          <div className='flex flex-col mt-24 justify-center items-center gap-y-3 w-full'>
             <h2 className='text-lg text-center font-bold'>Comments</h2>
             {post.messages.length === 0 ? (
               <p className='text-gray-500'>
