@@ -21,7 +21,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           to='/dashboard'
           class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
         >
-          Dashboad
+          Dashboard
         </Link>
         <Link
           to='/posts'
@@ -187,9 +187,16 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                     <div className='flex space-x-4 items-center px-4 sm:px-6'>
                       <Dialog.Title className='text-2xl font-bold text-green-500'>
                         Welcome,{' '}
-                        {user &&
-                          user.username.charAt(0).toUpperCase() +
-                            user.username.slice(1)}
+                        {user && (
+                          <Link
+                            onClick={() => setOpen(false)}
+                            className='text-green-500 cursor-pointer'
+                            to={`/profile/${user.username}`}
+                          >
+                            {user.username.charAt(0).toUpperCase() +
+                              user.username.slice(1)}
+                          </Link>
+                        )}
                       </Dialog.Title>
                       <Link
                         onClick={() => setOpen(false)}

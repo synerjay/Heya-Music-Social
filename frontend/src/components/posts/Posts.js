@@ -18,9 +18,10 @@ const Posts = ({ post: { posts, loading }, getPosts }) => {
     </div>
   ) : (
     <Fragment>
-      <p className='text-2xl text-center'>See what others are listening to</p>
-      {/* <PostForm /> */}
-      <div className='posts'>
+      <h1 className='text-center text-4xl text-green-600'>Music Feed</h1>
+      <p className='text-xl text-center'>See what others are listening to</p>
+
+      <div>
         {posts
           .sort(function (a, b) {
             return new Date(b.date_added) - new Date(a.date_added); // sort post from recent to old

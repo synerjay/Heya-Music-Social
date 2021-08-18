@@ -36,9 +36,9 @@ const PostItem = ({
 
   return (
     <Fragment>
-      <div class='py-1 md:my-5 sm:max-w-xl sm:mx-auto'>
-        <div class='bg-gray-800 shadow-lg h-56  border-black max-h-80	 border sm:rounded-3xl p-1 flex space-x-8'>
-          <div class='flex flex-col mx-2 w-1/2 space-y-3'>
+      <div class='py-1 md:my-10 sm:max-w-xl sm:mx-auto'>
+        <div class='bg-gray-800 shadow-lg h-56  border-black max-h-80	 border rounded-3xl p-1 flex space-x-0 md:space-x-8'>
+          <div class='flex flex-col overflow-y-scroll mx-0 md:mx-2 w-10/12 md:w-1/2 space-y-3'>
             <div class='flex space-x-6 items-start'>
               {!post ? null : (
                 <img class='rounded-xl h-16 w-16' src={post.avatar_url} />
@@ -177,7 +177,7 @@ const PostItem = ({
             )}
             {/* end of target 2*/}
           </div>
-          <div class='h-48 overflow-visible w-1/2 shadow-xl'>
+          <div class='h-16 md:h-48 overflow-visible w-1/5  md:w-1/2 shadow-xl'>
             {!post ? (
               <img
                 class='rounded-3xl shadow-lg'
@@ -185,7 +185,11 @@ const PostItem = ({
                 alt=''
               />
             ) : (
-              <img class='rounded-3xl shadow-lg' src={post.track_img} alt='' />
+              <img
+                class='rounded-full md:rounded-3xl shadow-lg'
+                src={post.track_img}
+                alt=''
+              />
             )}
           </div>
         </div>
