@@ -9,10 +9,6 @@ import { XIcon } from '@heroicons/react/outline';
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const [open, setOpen] = useState(false);
 
-  // useEffect(() => {
-  //   setMenu(false);
-  // }, []);
-
   const handleLogout = () => {
     setOpen(false);
     logout();
@@ -25,7 +21,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           to='/dashboard'
           class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
         >
-          Dashboard
+          Dashboad
         </Link>
         <Link
           to='/posts'
@@ -188,15 +184,22 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                     </div>
                   </Transition.Child>
                   <div className='h-full flex flex-col py-6 bg-gray-800 shadow-xl overflow-y-scroll'>
-                    <div className='px-4 sm:px-6'>
+                    <div className='flex space-x-4 items-center px-4 sm:px-6'>
                       <Dialog.Title className='text-2xl font-bold text-green-500'>
                         Welcome,{' '}
                         {user &&
                           user.username.charAt(0).toUpperCase() +
                             user.username.slice(1)}
                       </Dialog.Title>
+                      <Link
+                        onClick={() => setOpen(false)}
+                        class='block p-0 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                        to='/edit-profile'
+                      >
+                        Edit Profile
+                      </Link>
                     </div>
-                    <div className='mt-6 relative flex-1 px-4 sm:px-6'>
+                    <div className='mt-0 relative flex-1 px-4 sm:px-6'>
                       {/* Replace with your content */}
                       <div className='flex flex-col justify-between h-full'>
                         <div>
@@ -274,7 +277,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                             </a>
                           </div>
                           <p class='my-4 text-xs text-center text-gray-400'>
-                            <span>Copyright © 2021</span>
+                            <span>
+                              Copyright Created in React + Django by J.
+                              Tolentino © 2021
+                            </span>
                           </p>
                         </div>
                       </div>
