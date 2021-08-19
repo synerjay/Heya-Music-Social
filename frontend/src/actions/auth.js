@@ -160,9 +160,12 @@ export const changePassword =
     const body = JSON.stringify({ new_password1, new_password2 });
 
     try {
-      await axios.post('/api/v1/users/auth/password/change/', body, config);
-
-      dispatch(setAlert('New password has been saved', 'success'));
+      const res = await axios.post(
+        '/api/v1/users/auth/password/change/',
+        body,
+        config
+      );
+      dispatch(setAlert(res.data.detail, 'success'));
     } catch (err) {
       const errors = err.response.data.errors;
       dispatch(

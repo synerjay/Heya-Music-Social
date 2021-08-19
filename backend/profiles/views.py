@@ -116,7 +116,7 @@ def create_delete_profile(request):
                   return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     elif request.method == 'DELETE':
         user.delete()
-        return JsonResponse({'Success': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'detail': 'User account deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
 # // @route PUT /profile/album
 # // @desc Add profile Album
