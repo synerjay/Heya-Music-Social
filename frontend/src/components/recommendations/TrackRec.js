@@ -24,7 +24,6 @@ const TrackRec = ({ accessToken, profile }) => {
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
-    console.log(tracks);
     spotifyApi
       .getRecommendations({
         seed_tracks: tracks.length < 5 ? [tracks] : [...tracks.slice(0, 5)], // limit to only 5 tracks
@@ -57,7 +56,7 @@ const TrackRec = ({ accessToken, profile }) => {
           console.log('Something went wrong!', err);
         }
       );
-  }, [tracks]);
+  }, [accessToken]);
 
   return (
     <div className='mt-5 flex flex-col space-y-4'>
@@ -85,7 +84,7 @@ const TrackRec = ({ accessToken, profile }) => {
             />
           </svg>
           No recommendations found yet. Try adding your favorite tracks first or
-          refreshing the page.{' '}
+          come back again later{' '}
         </div>
       ) : (
         <Carousel

@@ -145,29 +145,9 @@ const ProfileForm = ({
               <div className='mb-3 space-y-2 w-full text-sm'>
                 <label className='text-xs font-semibold px-1'>
                   Your favorite musical genre. <abbr title='required'>* </abbr>
-                  {/* <p className='text-xs'>
-                    {' '} */}
-                  Please separate each item by a comma and a space. {/* </p> */}
+                  Please separate each item by a comma and a space.
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  {/* <div className='flex'>
-                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6 text-gray-700'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3'
-                        />
-                      </svg>
-                    </span>
-                  </div> */}
                   <input
                     type='text'
                     className='w-full p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
@@ -185,7 +165,6 @@ const ProfileForm = ({
                 <textarea
                   required='required'
                   className='w-full p-1 mb-3 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                  // className='w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-white text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4'
                   placeholder='A short bio of yourself'
                   name='bio'
                   value={bio}
@@ -197,28 +176,9 @@ const ProfileForm = ({
                   Instagram (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-6 relative'>
-                  {/* <div className='flex'>
-                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6 text-gray-700'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
-                        />
-                      </svg>
-                    </span>
-                  </div> */}
                   <input
                     type='text'
                     className='w-full mb-3 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='instagram'
                     value={instagram}
@@ -229,28 +189,9 @@ const ProfileForm = ({
                   Twitter (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  {/* <div className='flex'>
-                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6 text-gray-700'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
-                        />
-                      </svg>
-                    </span>
-                  </div> */}
                   <input
                     type='text'
                     className='w-full p-1 mb-3 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='twitter'
                     value={twitter}
@@ -261,28 +202,9 @@ const ProfileForm = ({
                   Facebook (Optional){' '}
                 </label>
                 <div className='flex flex-wrap items-stretch w-full mb-4 relative'>
-                  {/* <div className='flex'>
-                    <span className='flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark w-12 h-10 bg-blue-300 justify-center  text-xl rounded-lg text-white'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6 text-gray-700'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'
-                        />
-                      </svg>
-                    </span>
-                  </div> */}
                   <input
                     type='text'
                     className='w-full p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                    // className='bg-white flex-shrink flex-grow flex-auto leading-normal w-px border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow'
                     placeholder='https://'
                     name='spotify'
                     value={spotify}
@@ -295,10 +217,6 @@ const ProfileForm = ({
                 <abbr title='Required field'>*</abbr>
               </p>
               <div className='mt-5 text-right md:space-x-3 md:block flex flex-col-reverse'>
-                {/* <button className='mb-2 md:mb-0 bg-white md:px-5 md:py-2 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100'>
-                  {' '}
-                  Cancel{' '}
-                </button> */}
                 <button
                   type='submit'
                   className='mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'

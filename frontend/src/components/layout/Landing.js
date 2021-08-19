@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getPosts } from '../../actions/post';
 import PostItem from '../posts/PostItem';
+import ReactLoading from 'react-loading';
 
 const Landing = ({ isAuthenticated, post: { posts, loading }, getPosts }) => {
   useEffect(() => {
@@ -14,7 +15,11 @@ const Landing = ({ isAuthenticated, post: { posts, loading }, getPosts }) => {
     return <Redirect to='/dashboard' />;
   }
 
-  return (
+  return loading ? (
+    <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
+      <ReactLoading type='bars' color='#fff' width={300} />
+    </div>
+  ) : (
     <section className='flex justify-center items-center md:justify-start md:items-start md:mt-0 w-full h-screen overflow-hidden'>
       <div class='md:flex space-x-10 md:mr-0 mr-10'>
         <div class='-mt-0 md:-mt-36  md:flex items-center pl-5 md:pl-16 '>

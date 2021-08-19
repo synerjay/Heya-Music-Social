@@ -24,7 +24,6 @@ const ArtistRec = ({ accessToken, profile }) => {
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
-    console.log(artists);
     spotifyApi
       .getRecommendations({
         // min_energy: 0.4,
@@ -35,7 +34,6 @@ const ArtistRec = ({ accessToken, profile }) => {
       .then(
         function (data) {
           let recommendations = data.body;
-          console.log(recommendations.tracks);
           setRecommendations(
             recommendations.tracks.slice(0, 20).map((track) => {
               const smallestAlbumImage = track.album.images.reduce(
@@ -60,7 +58,7 @@ const ArtistRec = ({ accessToken, profile }) => {
           console.log('Something went wrong!', err);
         }
       );
-  }, [artists]);
+  }, [accessToken]);
 
   return (
     <div className='mt-5 flex flex-col space-y-4'>
@@ -88,7 +86,7 @@ const ArtistRec = ({ accessToken, profile }) => {
             />
           </svg>
           No recommendations found yet. Try adding your favorite artists first
-          or refreshing the page.{' '}
+          or come back again later{' '}
         </div>
       ) : (
         <Carousel

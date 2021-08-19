@@ -26,7 +26,6 @@ const GenreRec = ({ accessToken, profile }) => {
       .then(
         function (data) {
           let recommendations = data.body;
-          console.log(recommendations.tracks);
           setRecommendations(
             recommendations.tracks.slice(0, 20).map((track) => {
               const smallestAlbumImage = track.album.images.reduce(
@@ -51,7 +50,7 @@ const GenreRec = ({ accessToken, profile }) => {
           console.log('Something went wrong!', err);
         }
       );
-  }, [seedGenre]);
+  }, [accessToken]);
 
   return (
     <div className='flex flex-col space-y-4'>
@@ -80,7 +79,7 @@ const GenreRec = ({ accessToken, profile }) => {
             />
           </svg>
           No recommendations found yet. Try adding your favorite genre first in
-          your profile or refreshing the page.{' '}
+          your profile or come back again later.{' '}
         </div>
       ) : (
         <Carousel

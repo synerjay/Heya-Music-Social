@@ -8,6 +8,7 @@ import SearchArtists from '../search/SearchArtists';
 import SearchTracks from '../search/SearchTracks';
 import ProfileForm from '../profile-forms/ProfileForm';
 import PostForm from '../posts/PostForm';
+import Settings from '../layout/Settings';
 
 const PrivateRoute = ({
   name,
@@ -22,6 +23,7 @@ const PrivateRoute = ({
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showPostForm, setShowPostForm] = useState(false);
   const [showSideBar, setShowSideBar] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <Route
@@ -71,6 +73,14 @@ const PrivateRoute = ({
                 setShowModal={setShowTrackModal}
               />
             ) : null}
+
+            {showSettings ? (
+              <CustomModal
+                component={Settings}
+                setShowModal={setShowSettings}
+              />
+            ) : null}
+
             {showSideBar ? (
               <aside className='w-64  h-full bg-gray shadow-md hidden sm:block'>
                 <div className='w-64   flex flex-col justify-between h-screen p-4 bg-gray-800'>
@@ -146,7 +156,10 @@ const PrivateRoute = ({
             </div> */}
                   </div>
 
-                  <div className='flex p-1 text-white bg-gray-900 rounded cursor-pointer text-center text-sm hover:bg-gray-700 hover:text-green-400'>
+                  <div
+                    onClick={() => setShowSettings(true)}
+                    className='flex p-1 text-white bg-gray-900 rounded cursor-pointer text-center text-sm hover:bg-gray-700 hover:text-green-400'
+                  >
                     <button className='rounded inline-flex items-center'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'

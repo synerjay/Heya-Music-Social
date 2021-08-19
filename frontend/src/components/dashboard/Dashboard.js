@@ -55,6 +55,7 @@ const Dashboard = ({
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   return loading && profile === null ? (
     <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
@@ -111,11 +112,11 @@ const Dashboard = ({
             <Artist artists={profile.artists} />
             <Track tracks={profile.tracks} />
           </div> */}
-          <div className='my-2'>
+          {/* <div className='my-2'>
             <button className='btn btn-danger' onClick={() => deleteAccount()}>
               <i className='fas fa-user-minus' /> Delete My Account
             </button>
-          </div>
+          </div> */}
         </Fragment>
       ) : (
         <Fragment>

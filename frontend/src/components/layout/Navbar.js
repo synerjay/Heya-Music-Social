@@ -331,12 +331,13 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                         </div>
                         <div class='mt-auto'>
                           <div class='pt-6'>
-                            <a
+                            <Link
+                              onClick={() => setOpen(false)}
                               class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
-                              href='#'
+                              to='/settings'
                             >
-                              Settings
-                            </a>
+                              Account Settings
+                            </Link>
                             <a
                               onClick={() => handleLogout()}
                               href='#!'

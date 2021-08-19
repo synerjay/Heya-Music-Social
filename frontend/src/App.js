@@ -27,6 +27,7 @@ import AddTrack from './components/profile-forms/AddTrack';
 import SearchArtists from './components/search/SearchArtists';
 import SearchTracks from './components/search/SearchTracks';
 import PostForm from './components/posts/PostForm';
+import Settings from './components/layout/Settings';
 
 const App = () => {
   useEffect(() => {
@@ -82,6 +83,7 @@ const App = () => {
                 name='Music Feed'
                 component={Posts}
               />
+              <PrivateRoute exact path='/settings' component={Settings} />
               <PrivateRoute exact path='/posts/:id' component={Post} />
             </section>
           </Switch>
