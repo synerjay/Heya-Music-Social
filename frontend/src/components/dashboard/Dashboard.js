@@ -25,6 +25,7 @@ const Dashboard = ({
   getCurrentProfile,
   getAccessToken,
   deleteAccount,
+  setShowSideBar,
   auth: { user, token },
   profile: { profile, loading },
 }) => {
@@ -32,6 +33,14 @@ const Dashboard = ({
     getAccessToken();
     getCurrentProfile();
   }, []);
+
+  useEffect(() => {
+    if (!loading && !profile) {
+      setShowSideBar(false);
+    } else {
+      setShowSideBar(true);
+    }
+  }, [profile, loading]);
 
   // Get another Spotify Key after every one hour expiration time
   useEffect(() => {
@@ -91,9 +100,9 @@ const Dashboard = ({
             setShowTrackModal={setShowTrackModal}
             setShowProfileModal={setShowProfileModal}
           /> */}
-          <GenreRec />
-          <ArtistRec />
-          <TrackRec />
+          <GenreRec profile={profile} accessToken={accessToken} />
+          <ArtistRec profile={profile} accessToken={accessToken} />
+          <TrackRec profile={profile} accessToken={accessToken} />
           <Track tracks={profile.tracks} />
           <Album albums={profile.albums} />
           <Artist artists={profile.artists} />
@@ -110,8 +119,11 @@ const Dashboard = ({
         </Fragment>
       ) : (
         <Fragment>
-          <h2 className='text-4xl'> First things first</h2>
-          <p className='text-sm my-1'>
+          <h2 className='text-4xl font-semibold text-green-500 text-center'>
+            {' '}
+            First things first
+          </h2>
+          <p className='text-md my-1 text-center'>
             To best recommend you new music, please let us know who you are.
           </p>
           <ProfileForm />

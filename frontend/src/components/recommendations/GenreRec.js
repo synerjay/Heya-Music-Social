@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
-import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
 import RecommendItem from './RecommendItem';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-const GenreRec = ({
-  accessToken,
-  profile: { profile },
-  // getAccessToken,
-  getCurrentProfile,
-}) => {
+const GenreRec = ({ accessToken, profile }) => {
   const [seedGenre, setSeedGenre] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
 
@@ -20,7 +13,7 @@ const GenreRec = ({
 
   useEffect(() => {
     setSeedGenre(profile['genre'].split(', ').sort(() => 0.5 - Math.random()));
-  }, []);
+  }, [profile]);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken); // get token from redux state
@@ -58,7 +51,7 @@ const GenreRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [seedGenre]);
 
   return (
     <div className='flex flex-col space-y-4'>
@@ -111,12 +104,4 @@ const GenreRec = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
-  profile: state.profile,
-});
-
-export default connect(mapStateToProps, {
-  // getAccessToken,
-  getCurrentProfile,
-})(GenreRec);
+export default GenreRec;

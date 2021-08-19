@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import RecommendItem from './RecommendItem';
-import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-const ArtistRec = ({
-  accessToken,
-  profile: { profile },
-  // getAccessToken,
-  getCurrentProfile,
-}) => {
+const ArtistRec = ({ accessToken, profile }) => {
   const [artists, setArtists] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
 
@@ -27,7 +20,7 @@ const ArtistRec = ({
         .map((y) => y.spot_id.replace(regex, ''))
         .sort(() => 0.5 - Math.random())
     );
-  }, []);
+  }, [profile]);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
@@ -67,7 +60,7 @@ const ArtistRec = ({
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [artists]);
 
   return (
     <div className='mt-5 flex flex-col space-y-4'>
@@ -121,12 +114,4 @@ const ArtistRec = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
-  profile: state.profile,
-});
-
-export default connect(mapStateToProps, {
-  // getAccessToken,
-  getCurrentProfile,
-})(ArtistRec);
+export default ArtistRec;

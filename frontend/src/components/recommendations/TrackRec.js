@@ -6,7 +6,7 @@ import RecommendItem from './RecommendItem';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-const TrackRec = ({ accessToken, profile: { profile } }) => {
+const TrackRec = ({ accessToken, profile }) => {
   const [tracks, setTracks] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const spotifyApi = new SpotifyWebApi();
@@ -20,7 +20,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
         .map((y) => y.spot_id.replace(regex, ''))
         .sort(() => 0.5 - Math.random())
     );
-  }, []);
+  }, [profile]);
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
@@ -57,7 +57,7 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
           console.log('Something went wrong!', err);
         }
       );
-  }, [accessToken]);
+  }, [tracks]);
 
   return (
     <div className='mt-5 flex flex-col space-y-4'>
@@ -109,9 +109,9 @@ const TrackRec = ({ accessToken, profile: { profile } }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
-  profile: state.profile,
-});
+// const mapStateToProps = (state) => ({
+//   accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
+//   profile: state.profile,
+// });
 
-export default connect(mapStateToProps, { getCurrentProfile })(TrackRec);
+export default connect(null, { getCurrentProfile })(TrackRec);
