@@ -145,3 +145,34 @@ export const logout = () => async (dispatch) => {
     }
   }
 };
+
+//Change Password
+
+export const changePassword =
+  ({ new_password1, new_password2 }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({ new_password1, new_password2 });
+
+    try {
+      await axios.post('/api/v1/users/auth/password/change/', body, config);
+
+      dispatch(setAlert('New password has been saved', 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      dispatch(
+        setAlert(
+          'Oops! Something went terribly wrong. Please try reloading the page.',
+          'danger'
+        )
+      );
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+    }
+  };

@@ -133,7 +133,7 @@ export const createProfile =
     }
   };
 
-// Delete User Account
+// Delete User Profile
 
 export const deleteAccount = () => async (dispatch) => {
   if (window.confirm('Are you sure? This cannot be undone.')) {
