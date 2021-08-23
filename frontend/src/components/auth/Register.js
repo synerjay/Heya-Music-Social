@@ -2,10 +2,10 @@ import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
+import { register, login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, login, isAuthenticated }) => {
   //Component State Hook
   const [formData, setFormData] = useState({
     username: '',
@@ -29,6 +29,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   //   password2,
   // };
 
+  const handleGuest = () => {
+    login('guest@gmail.com', 'guest123456');
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault(); // IMPOR-EFFIN-TANT!
     if (password1 !== password2) {
@@ -43,9 +47,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center mt-10 md:-mt-5 px-5 py-5'>
+    <div className='min-w-screen min-h-screen bg-gray-900 flex items-center justify-center mt-16 md:-mt-10 px-5 py-5'>
       <div
-        className='bg-gray-800 text-gray-200 rounded-3xl shadow-xl w-full overflow-hidden'
+        className='bg-gray-800 text-gray-200 ml-0 md:ml-5 rounded-3xl shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
       >
         <div className='md:flex w-full'>
@@ -1072,7 +1076,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       <input
                         type='text'
                         className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                        placeholder='JohnSmith7'
+                        placeholder='YourUsernameHere'
                         name='username'
                         value={username}
                         onChange={(e) => onChange(e)}
@@ -1093,7 +1097,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       <input
                         type='email'
                         className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                        placeholder='johnsmith@example.com'
+                        placeholder='youremail@here.com'
                         name='email'
                         value={email}
                         onChange={(e) => onChange(e)}
@@ -1159,6 +1163,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   {' '}
                   <p className='text-green-600'>Log In</p>
                 </Link>
+                or{' '}
+                <div
+                  onClick={() => {
+                    handleGuest();
+                  }}
+                  className='text-green-600 cursor-pointer'
+                >
+                  Log in as Guest
+                </div>
               </p>
             </div>
           </div>
@@ -1170,6 +1183,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -1177,4 +1191,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register, login })(
+  Register
+);

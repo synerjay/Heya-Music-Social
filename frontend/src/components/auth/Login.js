@@ -40,7 +40,7 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className='overflow-hidden w-screen h-screen bg-gray-900 flex items-center justify-center mt-10 md:-mt-10 px-5 py-0'>
+    <div className='overflow-hidden w-screen h-screen bg-gray-900 flex items-center justify-center mt-16 md:-mt-10 px-5 py-0'>
       <div
         className='bg-gray-800 text-gray-200 rounded-3xl mx-auto my-auto shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
@@ -340,7 +340,7 @@ const Login = ({ login, isAuthenticated }) => {
                       <input
                         type='email'
                         className='w-full -ml-10 p-1 rounded-lg border-2 bg-gray-900 border-gray-200 outline-none focus:border-green-600'
-                        placeholder='johnsmith@example.com'
+                        placeholder='yourlogin@email.com'
                         name='email'
                         value={email}
                         onChange={(e) => onChange(e)}
