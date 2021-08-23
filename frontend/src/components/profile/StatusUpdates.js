@@ -6,7 +6,6 @@ import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 const StatusUpdates = ({ post }) => {
-  console.log(post);
   return (
     <div>
       <Link

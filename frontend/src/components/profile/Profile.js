@@ -30,8 +30,9 @@ const Profile = ({
   }, [memberProfile]);
 
   useEffect(() => {
-    console.log(updates);
-  }, [updates]);
+    if (!memberProfile) return;
+    console.log(memberProfile);
+  }, [memberProfile]);
 
   return (
     <Fragment>
@@ -107,6 +108,18 @@ const Profile = ({
                   Email
                 </a> */}
               </div>
+              <ProfileTrack
+                name={memberProfile.name}
+                tracks={memberProfile.tracks}
+              />
+              <ProfileAlbum
+                name={memberProfile.name}
+                albums={memberProfile.albums}
+              />
+              <ProfileArtist
+                name={memberProfile.name}
+                artists={memberProfile.artists}
+              />
 
               <div class='w-full'>
                 <h3 class='font-bold text-gray-200 text-left px-4'>
