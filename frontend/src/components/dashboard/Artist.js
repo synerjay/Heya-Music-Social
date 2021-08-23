@@ -28,22 +28,13 @@ const Artist = ({ artists, deleteArtist }) => {
               alt='Artist image'
             />
           )}
-          {/* <div class='ml-3'>
-                    <div class=''>Appple</div>
-                    <div class='text-gray-500'>mail@rgmail.com</div>
-                  </div> */}
         </div>
       </td>
       <td class='text-center p-1 text-md md:text-2xl font-bold'>{art.name}</td>
       <td class='p-1 font-bold'></td>
-      {/* <td class='p-1'>
-        <span class='bg-green-400 text-gray-50 rounded-md px-2'>available</span>
-      </td> */}
+
       <td class='p-1 '>
-        <button
-          onClick={() => deleteArtist(art.spot_id)}
-          // className='btn btn-danger'
-        >
+        <button onClick={() => deleteArtist(art.spot_id)}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='text-red-700 h-5 w-5'
@@ -70,7 +61,6 @@ const Artist = ({ artists, deleteArtist }) => {
               <th class='p-1 w-1/2'>Your Favorite Artists</th>
               <th class='p-1 text-center w-1/4'>Artist's Name</th>
               <th class='p-1 text-left w-0'></th>
-              {/* <th class='p-1 text-left'>Status</th> */}
               <th class='p-1 text-left w-1/12 '>Action</th>
             </tr>
           </thead>
@@ -87,35 +77,3 @@ Artist.propTypes = {
 };
 
 export default connect(null, { deleteArtist })(Artist);
-
-{
-  /* <div>
-      <h2 className='bg-gray-600 text-xs p-1 md:p-5 text-center rounded-lg flex justify-center'>
-        Your Favorite Artists
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6 ml-2'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-          />
-        </svg>
-      </h2>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th className='w-10 md:w-24 ' />
-            <th className='w-2 md:w-32' />
-            <th className='w-2  md:w-5' />
-          </tr>
-        </thead>
-        <tbody>{artistList}</tbody>
-      </table>
-    </div> */
-}

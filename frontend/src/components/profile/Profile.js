@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
+
 import { getProfileById } from '../../actions/profile';
 import { Link } from 'react-router-dom';
-import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout';
+
 import ProfileTrack from './ProfileTrack';
 import ProfileArtist from './ProfileArtist';
 import ProfileAlbum from './ProfileAlbum';
@@ -42,17 +41,37 @@ const Profile = ({
         </div>
       ) : (
         <Fragment>
-          <Link to='/profiles' className='btn btn-light'>
-            {' '}
-            Back to Profiles
-          </Link>
-          {auth.isAuthenticated &&
-            auth.loading === false &&
-            auth.user.username === memberProfile.user && (
-              <Link to='/edit-profile' className='btn btn-dark'>
-                Edit Profile
-              </Link>
-            )}
+          <div className='flex w-full gap-x-2 '>
+            <Link
+              to='/profiles'
+              className='flex items-center w-48  justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
+            >
+              {' '}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-3 w-3 text-white mr-1'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z'
+                  clipRule='evenodd'
+                />
+              </svg>
+              Back to Profiles
+            </Link>
+            {auth.isAuthenticated &&
+              auth.loading === false &&
+              auth.user.username === memberProfile.user && (
+                <Link
+                  to='/edit-profile'
+                  className='flex items-center w-40 justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
+                >
+                  Edit Profile
+                </Link>
+              )}
+          </div>
           {/* Start New Profile Component here */}
           <div class='bg-gray-800 mt-24 md:mt-16 p-1 relative rounded-lg shadow-xl w-full md:w-2/3  mx-auto'>
             <div class='flex justify-center'>
@@ -73,15 +92,7 @@ const Profile = ({
               <p>
                 <span></span>
               </p>
-              <div class='text-center my-5'>
-                {/* <a
-                  href='#'
-                  class='text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-indigo-600'
-                > */}
-                {memberProfile.bio}
-                {/* Connect with <span class='font-bold'>@eduardpantazi</span> */}
-                {/* </a> */}
-              </div>
+              <div class='text-center my-5'>{memberProfile.bio}</div>
               <div class='flex justify-evenly my-0'>
                 <a
                   href={memberProfile.instagram}
@@ -101,12 +112,6 @@ const Profile = ({
                 >
                   Facebook
                 </a>
-                {/* <a
-                  href=''
-                  class='font-bold text-sm text-gray-600 w-full text-center py-1 hover:bg-gray-600 hover:text-white hover:shadow-lg'
-                >
-                  Email
-                </a> */}
               </div>
               <ProfileTrack
                 name={memberProfile.name}

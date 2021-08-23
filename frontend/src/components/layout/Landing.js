@@ -6,7 +6,7 @@ import { getPosts } from '../../actions/post';
 import PostItem from '../posts/PostItem';
 import ReactLoading from 'react-loading';
 
-const Landing = ({ isAuthenticated, post: { posts, loading }, getPosts }) => {
+const Landing = ({ isAuthenticated, post: { posts }, getPosts }) => {
   useEffect(() => {
     getPosts();
   }, []);
@@ -15,7 +15,7 @@ const Landing = ({ isAuthenticated, post: { posts, loading }, getPosts }) => {
     return <Redirect to='/dashboard' />;
   }
 
-  return loading ? (
+  return posts.length === 0 ? (
     <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>
       <ReactLoading type='bars' color='#fff' width={300} />
     </div>

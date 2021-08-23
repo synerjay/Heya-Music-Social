@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getPost } from '../../actions/post';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
