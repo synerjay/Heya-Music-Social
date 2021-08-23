@@ -11,7 +11,7 @@ const initialState = {
   new_password2: '',
 };
 
-const Settings = ({ deleteAccount, changePassword }) => {
+const Settings = ({ auth: { user }, deleteAccount, changePassword }) => {
   const [formData, setFormData] = useState(initialState);
 
   const { new_password1, new_password2 } = formData;
@@ -92,6 +92,7 @@ const Settings = ({ deleteAccount, changePassword }) => {
               <div className='mt-0 text-right md:space-x-3 md:block flex flex-col-reverse'>
                 <button
                   type='submit'
+                  disabled={user.username == 'guest' ? true : false}
                   className='mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
                 >
                   Save New Password
@@ -102,7 +103,11 @@ const Settings = ({ deleteAccount, changePassword }) => {
             <div className='mt-32 flex flex-row-reverse '>
               <div className='flex flex-col'>
                 <p className='flex items-center justify-center text-center text-xs text-red-600 uppercase mb-2 font-bold'>
-                  Danger Zone{' '}
+                  {user.username == 'guest' ? (
+                    <>Guests cannot delete this account</>
+                  ) : (
+                    <>Danger Zone</>
+                  )}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-5 w-5 text-yellow-400'
@@ -117,7 +122,8 @@ const Settings = ({ deleteAccount, changePassword }) => {
                   </svg>
                 </p>
                 <button
-                  className='mb-2 w-96 md:w-auto md:mb-0 bg-red-700 md:px-6 md:py-3 px-5 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-800'
+                  disabled={user.username == 'guest' ? true : false}
+                  className='mb-2 w-96 md:w-auto md:mb-0 md:px-6 bg-red-700 md:py-3 px-5 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-800'
                   onClick={() => deleteAccount()}
                 >
                   <i className='fas fa-user-minus' /> Delete My Account
@@ -131,7 +137,11 @@ const Settings = ({ deleteAccount, changePassword }) => {
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
   deleteAccount,
   changePassword,
 })(Settings);

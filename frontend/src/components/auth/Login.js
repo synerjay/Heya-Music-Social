@@ -26,8 +26,12 @@ const Login = ({ login, isAuthenticated }) => {
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
 
+  const handleGuest = () => {
+    login('guest@gmail.com', 'guest123456');
+  };
+
   const onSubmit = async (e) => {
-    e.preventDefault(); // IMPOR-EFFIN-TANT!
+    e.preventDefault();
     login(email, password); // action to reducer
   };
 
@@ -36,7 +40,7 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className='overflow-hidden w-screen h-screen bg-gray-900 flex items-center justify-center -mt-7 md:-mt-16 px-5 py-5'>
+    <div className='overflow-hidden w-screen h-screen bg-gray-900 flex items-center justify-center mt-10 md:-mt-10 px-5 py-0'>
       <div
         className='bg-gray-800 text-gray-200 rounded-3xl mx-auto my-auto shadow-xl w-full overflow-hidden'
         // style='max-width:1000px'
@@ -377,6 +381,37 @@ const Login = ({ login, isAuthenticated }) => {
                 </div>
                 {/*  */}
               </form>
+              <div className='flex justify-center items-center text-sm font-semibold gap-x-3 text-center mb-3'>
+                {' '}
+                <hr className='border-1 border-gray-400 w-40' /> OR
+                <hr className='border-1 border-gray-400 w-40' />
+              </div>
+              <div className='flex -mx-3'>
+                <div className='w-full px-3 mb-5'>
+                  <button
+                    onClick={() => {
+                      handleGuest();
+                    }}
+                    className='flex justify-center items-center w-full max-w-xs mx-auto cursor-pointer bg-green-600 hover:bg-green-700 focus:bg-green-700 text-white rounded-lg p-1 font-semibold'
+                  >
+                    LOG IN AS GUEST
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='ml-1 h-5 w-5'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
               <p className='text-sm text-center flex justify-center gap-x-1'>
                 Don't have an account yet?{' '}
                 <Link to='/register'>

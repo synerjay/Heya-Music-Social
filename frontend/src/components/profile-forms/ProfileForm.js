@@ -16,6 +16,7 @@ const initialState = {
 
 const ProfileForm = ({
   profile: { profile, loading },
+  auth: { user },
   createProfile,
   getCurrentProfile,
   history,
@@ -115,6 +116,7 @@ const ProfileForm = ({
                         Browse
                       </span>
                       <input
+                        disabled={user.username == 'guest' ? true : false}
                         type='file'
                         name='avatar'
                         required={profile === null ? 'required' : null}
@@ -218,10 +220,15 @@ const ProfileForm = ({
               </p>
               <div className='mt-5 text-right md:space-x-3 md:block flex flex-col-reverse'>
                 <button
+                  disabled={user.username == 'guest' ? true : false}
                   type='submit'
                   className='mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
                 >
-                  Save
+                  {user.username == 'guest' ? (
+                    <>Sorry, Guests cannot edit</>
+                  ) : (
+                    <>Save Changes</>
+                  )}
                 </button>
               </div>
             </form>
@@ -240,6 +247,7 @@ ProfileForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
