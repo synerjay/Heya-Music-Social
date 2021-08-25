@@ -9,7 +9,6 @@ import Artist from '../dashboard/Artist';
 const SearchArtists = ({
   accessToken,
   profile: { profile },
-  // getAccessToken,
   getCurrentProfile,
 }) => {
   const [search, setSearch] = useState('');
@@ -23,22 +22,12 @@ const SearchArtists = ({
 
   //Get Spotify Key at start up
   useEffect(() => {
-    // getAccessToken();
     if (!profile) getCurrentProfile();
     if (profile) {
       setArtists(profile['artists']);
       setRegex(new RegExp(profile.user));
     }
   }, [profile]);
-
-  // Get another Spotify Key after every one hour expiration time
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // getAccessToken();
-  //   }, 1000 * 60 * 60);
-
-  //   return () => clearInterval(interval); // unmount & cleanup
-  // }, [accessToken]);
 
   useEffect(() => {
     console.log(search);
@@ -49,14 +38,13 @@ const SearchArtists = ({
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.searchArtists(search, { limit: 5 }).then(
       function (data) {
-        // console.log(data.body.artists.items);
         setSearchResults(
           data.body.artists.items.map((artist) => {
             const biggestImage = artist.images.reduce((biggest, image) => {
               if (image.height > biggest.height) return image;
               return biggest;
             }, artist.images[0]);
-            // console.log(biggestImage);
+
             return {
               name: artist.name,
               id: artist.id,
@@ -114,17 +102,6 @@ const SearchArtists = ({
       </form>
       <div className='flex w-full md:w-4/6  flex-col ml-0 md:ml-7 text-center'>
         <Artist artists={profile.artists} />
-        {/* <h2 className='text-2xl text-center font-bold'>
-          {' '}
-          Add your favorite artists:{' '}
-        </h2>
-        <p className='text-sm'>
-          {' '}
-          Search any artist and click on the plus button to add{' '}
-        </p>
-        {selectedArtist.map((artist) => (
-          <SelectedArtists key={artist.id} artist={artist} added={true} />
-        ))} */}
       </div>
     </div>
   );
@@ -136,6 +113,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  // getAccessToken,
   getCurrentProfile,
 })(SearchArtists);

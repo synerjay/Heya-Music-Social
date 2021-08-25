@@ -22,13 +22,6 @@ const Register = ({ setAlert, register, login, isAuthenticated }) => {
   // [e.target.name] corresponding to "name" attribute (not the value) of each HTML tags
   // e.target.value -- is the change in value in the fields
 
-  // const newUser = {
-  //   username,
-  //   email,
-  //   password1,
-  //   password2,
-  // };
-
   const handleGuest = () => {
     login('guest@gmail.com', 'guest123456');
   };

@@ -108,9 +108,4 @@ const TrackRec = ({ accessToken, profile }) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   accessToken: state.profile.accessToken, // make sure to put the PROPS in the name !!!!!!
-//   profile: state.profile,
-// });
-
 export default connect(null, { getCurrentProfile })(TrackRec);

@@ -6,7 +6,6 @@ import {
   getCurrentProfile,
   deleteAccount,
 } from '../../actions/profile';
-import DashboardActions from './ DashboardActions';
 import Album from './Album';
 import Artist from './Artist';
 import Track from './Track';
@@ -55,7 +54,6 @@ const Dashboard = ({
   const [showArtistModal, setShowArtistModal] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
 
   return loading && profile === null ? (
     <div className='w-full h-screen flex justify-center sm:mt-32 md:mt-36 '>

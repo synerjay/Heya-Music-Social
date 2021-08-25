@@ -1,5 +1,4 @@
 import React from 'react';
-import Spinner from '../layout/Spinner';
 import ReactLoading from 'react-loading';
 
 const RecommendItem = ({ track }) => {

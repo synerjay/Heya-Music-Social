@@ -16,22 +16,22 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
   const authLinks = (
     <Fragment>
-      <div class='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
+      <div className='md:flex text-white text-xs hidden sm:block ml-2 gap-x-1 '>
         <Link
           to='/dashboard'
-          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+          className='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
         >
           Dashboard
         </Link>
         <Link
           to='/posts'
-          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+          className='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
         >
           Music Feed
         </Link>
         <Link
           to='/profiles'
-          class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
+          className='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1 hover:text-green-400'
         >
           Members
         </Link>
@@ -39,7 +39,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         <a
           onClick={logout}
           href='#!'
-          class='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
+          className='bg-red-500 hover:bg-gray-700 text-white p-1 rounded cursor-pointer ml-1'
         >
           <button className='rounded inline-flex items-center'>
             <svg
@@ -82,10 +82,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         </Link>
         <button
           onClick={() => setOpen(!open)}
-          class='navbar-burger flex items-center text-gray-200 mr-2'
+          className='navbar-burger flex items-center text-gray-200 mr-2'
         >
           <svg
-            class='block h-4 w-4 fill-current'
+            className='block h-4 w-4 fill-current'
             viewBox='0 0 20 20'
             xmlns='http://www.w3.org/2000/svg'
           >
@@ -98,21 +98,15 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   );
 
   const guestLinks = (
-    <div class='flex text-white text-sm font-bold ml-2 gap-x-3 md:gap-x-5 '>
-      {/* <Link
-        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
-        to='/profiles'
-      >
-        Members
-      </Link> */}
+    <div className='flex text-white text-sm font-bold ml-2 gap-x-3 md:gap-x-5 '>
       <Link
-        class='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
+        className='bg-gray-900 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-400'
         to='/login'
       >
         Login
       </Link>
       <Link
-        class='bg-green-600 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-200'
+        className='bg-green-600 hover:bg-gray-700 text-white p-1 rounded cursor-pointer hover:text-green-200'
         to='/register'
       >
         Sign Up
@@ -122,7 +116,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
   return (
     <>
-      <header class='navbar w-full h-16 md:h-16 bg-gray-800 p-1 flex flex-row justify-between items-center'>
+      <header className='navbar w-full h-16 md:h-16 bg-gray-800 p-1 flex flex-row justify-between items-center'>
         <Link
           className='text-white text-sm md:text-lg flex font-bold justify-around items-center w-44 md:w-56'
           to='/'
@@ -189,7 +183,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           heya music social
         </Link>
 
-        <nav class='w-1/2 flex items-center justify-end'>
+        <nav className='w-1/2 flex items-center justify-end'>
           {!loading && (
             <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
           )}
@@ -262,7 +256,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                       </Dialog.Title>
                       <Link
                         onClick={() => setOpen(false)}
-                        class='block p-0 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                        className='block p-0 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                         to='/edit-profile'
                       >
                         Edit Profile
@@ -273,55 +267,55 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                       <div className='flex flex-col justify-between h-full'>
                         <div>
                           <ul>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
                                 to='/dashboard'
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                               >
                                 Dashboard
                               </Link>
                             </li>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
                                 to='/posts'
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                               >
                                 Music Feed
                               </Link>
                             </li>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
                                 to='/profiles'
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                               >
                                 Members
                               </Link>
                             </li>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                                 to='/add-artist'
                               >
                                 Add Artist
                               </Link>
                             </li>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                                 to='/add-album'
                               >
                                 Add Albums
                               </Link>
                             </li>
-                            <li class='mb-1'>
+                            <li className='mb-1'>
                               <Link
                                 onClick={() => setOpen(false)}
-                                class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
+                                className='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
                                 to='/add-track'
                               >
                                 Add Tracks
@@ -329,11 +323,11 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                             </li>
                           </ul>
                         </div>
-                        <div class='mt-auto'>
-                          <div class='pt-6'>
+                        <div className='mt-auto'>
+                          <div className='pt-6'>
                             <Link
                               onClick={() => setOpen(false)}
-                              class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
+                              className='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
                               to='/settings'
                             >
                               Account Settings
@@ -341,12 +335,12 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                             <a
                               onClick={() => handleLogout()}
                               href='#!'
-                              class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
+                              className='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
                             >
                               Log out
                             </a>
                           </div>
-                          <p class='my-4 text-xs text-center text-gray-400'>
+                          <p className='my-4 text-xs text-center text-gray-400'>
                             <span>
                               Copyright Created in React + Django by J.
                               Tolentino © 2021
@@ -377,124 +371,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);
-
-{
-  /* {menu ? ( */
-}
-// <Transition
-//   show={menu}
-//   enter='transition ease-in-out duration-200 transform'
-//   enterFrom='-translate-x-full'
-//   enterTo='translate-x-0'
-//   leave='transition ease-in-out duration-300 transform'
-//   leaveFrom='translate-x-0'
-//   leaveTo='-translate-x-full'
-// >
-//   <div class='navbar-menu relative z-50'>
-//     <div class='navbar-backdrop fixed inset-0 bg-gray-800 opacity-25'></div>
-//     <nav class='fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-gray-800 overflow-y-auto'>
-//       <div class='flex justify-center items-center mb-8'>
-//         <a class='mr-auto text-3xl font-bold leading-none' href='#'>
-//           heya music social
-//         </a>
-//         <button onClick={() => setMenu(!menu)} class='navbar-close'>
-//           <svg
-//             class='h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500'
-//             xmlns='http://www.w3.org/2000/svg'
-//             fill='none'
-//             viewBox='0 0 24 24'
-//             stroke='currentColor'
-//           >
-//             <path
-//               stroke-linecap='round'
-//               stroke-linejoin='round'
-//               stroke-width='2'
-//               d='M6 18L18 6M6 6l12 12'
-//             ></path>
-//           </svg>
-//         </button>
-//       </div>
-//       <div>
-//         <ul>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               to='/dashboard'
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//             >
-//               Dashboard
-//             </Link>
-//           </li>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               to='/posts'
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//             >
-//               Music Feed
-//             </Link>
-//           </li>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               to='/profiles'
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//             >
-//               Members
-//             </Link>
-//           </li>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//               to='/add-artist'
-//             >
-//               Add Artist
-//             </Link>
-//           </li>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//               to='/add-album'
-//             >
-//               Add Albums
-//             </Link>
-//           </li>
-//           <li class='mb-1'>
-//             <Link
-//               onClick={() => setMenu(false)}
-//               class='block p-4 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-green-600 rounded'
-//               to='/add-track'
-//             >
-//               Add Tracks
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//       <div class='mt-auto'>
-//         <div class='pt-6'>
-//           <a
-//             class='block p-1 mb-3 leading-loose text-xs text-center font-semibold bg-gray-900 hover:bg-gray-900 rounded-xl'
-//             href='#'
-//           >
-//             Settings
-//           </a>
-//           <a
-//             onClick={logout}
-//             href='#!'
-//             class='block p-1 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl'
-//           >
-//             Log out
-//           </a>
-//         </div>
-//         <p class='my-4 text-xs text-center text-gray-400'>
-//           <span>Copyright © 2021</span>
-//         </p>
-//       </div>
-//     </nav>
-//   </div>
-// </Transition>
-{
-  /* ) : null} */
-}

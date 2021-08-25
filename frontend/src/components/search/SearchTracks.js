@@ -10,7 +10,6 @@ import Track from '../dashboard/Track';
 const SearchTracks = ({
   accessToken,
   profile: { profile },
-  // getAccessToken,
   getCurrentProfile,
   setPlayingTrack,
 }) => {
@@ -23,12 +22,6 @@ const SearchTracks = ({
   // Make new instance of Spotify API
   const spotifyApi = new SpotifyWebApi();
 
-  //Get Spotify Key at start up
-  // useEffect(() => {
-  //   // getAccessToken();
-  //   if (!profile) getCurrentProfile();
-  // }, []);
-
   useEffect(() => {
     if (!profile) getCurrentProfile();
     if (profile) {
@@ -36,15 +29,6 @@ const SearchTracks = ({
       setRegex(new RegExp(profile.user));
     }
   }, [profile]);
-
-  // Get another Spotify Key after every one hour expiration time
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getAccessToken();
-  //   }, 1000 * 60 * 60); // one hour
-
-  //   return () => clearInterval(interval); // unmount & cleanup
-  // }, [accessToken]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -137,17 +121,6 @@ const SearchTracks = ({
       {setPlayingTrack ? null : (
         <div className='flex w-full md:w-4/6  flex-col ml-0 md:ml-7 text-center'>
           <Track tracks={profile.tracks} />
-          {/* <h2 className='text-2xl text-center font-bold'>
-            {' '}
-            Add your favorite tracks:{' '}
-          </h2>
-          <p className='text-sm'>
-            {' '}
-            Search any track and click on the plus button to add{' '}
-          </p>
-          {selectedTrack.map((track) => (
-            <SelectedTracks key={track.id} track={track} added={true} />
-          ))} */}
         </div>
       )}
     </div>
@@ -160,6 +133,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  // getAccessToken,
   getCurrentProfile,
 })(SearchTracks);
