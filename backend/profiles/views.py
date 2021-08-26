@@ -27,7 +27,7 @@ def get_all_profiles(request):
     print("The request is below")
     print(request)
     print(request.user.id)
-    serializer = ProfileSerializer(profiles, context={"request": request}, many=True)
+    serializer = ProfileSerializer(profiles, many=True)
     data = serializer.data
     for item in data:
         item["user"] = Users.objects.get(id=item["user"]).username
@@ -43,7 +43,7 @@ def get_one_profile(request, username):
     try: 
         user = Users.objects.get(username=username)
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({ 'profile': data}, safe=False, status=status.HTTP_200_OK)
@@ -62,7 +62,7 @@ def get_own_profile(request):
     user = request.user
     try:
         profile = Profile.objects.get(user=user.id)
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = Users.objects.get(id=user.id).username
         return JsonResponse({'profile': data }, safe=False, status=status.HTTP_200_OK)
@@ -72,6 +72,7 @@ def get_own_profile(request):
 # // @router  POST or DELETE profile/ (Indirectly also PUT method through POST method)
 # // @desc    Create profile or update user profile if it already exists / Delete user account and profile
 # // @access  Private access with tokens
+# @permission_classes([IsAuthenticated])
 @api_view(["POST", "DELETE"])
 @csrf_exempt
 @permission_classes([IsAuthenticated])
@@ -102,13 +103,14 @@ def create_delete_profile(request):
                 profile.avatar = request.data["avatar"]
             profile.save()    
             # profile = Profile.objects.get(user=user)
-            serializer = ProfileSerializer(profile, context={"request": request})
+            # serializer = serializer = ProfileSerializer(profile)
+            serializer = ProfileSerializer(profile) # remove this one if something fails
             data = serializer.data
             data["user"] = user.username
             return JsonResponse({'profile': data}, safe=False, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
               profile = Profile.objects.create(user=user, name = request.data["name"], genre = request.data["genre"], instagram = request.data["instagram"], spotify = request.data["spotify"], twitter = request.data["twitter"], bio=request.data["bio"], avatar = request.data["avatar"]) # add more fields in the future
-              serializer = ProfileSerializer(profile, context={"request": request})
+              serializer = serializer = ProfileSerializer(profile)
               data = serializer.data
               data["user"] = user.username
               return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -133,7 +135,7 @@ def add_album(request):
              return JsonResponse({'error': 'Album already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
             Album.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) # NEED TO CHANGE!!!
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -152,7 +154,7 @@ def delete_album(request, album_id):
         album = Album.objects.get(spot_id=album_id, user=user)
         album.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -174,7 +176,7 @@ def add_artist(request):
              return JsonResponse({'error': 'Artist already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
             Artist.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, name=payload["name"], img=payload["img"])
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -193,7 +195,7 @@ def delete_artist(request, art_id):
         artist = Artist.objects.get(spot_id=art_id, user=user)
         artist.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -217,7 +219,7 @@ def add_track(request):
              return JsonResponse({'error': 'Track already added'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
              Track.objects.create(spot_id = user.username + payload["id"], profile=profile, user=user, title=payload["title"], artist=payload["artist"], img=payload["img"]) 
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -237,7 +239,7 @@ def delete_track(request, track_id):
         track = Track.objects.get(spot_id=track_id, user=user)
         track.delete()
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, context={"request": request})
+        serializer = serializer = ProfileSerializer(profile)
         data = serializer.data
         data["user"] = user.username
         return JsonResponse({'profile': data}, safe=False, status=status.HTTP_201_CREATED)

@@ -22,14 +22,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     artists = ArtistSerializer(many=True, required=False)
     tracks = TrackSerializer(many=True, required=False)
     updates = UpdateSerializer(many=True, required=False)
-    avatar_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'name', 'avatar_url', 'bio', 'genre', 'instagram', 'twitter', 'spotify', 'albums', 'artists', 'tracks', 'updates']
+        fields = ['id', 'user', 'name', 'avatar', 'bio', 'genre', 'instagram', 'twitter', 'spotify', 'albums', 'artists', 'tracks', 'updates']
 
-    def get_avatar_url(self, profile):
-        request = self.context.get('request')
-        print(request)
-        avatar_url = profile.avatar.url
-        return request.build_absolute_uri(avatar_url)

@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes #for authenti
 from rest_framework.permissions import IsAuthenticated #for authenticated routes
 from django.views.decorators.csrf import csrf_exempt #for authenticated routes
 # API dependencies
-from .serializers import UpdateSerializer, MessageSerializer
+from .serializers import UpdateSerializer
 from .models import Update, Message
 from rest_framework import status
 import json #Useful for POST and PUT requests
@@ -50,7 +50,7 @@ def get_add_updates(request):
     try:
             profile = Profile.objects.get(user=request.user.id)
             update = Update.objects.create(track_title = payload["title"], track_artist = payload["artist"], track_img = payload["img"], body=payload["body"], added_by=member, profile=profile)
-            serializer = UpdateSerializer(update, context={"request": request})
+            serializer = UpdateSerializer(update)
             data = serializer.data
             data["added_by"] = member.username 
             return JsonResponse({'post': data}, safe=False, status=status.HTTP_201_CREATED)
@@ -70,7 +70,7 @@ def get_put_delete_update(request, update_id):
         try:
             # user = request.user
             update = Update.objects.get(id=update_id)
-            serializer = UpdateSerializer(update, context={"request": request})
+            serializer = UpdateSerializer(update)
             data = serializer.data
             data["added_by"] = Users.objects.get(id=data["added_by"]).username
             for i, like in enumerate(data["likes"]):
@@ -106,7 +106,7 @@ def put_like(request, update_id):
         update.likes.remove(user)
     else:
         update.likes.add(user) # add the like to the like array in the update object
-    serializer = UpdateSerializer(update, context={"request": request})
+    serializer = UpdateSerializer(update)
     data = serializer.data
     data["added_by"] = Users.objects.get(id=data["added_by"]).username
     data["total_likes"] = update.total_likes()
@@ -133,7 +133,7 @@ def create_message(request, update_id):
         # In the Comment object, for some weird effin reason Django needs to get the specific INSTANCE of the object NOT the Key like the update object. WEIRDO DJANGO UGH
         profile = Profile.objects.get(user=user.id)
         Message.objects.create(update=update, added_by=user, body=payload["body"], profile=profile)
-        serializer = UpdateSerializer(update, context={"request": request})
+        serializer = UpdateSerializer(update)
         data = serializer.data
         for item in data["messages"]:
             item["added_by"] = Users.objects.get(id=item["added_by"]).username
@@ -156,7 +156,7 @@ def delete_message(request, update_id, message_id):
     try:
         message = update.messages.get(id=message_id, added_by=user)
         message.delete()
-        serializer = UpdateSerializer(update, context={"request": request})
+        serializer = UpdateSerializer(update)
         data = serializer.data
         data["added_by"] = Users.objects.get(id=data["added_by"]).username
         for i, like in enumerate(data["likes"]):
