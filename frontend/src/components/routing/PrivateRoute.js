@@ -100,7 +100,7 @@ const PrivateRoute = ({
                         {profile && (
                           <img
                             class='w-16 h-16 rounded-full mb-2'
-                            src={profile.avatar_url}
+                            src={profile.avatar}
                           />
                         )}
                       </div>

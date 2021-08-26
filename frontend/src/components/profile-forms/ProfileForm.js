@@ -106,7 +106,7 @@ const ProfileForm = ({
                       ) : (
                         <img
                           className='w-24 h-24 mr-4 object-cover'
-                          src={profile.avatar_url}
+                          src={profile.avatar}
                           alt='Avatar Upload'
                         />
                       )}

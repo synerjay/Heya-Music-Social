@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ProfileItem = ({
-  profile: { id, user, name, genre, avatar_url, bio, tracks, artists },
+  profile: { id, user, name, genre, avatar, bio, tracks, artists },
 }) => {
   return (
     <div class='max-w-3xl w-full md:w-2/3  mx-auto z-10'>
@@ -12,7 +12,7 @@ const ProfileItem = ({
           <div class='flex'>
             <div class=' relative h-32 w-40 md:w-32 mr-2 md:mr-1   sm:mb-0 mb-3'>
               <img
-                src={avatar_url}
+                src={avatar}
                 alt='aji'
                 class=' w-32 h-32 object-cover rounded-2xl'
               />

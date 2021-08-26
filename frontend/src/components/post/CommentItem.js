@@ -9,7 +9,7 @@ import { Fragment } from 'react';
 
 const CommentItem = ({
   postId,
-  message: { id, body, added_by, avatar_url, date_added },
+  message: { id, body, added_by, avatar, date_added },
   auth,
   deleteComment,
 }) => {
@@ -17,7 +17,7 @@ const CommentItem = ({
     <Fragment>
       <div class='flex flex-row overflow-hidden bg-gray-800 shadow-lg h-auto w-96 max-w-2xl  border-black border sm:rounded-3xl p-1'>
         <div className='flex w-24 flex-col content-between justify-between items-center'>
-          <img class='rounded-xl h-16 w-16' src={avatar_url} />
+          <img class='rounded-xl h-16 w-16' src={avatar} />
           {!auth.loading && added_by === auth.user.username && (
             <svg
               onClick={() => deleteComment(postId, id)}

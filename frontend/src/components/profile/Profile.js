@@ -76,7 +76,7 @@ const Profile = ({
           <div class='bg-gray-800 mt-24 md:mt-16 p-1 relative rounded-lg shadow-xl w-full md:w-2/3  mx-auto'>
             <div class='flex justify-center'>
               <img
-                src={memberProfile.avatar_url}
+                src={memberProfile.avatar}
                 alt=''
                 class='rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-green-600'
               />

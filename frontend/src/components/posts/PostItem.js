@@ -47,7 +47,7 @@ const PostItem = ({
           <div class='flex flex-col overflow-y-scroll mx-0 md:mx-2 w-10/12 md:w-1/2 space-y-3'>
             <div class='flex space-x-6 items-start'>
               {!post ? null : (
-                <img class='rounded-xl h-16 w-16' src={post.avatar_url} />
+                <img class='rounded-xl h-16 w-16' src={post.avatar} />
               )}
               <div className='ml-2'>
                 {/* Start of Target 1 */}
