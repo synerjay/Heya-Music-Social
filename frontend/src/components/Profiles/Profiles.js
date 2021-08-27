@@ -17,7 +17,7 @@ const Profiles = ({ getProfiles, profile: { profiles } }) => {
           <ReactLoading type='bars' color='#fff' width={300} />
         </div>
       ) : (
-        <Fragment>
+        <div className='mt-20'>
           <h1 className='text-center text-4xl text-green-600'>Members</h1>
           <p className='text-xl text-center'>
             Browse and connect with other music lovers
@@ -31,7 +31,7 @@ const Profiles = ({ getProfiles, profile: { profiles } }) => {
               <h4> No profiles found...</h4>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
     </Fragment>
   );

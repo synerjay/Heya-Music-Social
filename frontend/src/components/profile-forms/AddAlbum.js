@@ -12,6 +12,7 @@ const AddAlbum = ({
   selectedAlbum,
   setSelectedAlbum,
 }) => {
+  const [added, setAdded] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -31,15 +32,17 @@ const AddAlbum = ({
   return (
     <button
       className='bg-gray-800 p-1 my-0.5 rounded-2xl w-96'
+      disabled={added ? true : false}
       onClick={(e) => {
         e.preventDefault();
         addAlbum(formData);
         setSelectedAlbum([...selectedAlbum, formData]);
+        setAdded(true);
         // setSearchResults([]);
         // setSearch('');
       }}
     >
-      <SelectedAlbums track={track} />
+      <SelectedAlbums track={track} added={added} />
     </button>
   );
 };

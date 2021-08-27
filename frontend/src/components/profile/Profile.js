@@ -40,11 +40,11 @@ const Profile = ({
           <ReactLoading type='bars' color='#fff' width={300} />
         </div>
       ) : (
-        <Fragment>
+        <div className='mt-5 p-0 md:p-16'>
           <div className='flex w-full gap-x-2 '>
             <Link
               to='/profiles'
-              className='flex items-center w-48  justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
+              className='flex items-center w-30 md:w-48  justify-center mb-2 md:mb-0 bg-green-600 md:px-6 md:py-3 px-10 py-0 h-12 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500'
             >
               {' '}
               <svg
@@ -59,7 +59,7 @@ const Profile = ({
                   clipRule='evenodd'
                 />
               </svg>
-              Back to Profiles
+              Back to Members
             </Link>
             {auth.isAuthenticated &&
               auth.loading === false &&
@@ -142,7 +142,7 @@ const Profile = ({
               </div>
             </div>
           </div>
-        </Fragment>
+        </div>
       )}
     </Fragment>
   );

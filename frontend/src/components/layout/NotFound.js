@@ -545,13 +545,13 @@ const NotFound = () => {
         <div className='w-full md:w-7/12 text-center md:text-left p-4'>
           <div className='text-6xl text-green-500 font-medium'>404</div>
           <div className='text-xl md:text-3xl font-medium mb-4'>
-            Oops. This page doesn't exist.
+            Oops! This page doesn't exist.
           </div>
           <div className='text-lg mb-8'>
-            You may have mistyped the address or the page may have moved.
+            You may have mistyped the address or the page may have been moved.
           </div>
           <Link to='/' className='border border-green-600 rounded p-4'>
-            Go Home
+            Go Back
           </Link>
         </div>
       </div>

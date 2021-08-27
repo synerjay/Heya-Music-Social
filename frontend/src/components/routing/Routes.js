@@ -24,14 +24,14 @@ const Routes = () => {
       <Switch>
         <Route exact path='/register' component={Register} />
         <Route exact path='/login' component={Login} />
-        <PrivateRoute exact path='/profile/:id' component={Profile} />
+        <Route exact path='/profile/:id' component={Profile} />
         <PrivateRoute
           exact
           path='/dashboard'
           name='Dashboard'
           component={Dashboard}
         />
-        <PrivateRoute exact path='/profiles' component={Profiles} />
+        <Route exact path='/profiles' component={Profiles} />
         <PrivateRoute exact path='/create-profile' component={ProfileForm} />
         <PrivateRoute exact path='/edit-profile' component={ProfileForm} />
         <PrivateRoute exact path='/add-album' component={SearchAlbum} />

@@ -11,6 +11,7 @@ const AddTrack = ({
   setSelectedTrack,
   selectedTrack,
 }) => {
+  const [added, setAdded] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -30,14 +31,16 @@ const AddTrack = ({
   return (
     <button
       className='bg-gray-800 p-1 my-0.5 rounded-2xl w-96'
+      disabled={added ? true : false}
       onClick={(e) => {
         e.preventDefault();
         addTrack(formData);
         // setSearchResults([]);
         setSelectedTrack([...selectedTrack, formData]);
+        setAdded(true);
       }}
     >
-      <SelectedTracks track={track} />
+      <SelectedTracks track={track} added={added} />
     </button>
   );
 };
