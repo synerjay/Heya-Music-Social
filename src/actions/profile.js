@@ -30,7 +30,6 @@ export const getCurrentProfile = () => async (dispatch) => {
     // axios get response from Django backend /profile/me
     const res = await axios.get('/profile/me'); // this endoint is HUGE problem
 
-    console.log(res.data.profile);
     dispatch({
       type: GET_PROFILE,
       payload: res.data.profile,
@@ -181,7 +180,6 @@ export const addAlbum = (formData) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
-    console.log(res.data.profile);
 
     dispatch(setAlert('Album Added to Favorites', 'success'));
 
@@ -227,7 +225,6 @@ export const addArtist = (formData, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
-    console.log(res.data.profile);
 
     dispatch(setAlert('Artist Added to Favorites', 'success'));
 
@@ -273,7 +270,6 @@ export const addTrack = (formData) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data.profile,
     });
-    console.log(res.data.profile);
 
     dispatch(setAlert('Track Added to Favorites', 'success'));
 
@@ -388,8 +384,6 @@ export const getAccessToken = () => (dispatch) => {
         type: GET_TOKEN,
         payload: tokenResponse.data.access_token,
       });
-      console.log('Successfully Recieve Spotify Token');
-      console.log(tokenResponse.data);
     });
   } catch (err) {
     dispatch({

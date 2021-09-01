@@ -55,7 +55,7 @@ const ArtistRec = ({ accessToken, profile }) => {
           );
         },
         function (err) {
-          console.log('Something went wrong!', err);
+          console.error('Something went wrong!', err);
         }
       );
   }, [accessToken]);

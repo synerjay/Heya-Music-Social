@@ -53,10 +53,10 @@ const ProfileForm = ({
     uploadData.append('genre', formData.genre);
     uploadData.append('twitter', formData.twitter);
     uploadData.append('spotify', formData.spotify);
-    if (formData.avatar) {
-      uploadData.append('avatar', formData.avatar, formData.avatar.name);
-    } else {
+    if (typeof formData.avatar === 'string') {
       uploadData.append('avatar', ''); // the empty field tells Django backend to NOT change the avatar field in the DB
+    } else {
+      uploadData.append('avatar', formData.avatar, formData.avatar.name);
     }
 
     createProfile(uploadData, history, profile ? true : false);
