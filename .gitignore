@@ -8,7 +8,9 @@ node_modules/
 # testing
 /coverage
 
-.vscode
+.vscode/
+
+/.vscode
 
 build/
 
