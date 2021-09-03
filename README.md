@@ -34,6 +34,14 @@ Each member features a personal profile which shows their favorite genre, artist
 
 <img src="https://github.com/synerjay/Heya-Music-Social/blob/main/github/profile.png?raw=true" />
 
+## Spotify API
+
+This app uses the Spotify Web API endpoint to fetch recommendations, artists, albums and tracks. The API is called using the <a href="https://www.npmjs.com/package/spotify-web-api-node"> Spotify Web API node package</a>. Since user authentication aren't used, a Spotify account isn't necessary to sign up. But in future development, it may be required to access song playback functionality. 
+
+## User Authentication Token System
+
+This app uses a native <a href="https://www.django-rest-framework.org/api-guide/authentication/">Django REST token authentication</a> system. Once logged in, tokens are stored in client's local storage which are then set to every API call from React frontend to Django REST backend using <a href="https://www.npmjs.com/package/axios">Axios</a>.
+
 ## Technologies Used
 - React
 - Redux
