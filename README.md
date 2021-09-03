@@ -36,7 +36,7 @@ Each member features a personal profile which shows their favorite genre, artist
 
 ## Spotify API
 
-This app uses the Spotify Web API endpoint to fetch recommendations, artists, albums and tracks. The API is called using the <a href="https://www.npmjs.com/package/spotify-web-api-node"> Spotify Web API node package</a>. Since user authentication aren't used, a Spotify account isn't necessary to sign up. But in future development, it may be required to access song playback functionality. 
+This app uses the Spotify Web API endpoint to fetch recommendations, artists, albums and tracks. The API is called using the <a href="https://www.npmjs.com/package/spotify-web-api-node"> Spotify Web API node package</a>. Since user authentication isn't used, a Spotify account isn't necessary to sign up. But in future development, it may be required to access song playback functionality. 
 
 ## User Authentication Token System
 
