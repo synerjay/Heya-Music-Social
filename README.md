@@ -1,9 +1,9 @@
 
 <img src="https://github.com/synerjay/Heya-Music-Social/blob/main/github/heyamusiclogo.png?raw=true" />
 
-## Heya Music Social App
+# Heya Music Social
 
-A social network that lets users see what songs their friends are listening to. Utilizing the open sourced Spotify API, clients are able to search any songs to their profiles stored in PostgreSQL. User avatars and images are stored using AWS S3. Although it uses Spotify API to fetch music data, a Spotify account is NOT necessary to be registered in the social network.
+A social network app that lets users see what songs their friends are listening to. Utilizing the open sourced Spotify Web API, clients are able to search any songs to their profiles stored in PostgreSQL. User avatars and images are stored using AWS S3. Although it uses Spotify API to fetch music data, a Spotify account is NOT necessary to sign up in the social network.
 
 ## Landing page
 
